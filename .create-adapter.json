@@ -1,0 +1,39 @@
+{
+	"cli": true,
+	"adapterName": "rct",
+	"title": "RCT PV",
+	"description": "Show values of a RCT photovolatics power converter",
+	"keywords": [
+		"rct",
+		"pv"
+	],
+	"expert": "no",
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [],
+	"type": "energy",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "poll",
+	"connectionIndicator": "no",
+	"language": "JavaScript",
+	"adminReact": "no",
+	"tools": [
+		"ESLint",
+		"type checking",
+		"devcontainer"
+	],
+	"indentation": "Tab",
+	"quotes": "single",
+	"es6class": "yes",
+	"authorName": "Markus Lauff",
+	"authorGithub": "lauff",
+	"authorEmail": "rct@markus.lauff.com",
+	"gitRemoteProtocol": "HTTPS",
+	"gitCommit": "no",
+	"license": "MIT License",
+	"ci": "gh-actions",
+	"dependabot": "no",
+	"creatorVersion": "1.33.0"
+}

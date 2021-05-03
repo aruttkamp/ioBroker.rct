@@ -1,0 +1,74 @@
+{
+    "common": {
+        "name": "rct",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "titleLang": {
+            "en": "RCT Power - Photovoltaic",
+            "de": "RCT Power - Photovoltaik",
+            "ru": "RCT Power - PV",
+            "pt": "RCT Power - PV",
+            "nl": "RCT Power - PV",
+            "fr": "RCT Power - PV",
+            "it": "RCT Power - PV",
+            "es": "RCT Power - PV",
+            "pl": "RCT Power - PV",
+            "zh-cn": "RCT Power - PV"
+        },
+        "desc": {
+            "en": "Show values of a RCT photovolatics power converter",
+            "de": "Werte eines RCT-Photovoltaik-Wechselrichters anzeigen",
+            "ru": "Показать значения фотоэлектрического преобразователя мощности RCT",
+            "pt": "Mostrar valores de um conversor de energia fotovolático RCT",
+            "nl": "Toon waarden van een RCT fotovolatica stroomomvormer",
+            "fr": "Afficher les valeurs d'un convertisseur de puissance photovoltaïque RCT",
+            "it": "Mostra i valori di un convertitore di potenza fotovolatico RCT",
+            "es": "Mostrar los valores de un convertidor de potencia fotovoltaico RCT",
+            "pl": "Pokaż wartości przetwornika mocy fotowoltaiki RCT",
+            "zh-cn": "显示RCT光电功率转换器的值"
+        },
+        "authors": [
+            "Markus Lauff <rct@markus.lauff.com>"
+        ],
+        "keywords": [
+            "rct",
+            "pv"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "icon": "rct.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/lauff/ioBroker.rct/master/admin/rct.png",
+        "readme": "https://github.com/lauff/ioBroker.rct/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "energy",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
+        ]
+    },
+    "native": {
+        "rct_ip": "127.0.0.1"
+    },
+    "objects": [],
+    "instanceObjects": []
+}
