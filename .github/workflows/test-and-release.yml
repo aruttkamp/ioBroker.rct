@@ -41,9 +41,9 @@ jobs:
             - name: Test package files
               run: npm run test:package
 
-#  Deploys the final package to NPM
-   deploy:
-#       needs: [adapter-tests]
+    #  Deploys the final package to NPM
+    deploy:
+       # needs: [adapter-tests]
        needs: [check-and-lint]
 
        # Trigger this step only when a commit on any branch is tagged with a version number
