@@ -1,19 +1,31 @@
 {
     "common": {
         "name": "rct",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
+            "0.0.2": {
+                "en": "news",
+                "de": "neues",
+                "ru": "новое",
+                "pt": "novidades",
+                "nl": "nieuws",
+                "fr": "nouvelles",
+                "it": "notizie",
+                "es": "noticias",
+                "pl": "nowości",
+                "zh-cn": "新"
+            },
             "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "en": "initial bare minimum release",
+                "de": "Erstveröffentlichung minimale Funktionalität",
+                "ru": "начальный минимальный выпуск",
+                "pt": "liberação mínima inicial",
+                "nl": "eerste absolute minimum release",
+                "fr": "version minimale minimale initiale",
+                "it": "rilascio minimo minimo iniziale",
+                "es": "lanzamiento mínimo inicial desnudo",
+                "pl": "początkowe minimalne wydanie",
+                "zh-cn": "最初的最低限度释放"
             }
         },
         "titleLang": {
