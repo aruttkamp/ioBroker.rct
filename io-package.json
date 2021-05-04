@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "rct",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "news": {
             "0.0.4": {
                 "en": "news",
@@ -65,8 +65,8 @@
             "zh-cn": "RCT Power - PV"
         },
         "desc": {
-            "en": "Show values of a RCT photovolatics power converter",
-            "de": "Werte eines RCT-Photovoltaik-Wechselrichters anzeigen",
+            "en": "Connect a RCT photovolatics power converter",
+            "de": "Anbindung RCT-Photovoltaik-Wechselrichter",
             "ru": "Показать значения фотоэлектрического преобразователя мощности RCT",
             "pt": "Mostrar valores de um conversor de energia fotovolático RCT",
             "nl": "Toon waarden van een RCT fotovolatica stroomomvormer",
@@ -77,7 +77,7 @@
             "zh-cn": "显示RCT光电功率转换器的值"
         },
         "authors": [
-            "Markus Lauff <rct@markus.lauff.com>"
+            "Markus Lauff <ioBroker.rct@markus.lauff.com>"
         ],
         "keywords": [
             "rct",

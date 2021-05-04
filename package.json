@@ -1,10 +1,10 @@
 {
   "name": "iobroker.rct",
-  "version": "0.0.4",
-  "description": "Show values of a RCT Power photovolatics power converter",
+  "version": "0.0.5",
+  "description": "RCT Power photovolatics power converter",
   "author": {
     "name": "Markus Lauff",
-    "email": "rct@markus.lauff.com"
+    "email": "ioBroker.rct@markus.lauff.com"
   },
   "homepage": "https://github.com/lauff/ioBroker.rct",
   "license": "MIT",
