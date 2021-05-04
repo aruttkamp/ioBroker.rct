@@ -79,7 +79,7 @@
         ]
     },
     "native": {
-        "rct_ip": "127.0.0.1"
+        "rct_ip": ""
     },
     "objects": [],
     "instanceObjects": []
