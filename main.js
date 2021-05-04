@@ -7,8 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const rct = require('./rct/rct_core.js');
-const rct_process = require('./rct/rct.js');
+const rct = require('./rct/rct.js');
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -51,19 +50,25 @@ class Rct extends utils.Adapter {
 
 		if (!this.config.rct_elements) this.config.rct_elements = 'battery.soc,battery.soc_target,battery.soc_target_low,battery.soc_target_high,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,g_sync.p_ac_grid_sum_lp,g_sync.p_acc_lp,g_sync.p_ac_load_sum_lp';
 
-		await this.setObjectNotExistsAsync('info', {
-			type: 'channel',
-			common: { name: 'Information' },
-			native: {},
-		});
-
 		// add states
 		const rctElements = this.config.rct_elements.split(',');
 
 		rctElements.forEach(async (e) => {
-			if (rct.cmd[e]) {
+
+			const stateInfo = rct.getStateInfo(e, this);
+			if (stateInfo) {
+
+				const { channelName, stateName, stateFullName } = stateInfo;
+
+				if (channelName) {
+					await iobInstance.setObjectNotExistsAsync(channelName, {
+						type: 'channel',
+						common: { name: channelName },
+						native: {},
+					});
+				}
+
 				const rct_id = rct.cmd[e].id;
-				const stateName = e.replace(/(\.|\[)/g, '_').replace(/(\])/g,'');
 				const name = rct.cmdReverse[rct_id].description || stateName;
 				const unit = (rct.cmdReverse[rct_id].unit || '').trim();
 				const common = { name, type: 'number', unit, role: 'indicator', read: true, write: false };
@@ -71,7 +76,7 @@ class Rct extends utils.Adapter {
 					common.min = 0;
 					common.max = 100;
 				}
-				await iobInstance.setObjectNotExistsAsync('info.' + stateName, {
+				await iobInstance.setObjectNotExistsAsync(stateFullName, {
 					type: 'state',
 					common,
 					native: {},
@@ -79,7 +84,7 @@ class Rct extends utils.Adapter {
 			} else iobInstance.log.info('rct state not defined: ' + e);
 		});
 
-		rct_process(this.config.rct_ip, rctElements, this);
+		rct.process(this.config.rct_ip, rctElements, this);
 
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
 		// this.subscribeStates('battery_soc');

@@ -2,29 +2,55 @@ const net = require('net');
 
 const rct = require('./rct_core.js');
 
-module.exports = function rct_process(host, rctElements, iobInstance) {
+module.exports = rct;
+
+rct.getStateInfo = function (rctName,iobInstance) {
+
+	if (!rct.cmd[rctName]) {
+		iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
+		return false;
+	}
+
+	let name = rctName;
+
+	name = name.replace(/\]/g, ''); // remove all ']' characters
+
+	// if '[' comes before first '.', replace it by '.' and hence make it part of state name
+	if (name.search(/\[/) < name.search(/\./)) name = name.replace('[','.');
+
+	const elements = name.split('.');
+
+	let channelName,stateName,stateFullName;
+
+	if (elements.length == 1) {
+		channelName = '';
+		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g,'_');
+		stateFullName = stateName;
+	} else {
+		channelName = elements.shift();
+		stateName = elements.join('_').replace(/(\.|\[)/g, '_').replace(/_+/g,'_');
+		stateFullName = channelName + '.' + stateName;
+	}
+
+	return { channelName, stateName, stateFullName };
+};
+
+rct.process = function (host, rctElements, iobInstance) {
 
 	const client = net.createConnection({ host, port: 8899 }, () => {
 
 		function requestElements() {
-			rctElements.forEach((e)=>{
+			rctElements.forEach((e) => {
 				if (rct.cmd[e]) {
 					client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
 				}
 			});
-			setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh ) || 15000);
+			setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh) || 15000);
 		}
 
 		iobInstance.log.info(`RCT: connected to server at ${host}`);
 
 		requestElements();
-
-		//client.write(getFrame(rct.const.command_byte_read, rct['cmd']['battery.soc'].id));
-		//client.write(getFrame(rct.const.command_byte_read,rct['cmd']['battery.temperature'].id));
-		//client.write(getFrame(rct.const.command_byte_read, rct['cmd']['dc_conv.dc_conv_struct[0].p_dc_lp'].id));
-		//client.write(getFrame(rct.const.command_byte_read, rct['cmd']['dc_conv.dc_conv_struct[1].p_dc_lp'].id));
-		//client.write(getFrame(rct.const.command_byte_read,rct['cmd']['g_sync.p_acc_lp'].id));
-		//client.write(getFrame(rct.const.command_byte_read,rct['cmd']['g_sync.p_ac_grid_sum_lp'].id));
 	});
 
 
@@ -97,8 +123,8 @@ module.exports = function rct_process(host, rctElements, iobInstance) {
 
 			if (response.name && rctElements.includes(response.name)) {
 				//iobInstance.log.debug(`RCT: result: ${txt}`);
-				const stateName = 'info.' + response.name.replace(/(\.|\[)/g, '_').replace(/(\])/g,'');
-				iobInstance.setStateAsync(stateName, response.result, true);
+				const stateInfo = rct.getStateInfo(response.name, iobInstance);
+				if (stateInfo) iobInstance.setStateAsync(stateInfo.stateFullName, response.result, true);
 			} else iobInstance.log.info(`RCT: received, but not requested: ${txt}`);
 
 		} else {
@@ -108,13 +134,10 @@ module.exports = function rct_process(host, rctElements, iobInstance) {
 		handleData(); // continue and check if new data is available;
 	}
 
-
-
 	client.on('end', () => {
 		iobInstance.log.info('RCT: disconnected from server');
 		//console.log('disconnected from server');
 	});
-
 
 	function getFrameLength(buf) {
 		const cmd = buf.readInt8(1);
