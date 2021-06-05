@@ -11,19 +11,33 @@
 
 **Tests:** ![Test and Release](https://github.com/lauff/ioBroker.rct/workflows/Test%20and%20Release/badge.svg)
 
-## rct adapter for ioBroker
+## RCT adapter for ioBroker
 
 Show values of a RCT Power photovolatics power converter
 
+## REMARKS
+
+### Early Pre-Release
+
+Please not that this is a very early pre-release with very limited functionality.
+
+Configuration is still limited and rather technical. Using the "RCT ELemente" it can be selected which data shall be read from the power converter. Default is "battery.soc,battery.soc_target,battery.soc_target_low,battery.soc_target_high,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,g_sync.p_ac_grid_sum_lp,g_sync.p_acc_lp,g_sync.p_ac_load_sum_lp". Other elements can be found in the code (file "rct/rc_core.js"). But this is not self descriptive at all (even not really tested).
+
+### Known Issues
+
+As for now, it is not clear how the RCT power connector handles multiple parallel connections. Because of that, connecting to the power converter from multiple sources causes unpredicted behaviour. This typically also means that accessing the power converter from the mobile RCT app will disconnect the ioBroker adapter. 
+
 ## Changelog
 
+### 0.0.5
+* (Markus Lauff) some fixes / minor improvements
 ### 0.0.1
 * (Markus Lauff) initially bare minimum working release
 
 ## License
 MIT License
 
-Copyright (c) 2021 Markus Lauff <rct@markus.lauff.com>
+Copyright (c) 2021: Markus Lauff <rct@markus.lauff.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
