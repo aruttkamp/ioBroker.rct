@@ -1,8 +1,24 @@
 {
     "common": {
         "name": "rct",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "news": {
+            "0.0.6": {
+                "en": "adding new channels/states, major stability improvements",
+                "de": "neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert"
+            },
+            "0.0.5": {
+                "en": "news",
+                "de": "neues",
+                "ru": "новое",
+                "pt": "novidades",
+                "nl": "nieuws",
+                "fr": "nouvelles",
+                "it": "notizie",
+                "es": "noticias",
+                "pl": "nowości",
+                "zh-cn": "新"
+            },
             "0.0.4": {
                 "en": "news",
                 "de": "neues",

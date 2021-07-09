@@ -21,14 +21,24 @@ Show values of a RCT Power photovolatics power converter
 
 Please not that this is a very early pre-release with very limited functionality.
 
-Configuration is still limited and rather technical. Using the "RCT ELemente" it can be selected which data shall be read from the power converter. Default is "battery.soc,battery.soc_target,battery.soc_target_low,battery.soc_target_high,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,g_sync.p_ac_grid_sum_lp,g_sync.p_acc_lp,g_sync.p_ac_load_sum_lp". Other elements can be found in the code (file "rct/rc_core.js"). But this is not self descriptive at all (even not really tested).
+Configuration is still limited and rather technical. Using the "RCT ELemente" it can be selected which data shall be read from the power converter. Default is "battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].enabled,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].enabled,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.battery_type,power_mng.is_grid,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag,prim_sm.state". Other elements can be found in the code (file "rct/rc_core.js"). But this is not self descriptive at all (even not really tested).
 
-### Known Issues
+## Known Issues
 
-As for now, it is not clear how the RCT power connector handles multiple parallel connections. Because of that, connecting to the power converter from multiple sources causes unpredicted behaviour. This typically also means that accessing the power converter from the mobile RCT app will disconnect the ioBroker adapter. 
+### Wrong Channels / States
+
+A new version might not be able to create the right ioBroker channels / states. In most cases this can be recognized by the node "battery" showing up as a single element instead of a folder.
+
+If this happens, stop the adapter and manually delete the node "rct.0".
+
+### Parallel Connections
+
+The current version tries to handle this, but still, it is not clear how the RCT power connector handles multiple parallel connections. Because of that, connecting to the power converter from multiple sources might cause unpredicted behaviour.
 
 ## Changelog
 
+### 0.0.6
+* (Markus Lauff) adding further channels/states, major stability improvements
 ### 0.0.5
 * (Markus Lauff) some fixes / minor improvements
 ### 0.0.1
