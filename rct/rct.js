@@ -4,7 +4,10 @@ const rct = require('./rct_core.js');
 
 module.exports = rct;
 
-rct.getStateInfo = function (rctName,iobInstance) {
+// flag for local debugging
+const DEBUG_CONSOLE = false;
+
+rct.getStateInfo = function (rctName, iobInstance) {
 
 	if (!rct.cmd[rctName]) {
 		iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
@@ -16,21 +19,23 @@ rct.getStateInfo = function (rctName,iobInstance) {
 	name = name.replace(/\]/g, ''); // remove all ']' characters
 
 	// if '[' comes before first '.', replace it by '.' and hence make it part of state name
-	if (name.search(/\[/) < name.search(/\./)) name = name.replace('[','.');
+	if (name.search(/\[/) < name.search(/\./)) name = name.replace('[', '.');
 
 	const elements = name.split('.');
 
-	let channelName,stateName,stateFullName;
+	let channelName, stateName, stateFullName;
 
 	if (elements.length == 1) {
 		channelName = '';
-		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g,'_');
+		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
 		stateFullName = stateName;
 	} else {
 		channelName = elements.shift();
-		stateName = elements.join('_').replace(/(\.|\[)/g, '_').replace(/_+/g,'_');
+		stateName = elements.join('_').replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
 		stateFullName = channelName + '.' + stateName;
 	}
+
+	//console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
 
 	return { channelName, stateName, stateFullName };
 };
@@ -85,7 +90,9 @@ rct.process = function (host, rctElements, iobInstance) {
 	function handleData() {
 
 		while (dataBuffer.length && dataBuffer[0] != 43) {
-			console.log('DEBUG: skipping', dataBuffer[0]);
+			if (dataBuffer[0] != 0) {
+				if (DEBUG_CONSOLE) console.log('DEBUG: skipping', dataBuffer[0]); // FIXME: regularly skipping 0 values - no idea why
+			}
 			dataBuffer = dataBuffer.slice(1);
 		}
 
@@ -125,7 +132,9 @@ rct.process = function (host, rctElements, iobInstance) {
 				//iobInstance.log.debug(`RCT: result: ${txt}`);
 				const stateInfo = rct.getStateInfo(response.name, iobInstance);
 				if (stateInfo) iobInstance.setStateAsync(stateInfo.stateFullName, response.result, true);
-			} else iobInstance.log.info(`RCT: received, but not requested: ${txt}`);
+			} else {
+				if (DEBUG_CONSOLE) console.debug(`RCT: received, but not requested: ${txt}`);
+			}
 
 		} else {
 			console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
@@ -160,7 +169,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		if (response.cmd == 3 || response.cmd == 6) {
 			// long response
-			response.length = buf.readUInt16(2);
+			response.length = buf.readUInt16BE(2);
 			response.id = byteArray2HexString(buf.slice(4, 8));
 			response.data = buf.slice(8, -2);
 		} else {
@@ -173,6 +182,11 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		// in case CRC is not ok, return here (as data might be faulty)
 		if (!response.crcOk) return response;
+
+		if (!rct.cmdReverse[response.id]) {
+			if (DEBUG_CONSOLE) console.debug(`RCT: unknown response.id ${response.id}`);
+			return response;
+		}
 
 		response.name = rct.cmdReverse[response.id].name;
 		response.description = rct.cmdReverse[response.id].description;
@@ -189,6 +203,20 @@ rct.process = function (host, rctElements, iobInstance) {
 				case 4: response.dataType = 'float'; break;
 				default: console.log('DEBUG unknown dataType', response.length - 4); break;
 			}
+		}
+
+		if (response.dataType == 'uint4' && response.data.length !== 4) {
+			console.log('DEBUG: wrong length for uint4: ', response);
+			response.dataType = '';
+		}
+
+
+		if ((response.dataType == 'float' && response.data.length != 4) ||
+			(response.dataType == 'uint1' && response.data.length != 1) ||
+			(response.dataType == 'uint2' && response.data.length != 2) ||
+			(response.dataType == 'uint4' && response.data.length != 4)) {
+			console.log('NOTICE: wrong length for data type', response);
+			response.dataType = '';
 		}
 
 		let result;
