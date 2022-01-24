@@ -1,11 +1,15 @@
 {
     "common": {
         "name": "rct",
-        "version": "0.0.6",
+        "version": "1.0.0",
         "news": {
+            "1.0.0": {
+                "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
+                "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben."
+            },
             "0.0.6": {
-                "en": "adding new channels/states, major stability improvements",
-                "de": "neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert"
+                "en": "Adding new channels/states, major stability improvements.",
+                "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert."
             },
             "0.0.5": {
                 "en": "news",
@@ -102,7 +106,7 @@
         ],
         "license": "MIT",
         "platform": "Javascript/Node.js",
-        "icon": "rct.png",
+        "icon": "rct-logo.square.png",
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/lauff/ioBroker.rct/master/admin/rct.png",
         "readme": "https://github.com/lauff/ioBroker.rct/blob/master/README.md",
