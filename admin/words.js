@@ -19,7 +19,7 @@ systemDictionary = {
 		'de': 'RCT IP-Adresse',
 		'ru': 'IP-адрес RCT',
 		'pt': 'Endereço IP RCT',
-		'nl': 'RCT IP-adres',s
+		'nl': 'RCT IP-adres',
 		'fr': 'Adresse IP RCT',
 		'it': 'Indirizzo IP RCT',
 		'es': 'Dirección IP RCT',
