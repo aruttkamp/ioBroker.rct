@@ -152,7 +152,9 @@ rct.process = function (host, rctElements, iobInstance) {
 			if (response.name && rctElements.includes(response.name)) {
 				//iobInstance.log.debug(`RCT: result: ${txt}`);
 				const stateInfo = rct.getStateInfo(response.name, iobInstance);
-				if (stateInfo) iobInstance.setStateAsync(stateInfo.stateFullName, response.result, true);
+				if (stateInfo) {
+					iobInstance.setState(stateInfo.stateFullName, response.result, true);
+				}
 			} else {
 				if (DEBUG_CONSOLE) console.debug(`RCT: received, but not requested: ${txt}`);
 			}
