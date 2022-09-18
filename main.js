@@ -23,7 +23,7 @@ class Rct extends utils.Adapter {
 			name: 'rct',
 		});
 		this.on('ready', this.onReady.bind(this));
-		this.on('stateChange', this.onStateChange.bind(this));
+		// this.on('stateChange', this.onStateChange.bind(this));
 		// this.on('objectChange', this.onObjectChange.bind(this));
 		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
@@ -155,11 +155,13 @@ class Rct extends utils.Adapter {
 	// 	}
 	// }
 
+	// !!! MARKUS: the binding for this is commented out (look for "this.on('stateChange'") !!!
 	/**
 	 * Is called if a subscribed state changes
 	 * @param {string} id
 	 * @param {ioBroker.State | null | undefined} state
 	 */
+	/*
 	onStateChange(id, state) {
 		if (state) {
 			// The state was changed
@@ -169,6 +171,7 @@ class Rct extends utils.Adapter {
 			this.log.info(`state ${id} deleted`);
 		}
 	}
+	*/
 
 	// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
 	// /**
