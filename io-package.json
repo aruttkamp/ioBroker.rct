@@ -124,7 +124,9 @@
         ]
     },
     "native": {
-        "rct_ip": ""
+        "rct_ip": "",
+        "rct_refresh": 10,
+        "rct_elements": ""
     },
     "objects": [],
     "instanceObjects": []
