@@ -6,6 +6,8 @@ module.exports = rct;
 
 // flag for local debugging
 const DEBUG_CONSOLE = false;
+let __refreshTimeout = null;
+let __client = null;
 
 rct.getStateInfo = function (rctName, iobInstance) {
 
@@ -16,7 +18,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
 	let name = rctName;
 
-	name = name.replace(/\]/g, ''); // remove all ']' characters
+	name = name.replace(/]/g, ''); // remove all ']' characters
 
 	// if '[' comes before first '.', replace it by '.' and hence make it part of state name
 	if (name.search(/\[/) < name.search(/\./)) name = name.replace('[', '.');
@@ -25,7 +27,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
 	let channelName, stateName, stateFullName;
 
-	if (elements.length == 1) {
+	if (elements.length === 1) {
 		channelName = '';
 		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
 		stateFullName = stateName;
@@ -40,28 +42,47 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	return { channelName, stateName, stateFullName };
 };
 
+rct.end = function () {
+	if (__client) {
+		try {
+			__client.end();
+		} catch (err) {
+			// ignore
+		}
+		__client = null;
+	}
+	if (__refreshTimeout) {
+		clearTimeout(__refreshTimeout);
+		__refreshTimeout = null;
+	}
+}
+
 rct.process = function (host, rctElements, iobInstance) {
 
-	const client = net.createConnection({ host, port: 8899 }, () => {
+	__client = net.createConnection({ host, port: 8899 }, () => {
 
 		function requestElements() {
+			if (!__client) {
+				return;
+			}
 			rctElements.forEach((e) => {
 				if (rct.cmd[e]) {
-					client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
+					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
 				}
 			});
-			setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh) || 15000);
+			__refreshTimeout = setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh) || 15000);
 		}
 
 		iobInstance.log.info(`RCT: connected to server at ${host}`);
 
+		connectionStatus = true;
 		requestElements();
 	});
 
 
 	let dataBuffer = Buffer.alloc(0);
 
-	client.on('data', (data) => {
+	__client.on('data', (data) => {
 
 		function escaping(element, index, array) {
 			if (element == rct.const.stop_byte_value) {
@@ -143,9 +164,15 @@ rct.process = function (host, rctElements, iobInstance) {
 		handleData(); // continue and check if new data is available;
 	}
 
-	client.on('end', () => {
+	__client.on('end', () => {
 		iobInstance.log.info('RCT: disconnected from server');
 		//console.log('disconnected from server');
+		// clear refresh timeout and reconnect
+		__client = null;
+		if (__refreshTimeout) {
+			clearTimeout(__refreshTimeout);
+		}
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh) || 15000);
 	});
 
 	function getFrameLength(buf) {
@@ -205,16 +232,16 @@ rct.process = function (host, rctElements, iobInstance) {
 			}
 		}
 
-		if (response.dataType == 'uint4' && response.data.length !== 4) {
+		if (response.dataType === 'uint4' && response.data.length !== 4) {
 			console.log('DEBUG: wrong length for uint4: ', response);
 			response.dataType = '';
 		}
 
 
-		if ((response.dataType == 'float' && response.data.length != 4) ||
-			(response.dataType == 'uint1' && response.data.length != 1) ||
-			(response.dataType == 'uint2' && response.data.length != 2) ||
-			(response.dataType == 'uint4' && response.data.length != 4)) {
+		if ((response.dataType === 'float' && response.data.length != 4) ||
+			(response.dataType === 'uint1' && response.data.length != 1) ||
+			(response.dataType === 'uint2' && response.data.length != 2) ||
+			(response.dataType === 'uint4' && response.data.length != 4)) {
 			console.log('NOTICE: wrong length for data type', response);
 			response.dataType = '';
 		}
@@ -296,8 +323,8 @@ rct.process = function (host, rctElements, iobInstance) {
 							str.substring(str.length - 2, str.length);
 
 				str = str.toUpperCase();
-				if (format && str == '2B') str = ' 2B'; // seperate commands with leading space
-				if (format && str == '2D') str = ' !!!2D!!! '; // mark stop/escape byte
+				if (format && str === '2B') str = ' 2B'; // seperate commands with leading space
+				if (format && str === '2D') str = ' !!!2D!!! '; // mark stop/escape byte
 				result += str;
 			}
 		}
@@ -310,9 +337,9 @@ rct.process = function (host, rctElements, iobInstance) {
 		// Pad to two digits, truncate to last two if too long.  Again,
 		// I'm not sure what your needs are for the case, you may want
 		// to handle errors in some other way.
-		result = result.length == 0 ? '00' :
-			result.length == 1 ? '0' + result :
-				result.length == 2 ? result : result.substring(result.length - 2, result.length);
+		result = result.length === 0 ? '00' :
+			result.length === 1 ? '0' + result :
+				result.length === 2 ? result : result.substring(result.length - 2, result.length);
 
 		return result;
 	}
