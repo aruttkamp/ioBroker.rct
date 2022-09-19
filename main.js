@@ -53,8 +53,7 @@ class Rct extends utils.Adapter {
 		// add states
 		const rctElements = this.config.rct_elements.split(',');
 
-		rctElements.forEach(async (e) => {
-
+		for (const e of rctElements) {
 			const stateInfo = rct.getStateInfo(e, this);
 			if (stateInfo) {
 
@@ -71,8 +70,8 @@ class Rct extends utils.Adapter {
 				const rct_id = rct.cmd[e].id;
 				const name = rct.cmdReverse[rct_id].description || stateName;
 				const unit = (rct.cmdReverse[rct_id].unit || '').trim();
-				const common = { name, type: 'number', unit, role: 'indicator', read: true, write: false };
-				if (unit == '%') {
+				const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
+				if (unit === '%') {
 					common.min = 0;
 					common.max = 100;
 				}
@@ -82,7 +81,7 @@ class Rct extends utils.Adapter {
 					native: {},
 				});
 			} else iobInstance.log.info('rct state not defined: ' + e);
-		});
+		}
 
 		console.debug('onReady() rct.process(): start processing');
 
@@ -131,7 +130,7 @@ class Rct extends utils.Adapter {
 			// clearTimeout(timeout2);
 			// ...
 			// clearInterval(interval1);
-
+			rct.end();
 			callback();
 		} catch (e) {
 			callback();
