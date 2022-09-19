@@ -1,15 +1,43 @@
 {
     "common": {
         "name": "rct",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "news": {
+            "1.0.1": {
+                "en": "fixing review comments",
+                "de": "Rezensionskommentare korrigieren",
+                "ru": "исправление комментариев к обзору",
+                "pt": "corrigindo comentários de revisão",
+                "nl": "recensie-opmerkingen corrigeren",
+                "fr": "correction des commentaires de révision",
+                "it": "correzione dei commenti di revisione",
+                "es": "arreglando comentarios de revisión",
+                "pl": "naprawianie komentarzy do recenzji",
+                "zh-cn": "修复评论评论"
+            },
             "1.0.0": {
                 "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
-                "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben."
+                "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben.",
+                "ru": "Версия 0.0.6 оказалась стабильной и удовлетворяла минимальным функциональным требованиям, поэтому для продуктивного использования была выпущена версия 1.0.0.",
+                "pt": "A versão 0.0.6 mostrou-se estável e atendeu aos requisitos funcionais mínimos, liberando-a como versão 1.0.0 para uso produtivo.",
+                "nl": "Versie 0.0.6 bleek stabiel en voldeed aan minimale functionele vereisten, dus werd het vrijgegeven als versie 1.0.0 voor productief gebruik.",
+                "fr": "La version 0.0.6 s'est avérée stable et répondait aux exigences fonctionnelles minimales, la publiant donc en tant que version 1.0.0 pour une utilisation productive.",
+                "it": "La versione 0.0.6 si è dimostrata stabile e ha soddisfatto i requisiti funzionali minimi, quindi rilasciandola come versione 1.0.0 per un utilizzo produttivo.",
+                "es": "La versión 0.0.6 demostró ser estable y cumplir con los requisitos funcionales mínimos, por lo que se lanzó como versión 1.0.0 para un uso productivo.",
+                "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
+                "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。"
             },
             "0.0.6": {
                 "en": "Adding new channels/states, major stability improvements.",
-                "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert."
+                "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert.",
+                "ru": "Добавление новых каналов/состояний, значительные улучшения стабильности.",
+                "pt": "Adicionando novos canais/estados, grandes melhorias de estabilidade.",
+                "nl": "Nieuwe kanalen/staten toevoegen, grote stabiliteitsverbeteringen.",
+                "fr": "Ajout de nouveaux canaux/états, améliorations majeures de la stabilité.",
+                "it": "Aggiunta di nuovi canali/stati, importanti miglioramenti della stabilità.",
+                "es": "Adición de nuevos canales/estados, importantes mejoras de estabilidad.",
+                "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
+                "zh-cn": "添加新的通道/状态，重大的稳定性改进。"
             },
             "0.0.5": {
                 "en": "news",

@@ -35,8 +35,10 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 
 ## Changelog
 
+### 1.0.1
+* (Markus Lauff) fixing review comments - thanks to Apollon77
 ### 1.0.0
-* (Markus Lauff) 0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.
+* (Markus Lauff) 0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage
 ### 0.0.6
 * (Markus Lauff) adding further channels/states, major stability improvements
 ### 0.0.5
