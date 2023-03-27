@@ -11,14 +11,14 @@
 
 **Tests:** ![Test and Release](https://github.com/lauff/ioBroker.rct/workflows/Test%20and%20Release/badge.svg)
 
-## Project NO LONGER MAINTAINED
+## Project maintained again
 
-After I switched to Home Assistant, I do no longer maintain this adapter.
-If you are interested to take it over, please let me know.
+After the original developer (Markus Lauff) switched to Home Assistant, project will be continued by other maintainers.
+Improvements and updates will be available soon.
 
 ## RCT adapter for ioBroker
 
-Please note that this is a private project and that I (Markus Lauff) am not related to RCT in any way.
+Please note that this is a private project and that no developer is related to RCT in any way.
 
 Show values of a RCT Power photovolatics power converter
 
