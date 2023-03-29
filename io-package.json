@@ -13,7 +13,8 @@
                 "it": "correzione dei commenti di revisione",
                 "es": "arreglando comentarios de revisión",
                 "pl": "naprawianie komentarzy do recenzji",
-                "zh-cn": "修复评论评论"
+                "zh-cn": "修复评论评论",
+                "uk": "виправлення коментарів огляду"
             },
             "1.0.0": {
                 "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
@@ -25,7 +26,8 @@
                 "it": "La versione 0.0.6 si è dimostrata stabile e ha soddisfatto i requisiti funzionali minimi, quindi rilasciandola come versione 1.0.0 per un utilizzo produttivo.",
                 "es": "La versión 0.0.6 demostró ser estable y cumplir con los requisitos funcionales mínimos, por lo que se lanzó como versión 1.0.0 para un uso productivo.",
                 "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
-                "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。"
+                "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。",
+                "uk": "Версія 0.0.6 виявилася стабільною та відповідає мінімальним функціональним вимогам, тому її було випущено як версію 1.0.0 для продуктивного використання."
             },
             "0.0.6": {
                 "en": "Adding new channels/states, major stability improvements.",
@@ -37,7 +39,8 @@
                 "it": "Aggiunta di nuovi canali/stati, importanti miglioramenti della stabilità.",
                 "es": "Adición de nuevos canales/estados, importantes mejoras de estabilidad.",
                 "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
-                "zh-cn": "添加新的通道/状态，重大的稳定性改进。"
+                "zh-cn": "添加新的通道/状态，重大的稳定性改进。",
+                "uk": "Додавання нових каналів/станів, значні покращення стабільності."
             },
             "0.0.5": {
                 "en": "news",
@@ -49,7 +52,8 @@
                 "it": "notizie",
                 "es": "noticias",
                 "pl": "nowości",
-                "zh-cn": "新"
+                "zh-cn": "新",
+                "uk": "новини"
             },
             "0.0.4": {
                 "en": "news",
@@ -61,7 +65,8 @@
                 "it": "notizie",
                 "es": "noticias",
                 "pl": "nowości",
-                "zh-cn": "新"
+                "zh-cn": "新",
+                "uk": "новини"
             },
             "0.0.3": {
                 "en": "news",
@@ -73,7 +78,8 @@
                 "it": "notizie",
                 "es": "noticias",
                 "pl": "nowości",
-                "zh-cn": "新"
+                "zh-cn": "新",
+                "uk": "новини"
             },
             "0.0.2": {
                 "en": "news",
@@ -85,7 +91,8 @@
                 "it": "notizie",
                 "es": "noticias",
                 "pl": "nowości",
-                "zh-cn": "新"
+                "zh-cn": "新",
+                "uk": "новини"
             },
             "0.0.1": {
                 "en": "initial bare minimum release",
@@ -97,7 +104,8 @@
                 "it": "rilascio minimo minimo iniziale",
                 "es": "lanzamiento mínimo inicial desnudo",
                 "pl": "początkowe minimalne wydanie",
-                "zh-cn": "最初的最低限度释放"
+                "zh-cn": "最初的最低限度释放",
+                "uk": "початковий мінімальний випуск"
             }
         },
         "titleLang": {
@@ -110,7 +118,8 @@
             "it": "RCT Power - PV",
             "es": "RCT Power - PV",
             "pl": "RCT Power - PV",
-            "zh-cn": "RCT Power - PV"
+            "zh-cn": "RCT Power - PV",
+            "uk": "RCT Power - фотоелектричні"
         },
         "desc": {
             "en": "Connect a RCT photovolatics power converter",
@@ -122,7 +131,8 @@
             "it": "Mostra i valori di un convertitore di potenza fotovolatico RCT",
             "es": "Mostrar los valores de un convertidor de potencia fotovoltaico RCT",
             "pl": "Pokaż wartości przetwornika mocy fotowoltaiki RCT",
-            "zh-cn": "显示RCT光电功率转换器的值"
+            "zh-cn": "显示RCT光电功率转换器的值",
+            "uk": "Підключіть фотоелектричний перетворювач потужності RCT"
         },
         "authors": [
             "Andreas Ruttkamp <ioBroker.rct@ruttkamp.com>"
