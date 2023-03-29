@@ -100,7 +100,6 @@
                 "zh-cn": "最初的最低限度释放"
             }
         },
-        "title": "RCT Power PV",
         "titleLang": {
             "en": "RCT Power - Photovoltaic",
             "de": "RCT Power - Photovoltaik",
@@ -126,7 +125,7 @@
             "zh-cn": "显示RCT光电功率转换器的值"
         },
         "authors": [
-            "Markus Lauff <ioBroker.rct@ruttkamp.com>"
+            "Andreas Ruttkamp <ioBroker.rct@ruttkamp.com>"
         ],
         "keywords": [
             "rct",
