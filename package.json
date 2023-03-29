@@ -3,10 +3,10 @@
   "version": "1.0.1",
   "description": "RCT Power photovolatics power converter",
   "author": {
-    "name": "Markus Lauff",
-    "email": "ioBroker.rct@markus.lauff.com"
+    "name": "Andreas Ruttkamp",
+    "email": "ioBroker.rct@ruttkamp.com"
   },
-  "homepage": "https://github.com/lauff/ioBroker.rct",
+  "homepage": "https://github.com/aruttkamp/ioBroker.rct",
   "license": "MIT",
   "keywords": [
     "rct",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lauff/ioBroker.rct"
+    "url": "https://github.com/aruttkamp/ioBroker.rct"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.6"
@@ -52,7 +52,7 @@
     "lint": "eslint"
   },
   "bugs": {
-    "url": "https://github.com/lauff/ioBroker.rct/issues"
+    "url": "https://github.com/aruttkamp/ioBroker.rct/issues"
   },
   "readmeFilename": "README.md"
 }
