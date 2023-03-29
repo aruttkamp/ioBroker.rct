@@ -126,7 +126,7 @@
             "zh-cn": "显示RCT光电功率转换器的值"
         },
         "authors": [
-            "Markus Lauff <ioBroker.rct@markus.lauff.com>"
+            "Markus Lauff <ioBroker.rct@ruttkamp.com>"
         ],
         "keywords": [
             "rct",
@@ -136,8 +136,8 @@
         "platform": "Javascript/Node.js",
         "icon": "rct-logo.square.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/lauff/ioBroker.rct/master/admin/rct-logo.square.png",
-        "readme": "https://github.com/lauff/ioBroker.rct/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/master/admin/rct-logo.square.png",
+        "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "energy",
