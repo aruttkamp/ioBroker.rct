@@ -45,7 +45,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-
+* (Andreas Ruttkamp) Release Script added
 ### 1.0.1
 * (Markus Lauff) fixing review comments - thanks to Apollon77
 
