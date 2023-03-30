@@ -46,7 +46,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 -->
 
 ### **WORK IN PROGRESS**
-
+* (Andreas Ruttkamp) internal changes for automated release
 ### 1.0.2
 * (Andreas Ruttkamp) 
 ### 1.0.1
