@@ -39,6 +39,14 @@ A new version might not be able to create the right ioBroker channels / states. 
 If this happens, stop the adapter and manually delete the node "rct.0".
 
 ## Changelog
+
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ### **WORK IN PROGRESS**
+-->
+
+### **WORK IN PROGRESS**
+
 ### 1.0.2
 * (Andreas Ruttkamp) 
 ### 1.0.1
