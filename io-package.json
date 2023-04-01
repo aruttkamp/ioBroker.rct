@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "rct",
-        "version": "1.0.1",
+        "version": "1.0.3",
         "news": {
             "1.0.1": {
                 "en": "fixing review comments",
