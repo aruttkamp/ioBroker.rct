@@ -1,5 +1,4 @@
 const net = require('net');
-
 const rct = require('./rct_core.js');
 
 module.exports = rct;
@@ -55,7 +54,7 @@ rct.end = function () {
 		clearTimeout(__refreshTimeout);
 		__refreshTimeout = null;
 	}
-}
+};
 
 rct.process = function (host, rctElements, iobInstance) {
 
