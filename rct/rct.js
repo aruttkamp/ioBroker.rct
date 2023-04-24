@@ -36,8 +36,9 @@ rct.getStateInfo = function (rctName, iobInstance) {
 		stateFullName = channelName + '.' + stateName;
 	}
 
+	if (DEBUG_CONSOLE==true) {
 	//console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
-
+	}
 	return { channelName, stateName, stateFullName };
 };
 
@@ -100,7 +101,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			return true;
 		}
 
-		//console.log("DEBUG data received", data);
+		console.log("DEBUG data received", data);
 		dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
 		handleData();
