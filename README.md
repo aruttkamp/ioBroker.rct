@@ -46,6 +46,8 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 -->
 
 ### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) Release Script added and update dev-components
+* (Andreas Ruttkamp) Vorbereitung neues Backend
 
 ### 1.0.3 (2023-03-30)
 * (Andreas Ruttkamp) Release Script added and update dev-components
