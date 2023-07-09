@@ -28,7 +28,7 @@
 	"quotes": "single",
 	"es6class": "yes",
 	"authorName": "Andreas Ruttkamp",
-	"authorGithub": "aruttkamp	",
+	"authorGithub": "aruttkamp",
 	"authorEmail": "ioBroker.rct@ruttkamp.com",
 	"gitRemoteProtocol": "HTTPS",
 	"gitCommit": "no",

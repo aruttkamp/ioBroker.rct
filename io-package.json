@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "rct",
-        "version": "1.0.3",
+        "version": "1.0.4",
         "news": {
             "1.0.1": {
                 "en": "fixing review comments",
@@ -145,8 +145,8 @@
         "platform": "Javascript/Node.js",
         "icon": "rct-logo.square.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/master/admin/rct-logo.square.png",
-        "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/main/admin/rct-logo.square.png",
+        "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/main/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "energy",
