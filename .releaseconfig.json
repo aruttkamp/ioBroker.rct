@@ -4,5 +4,8 @@
 		"license",
 		"manual-review"
 		"changelog"
-	]
+	],
+	"exec": {
+        "before_commit": "npm run build"
+    }
 }
