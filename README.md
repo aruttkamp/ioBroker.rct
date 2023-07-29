@@ -48,6 +48,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) interne Arbeiten
 * (Andreas Ruttkamp) Umgebung für Neuen Admin aktualisiert
+* (Andreas Ruttkamp) Abhängigkeiten aktualisiert
 
 
 ### 1.0.4 (2023-04-24)

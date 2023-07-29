@@ -37,7 +37,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	}
 
 	if (DEBUG_CONSOLE==true) {
-	//console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
+	console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
 	}
 	return { channelName, stateName, stateFullName };
 };
@@ -129,9 +129,9 @@ rct.process = function (host, rctElements, iobInstance) {
 		if (dataBuffer.length < 5) return; // not enough data
 
 		const frameLength = getFrameLength(dataBuffer);
-
-		// console.log('DEBUG handleData()',byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
-
+		if (DEBUG_CONSOLE==true) {
+		   console.log('DEBUG handleData()',byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
+		}
 		if (dataBuffer.length < frameLength) {
 			console.log('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
 			return;
