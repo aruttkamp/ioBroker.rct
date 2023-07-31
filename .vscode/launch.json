@@ -11,6 +11,7 @@
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/main.js",
             "args": ["--debug", "0"],
+            "cwd": "${workspaceFolder}/.dev-server/default"
             //"preLaunchTask": "tsc: build - tsconfig.build.json",
             //"outFiles": ["${workspaceFolder}/build/**/*.js"]
             "resolveSourceMapLocations": [
