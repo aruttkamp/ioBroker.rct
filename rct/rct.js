@@ -10,6 +10,7 @@ let __client = null;
 
 rct.getStateInfo = function (rctName, iobInstance) {
 
+	// Prüfen ob Parameter bekannt ist.
 	if (!rct.cmd[rctName]) {
 		iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
 		return false;
@@ -37,7 +38,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	}
 
 	if (DEBUG_CONSOLE==true) {
-	console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
+		console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
 	}
 	return { channelName, stateName, stateFullName };
 };
@@ -75,6 +76,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		iobInstance.log.info(`RCT: connected to server at ${host}`);
 
+		// eslint-disable-next-line no-undef
 		connectionStatus = true;
 		requestElements();
 	});
@@ -101,7 +103,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			return true;
 		}
 
-		console.log("DEBUG data received", data);
+		console.log('DEBUG data received', data);
 		dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
 		handleData();
@@ -130,7 +132,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		const frameLength = getFrameLength(dataBuffer);
 		if (DEBUG_CONSOLE==true) {
-		   console.log('DEBUG handleData()',byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
+			console.log('DEBUG handleData()',byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
 		}
 		if (dataBuffer.length < frameLength) {
 			console.log('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);

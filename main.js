@@ -23,9 +23,6 @@ class Rct extends utils.Adapter {
 			name: 'rct',
 		});
 		this.on('ready', this.onReady.bind(this));
-		// this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
 
@@ -40,14 +37,19 @@ class Rct extends utils.Adapter {
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
 		this.log.info('config rct_ip: ' + this.config.rct_ip);
+		// Reset the connection indicator during startup
+		this.setState('info.connection',false,true);
 
+		// keine IP konfiguriert
 		if (!this.config.rct_ip) {
 			this.log.warn('No IP-address set / cancelling initialization');
 			return;
 		}
 
+		//refresh vorbelegen wenn nicht definiert
 		if (!this.config.rct_refresh) this.config.rct_refresh = 10;
 
+		//Wenn keine Elemente konfiguriert sind - Defaultwerte laden
 		if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].enabled,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].enabled,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.battery_type,power_mng.is_grid,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag,prim_sm.state';
 
 		// add states
