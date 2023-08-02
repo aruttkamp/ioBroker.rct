@@ -9,11 +9,9 @@
             "request": "launch",
             "name": "Launch JavaScript Adapter",
             "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/main.js",
+            "program": "/home/aruttkamp/ioBroker.rct/main.js",
             "args": ["--debug", "0"],
-            "cwd": "${workspaceFolder}/.dev-server/default"
-            //"preLaunchTask": "tsc: build - tsconfig.build.json",
-            //"outFiles": ["${workspaceFolder}/build/**/*.js"]
+            "cwd": "/home/aruttkamp/ioBroker.rct/.dev-server/default",
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/**",
                 "!**/node_modules/**"

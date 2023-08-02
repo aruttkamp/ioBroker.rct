@@ -724,7 +724,11 @@ rct.cmd['wifi.sockb_protocol'] = { serial: 26, id: '0BA16A10' };
 rct.cmd['wifi.state'] = { serial: 476, id: 'B4222BDE' };
 rct.cmd['wifi.use_ethernet'] = { serial: 486, id: 'B7C85C51' };
 rct.cmd['wifi.use_wifi'] = { serial: 560, id: 'D5790CE1' };
-
+rct.cmd['g_sync.p_ac_load[0]'] = { serial: 6, id: '03A39CA2' };
+rct.cmd['g_sync.p_ac_load[1]'] = { serial: 100, id: '2788928C' };
+rct.cmd['g_sync.p_ac_load[2]'] = { serial: 627, id: 'F0B436DD' };
+rct.cmd['dc_conv.dc_conv_struct[0].u_sg_lp'] = { serial: 473, id: 'B298395D' };
+rct.cmd['dc_conv.dc_conv_struct[1].u_sg_lp'] = { serial: 237, id: '5BB8075A' };
 
 rct.cmdReverse = {};
 rct.cmdReverse['0AFDD6CF'] = { name: 'acc_conv.i_acc_lp_fast' };
@@ -1395,5 +1399,10 @@ rct.cmdReverse['0BA16A10'] = { name: 'wifi.sockb_protocol' };
 rct.cmdReverse['B4222BDE'] = { name: 'wifi.state' };
 rct.cmdReverse['B7C85C51'] = { name: 'wifi.use_ethernet' };
 rct.cmdReverse['D5790CE1'] = { name: 'wifi.use_wifi' };
+rct.cmdReverse['03A39CA2'] = { name: 'g_sync.p_ac_load[0]', type: 'float', precision: 0, unit: ' W', description: 'Load Household phase 1' };
+rct.cmdReverse['2788928C'] = { name: 'g_sync.p_ac_load[1]', type: 'float', precision: 0, unit: ' W', description: 'Load Household phase 2' };
+rct.cmdReverse['F0B436DD'] = { name: 'g_sync.p_ac_load[2]', type: 'float', precision: 0, unit: ' W', description: 'Load Household phase 3' };
+rct.cmdReverse['B298395D'] = { name: 'dc_conv.dc_conv_struct[0].u_sg_lp', type: 'float', precision: 0, unit: ' V', description: 'Solar generator A voltage' };
+rct.cmdReverse['5BB8075A'] = { name: 'dc_conv.dc_conv_struct[1].u_sg_lp', type: 'float', precision: 0, unit: ' V', description: 'Solar generator B voltage' };
 
 module.exports = rct;

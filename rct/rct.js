@@ -15,10 +15,10 @@ rct.getStateInfo = function (rctName, iobInstance) {
 		iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
 		return false;
 	}
-
+	//Zuweisen Name
 	let name = rctName;
-
-	name = name.replace(/]/g, ''); // remove all ']' characters
+	// remove all ']' characters
+	name = name.replace(/]/g, '');
 
 	// if '[' comes before first '.', replace it by '.' and hence make it part of state name
 	if (name.search(/\[/) < name.search(/\./)) name = name.replace('[', '.');
@@ -247,6 +247,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			(response.dataType === 'uint2' && response.data.length != 2) ||
 			(response.dataType === 'uint4' && response.data.length != 4)) {
 			console.log('NOTICE: wrong length for data type', response);
+			//console.log('NOTICE: ', response.data.length);
 			response.dataType = '';
 		}
 
