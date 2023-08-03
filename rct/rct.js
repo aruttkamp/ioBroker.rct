@@ -1,5 +1,5 @@
 const net = require('net');
-const rct = require('./rct_core.js');
+const rct = require('./rct_core2.js');
 
 module.exports = rct;
 
