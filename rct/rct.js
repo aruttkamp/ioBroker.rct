@@ -148,7 +148,6 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		if (response.crcOk) {
 			let txt;
-
 			if (response.description) txt = `${response.description}: ${response.result} ${response.unit}`;
 			else if (response.name) txt = `${response.name}: ${response.result} ${response.unit}`;
 			else txt = response.infoText;
@@ -263,11 +262,20 @@ rct.process = function (host, rctElements, iobInstance) {
 			case 'UINT8':
 				response.result = response.data.readUInt8();
 				break;
+			case 'INT8':
+				response.result = response.data.readInt8();
+				break;
 			case 'UINT16':
 				response.result = response.data.readUInt16LE();
 				break;
+			case 'INT16':
+				response.result = response.data.readInt16LE();
+				break;
 			case 'UINT32':
 				response.result = response.data.readUInt32LE();
+				break;
+			case 'INT32':
+				response.result = response.data.readInt32LE();
 				break;
 			default: response.result = ''; break;
 		}
