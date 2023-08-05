@@ -10,7 +10,9 @@ let __client = null;
 
 rct.getStateInfo = function (rctName, iobInstance) {
 
-	// Prüfen ob Parameter bekannt ist.
+	//Übergebenen Parameter zerlegen und Korrekt in Channel und State füllen
+	//
+	//Prüfen ob Parameter bekannt ist.
 	if (!rct.cmd[rctName]) {
 		iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
 		return false;
@@ -254,6 +256,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		let result;
 		switch (response.dataType) {
 			case 'float':
+			case 'FLOAT':
 				result = response.data.readFloatBE();
 				if (response.multiplier !== undefined) result = result * response.multiplier;
 				response.result = floatPrecision(result, response.precision);

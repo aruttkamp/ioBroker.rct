@@ -56,7 +56,7 @@ class Rct extends utils.Adapter {
 		const rctElements = this.config.rct_elements.split(',');
 
 		for (const e of rctElements) {
-			const stateInfo = rct.getStateInfo(e, this);
+			const stateInfo = rct.getStateInfo(e, this); //Parameter Namen prüfen , zerlegen und ggfls. korrigieren
 			if (stateInfo) {
 
 				const { channelName, stateName, stateFullName } = stateInfo;
