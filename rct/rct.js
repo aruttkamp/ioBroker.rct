@@ -255,19 +255,18 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		let result;
 		switch (response.dataType) {
-			case 'float':
 			case 'FLOAT':
 				result = response.data.readFloatBE();
 				if (response.multiplier !== undefined) result = result * response.multiplier;
 				response.result = floatPrecision(result, response.precision);
 				break;
-			case 'uint1':
+			case 'UINT8':
 				response.result = response.data.readUInt8();
 				break;
-			case 'uint2':
+			case 'UINT16':
 				response.result = response.data.readUInt16LE();
 				break;
-			case 'uint4':
+			case 'UINT32':
 				response.result = response.data.readUInt32LE();
 				break;
 			default: response.result = ''; break;
