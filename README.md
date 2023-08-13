@@ -47,6 +47,9 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 -->
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt
+* (Andreas Ruttkamp) Weitere Parameter ergänzt. 
+* (Andreas Ruttkamp) Konvertierungsproblem mit Datumswerten behoben
+
 
 ### 1.0.5 (2023-07-29)
 * (Andreas Ruttkamp) interne Arbeiten
