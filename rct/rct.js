@@ -166,7 +166,9 @@ rct.process = function (host, rctElements, iobInstance) {
 			console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
 		}
 
-		handleData(); // continue and check if new data is available;
+		if (response.crcOk) {
+			handleData(); // continue and check if new data is available;
+		}
 	}
 
 	__client.on('end', () => {
@@ -255,7 +257,11 @@ rct.process = function (host, rctElements, iobInstance) {
 		let result;
 		switch (response.dataType) {
 			case 'FLOAT':
+				//console.log(response.name);
 				result = response.data.readFloatBE();
+				//console.log('result'&& result);
+				//console.log('multiplier: ' && response.multiplier);
+				//if (response.multiplier !== undefinded) response.mulitplier=100;
 				if (response.multiplier !== undefined) result = result * response.multiplier;
 				response.result = floatPrecision(result, response.precision);
 				break;

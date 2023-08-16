@@ -1,3 +1,4 @@
+//Alte Version - nicht mehr genutzt
 const rct = {};
 
 rct.crc = function (byteArray, previous) {
