@@ -56,9 +56,6 @@
     "prebuild": "rimraf admin/build",
     "build": "build-adapter react",
     "watch": "build-adapter react --watch",
-    "prebuild:react": "rimraf admin/build",
-    "build:react": "build-adapter react",
-    "watch:react": "build-adapter react --watch",
     "translate": "translate-adapter",
     "release": "release-script",
     "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
@@ -66,11 +63,7 @@
     "test:integration": "mocha test/integration --exit",
     "test": "npm run test:js && npm run test:package",
     "check": "tsc --noEmit -p tsconfig.check.json",
-    "lint": "eslint",
-    "prebuild": "rimraf admin/build",
-    "build": "build-adapter react",
-    "watch": "build-adapter react --watch"
-
+    "lint": "eslint"
   },
   "bugs": {
     "url": "https://github.com/aruttkamp/ioBroker.rct/issues"
