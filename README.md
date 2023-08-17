@@ -45,6 +45,9 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) Fix: Abbruch des Adapters 
+
 ### 1.1.1 (2023-08-17)
 * (Andreas Ruttkamp) Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt
 * (Andreas Ruttkamp) Weitere Parameter ergänzt. 

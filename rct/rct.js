@@ -230,35 +230,39 @@ rct.process = function (host, rctElements, iobInstance) {
 		response.precision = rct.cmdReverse[response.id].precision;
 		response.unit = rct.cmdReverse[response.id].unit || '';
 
-		if (!response.dataType) {
-			switch (response.length - 4) {
-				case 1: response.dataType = 'uint1'; break;
-				case 2: response.dataType = 'uint2'; break;
-				case 4: response.dataType = 'float'; break;
-				default: console.log('DEBUG unknown dataType', response.length - 4); break;
-			}
-		}
+//		if (!response.dataType) {
+//			switch (response.length - 4) {
+//				case 1: response.dataType = 'uint1'; break;
+//				case 2: response.dataType = 'uint2'; break;
+//				case 4: response.dataType = 'float'; break;
+//				default: console.log('DEBUG unknown dataType', response.length - 4); break;
+//			}
+//		}
 
-		if (response.dataType === 'uint4' && response.data.length !== 4) {
-			console.log('DEBUG: wrong length for uint4: ', response);
-			response.dataType = '';
-		}
+//		if (response.dataType === 'uint4' && response.data.length !== 4) {
+//			console.log('DEBUG: wrong length for uint4: ', response);
+//			response.dataType = '';
+//		}
 
 
-		if ((response.dataType === 'float' && response.data.length != 4) ||
-			(response.dataType === 'uint1' && response.data.length != 1) ||
-			(response.dataType === 'uint2' && response.data.length != 2) ||
-			(response.dataType === 'uint4' && response.data.length != 4)) {
-			console.log('NOTICE: wrong length for data type', response);
+//		if ((response.dataType === 'float' && response.data.length != 4) ||
+//			(response.dataType === 'uint1' && response.data.length != 1) ||
+//			(response.dataType === 'uint2' && response.data.length != 2) ||
+//			(response.dataType === 'uint4' && response.data.length != 4)) {
+//			console.log('NOTICE: wrong length for data type', response);
 			//console.log('NOTICE: ', response.data.length);
-			response.dataType = '';
-		}
+//			response.dataType = '';
+//		}
 
 		let result;
 		switch (response.dataType) {
 			case 'FLOAT':
 				//console.log(response.name);
-				result = response.data.readFloatBE();
+				//console.log('response.data : ' && response.data);
+				//console.log('länge//' && response.data.length);
+				if (response.data.length === 4){
+					result = response.data.readFloatBE();
+				}
 				//console.log('result'&& result);
 				//console.log('multiplier: ' && response.multiplier);
 				//if (response.multiplier !== undefinded) response.mulitplier=100;
