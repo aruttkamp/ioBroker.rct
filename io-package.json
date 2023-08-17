@@ -1,170 +1,157 @@
 {
-    "common": {
-        "name": "rct",
-        "version": "1.1.0",
-        "news": {
-            "1.0.1": {
-                "en": "fixing review comments",
-                "de": "Rezensionskommentare korrigieren",
-                "ru": "исправление комментариев к обзору",
-                "pt": "corrigindo comentários de revisão",
-                "nl": "recensie-opmerkingen corrigeren",
-                "fr": "correction des commentaires de révision",
-                "it": "correzione dei commenti di revisione",
-                "es": "arreglando comentarios de revisión",
-                "pl": "naprawianie komentarzy do recenzji",
-                "zh-cn": "修复评论评论",
-                "uk": "виправлення коментарів огляду"
-            },
-            "1.0.0": {
-                "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
-                "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben.",
-                "ru": "Версия 0.0.6 оказалась стабильной и удовлетворяла минимальным функциональным требованиям, поэтому для продуктивного использования была выпущена версия 1.0.0.",
-                "pt": "A versão 0.0.6 mostrou-se estável e atendeu aos requisitos funcionais mínimos, liberando-a como versão 1.0.0 para uso produtivo.",
-                "nl": "Versie 0.0.6 bleek stabiel en voldeed aan minimale functionele vereisten, dus werd het vrijgegeven als versie 1.0.0 voor productief gebruik.",
-                "fr": "La version 0.0.6 s'est avérée stable et répondait aux exigences fonctionnelles minimales, la publiant donc en tant que version 1.0.0 pour une utilisation productive.",
-                "it": "La versione 0.0.6 si è dimostrata stabile e ha soddisfatto i requisiti funzionali minimi, quindi rilasciandola come versione 1.0.0 per un utilizzo produttivo.",
-                "es": "La versión 0.0.6 demostró ser estable y cumplir con los requisitos funcionales mínimos, por lo que se lanzó como versión 1.0.0 para un uso productivo.",
-                "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
-                "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。",
-                "uk": "Версія 0.0.6 виявилася стабільною та відповідає мінімальним функціональним вимогам, тому її було випущено як версію 1.0.0 для продуктивного використання."
-            },
-            "0.0.6": {
-                "en": "Adding new channels/states, major stability improvements.",
-                "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert.",
-                "ru": "Добавление новых каналов/состояний, значительные улучшения стабильности.",
-                "pt": "Adicionando novos canais/estados, grandes melhorias de estabilidade.",
-                "nl": "Nieuwe kanalen/staten toevoegen, grote stabiliteitsverbeteringen.",
-                "fr": "Ajout de nouveaux canaux/états, améliorations majeures de la stabilité.",
-                "it": "Aggiunta di nuovi canali/stati, importanti miglioramenti della stabilità.",
-                "es": "Adición de nuevos canales/estados, importantes mejoras de estabilidad.",
-                "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
-                "zh-cn": "添加新的通道/状态，重大的稳定性改进。",
-                "uk": "Додавання нових каналів/станів, значні покращення стабільності."
-            },
-            "0.0.5": {
-                "en": "news",
-                "de": "neues",
-                "ru": "новое",
-                "pt": "novidades",
-                "nl": "nieuws",
-                "fr": "nouvelles",
-                "it": "notizie",
-                "es": "noticias",
-                "pl": "nowości",
-                "zh-cn": "新",
-                "uk": "новини"
-            },
-            "0.0.4": {
-                "en": "news",
-                "de": "neues",
-                "ru": "новое",
-                "pt": "novidades",
-                "nl": "nieuws",
-                "fr": "nouvelles",
-                "it": "notizie",
-                "es": "noticias",
-                "pl": "nowości",
-                "zh-cn": "新",
-                "uk": "новини"
-            },
-            "0.0.3": {
-                "en": "news",
-                "de": "neues",
-                "ru": "новое",
-                "pt": "novidades",
-                "nl": "nieuws",
-                "fr": "nouvelles",
-                "it": "notizie",
-                "es": "noticias",
-                "pl": "nowości",
-                "zh-cn": "新",
-                "uk": "новини"
-            },
-            "0.0.2": {
-                "en": "news",
-                "de": "neues",
-                "ru": "новое",
-                "pt": "novidades",
-                "nl": "nieuws",
-                "fr": "nouvelles",
-                "it": "notizie",
-                "es": "noticias",
-                "pl": "nowości",
-                "zh-cn": "新",
-                "uk": "новини"
-            },
-            "0.0.1": {
-                "en": "initial bare minimum release",
-                "de": "Erstveröffentlichung minimale Funktionalität",
-                "ru": "начальный минимальный выпуск",
-                "pt": "liberação mínima inicial",
-                "nl": "eerste absolute minimum release",
-                "fr": "version minimale minimale initiale",
-                "it": "rilascio minimo minimo iniziale",
-                "es": "lanzamiento mínimo inicial desnudo",
-                "pl": "początkowe minimalne wydanie",
-                "zh-cn": "最初的最低限度释放",
-                "uk": "початковий мінімальний випуск"
-            }
-        },
-        "titleLang": {
-            "en": "RCT Power - Photovoltaic",
-            "de": "RCT Power - Photovoltaik",
-            "ru": "RCT Power - PV",
-            "pt": "RCT Power - PV",
-            "nl": "RCT Power - PV",
-            "fr": "RCT Power - PV",
-            "it": "RCT Power - PV",
-            "es": "RCT Power - PV",
-            "pl": "RCT Power - PV",
-            "zh-cn": "RCT Power - PV",
-            "uk": "RCT Power - фотоелектричні"
-        },
-        "desc": {
-            "en": "Connect a RCT photovolatics power converter",
-            "de": "Anbindung RCT-Photovoltaik-Wechselrichter",
-            "ru": "Показать значения фотоэлектрического преобразователя мощности RCT",
-            "pt": "Mostrar valores de um conversor de energia fotovolático RCT",
-            "nl": "Toon waarden van een RCT fotovolatica stroomomvormer",
-            "fr": "Afficher les valeurs d'un convertisseur de puissance photovoltaïque RCT",
-            "it": "Mostra i valori di un convertitore di potenza fotovolatico RCT",
-            "es": "Mostrar los valores de un convertidor de potencia fotovoltaico RCT",
-            "pl": "Pokaż wartości przetwornika mocy fotowoltaiki RCT",
-            "zh-cn": "显示RCT光电功率转换器的值",
-            "uk": "Підключіть фотоелектричний перетворювач потужності RCT"
-        },
-        "authors": [
-            "Andreas Ruttkamp <ioBroker.rct@ruttkamp.com>"
-        ],
-        "keywords": [
-            "rct",
-            "pv"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "icon": "rct-logo.square.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/main/admin/rct-logo.square.png",
-        "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/main/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "type": "energy",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "materialize": true,
-        "dependencies": [
-            {
-                "js-controller": ">=2.0.0"
-            }
-        ]
+  "common": {
+    "name": "rct",
+    "version": "1.1.1",
+    "news": {
+      "1.1.1": {
+        "en": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt. \nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "de": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nNews und News\nIn den Warenkorb\nAbbruch der Instanz bei Übertragungsfehlern",
+        "ru": "Дата Für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Начало\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nКонверторунгсфехлер bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "pt": "Datan für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Produtos de plástico\nWeitere Parâmetro ergänzt.\nAdicionar ao cesto\nProdutos químicos em %\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "nl": "Vertaling: Hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsprobleem mit Datumswerf\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Çragungsfehlern Behoben",
+        "fr": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "it": "Datan für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "es": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "pl": "Daten für g_sync.p_ac_load0-2 / dc_conv_struct0-1.u_sg_sg_lpf.dc_conv_struct0-1 (ang.). hinzugefügt\nWspółzałożyciel.\nNiezwykłe sytuacje\n% Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behobenz",
+        "uk": "Датан für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp свінгери\nВейтер параметр ergänzt.\nKonvertierungsproblem міт Datumswerten behoben\nKonvertierungsfehler bei % Уертен behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
+        "zh-cn": "日期 欣 zugefügt\nWeitere Para参数 ergänzt。.\nKonvertierungsblem mit Damidswertenhoben\nKonvertierungsfehleri perrtenhoben\nAbbruchder Instanz asi oubertragsfehlernhoben"
+      },
+      "1.0.1": {
+        "en": "fixing review comments",
+        "de": "Rezensionskommentare korrigieren",
+        "ru": "исправление комментариев к обзору",
+        "pt": "corrigindo comentários de revisão",
+        "nl": "recensie-opmerkingen corrigeren",
+        "fr": "correction des commentaires de révision",
+        "it": "correzione dei commenti di revisione",
+        "es": "arreglando comentarios de revisión",
+        "pl": "naprawianie komentarzy do recenzji",
+        "zh-cn": "修复评论评论",
+        "uk": "виправлення коментарів огляду"
+      },
+      "1.0.0": {
+        "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
+        "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben.",
+        "ru": "Версия 0.0.6 оказалась стабильной и удовлетворяла минимальным функциональным требованиям, поэтому для продуктивного использования была выпущена версия 1.0.0.",
+        "pt": "A versão 0.0.6 mostrou-se estável e atendeu aos requisitos funcionais mínimos, liberando-a como versão 1.0.0 para uso produtivo.",
+        "nl": "Versie 0.0.6 bleek stabiel en voldeed aan minimale functionele vereisten, dus werd het vrijgegeven als versie 1.0.0 voor productief gebruik.",
+        "fr": "La version 0.0.6 s'est avérée stable et répondait aux exigences fonctionnelles minimales, la publiant donc en tant que version 1.0.0 pour une utilisation productive.",
+        "it": "La versione 0.0.6 si è dimostrata stabile e ha soddisfatto i requisiti funzionali minimi, quindi rilasciandola come versione 1.0.0 per un utilizzo produttivo.",
+        "es": "La versión 0.0.6 demostró ser estable y cumplir con los requisitos funcionales mínimos, por lo que se lanzó como versión 1.0.0 para un uso productivo.",
+        "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
+        "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。",
+        "uk": "Версія 0.0.6 виявилася стабільною та відповідає мінімальним функціональним вимогам, тому її було випущено як версію 1.0.0 для продуктивного використання."
+      },
+      "0.0.6": {
+        "en": "Adding new channels/states, major stability improvements.",
+        "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert.",
+        "ru": "Добавление новых каналов/состояний, значительные улучшения стабильности.",
+        "pt": "Adicionando novos canais/estados, grandes melhorias de estabilidade.",
+        "nl": "Nieuwe kanalen/staten toevoegen, grote stabiliteitsverbeteringen.",
+        "fr": "Ajout de nouveaux canaux/états, améliorations majeures de la stabilité.",
+        "it": "Aggiunta di nuovi canali/stati, importanti miglioramenti della stabilità.",
+        "es": "Adición de nuevos canales/estados, importantes mejoras de estabilidad.",
+        "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
+        "zh-cn": "添加新的通道/状态，重大的稳定性改进。",
+        "uk": "Додавання нових каналів/станів, значні покращення стабільності."
+      },
+      "0.0.5": {
+        "en": "news",
+        "de": "neues",
+        "ru": "новое",
+        "pt": "novidades",
+        "nl": "nieuws",
+        "fr": "nouvelles",
+        "it": "notizie",
+        "es": "noticias",
+        "pl": "nowości",
+        "zh-cn": "新",
+        "uk": "новини"
+      },
+      "0.0.4": {
+        "en": "news",
+        "de": "neues",
+        "ru": "новое",
+        "pt": "novidades",
+        "nl": "nieuws",
+        "fr": "nouvelles",
+        "it": "notizie",
+        "es": "noticias",
+        "pl": "nowości",
+        "zh-cn": "新",
+        "uk": "новини"
+      },
+      "0.0.3": {
+        "en": "news",
+        "de": "neues",
+        "ru": "новое",
+        "pt": "novidades",
+        "nl": "nieuws",
+        "fr": "nouvelles",
+        "it": "notizie",
+        "es": "noticias",
+        "pl": "nowości",
+        "zh-cn": "新",
+        "uk": "новини"
+      }
     },
-    "native": {
-        "rct_ip": "",
-        "rct_refresh": 10,
-        "rct_elements": ""
+    "titleLang": {
+      "en": "RCT Power - Photovoltaic",
+      "de": "RCT Power - Photovoltaik",
+      "ru": "RCT Power - PV",
+      "pt": "RCT Power - PV",
+      "nl": "RCT Power - PV",
+      "fr": "RCT Power - PV",
+      "it": "RCT Power - PV",
+      "es": "RCT Power - PV",
+      "pl": "RCT Power - PV",
+      "zh-cn": "RCT Power - PV",
+      "uk": "RCT Power - фотоелектричні"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "Connect a RCT photovolatics power converter",
+      "de": "Anbindung RCT-Photovoltaik-Wechselrichter",
+      "ru": "Показать значения фотоэлектрического преобразователя мощности RCT",
+      "pt": "Mostrar valores de um conversor de energia fotovolático RCT",
+      "nl": "Toon waarden van een RCT fotovolatica stroomomvormer",
+      "fr": "Afficher les valeurs d'un convertisseur de puissance photovoltaïque RCT",
+      "it": "Mostra i valori di un convertitore di potenza fotovolatico RCT",
+      "es": "Mostrar los valores de un convertidor de potencia fotovoltaico RCT",
+      "pl": "Pokaż wartości przetwornika mocy fotowoltaiki RCT",
+      "zh-cn": "显示RCT光电功率转换器的值",
+      "uk": "Підключіть фотоелектричний перетворювач потужності RCT"
+    },
+    "authors": [
+      "Andreas Ruttkamp <ioBroker.rct@ruttkamp.com>"
+    ],
+    "keywords": [
+      "rct",
+      "pv"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "icon": "rct-logo.square.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/main/admin/rct-logo.square.png",
+    "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "energy",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "materialize": true,
+    "dependencies": [
+      {
+        "js-controller": ">=2.0.0"
+      }
+    ]
+  },
+  "native": {
+    "rct_ip": "",
+    "rct_refresh": 10,
+    "rct_elements": ""
+  },
+  "objects": [],
+  "instanceObjects": []
 }
