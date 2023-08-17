@@ -49,9 +49,6 @@
       },
   "main": "main.js",
   "scripts": {
-    "prebuild": "rimraf admin/build",
-    "build": "build-adapter",
-    "watch": "build-adapter --watch",
     "translate": "translate-adapter",
     "release": "release-script",
     "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
