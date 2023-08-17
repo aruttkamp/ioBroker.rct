@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "news": {
+      "1.1.2": {
+        "en": "Fix: Abbruch des Adapters",
+        "de": "Fix: Abbruch des Adapters",
+        "ru": "Исправление: Abbruch des Adapters",
+        "pt": "Fix: Adaptadores de Abbruch",
+        "nl": "Abbruch des Adapters",
+        "fr": "Fix: Abbruch des Adapters",
+        "it": "Fisso: Abbruch des Adattatori",
+        "es": "Fix: Abbruch des Adapters",
+        "pl": "Abbruch des Adapter",
+        "uk": "Виправлення: Адаптери знеболювання",
+        "zh-cn": "Fix:Abbruch des Adapters"
+      },
       "1.1.1": {
         "en": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt. \nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
         "de": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nNews und News\nIn den Warenkorb\nAbbruch der Instanz bei Übertragungsfehlern",
@@ -69,19 +82,6 @@
         "uk": "новини"
       },
       "0.0.4": {
-        "en": "news",
-        "de": "neues",
-        "ru": "новое",
-        "pt": "novidades",
-        "nl": "nieuws",
-        "fr": "nouvelles",
-        "it": "notizie",
-        "es": "noticias",
-        "pl": "nowości",
-        "zh-cn": "新",
-        "uk": "новини"
-      },
-      "0.0.3": {
         "en": "news",
         "de": "neues",
         "ru": "новое",
