@@ -45,6 +45,10 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) Fix: Weitere Datenprüfungen eingbaut
+
 ### 1.1.2 (2023-08-17)
 * (Andreas Ruttkamp) Fix: Abbruch des Adapters
 

@@ -16,3 +16,5 @@ admin/i18n/*/flat.txt
 # ioBroker dev-server
 .dev-server/
 .vscode/launch.json
+log/iobroker-audit.json
+log/iobroker.2023-08-18.log
