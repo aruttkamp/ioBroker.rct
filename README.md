@@ -45,8 +45,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.1.5 (2023-08-18)
 * (Andreas Ruttkamp) Fix: Abbruch bei lesen von UInt8 Datentypen behoben
 * (Andreas Ruttkamp) Verzeichnisse aufgeräumt
 

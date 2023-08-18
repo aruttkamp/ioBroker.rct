@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "news": {
+      "1.1.5": {
+        "en": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
+        "de": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse auf",
+        "ru": "Исправление: Abbruch bei lesen von UInt8 Datentypen behoben\nВерзейхнисе aufgeräumt",
+        "pt": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVer todos os produtos",
+        "nl": "Vertaling:\nVerzeichnisse aufgeräum",
+        "fr": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
+        "it": "Fisso: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
+        "es": "Corrección: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
+        "pl": "Abbruch bei lesen von UInt8 Datentypen behoben (ang.)\nWerzeichnisse aufgeräumt",
+        "uk": "Виправлення: abbruch bei lesen фон UInt8 Датаntypen behoben\nАуфгераумт",
+        "zh-cn": "Fix:Abbruchi lesen von UInt8衰期\nVerzeichnisse aufgeräumt"
+      },
       "1.1.4": {
         "en": "Fix: Rückgabewerte nochmals angepasst.",
         "de": "Fix: Rückgabewerte angepasst.",
@@ -80,19 +93,6 @@
         "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
         "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。",
         "uk": "Версія 0.0.6 виявилася стабільною та відповідає мінімальним функціональним вимогам, тому її було випущено як версію 1.0.0 для продуктивного використання."
-      },
-      "0.0.6": {
-        "en": "Adding new channels/states, major stability improvements.",
-        "de": "Neue Kanäle/Werte hinzugefügt, Stabilität wesentlich verbessert.",
-        "ru": "Добавление новых каналов/состояний, значительные улучшения стабильности.",
-        "pt": "Adicionando novos canais/estados, grandes melhorias de estabilidade.",
-        "nl": "Nieuwe kanalen/staten toevoegen, grote stabiliteitsverbeteringen.",
-        "fr": "Ajout de nouveaux canaux/états, améliorations majeures de la stabilité.",
-        "it": "Aggiunta di nuovi canali/stati, importanti miglioramenti della stabilità.",
-        "es": "Adición de nuevos canales/estados, importantes mejoras de estabilidad.",
-        "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
-        "zh-cn": "添加新的通道/状态，重大的稳定性改进。",
-        "uk": "Додавання нових каналів/станів, значні покращення стабільності."
       }
     },
     "titleLang": {
