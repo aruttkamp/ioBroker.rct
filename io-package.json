@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "news": {
+      "1.1.4": {
+        "en": "Fix: Rückgabewerte nochmals angepasst.",
+        "de": "Fix: Rückgabewerte angepasst.",
+        "ru": "Исправление: Rückgabewerte nochmals angepasst.",
+        "pt": "Fix: Rückgabewerte nochmals angepasst.",
+        "nl": "Rückgabewerte nochmals angepasst.",
+        "fr": "Fix: Rückgabewerte nochmals angepasst.",
+        "it": "Fisso: Rückgabewerte nochmals angepasst.",
+        "es": "Fijo: Rückgabewerte nochmals angepasst.",
+        "pl": "Rückgabewerte nochmals angepasst (ang.).",
+        "uk": "Виправлення: Rückgabewerte nochmals angepasst.",
+        "zh-cn": "Fix: Rückgabewerte nochmals agepasst。."
+      },
       "1.1.3": {
         "en": "Fix: Weitere Datenprüfungen eingbaut",
         "de": "Fix: Weitere Datenprüfungen eingbaut",
@@ -80,19 +93,6 @@
         "pl": "Dodanie nowych kanałów/stanów, znaczna poprawa stabilności.",
         "zh-cn": "添加新的通道/状态，重大的稳定性改进。",
         "uk": "Додавання нових каналів/станів, значні покращення стабільності."
-      },
-      "0.0.5": {
-        "en": "news",
-        "de": "neues",
-        "ru": "новое",
-        "pt": "novidades",
-        "nl": "nieuws",
-        "fr": "nouvelles",
-        "it": "notizie",
-        "es": "noticias",
-        "pl": "nowości",
-        "zh-cn": "新",
-        "uk": "новини"
       }
     },
     "titleLang": {
