@@ -48,6 +48,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) Fix: Abbruch bei lesen von UInt8 Datentypen behoben
+* (Andreas Ruttkamp) Verzeichnisse aufgeräumt
 
 ### 1.1.4 (2023-08-18)
 * (Andreas Ruttkamp) Fix: Rückgabewerte nochmals angepasst.
