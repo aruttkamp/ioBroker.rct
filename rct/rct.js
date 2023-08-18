@@ -276,16 +276,24 @@ rct.process = function (host, rctElements, iobInstance) {
 				response.result = response.data.readInt8();
 				break;
 			case 'UINT16':
-				response.result = response.data.readUInt16LE();
+				if (response.data.length > 0){
+					response.result = response.data.readUInt16LE();
+				}
 				break;
 			case 'INT16':
-				response.result = response.data.readInt16BE();
+				if (response.data.length > 0){
+					response.result = response.data.readInt16BE();
+				}
 				break;
 			case 'UINT32':
-				response.result = response.data.readUInt32LE();
+				if (response.data.length > 0){
+					response.result = response.data.readUInt32LE();
+				}
 				break;
 			case 'INT32':
-				response.result = response.data.readInt32BE();
+				if (response.data.length > 0){
+					response.result = response.data.readInt32BE();
+				}
 				break;
 			case 'STRING':
 				response.result = response.data.Buffer;
