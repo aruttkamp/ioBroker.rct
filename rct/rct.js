@@ -270,10 +270,18 @@ rct.process = function (host, rctElements, iobInstance) {
 				response.result = floatPrecision(result, response.precision);
 				break;
 			case 'UINT8':
-				response.result = response.data.readUInt8();
+				if (response.data.length > 0){
+					response.result = response.data.readUInt8();
+				}else{
+					response.result=0;
+				}
 				break;
 			case 'INT8':
-				response.result = response.data.readInt8();
+				if (response.data.length > 0){
+					response.result = response.data.readInt8();
+				}else{
+					response.result=0;
+				}
 				break;
 			case 'UINT16':
 				if (response.data.length > 0){
