@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "news": {
+      "1.1.3": {
+        "en": "Fix: Weitere Datenprüfungen eingbaut",
+        "de": "Fix: Weitere Datenprüfungen eingbaut",
+        "ru": "Исправление: Weitere Datenprüfungen eingbaut",
+        "pt": "Fix: Weitere Datenprüfungen eingbaut",
+        "nl": "Weitere Datenprüfungen Eingbaut",
+        "fr": "Fix: Weitere Datenprüfungen eingbaut",
+        "it": "Fisso: Weitere Datenprüfungen eingbaut",
+        "es": "Fix: Weitere Datenprüfungen eingbaut",
+        "pl": "Fix: Weitere Datenprüfungen (ang.)",
+        "uk": "Виправлення: Weitere Datenprüfungen eingbaut",
+        "zh-cn": "Fix: Weiterenprüfungen ebaut"
+      },
       "1.1.2": {
         "en": "Fix: Abbruch des Adapters",
         "de": "Fix: Abbruch des Adapters",
@@ -69,19 +82,6 @@
         "uk": "Додавання нових каналів/станів, значні покращення стабільності."
       },
       "0.0.5": {
-        "en": "news",
-        "de": "neues",
-        "ru": "новое",
-        "pt": "novidades",
-        "nl": "nieuws",
-        "fr": "nouvelles",
-        "it": "notizie",
-        "es": "noticias",
-        "pl": "nowości",
-        "zh-cn": "新",
-        "uk": "новини"
-      },
-      "0.0.4": {
         "en": "news",
         "de": "neues",
         "ru": "новое",
