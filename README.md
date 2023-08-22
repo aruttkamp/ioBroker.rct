@@ -46,7 +46,9 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (Andreas Ruttkamp) rct_core.js entfernt
+* (Andreas Ruttkamp) rct_core.js entfernt (wurde durch rct_core2 ersetzt)
+* (Andreas Ruttkamp) Parameter die nicht unterstützt werden aus Defaultbelegung entfernt.
+
 
 ### 1.1.5 (2023-08-18)
 * (Andreas Ruttkamp) Fix: Abbruch bei lesen von UInt8 Datentypen behoben
