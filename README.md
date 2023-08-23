@@ -45,7 +45,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.1.6 (2023-08-23)
 * (Andreas Ruttkamp) rct_core.js entfernt (wurde durch rct_core2 ersetzt)
 * (Andreas Ruttkamp) Parameter die nicht unterstützt werden aus Defaultbelegung entfernt.
 * (Andreas Ruttkamp) min. Node 18

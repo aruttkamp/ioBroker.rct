@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "news": {
+      "1.1.6": {
+        "en": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
+        "de": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
+        "ru": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nПараметры die nicht unterstützt werden aus Defaultbelegung entfernt.\nмин. Нод 18",
+        "pt": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParâmetro morrer nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
+        "nl": "rctcore.js entfernt (wurde durch rctcore2 ersetzt)\nDe parameter dient de onvertaalde Ondertiteling.\nmin. Node 18",
+        "fr": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
+        "it": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParametro die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
+        "es": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. No. 18",
+        "pl": "rct_core.js entfernt (wurde durch rct_core2 ersetzt) (ang.)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. 18",
+        "uk": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nПараметр вмирає ніхт unterstützt werden ausЗагружено гостем.\nхв. Лот 18",
+        "zh-cn": "页: 1\n帕特特特特特特特特特特·特韦德去世。.\n页: 1 第18条"
+      },
       "1.1.5": {
         "en": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
         "de": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse auf",
@@ -80,19 +93,6 @@
         "pl": "naprawianie komentarzy do recenzji",
         "zh-cn": "修复评论评论",
         "uk": "виправлення коментарів огляду"
-      },
-      "1.0.0": {
-        "en": "0.0.6 version proved stable and fulfilling minimal functional requirements, so releasing it as version 1.0.0 for productive usage.",
-        "de": "Version 0.0.6 hat sich als stabil erwiesen und erfüllt die minimalen funktionalen Anforderungen. Die Version wird daher als 1.0.0 zur produktiven Nutzung freigegeben.",
-        "ru": "Версия 0.0.6 оказалась стабильной и удовлетворяла минимальным функциональным требованиям, поэтому для продуктивного использования была выпущена версия 1.0.0.",
-        "pt": "A versão 0.0.6 mostrou-se estável e atendeu aos requisitos funcionais mínimos, liberando-a como versão 1.0.0 para uso produtivo.",
-        "nl": "Versie 0.0.6 bleek stabiel en voldeed aan minimale functionele vereisten, dus werd het vrijgegeven als versie 1.0.0 voor productief gebruik.",
-        "fr": "La version 0.0.6 s'est avérée stable et répondait aux exigences fonctionnelles minimales, la publiant donc en tant que version 1.0.0 pour une utilisation productive.",
-        "it": "La versione 0.0.6 si è dimostrata stabile e ha soddisfatto i requisiti funzionali minimi, quindi rilasciandola come versione 1.0.0 per un utilizzo produttivo.",
-        "es": "La versión 0.0.6 demostró ser estable y cumplir con los requisitos funcionales mínimos, por lo que se lanzó como versión 1.0.0 para un uso productivo.",
-        "pl": "Wersja 0.0.6 okazała się stabilna i spełniała minimalne wymagania funkcjonalne, dlatego została wydana jako wersja 1.0.0 do użytku produkcyjnego.",
-        "zh-cn": "0.0.6 版本被证明是稳定的并满足最低的功能要求，因此将其作为 1.0.0 版本发布以供生产使用。",
-        "uk": "Версія 0.0.6 виявилася стабільною та відповідає мінімальним функціональним вимогам, тому її було випущено як версію 1.0.0 для продуктивного використання."
       }
     },
     "titleLang": {
