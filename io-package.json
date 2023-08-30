@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "news": {
+      "1.1.7": {
+        "en": "Connection state korrigiert",
+        "de": "Kontakt Staat",
+        "ru": "Соединение государственный korrigiert",
+        "pt": "Conexão Estado korrigiert",
+        "nl": "Connectie staat korrigiert",
+        "fr": "État de connexion korrigiert",
+        "it": "Stato di connessione korrigiert",
+        "es": "Estado de conexión korrigiert",
+        "pl": "Strona oficjalna",
+        "uk": "Стан підключення korrigiert",
+        "zh-cn": "A. 殴打国"
+      },
       "1.1.6": {
         "en": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
         "de": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
@@ -80,19 +93,6 @@
         "pl": "Daten für g_sync.p_ac_load0-2 / dc_conv_struct0-1.u_sg_sg_lpf.dc_conv_struct0-1 (ang.). hinzugefügt\nWspółzałożyciel.\nNiezwykłe sytuacje\n% Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behobenz",
         "uk": "Датан für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp свінгери\nВейтер параметр ergänzt.\nKonvertierungsproblem міт Datumswerten behoben\nKonvertierungsfehler bei % Уертен behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
         "zh-cn": "日期 欣 zugefügt\nWeitere Para参数 ergänzt。.\nKonvertierungsblem mit Damidswertenhoben\nKonvertierungsfehleri perrtenhoben\nAbbruchder Instanz asi oubertragsfehlernhoben"
-      },
-      "1.0.1": {
-        "en": "fixing review comments",
-        "de": "Rezensionskommentare korrigieren",
-        "ru": "исправление комментариев к обзору",
-        "pt": "corrigindo comentários de revisão",
-        "nl": "recensie-opmerkingen corrigeren",
-        "fr": "correction des commentaires de révision",
-        "it": "correzione dei commenti di revisione",
-        "es": "arreglando comentarios de revisión",
-        "pl": "naprawianie komentarzy do recenzji",
-        "zh-cn": "修复评论评论",
-        "uk": "виправлення коментарів огляду"
       }
     },
     "titleLang": {
