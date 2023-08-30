@@ -48,6 +48,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) Connection state bei Stop des Adapters zurückgesetzt
+* (Andreas Ruttkamp) Connection state bei Start des Adapters nochmals angepasst
 
 ### 1.1.7 (2023-08-30)
 * (Andreas Ruttkamp) Connection state korrigiert

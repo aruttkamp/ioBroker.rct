@@ -80,6 +80,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		// eslint-disable-next-line no-undef
 		connectionStatus = true;
+		this.setState('info.connection',true);
 		requestElements();
 	});
 
