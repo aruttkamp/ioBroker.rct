@@ -85,6 +85,7 @@ class Rct extends utils.Adapter {
 			} else iobInstance.log.info('rct state not defined: ' + e);
 		}
 
+		this.setState('info.connection',true);
 		console.debug('onReady() rct.process(): start processing');
 
 		rct.process(this.config.rct_ip, rctElements, this);
