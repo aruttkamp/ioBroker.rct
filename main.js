@@ -87,7 +87,7 @@ class Rct extends utils.Adapter {
 
 
 		console.debug('onReady() rct.process(): start processing');
-
+		this.setState('info.connection',true);
 		rct.process(this.config.rct_ip, rctElements, this);
 
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
