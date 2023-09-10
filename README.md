@@ -47,15 +47,15 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 -->
 
 ### **WORK IN PROGRESS**
-* (Andreas Ruttkamp) Connection state bei Stop des Adapters zurückgesetzt
-* (Andreas Ruttkamp) Connection state bei Start des Adapters nochmals angepasst
+* (Andreas Ruttkamp) Connection state on Stop from Adapter corrected
+* (Andreas Ruttkamp) depencies updated 
 
 ### 1.1.7 (2023-08-30)
-* (Andreas Ruttkamp) Connection state korrigiert
+* (Andreas Ruttkamp) Connection state corrected
 
 ### 1.1.6 (2023-08-23)
-* (Andreas Ruttkamp) rct_core.js entfernt (wurde durch rct_core2 ersetzt)
-* (Andreas Ruttkamp) Parameter die nicht unterstützt werden aus Defaultbelegung entfernt.
+* (Andreas Ruttkamp) rct_core.js deleted (now rct_core2 is used)
+* (Andreas Ruttkamp) parameters in default setting deleted 
 * (Andreas Ruttkamp) min. Node 18
 
 ### 1.1.5 (2023-08-18)

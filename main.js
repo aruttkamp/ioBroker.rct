@@ -38,7 +38,7 @@ class Rct extends utils.Adapter {
 		// this.config:
 		this.log.info('config rct_ip: ' + this.config.rct_ip);
 		// Reset the connection indicator during startup
-		this.setState('info.connection',false,true);
+		//this.setState('info.connection',false,true);
 
 		// keine IP konfiguriert
 		if (!this.config.rct_ip) {
@@ -51,6 +51,7 @@ class Rct extends utils.Adapter {
 
 		//Wenn keine Elemente konfiguriert sind - Defaultwerte laden
 		if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag,prim_sm.state';
+		this.config.rct_elements = 'power_mng.bat_next_calib_date';
 
 		// add states
 		const rctElements = this.config.rct_elements.split(',');
@@ -87,7 +88,7 @@ class Rct extends utils.Adapter {
 
 
 		console.debug('onReady() rct.process(): start processing');
-		this.setState('info.connection',true);
+		//this.setState('info.connection',true);
 		rct.process(this.config.rct_ip, rctElements, this);
 
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.

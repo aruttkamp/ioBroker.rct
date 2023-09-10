@@ -1,6 +1,7 @@
 const net = require('net');
 const rct = require('./rct_core2.js');
 
+
 module.exports = rct;
 
 // flag for local debugging
@@ -65,6 +66,9 @@ rct.process = function (host, rctElements, iobInstance) {
 	__client = net.createConnection({ host, port: 8899 }, () => {
 
 		function requestElements() {
+			//Test ob refresh ordnungsgemäß funktioniert.
+			//iobInstance.log.info('request Elements');
+
 			if (!__client) {
 				return;
 			}
@@ -77,7 +81,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 
 		iobInstance.log.info(`RCT: connected to server at ${host}`);
-
+		iobInstance.setState('info.connection',true,true);
 		// eslint-disable-next-line no-undef
 		connectionStatus = true;
 		requestElements();
