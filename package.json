@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/aruttkamp/ioBroker.rct"
   },
+  "engines": {
+    "node": ">= 18"
+  },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.6"
   },
