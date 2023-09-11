@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.1.7",
+    "version": "1.2.0",
     "news": {
+      "1.2.0": {
+        "en": "Connection state on Stop from Adapter corrected\ndepencies updated",
+        "de": "Anschlusszustand auf Stopp vom Adapter korrigiert\ndepene aktualisiert",
+        "ru": "Соединение состояния на Stop from Adapter исправлено\nчастоты обновлены",
+        "pt": "Estado de conexão em Parar de Adapter corrigido\ncompetências atualizadas",
+        "nl": "Connectie staat op Stop van Adapter correct\n_",
+        "fr": "État de connexion sur Stop from Adapter corrigé\ndepencies updated",
+        "it": "Stato di connessione su Stop da Adattatore corretto\nspese aggiornate",
+        "es": "Estado de conexión en Stop from Adapter corregido\ndepencies updated",
+        "pl": "Połączenie stanu z Stop od Adaptera skorygowane\ndepozyty",
+        "uk": "Стан з'єднання на стопі від адаптера, виправленого\ndepencies оновлений",
+        "zh-cn": "纠正的阿道道站站站区\n最新资料"
+      },
       "1.1.7": {
         "en": "Connection state korrigiert",
         "de": "Kontakt Staat",
@@ -80,19 +93,6 @@
         "pl": "Abbruch des Adapter",
         "uk": "Виправлення: Адаптери знеболювання",
         "zh-cn": "Fix:Abbruch des Adapters"
-      },
-      "1.1.1": {
-        "en": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt. \nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "de": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nNews und News\nIn den Warenkorb\nAbbruch der Instanz bei Übertragungsfehlern",
-        "ru": "Дата Für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Начало\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nКонверторунгсфехлер bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "pt": "Datan für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Produtos de plástico\nWeitere Parâmetro ergänzt.\nAdicionar ao cesto\nProdutos químicos em %\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "nl": "Vertaling: Hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsprobleem mit Datumswerf\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Çragungsfehlern Behoben",
-        "fr": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "it": "Datan für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp Hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "es": "Daten für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp hinzugefügt\nWeitere Parameter ergänzt.\nKonvertierungsproblem mit Datumswerten behoben\nKonvertierungsfehler bei % Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "pl": "Daten für g_sync.p_ac_load0-2 / dc_conv_struct0-1.u_sg_sg_lpf.dc_conv_struct0-1 (ang.). hinzugefügt\nWspółzałożyciel.\nNiezwykłe sytuacje\n% Werten behoben\nAbbruch der Instanz bei Übertragungsfehlern behobenz",
-        "uk": "Датан für g_sync.p_ac_load[0-2] / dc_conv.dc_conv_struct[0-1].u_sg_lp свінгери\nВейтер параметр ergänzt.\nKonvertierungsproblem міт Datumswerten behoben\nKonvertierungsfehler bei % Уертен behoben\nAbbruch der Instanz bei Übertragungsfehlern behoben",
-        "zh-cn": "日期 欣 zugefügt\nWeitere Para参数 ergänzt。.\nKonvertierungsblem mit Damidswertenhoben\nKonvertierungsfehleri perrtenhoben\nAbbruchder Instanz asi oubertragsfehlernhoben"
       }
     },
     "titleLang": {

@@ -45,10 +45,9 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.2.0 (2023-09-11)
 * (Andreas Ruttkamp) Connection state on Stop from Adapter corrected
-* (Andreas Ruttkamp) depencies updated 
+* (Andreas Ruttkamp) depencies updated
 
 ### 1.1.7 (2023-08-30)
 * (Andreas Ruttkamp) Connection state corrected
