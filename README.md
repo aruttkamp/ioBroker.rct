@@ -45,7 +45,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.2 (2023-09-13)
 * (Andreas Ruttkamp) data type for power_mng.bat_next_calib_date corrected)
 * (Andreas Ruttkamp) data type for battery.stack_cycles[x] corrected)
 
