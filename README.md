@@ -45,7 +45,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.1 (2023-09-13)
 * (Andreas Ruttkamp) configured rct elements will now  used. ( in 1.2.0 only power_mng.bat_next_calib_date was read)
 
 ### 1.2.0 (2023-09-11)

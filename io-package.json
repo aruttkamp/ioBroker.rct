@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "news": {
+      "1.2.1": {
+        "en": "configured rct elements will now  used. ( in 1.2.0 only power_mng.bat_next_calib_date was read)",
+        "de": "konfigurierte rct-elemente werden nun verwendet. (in 1.2.0 wurde nur power_mng.bat_next_calib_date gelesen)",
+        "ru": "настроенные элементы rct теперь будут использоваться. (в 1.2.0 только power_mng.bat_next_calib_date было прочитано)",
+        "pt": "elementos rct configurados agora serão usados. (em 1.2.0 somente power_mng.bat_next_calib_date foi lido)",
+        "nl": "in beslag genomen rct elementen zullen nu gebruikt worden. (in 1.2.0 enige machtsvermogen ) bat calibaat werd gelezen",
+        "fr": "les éléments rct configurés seront désormais utilisés. (dans 1.2.0 seulement power_mng.bat_next_calib_date a été lu)",
+        "it": "gli elementi di rct configurati verranno ora utilizzati. (in 1.2.0 solo power_mng.bat_next_calib_date è stato letto)",
+        "es": "ahora se utilizarán elementos rct configurados. ( en 1.2.0 sólo power_mng.bat_next_calib_date fue leído)",
+        "pl": "obecnie używa się elementów rct. (w wersji 1.2.0 odczytano tylko power_mng.bat_next_calib_date)",
+        "uk": "налаштовані елементи ректу тепер будуть використані. ( в 1.2.0 тільки power_mng.bat_next_calib_date was read)",
+        "zh-cn": "现在将使用整套配件。 (在1.2.0中,只有权力_mng.bat_next_calib_date 宣读)"
+      },
       "1.2.0": {
         "en": "Connection state on Stop from Adapter corrected\ndepencies updated",
         "de": "Anschlusszustand auf Stopp vom Adapter korrigiert\ndepene aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Fix: Weitere Datenprüfungen (ang.)",
         "uk": "Виправлення: Weitere Datenprüfungen eingbaut",
         "zh-cn": "Fix: Weiterenprüfungen ebaut"
-      },
-      "1.1.2": {
-        "en": "Fix: Abbruch des Adapters",
-        "de": "Fix: Abbruch des Adapters",
-        "ru": "Исправление: Abbruch des Adapters",
-        "pt": "Fix: Adaptadores de Abbruch",
-        "nl": "Abbruch des Adapters",
-        "fr": "Fix: Abbruch des Adapters",
-        "it": "Fisso: Abbruch des Adattatori",
-        "es": "Fix: Abbruch des Adapters",
-        "pl": "Abbruch des Adapter",
-        "uk": "Виправлення: Адаптери знеболювання",
-        "zh-cn": "Fix:Abbruch des Adapters"
       }
     },
     "titleLang": {
