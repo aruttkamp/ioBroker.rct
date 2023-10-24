@@ -50,7 +50,8 @@ class Rct extends utils.Adapter {
 		if (!this.config.rct_refresh) this.config.rct_refresh = 10;
 
 		//Wenn keine Elemente konfiguriert sind - Defaultwerte laden
-		if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag,prim_sm.state';
+		//if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.u_acc_mix_lp,prim_sm.island_flag';
+		this.config.rct_elements = 'android_description';
 		//this.config.rct_elements = 'power_mng.bat_next_calib_date';
 
 		// add states
@@ -73,7 +74,9 @@ class Rct extends utils.Adapter {
 				const rct_id = rct.cmd[e].id;
 				const name = rct.cmdReverse[rct_id].description || stateName;
 				const unit = (rct.cmdReverse[rct_id].unit || '').trim();
-				const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
+				const type = (rct.cmdReverse[rct_id].type);
+				//const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
+				const common = { name, type, unit, role: 'value', read: true, write: false };
 				if (unit === '%') {
 					common.min = 0;
 					common.max = 100;
