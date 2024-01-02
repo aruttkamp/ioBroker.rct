@@ -1,4 +1,5 @@
-![Logo](admin/rct.png)
+[![Logo](https://github.com/aruttkamp/ioBroker.rct/assets/127289023/6d678c29-a6b0-44bb-bf85-9fe95ef9b537)](https://www.rct-power.com/de)
+
 # ioBroker.rct
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.rct.svg)](https://www.npmjs.com/package/iobroker.rct)
@@ -21,7 +22,7 @@ After lauff switched to Home Assistant - project will continued by aruttkamp
 
 Please note that this is a private project and that I (Andreas Ruttkamp) am not related to RCT in any way.
 
-Read values of a RCT Power photovoltaics power converter
+Read values of a RCT Power photovoltaics power converter.
 
 ## REMARKS
 
