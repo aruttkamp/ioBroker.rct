@@ -1,4 +1,4 @@
-[![Logo](https://github.com/aruttkamp/ioBroker.rct/assets/127289023/6d678c29-a6b0-44bb-bf85-9fe95ef9b537)](https://www.rct-power.com/de)
+[![Logo](admin/rct.png)](https://www.rct-power.com/de)
 
 # ioBroker.rct
 
@@ -7,7 +7,7 @@
 ![Number of Installations (latest)](https://iobroker.live/badges/rct-installed.svg)
 ![Number of Installations (stable)](https://iobroker.live/badges/rct-stable.svg)
 
-[![Dependency Status](https://img.shields.io/david/aruttkamp/iobroker.rct.svg)](https://david-dm.org/aruttkamp/iobroker.rct)
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/aruttkamp/ioBroker.rct)](https://img.shields.io/librariesio/github/aruttkamp/ioBroker.rct)
 
 [![NPM](https://nodei.co/npm/iobroker.rct.png?downloads=true)](https://nodei.co/npm/iobroker.rct/)
 
