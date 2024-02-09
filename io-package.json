@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "news": {
+      "1.2.4": {
+        "en": "Adapter not running in 1.2.3 - fixed",
+        "de": "Adapter nicht läuft in 1.2.3 - fixiert",
+        "ru": "Адаптер не работает в 1.2.3 - фиксированный",
+        "pt": "Adaptador não executado em 1.2.3 - fixo",
+        "nl": "Adapter werkt niet in 1.2.3 - vast",
+        "fr": "Adaptateur ne fonctionnant pas en 1.2.3 - fixe",
+        "it": "Adattatore non attivo in 1.2.3 - fisso",
+        "es": "Adaptador que no se ejecuta en 1.2.3 - fijo",
+        "pl": "Adapter nieuruchomiony w 1.2.3 - stały",
+        "uk": "Адаптер не працює в 1.2.3 - фіксований",
+        "zh-cn": "1.2.3 - 固定状态下不运行的适配器"
+      },
       "1.2.3": {
         "en": "prim_sm.state added\nstates for battery added\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
         "de": "prim_sm.state hinzugefügt\nzustände für batterie hinzugefügt\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island",
@@ -80,19 +93,6 @@
         "pl": "rct_core.js entfernt (wurde durch rct_core2 ersetzt) (ang.)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. 18",
         "uk": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nПараметр вмирає ніхт unterstützt werden ausЗагружено гостем.\nхв. Лот 18",
         "zh-cn": "页: 1\n帕特特特特特特特特特特·特韦德去世。.\n页: 1 第18条"
-      },
-      "1.1.5": {
-        "en": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
-        "de": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse auf",
-        "ru": "Исправление: Abbruch bei lesen von UInt8 Datentypen behoben\nВерзейхнисе aufgeräumt",
-        "pt": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVer todos os produtos",
-        "nl": "Vertaling:\nVerzeichnisse aufgeräum",
-        "fr": "Fix: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
-        "it": "Fisso: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
-        "es": "Corrección: Abbruch bei lesen von UInt8 Datentypen behoben\nVerzeichnisse aufgeräumt",
-        "pl": "Abbruch bei lesen von UInt8 Datentypen behoben (ang.)\nWerzeichnisse aufgeräumt",
-        "uk": "Виправлення: abbruch bei lesen фон UInt8 Датаntypen behoben\nАуфгераумт",
-        "zh-cn": "Fix:Abbruchi lesen von UInt8衰期\nVerzeichnisse aufgeräumt"
       }
     },
     "titleLang": {
