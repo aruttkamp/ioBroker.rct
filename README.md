@@ -57,6 +57,9 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) Adapter not running in 1.2.3 - fixed
+
 ### 1.2.3 (2024-02-09)
 * (Andreas Ruttkamp) prim_sm.state added
 * (Andreas Ruttkamp) states for battery added

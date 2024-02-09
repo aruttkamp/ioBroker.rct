@@ -58,7 +58,7 @@ rct.inverter_state = {
 };
 
 rct.battery_state = {
-	0: 'normal mode / idle', 
+	0: 'normal mode/idle',
 	3: 'Update?',
 	5: 'Start ?',
 	8: 'calibrating - charging phase (0% --> 100%)',
@@ -86,7 +86,7 @@ rct.cmd['bat_mng_struct.k_trust'] = { serial: 0, id: 'B2FB9A90' };
 rct.cmd['bat_mng_struct.profile_pext'] = { serial: 0, id: 'DE68F62D' };
 rct.cmd['bat_mng_struct.profile_pdc'] = { serial: 0, id: 'DF6EA121' };
 rct.cmd['bat_mng_struct.k'] = { serial: 0, id: 'F0A03A20' };
-rct.cmd['bat_mng_struct.k_reserve'] = { serial: 0, id: 'F644DCA7' };
+rct.cmd['bat_mng_struct.knpm _reserve'] = { serial: 0, id: 'F644DCA7' };
 rct.cmd['bat_mng_struct.count'] = { serial: 0, id: 'FB57BA65' };
 rct.cmd['bat_mng_struct.bat_calib_soc_threshold'] = { serial: 0, id: 'FC5AA529' };
 rct.cmd['battery.cells_stat[0].u_max.value'] = { serial: 0, id: '03D9C51F' };
