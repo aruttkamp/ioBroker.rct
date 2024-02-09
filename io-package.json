@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "news": {
+      "1.2.3": {
+        "en": "prim_sm.state added\nstates for battery added\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "de": "prim_sm.state hinzugefügt\nzustände für batterie hinzugefügt\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island",
+        "ru": "prim_sm.state\nсостояния для добавления аккумулятора\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "pt": "prim_sm.state adicionado\nestados para bateria adicionada\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island",
+        "nl": "prim_sm.state toegevoegd\nstaat voor batterij toegevoegd\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "fr": "prim_sm.state ajouté\nétats pour batterie ajoutée\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "it": "prim_sm.state aggiunto\nstati per batteria aggiunto\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "es": "prim_sm.state añadido\nestados para la batería añadido\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "pl": "prim _ sm.state added\nstany do dodania baterii\nAusgabe der Datenpunkte power _ mng.soc _ min und soc _ min _ island korrigiert",
+        "uk": "prim_sm.state додано\nстани для акумулятора\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
+        "zh-cn": "已添加 prim_ sm. state\n添加电池状态\n(原始内容存档于2018-09-26). Ausgabe der Datenpunkte power_mng.soc_min und soc_min_sirland korrigiert"
+      },
       "1.2.2": {
         "en": "data type for power_mng.bat_next_calib_date corrected)\ndata type for battery.stack_cycles[x] corrected)",
         "de": "datentyp für power_mng.bat_next_calib_date korrigiert)\ndatentyp für battery.stack_cycles[x] korrigiert)",
@@ -80,19 +93,6 @@
         "pl": "Abbruch bei lesen von UInt8 Datentypen behoben (ang.)\nWerzeichnisse aufgeräumt",
         "uk": "Виправлення: abbruch bei lesen фон UInt8 Датаntypen behoben\nАуфгераумт",
         "zh-cn": "Fix:Abbruchi lesen von UInt8衰期\nVerzeichnisse aufgeräumt"
-      },
-      "1.1.4": {
-        "en": "Fix: Rückgabewerte nochmals angepasst.",
-        "de": "Fix: Rückgabewerte angepasst.",
-        "ru": "Исправление: Rückgabewerte nochmals angepasst.",
-        "pt": "Fix: Rückgabewerte nochmals angepasst.",
-        "nl": "Rückgabewerte nochmals angepasst.",
-        "fr": "Fix: Rückgabewerte nochmals angepasst.",
-        "it": "Fisso: Rückgabewerte nochmals angepasst.",
-        "es": "Fijo: Rückgabewerte nochmals angepasst.",
-        "pl": "Rückgabewerte nochmals angepasst (ang.).",
-        "uk": "Виправлення: Rückgabewerte nochmals angepasst.",
-        "zh-cn": "Fix: Rückgabewerte nochmals agepasst。."
       }
     },
     "titleLang": {

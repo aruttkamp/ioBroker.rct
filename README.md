@@ -57,11 +57,10 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.3 (2024-02-09)
 * (Andreas Ruttkamp) prim_sm.state added
 * (Andreas Ruttkamp) states for battery added
 * (Andreas Ruttkamp) Ausgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert
-
 
 ### 1.2.2 (2023-09-13)
 * (Andreas Ruttkamp) data type for power_mng.bat_next_calib_date corrected
