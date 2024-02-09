@@ -32,7 +32,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
 	if (elements.length === 1) {
 		channelName = '';
-		stateName = name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
+		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
 		stateFullName = stateName;
 	} else {
 		channelName = elements.shift();
