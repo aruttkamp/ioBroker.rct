@@ -33,7 +33,7 @@ This productive release has proven stable.
 By using the "RCT Elements" field, one may select which data shall be read from the power converter.
 If nothing is entered here, default will be used:
 
-"battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag,prim_sm.state"
+"battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.use_grid_power_enable,power_mng.u_acc_mix_lp,prim_sm.island_flag"
 
 Other elements can be found in the code (file "rct/rc_core2.js"). Since this is not self descriptive, use at own risk!
 
@@ -57,6 +57,12 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) prim_sm.state added
+* (Andreas Ruttkamp) states for battery added
+* (Andreas Ruttkamp) Ausgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert
+
+
 ### 1.2.2 (2023-09-13)
 * (Andreas Ruttkamp) data type for power_mng.bat_next_calib_date corrected
 * (Andreas Ruttkamp) data type for battery.stack_cycles[x] corrected

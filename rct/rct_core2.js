@@ -57,9 +57,16 @@ rct.inverter_state = {
 	9: 'Grid Passive (inverter get power from grid without bridge clocking'
 };
 
+rct.battery_state = {
+	0: 'normal mode / idle', 
+	3: 'Update?',
+	5: 'Start ?',
+	8: 'calibrating - charging phase (0% --> 100%)',
+	1024: 'calibrating - discharge phase (xx% --> 0%)',
+	2048: 'balancing'
+};
+
 rct.cmd = {};
-
-
 
 
 rct.cmd['acc_conv.i_acc_lp_fast'] = { serial: 0, id: '0AFDD6CF' };
@@ -634,6 +641,7 @@ rct.cmd['prim_sm.island_flag'] = { serial: 0, id: '3623D82A' };
 rct.cmd['prim_sm.island_reset_retrials_counter_time'] = { serial: 0, id: '5151D84C' };
 rct.cmd['prim_sm.island_max_trials'] = { serial: 0, id: '73E3ED49' };
 rct.cmd['prim_sm.island_reset_retrials_operation_time'] = { serial: 0, id: '751E80CA' };
+rct.cmd['prim_sm.state'] = { serial: 246, id: '5F33284E' };
 rct.cmd['prim_sm.state_source'] = { serial: 0, id: 'C40D5688' };
 rct.cmd['prim_sm.island_retrials'] = { serial: 0, id: 'C4D87E96' };
 rct.cmd['prim_sm.Uzk_pump_grad[0]'] = { serial: 0, id: 'E31F8B17' };
@@ -1217,7 +1225,7 @@ rct.cmdReverse['6599E3D3'] = { name: 'power_mng.schedule[3]', type: 'STRING', un
 rct.cmdReverse['663F1452'] = { name: 'power_mng.n_batteries', type: 'UINT8', unit: '', description: '' };
 rct.cmdReverse['672552DC'] = { name: 'power_mng.bat_calib_days_in_advance', type: 'UINT8', unit: '', description: 'Battery calibration days in advance' };
 rct.cmdReverse['7AF0AD03'] = { name: 'power_mng.schedule[9]', type: 'STRING', unit: '', description: '' };
-rct.cmdReverse['8EBF9574'] = { name: 'power_mng.soc_min_island', type: 'FLOAT', unit: '', description: 'Min SOC target (island)' };
+rct.cmdReverse['8EBF9574'] = { name: 'power_mng.soc_min_island', type: 'FLOAT', precision: 1, multiplier: 100, unit: '%' , description: 'Min SOC target (island)' };
 rct.cmdReverse['93C0C2E2'] = { name: 'power_mng.bat_calib_reqularity', type: 'UINT32', unit: 'days', description: 'Battery calibration interval' };
 rct.cmdReverse['972B3029'] = { name: 'power_mng.stop_discharge_voltage_buffer', type: 'FLOAT', unit: 'V', description: 'Stop discharge voltage buffer' };
 rct.cmdReverse['97997C93'] = { name: 'power_mng.soc_max', type: 'FLOAT', unit: '', description: 'Max SOC target' };
@@ -1229,7 +1237,7 @@ rct.cmdReverse['AEF76FA1'] = { name: 'power_mng.minimum_discharge_voltage', type
 rct.cmdReverse['B6623608'] = { name: 'power_mng.bat_next_calib_date', type: 'INT32', unit: '', description: 'Next battery calibration' };
 rct.cmdReverse['BD008E29'] = { name: 'power_mng.battery_power_extern', type: 'FLOAT', unit: 'W', description: 'Battery target power (positive = discharge)' };
 rct.cmdReverse['BD3A23C3'] = { name: 'power_mng.soc_charge', type: 'FLOAT', unit: '', description: 'SOC min maintenance charge' };
-rct.cmdReverse['CE266F0F'] = { name: 'power_mng.soc_min', type: 'FLOAT', unit: '', description: 'Min SOC target' };
+rct.cmdReverse['CE266F0F'] = { name: 'power_mng.soc_min', type: 'FLOAT', xxxprecision: 1, multiplier: 100, unit: '%', description: 'Min SOC target' };
 rct.cmdReverse['D197CBE0'] = { name: 'power_mng.stop_charge_current', type: 'FLOAT', unit: 'A', description: 'Stop charge current' };
 rct.cmdReverse['D1DFC969'] = { name: 'power_mng.soc_target_set', type: 'FLOAT', unit: '', description: 'Force SOC target' };
 rct.cmdReverse['DC667958'] = { name: 'power_mng.state', type: 'UINT8', unit: '', description: 'Battery state machine' };
@@ -1253,6 +1261,7 @@ rct.cmdReverse['3623D82A'] = { name: 'prim_sm.island_flag', type: 'UINT16', unit
 rct.cmdReverse['5151D84C'] = { name: 'prim_sm.island_reset_retrials_counter_time', type: 'FLOAT', unit: 'min', description: 'Reset island trials counter in (by 0 not used)' };
 rct.cmdReverse['73E3ED49'] = { name: 'prim_sm.island_max_trials', type: 'UINT16', unit: '', description: 'Max island trials' };
 rct.cmdReverse['751E80CA'] = { name: 'prim_sm.island_reset_retrials_operation_time', type: 'FLOAT', unit: '', description: '' };
+rct.cmdReverse['5F33284E'] = { name: 'prim_sm.state' };
 rct.cmdReverse['C40D5688'] = { name: 'prim_sm.state_source', type: 'UINT32', unit: '', description: '' };
 rct.cmdReverse['C4D87E96'] = { name: 'prim_sm.island_retrials', type: 'UINT16', unit: '', description: 'Island trials counter' };
 rct.cmdReverse['E31F8B17'] = { name: 'prim_sm.Uzk_pump_grad[0]', type: 'FLOAT', unit: 'W', description: 'start power' };
