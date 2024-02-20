@@ -137,7 +137,7 @@ class Rct extends utils.Adapter {
 			// clearTimeout(timeout2);
 			// ...
 			// clearInterval(interval1);
-			this.setState('info.connection',false);
+			this.setState('info.connection',false,true);
 			rct.end();
 			callback();
 		} catch (e) {
