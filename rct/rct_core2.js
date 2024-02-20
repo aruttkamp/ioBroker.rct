@@ -1237,7 +1237,7 @@ rct.cmdReverse['AEF76FA1'] = { name: 'power_mng.minimum_discharge_voltage', type
 rct.cmdReverse['B6623608'] = { name: 'power_mng.bat_next_calib_date', type: 'INT32', unit: '', description: 'Next battery calibration' };
 rct.cmdReverse['BD008E29'] = { name: 'power_mng.battery_power_extern', type: 'FLOAT', unit: 'W', description: 'Battery target power (positive = discharge)' };
 rct.cmdReverse['BD3A23C3'] = { name: 'power_mng.soc_charge', type: 'FLOAT', unit: '', description: 'SOC min maintenance charge' };
-rct.cmdReverse['CE266F0F'] = { name: 'power_mng.soc_min', type: 'FLOAT', xxxprecision: 1, multiplier: 100, unit: '%', description: 'Min SOC target' };
+rct.cmdReverse['CE266F0F'] = { name: 'power_mng.soc_min', type: 'FLOAT', precision: 1, multiplier: 100, unit: '%', description: 'Min SOC target' };
 rct.cmdReverse['D197CBE0'] = { name: 'power_mng.stop_charge_current', type: 'FLOAT', unit: 'A', description: 'Stop charge current' };
 rct.cmdReverse['D1DFC969'] = { name: 'power_mng.soc_target_set', type: 'FLOAT', unit: '', description: 'Force SOC target' };
 rct.cmdReverse['DC667958'] = { name: 'power_mng.state', type: 'UINT8', unit: '', description: 'Battery state machine' };
