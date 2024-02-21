@@ -58,26 +58,26 @@ If this happens, stop the adapter and manually delete the node "rct.0".
   ### **WORK IN PROGRESS**
 -->
 ### 1.2.4 (2024-02-09)
-* (Andreas Ruttkamp) Adapter not running in 1.2.3 - fixed
+* (Andreas Ruttkamp) adapter not running in 1.2.3 - fixed
 
 ### 1.2.3 (2024-02-09)
 * (Andreas Ruttkamp) prim_sm.state added
 * (Andreas Ruttkamp) states for battery added
-* (Andreas Ruttkamp) Ausgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert
+* (Andreas Ruttkamp) output of data points power_mng.soc_min and soc_min_island corrected
 
 ### 1.2.2 (2023-09-13)
 * (Andreas Ruttkamp) data type for power_mng.bat_next_calib_date corrected
 * (Andreas Ruttkamp) data type for battery.stack_cycles[x] corrected
 
 ### 1.2.1 (2023-09-13)
-* (Andreas Ruttkamp) configured rct elements will now correctly used. ( in 1.2.0 only power_mng.bat_next_calib_date was read)
+* (Andreas Ruttkamp) configured rct elements will now be used correctly ( in 1.2.0 only power_mng.bat_next_calib_date was read)
 
 ### 1.2.0 (2023-09-11)
-* (Andreas Ruttkamp) Connection state on Stop from Adapter corrected
+* (Andreas Ruttkamp) connection state corrected when adapter is stopped
 * (Andreas Ruttkamp) dependancies updated
 
 ### 1.1.7 (2023-08-30)
-* (Andreas Ruttkamp) Connection state corrected
+* (Andreas Ruttkamp) connection state corrected
 
 ### 1.1.6 (2023-08-23)
 * (Andreas Ruttkamp) rct_core.js deleted (now rct_core2 is used)
