@@ -74,7 +74,8 @@ class Rct extends utils.Adapter {
 				const rct_id = rct.cmd[e].id;
 				const name = rct.cmdReverse[rct_id].description || stateName;
 				const unit = (rct.cmdReverse[rct_id].unit || '').trim();
-				const type = (rct.cmdReverse[rct_id].type);
+				const type = (rct.cmdReverse[rct_id].ioBrokerType);
+
 				//const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
 				const common = { name, type, unit, role: 'value', read: true, write: false };
 				if (unit === '%') {
@@ -88,7 +89,6 @@ class Rct extends utils.Adapter {
 				});
 			} else iobInstance.log.info('rct state not defined: ' + e);
 		}
-
 
 		console.debug('onReady() rct.process(): start processing');
 		//this.setState('info.connection',true);

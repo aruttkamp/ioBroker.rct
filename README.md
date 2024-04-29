@@ -61,6 +61,7 @@ If this happens, stop the adapter and manually delete the node "rct.0".
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) misspelling in rct_core2 corrected
 * (Andreas Ruttkamp) Missing ack:true added ( issue:#89)
+* (Andreas Ruttkamp) change of datatypes ( not completed ! )
 
 
 ### 1.2.4 (2024-02-09)

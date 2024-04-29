@@ -80,13 +80,19 @@ rct.process = function (host, rctElements, iobInstance) {
 			__refreshTimeout = setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh) || 15000);
 		}
 
+//		__client.on('error', function(error) {
+//			iobInstance.log.info(`RCT: not connected to server at ${host}`);
+//			iobInstance.setState('info.connection',false,false);
+//			// eslint-disable-next-line no-undef
+//			connectionStatus = false;
+//		});
+//		__client.on('connect', function(connect) {
 		iobInstance.log.info(`RCT: connected to server at ${host}`);
 		iobInstance.setState('info.connection',true,true);
 		// eslint-disable-next-line no-undef
 		connectionStatus = true;
 		requestElements();
 	});
-
 
 	let dataBuffer = Buffer.alloc(0);
 
