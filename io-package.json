@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "news": {
+      "1.2.5": {
+        "en": "misspelling in rct_core2 corrected\nMissing ack:true added ( issue:#89)\ndatatypes corrected ( issue:#106)\nchanges to correct loosing connection ( issue:#114 )",
+        "de": "fehler in rct_core2 korrigiert\nFehlen von ack:true add (Ausgabe:#89)\nkorrigierte datentypen (ausgabe:#106)\nänderungen der korrekten loosingverbindung (ausgabe:#114)",
+        "ru": "rct_core2 исправить\nПропавший ак: Истинная добавленная (вопрос:#89)\nисправлены (выпуск:#106)\nизменения для исправления разграбления соединения (выпуск:#114)",
+        "pt": "erroneamente corrigido em rct_core2\nFalta de ack:true adicionado ( questão:#89)\ndatatypes corrigidos ( questão:#106)\nalterações na conexão de saque correta ( questão:#114 )",
+        "nl": "foutspelling in rct_core2 gecorrigeerd\nOntbrekende ack:true toegevoegd (nummer:#89)\ngecorrigeerd datatypes (nummer:#106)\nwijzigingen in de juiste losverbinding (nummer:#114)",
+        "fr": "faute orthographique dans rct_core2 corrigé\nAck manquant:true ajouté (numéro: #89)\ntypes de données corrigés (numéro:#106)\nmodifications pour corriger la connexion de retrait ( issue:#114 )",
+        "it": "misspelling in rct_core2 corretto\nMissing ack:true aggiunto (edizione: #89)\ntipi di dati corretti (edizione: #106)\nmodifiche alla corretta connessione di loosing (edizione: #114 )",
+        "es": "error en rct_core2 corregido\nFaltando ack:true añadido ( número:#89)\ndatatypes corrected ( issue:#106)\ncambios para corregir la conexión de saqueo ( número:#114 )",
+        "pl": "błędna pisownia w rct _ core2 poprawiona\nBrak ack: true added (wydanie: # 89)\npoprawione typy danych (wydanie: # 106)\nzmiany poprawnego połączenia luzującego (wydanie: # 114)",
+        "uk": "пробити в rct_core2 виправлено\nПомилки ack:true added ( question:#89)\nвиправлено типи даних ( question:#106)\nзміни для виправлення з'єднання лоосів ( question:#114 )",
+        "zh-cn": "在 rct_core2 中错拼\n缺少 ack: truth 添加(问题:#89)\n数据类型更正( 问题 : # 106)\n更改以更正脱机连接( 问题 : # 114)"
+      },
       "1.2.4": {
         "en": "Adapter not running in 1.2.3 - fixed",
         "de": "Adapter nicht läuft in 1.2.3 - fixiert",
@@ -80,19 +93,6 @@
         "pl": "Strona oficjalna",
         "uk": "Стан підключення korrigiert",
         "zh-cn": "A. 殴打国"
-      },
-      "1.1.6": {
-        "en": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
-        "de": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
-        "ru": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nПараметры die nicht unterstützt werden aus Defaultbelegung entfernt.\nмин. Нод 18",
-        "pt": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParâmetro morrer nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
-        "nl": "rctcore.js entfernt (wurde durch rctcore2 ersetzt)\nDe parameter dient de onvertaalde Ondertiteling.\nmin. Node 18",
-        "fr": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
-        "it": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParametro die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. Node 18",
-        "es": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. No. 18",
-        "pl": "rct_core.js entfernt (wurde durch rct_core2 ersetzt) (ang.)\nParameter die nicht unterstützt werden aus Defaultbelegung entfernt.\nmin. 18",
-        "uk": "rct_core.js entfernt (wurde durch rct_core2 ersetzt)\nПараметр вмирає ніхт unterstützt werden ausЗагружено гостем.\nхв. Лот 18",
-        "zh-cn": "页: 1\n帕特特特特特特特特特特·特韦德去世。.\n页: 1 第18条"
       }
     },
     "titleLang": {
