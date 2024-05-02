@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const net = require('net');
 const rct = require('./rct_core2.js');
 
@@ -7,7 +8,9 @@ module.exports = rct;
 // flag for local debugging
 const DEBUG_CONSOLE = false;
 let __refreshTimeout = null;
+let __reconnect = null;
 let __client = null;
+let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
 
@@ -46,24 +49,44 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	return { channelName, stateName, stateFullName };
 };
 
-rct.end = function () {
+rct.reconnect = function () {
 	if (__client) {
 		try {
 			__client.end();
 		} catch (err) {
+			iobInstance.log.error('RCT: reconnection not working!');
+		}
+	}
+};
+
+rct.end = function () {
+	clearTimeout(__reconnect);
+	clearInterval(__refreshTimeout);
+	__connection = false;
+	iobInstance.log.info('RCT: disconnected from server');
+	if (__client) {
+		try {
+			__client.end();
+			__client = null;
+		} catch (err) {
 			// ignore
 		}
-		__client = null;
 	}
-	if (__refreshTimeout) {
-		clearTimeout(__refreshTimeout);
-		__refreshTimeout = null;
-	}
+
 };
 
 rct.process = function (host, rctElements, iobInstance) {
 
 	__client = net.createConnection({ host, port: 8899 }, () => {
+		__reconnect = setTimeout(rct.reconnect, 2000);
+
+		if (!__connection) {
+			iobInstance.log.info(`RCT: connected to server at ${host}`);
+			iobInstance.setState('info.connection',true,true);
+			clearInterval(__refreshTimeout);
+			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
+			__connection = true;
+		}
 
 		function requestElements() {
 			//Test ob refresh ordnungsgemäß funktioniert.
@@ -76,22 +99,25 @@ rct.process = function (host, rctElements, iobInstance) {
 				if (rct.cmd[e]) {
 					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
 				}
+				if (!__client) {
+					return;
+				}
 			});
-			__refreshTimeout = setTimeout(requestElements, (1000 * iobInstance.config.rct_refresh) || 15000);
 		}
 
-		//__client.on('error', function(error) {
-		//			iobInstance.log.info(`RCT: not connected to server at ${host}`);
-		//			iobInstance.setState('info.connection',false,false);
-		//			// eslint-disable-next-line no-undef
-		//			connectionStatus = false;
-		//		});
-		//		__client.on('connect', function(connect) {
-		iobInstance.log.info(`RCT: connected to server at ${host}`);
-		iobInstance.setState('info.connection',true,true);
-		// eslint-disable-next-line no-undef
-		connectionStatus = true;
 		requestElements();
+	});
+
+	__client.on('error', (err) => {
+		iobInstance.log.error('RCT: connection error, please check ip address and network!');
+		try {
+			__client.end();
+		} catch (err) {
+			// ignore
+		}
+		__client = null;
+		__connection = false;
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh) || 15000);
 	});
 
 	let dataBuffer = Buffer.alloc(0);
@@ -182,14 +208,15 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 
 	__client.on('end', () => {
-		iobInstance.log.info('RCT: disconnected from server');
-		//console.log('disconnected from server');
+		/*
+  		iobInstance.log.info('RCT: disconnected from server');
+		console.log('disconnected from server');
 		// clear refresh timeout and reconnect
-		__client = null;
 		if (__refreshTimeout) {
 			clearTimeout(__refreshTimeout);
 		}
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh) || 15000);
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), ((1000 * iobInstance.config.rct_refresh) - __reconnect));
+  		*/
 	});
 
 	function getFrameLength(buf) {
