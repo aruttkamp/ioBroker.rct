@@ -53,6 +53,9 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### 1.2.6 (2024-05-03)
+* (Andreas Ruttkamp) unused parameter deleted
+
 ### 1.2.5 (2024-05-02)
 * (Andreas Ruttkamp) misspelling in rct_core2 corrected
 * (Andreas Ruttkamp) Missing ack:true added ( issue:#89)
