@@ -45,11 +45,7 @@ The object "battery.bat_status" indicates the status of a connected battery:
 
 ## Known Issues
 
-### Wrong Channels / States
-
-A new version might not be able to create the right ioBroker channels / states. In most cases this can be recognized by the node "battery" showing up as a single element instead of a folder.
-
-If this happens, stop the adapter and manually delete the node "rct.0".
+None
 
 ## Changelog
 
