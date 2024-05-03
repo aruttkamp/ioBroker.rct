@@ -53,7 +53,7 @@ class Rct extends utils.Adapter {
 		if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.u_acc_mix_lp,prim_sm.island_flag';
 		//this.config.rct_elements = 'android_description';
 		//this.config.rct_elements = 'battery.soc';
-
+	   try {
 		// add states
 		const rctElements = this.config.rct_elements.split(',');
 
@@ -89,11 +89,15 @@ class Rct extends utils.Adapter {
 				});
 			} else iobInstance.log.info('rct state not defined: ' + e);
 		}
+	   } catch (err) {
+		   this.log.error('Error during state creation / cancelling initialization');
+		   
+	   }
 
 		console.debug('onReady() rct.process(): start processing');
 		//this.setState('info.connection',true);
 		rct.process(this.config.rct_ip, rctElements, this);
-
+	}
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
 		// this.subscribeStates('battery_soc');
 		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
@@ -124,7 +128,6 @@ class Rct extends utils.Adapter {
 
 		//result = await this.checkGroupAsync('admin', 'admin');
 		//this.log.info('check group user admin group admin: ' + result);
-	}
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
