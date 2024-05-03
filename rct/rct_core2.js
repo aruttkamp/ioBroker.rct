@@ -641,7 +641,6 @@ rct.cmd['prim_sm.island_flag'] = { serial: 0, id: '3623D82A' };
 rct.cmd['prim_sm.island_reset_retrials_counter_time'] = { serial: 0, id: '5151D84C' };
 rct.cmd['prim_sm.island_max_trials'] = { serial: 0, id: '73E3ED49' };
 rct.cmd['prim_sm.island_reset_retrials_operation_time'] = { serial: 0, id: '751E80CA' };
-rct.cmd['prim_sm.state'] = { serial: 246, id: '5F33284E' };
 rct.cmd['prim_sm.state_source'] = { serial: 0, id: 'C40D5688' };
 rct.cmd['prim_sm.island_retrials'] = { serial: 0, id: 'C4D87E96' };
 rct.cmd['prim_sm.Uzk_pump_grad[0]'] = { serial: 0, id: 'E31F8B17' };

@@ -52,7 +52,6 @@ class Rct extends utils.Adapter {
 		//Wenn keine Elemente konfiguriert sind - Defaultwerte laden
 		if (!this.config.rct_elements) this.config.rct_elements = 'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.u_acc_mix_lp,prim_sm.island_flag';
 		//this.config.rct_elements = 'android_description';
-		//this.config.rct_elements = 'battery.soc';
 
 		// add states
 		const rctElements = this.config.rct_elements.split(',');
