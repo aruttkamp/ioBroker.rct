@@ -351,6 +351,8 @@ rct.process = function (host, rctElements, iobInstance) {
 			case 'STRING':
 				response.result = response.data.Buffer;
 				break;
+			case 'ENUM':
+				break;
 			default: response.result = ''; break;
 		}
 

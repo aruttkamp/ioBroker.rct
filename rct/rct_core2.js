@@ -54,7 +54,11 @@ rct.inverter_state = {
 	6: 'Power check (decision if enougth energy to start or not',
 	7: 'Symmetry (DC-link alignment',
 	8: 'Relays test',
-	9: 'Grid Passive (inverter get power from grid without bridge clocking'
+	9: 'Grid Passive (inverter get power from grid without bridge clocking',
+	10: 'Prepare Bat passive',
+	11: 'Battery passice (off-grid)',
+	12: 'Hardwaretest',
+	13: 'Einspeisung'
 };
 
 rct.battery_state = {
@@ -641,6 +645,7 @@ rct.cmd['prim_sm.island_flag'] = { serial: 0, id: '3623D82A' };
 rct.cmd['prim_sm.island_reset_retrials_counter_time'] = { serial: 0, id: '5151D84C' };
 rct.cmd['prim_sm.island_max_trials'] = { serial: 0, id: '73E3ED49' };
 rct.cmd['prim_sm.island_reset_retrials_operation_time'] = { serial: 0, id: '751E80CA' };
+rct.cmd['prim_sm.state'] = { serial: 0, id: '5F33284E' };
 rct.cmd['prim_sm.state_source'] = { serial: 0, id: 'C40D5688' };
 rct.cmd['prim_sm.island_retrials'] = { serial: 0, id: 'C4D87E96' };
 rct.cmd['prim_sm.Uzk_pump_grad[0]'] = { serial: 0, id: 'E31F8B17' };
@@ -1260,6 +1265,7 @@ rct.cmdReverse['3623D82A'] = { name: 'prim_sm.island_flag', type: 'UINT16', unit
 rct.cmdReverse['5151D84C'] = { name: 'prim_sm.island_reset_retrials_counter_time', type: 'FLOAT', unit: 'min', description: 'Reset island trials counter in (by 0 not used)',ioBrokerType: 'number' };
 rct.cmdReverse['73E3ED49'] = { name: 'prim_sm.island_max_trials', type: 'UINT16', unit: '', description: 'Max island trials',ioBrokerType: 'number' };
 rct.cmdReverse['751E80CA'] = { name: 'prim_sm.island_reset_retrials_operation_time', type: 'FLOAT', unit: '', description: '',ioBrokerType: 'number' };
+rct.cmdReverse['5F33284E'] = { name: 'prim_sm.state', type: 'UINT8', unit: '', description: '',ioBrokerType: 'number' };
 rct.cmdReverse['C40D5688'] = { name: 'prim_sm.state_source', type: 'UINT32', unit: '', description: '',ioBrokerType: 'number' };
 rct.cmdReverse['C4D87E96'] = { name: 'prim_sm.island_retrials', type: 'UINT16', unit: '', description: 'Island trials counter',ioBrokerType: 'number' };
 rct.cmdReverse['E31F8B17'] = { name: 'prim_sm.Uzk_pump_grad[0]', type: 'FLOAT', unit: 'W', description: 'start power',ioBrokerType: 'number' };

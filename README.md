@@ -53,6 +53,10 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) prim_sm.state added
+* (NCIceWolf) handling of type errors added
+
 ### 1.2.6 (2024-05-03)
 * (Andreas Ruttkamp) unused parameter deleted
 
