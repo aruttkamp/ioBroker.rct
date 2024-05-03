@@ -56,6 +56,7 @@ None
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) prim_sm.state added
 * (NCIceWolf) handling of type errors added
+* (Andreas Ruttkamp) some Code cleaning
 
 ### 1.2.6 (2024-05-03)
 * (Andreas Ruttkamp) unused parameter deleted
