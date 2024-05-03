@@ -72,7 +72,7 @@ class Rct extends utils.Adapter {
 				}
 
 				const rct_id = rct.cmd[e].id;
-				const name = (rct.cmdReverse[rct_id].description) || stateName;
+				const name = rct.cmdReverse[rct_id].description || stateName;
 				const unit = (rct.cmdReverse[rct_id].unit || '').trim();
 				const type = (rct.cmdReverse[rct_id].ioBrokerType);
 
