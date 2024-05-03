@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "news": {
+      "1.2.6": {
+        "en": "unused parameter deleted",
+        "de": "ungenutzter parameter gelöscht",
+        "ru": "неиспользуемый параметр",
+        "pt": "parâmetro não utilizado excluído",
+        "nl": "ongebruikte parameter verwijderd",
+        "fr": "paramètre inutilisé supprimé",
+        "it": "parametro non utilizzato cancellato",
+        "es": "parámetro no utilizado eliminado",
+        "pl": "niewykorzystany parametr usunięty",
+        "uk": "невикористаний параметр видалений",
+        "zh-cn": "未使用的参数已删除"
+      },
       "1.2.5": {
         "en": "misspelling in rct_core2 corrected\nMissing ack:true added ( issue:#89)\ndatatypes corrected ( issue:#106)\nchanges to correct loosing connection ( issue:#114 )",
         "de": "fehler in rct_core2 korrigiert\nFehlen von ack:true add (Ausgabe:#89)\nkorrigierte datentypen (ausgabe:#106)\nänderungen der korrekten loosingverbindung (ausgabe:#114)",
@@ -80,19 +93,6 @@
         "pl": "Połączenie stanu z Stop od Adaptera skorygowane\ndepozyty",
         "uk": "Стан з'єднання на стопі від адаптера, виправленого\ndepencies оновлений",
         "zh-cn": "纠正的阿道道站站站区\n最新资料"
-      },
-      "1.1.7": {
-        "en": "Connection state korrigiert",
-        "de": "Kontakt Staat",
-        "ru": "Соединение государственный korrigiert",
-        "pt": "Conexão Estado korrigiert",
-        "nl": "Connectie staat korrigiert",
-        "fr": "État de connexion korrigiert",
-        "it": "Stato di connessione korrigiert",
-        "es": "Estado de conexión korrigiert",
-        "pl": "Strona oficjalna",
-        "uk": "Стан підключення korrigiert",
-        "zh-cn": "A. 殴打国"
       }
     },
     "titleLang": {
