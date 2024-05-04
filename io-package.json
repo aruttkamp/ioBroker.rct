@@ -128,7 +128,7 @@
       "rct",
       "pv"
     ],
-    "license": "MIT",
+    "licenseInformation": "MIT",
     "platform": "Javascript/Node.js",
     "icon": "rct-logo.square.png",
     "enabled": true,
