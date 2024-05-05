@@ -53,8 +53,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.2.7 (2024-05-05)
 * (Andreas Ruttkamp) prim_sm.state added
 * (NCIceWolf) handling of type errors added
 * (Andreas Ruttkamp) some Code cleaning

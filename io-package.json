@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "news": {
+      "1.2.7": {
+        "en": "prim_sm.state added\nhandling of type errors added\nsome Code cleaning\nUpdate io-package.json",
+        "de": "prim_sm.state hinzugefügt\nhandhabung von typfehlern hinzugefügt\neinige Code Reinigung\nUpdate io-package.json",
+        "ru": "prim_sm.state\nобработка добавленных ошибок типа\nнекоторые коды очистки\nОбновление io-package.json",
+        "pt": "prim_sm.state adicionado\nmanipulação de erros de tipo adicionados\nalguns códigos de limpeza\nAtualizar io-package.json",
+        "nl": "prim_sm.state toegevoegd\nbehandeling van typefouten toegevoegd\nsommige code reiniging\nBijwerken io-package.json",
+        "fr": "prim_sm.state ajouté\nmanipulation des erreurs de type ajoutées\ncertains nettoyage de code\nMettre à jour io-package.json",
+        "it": "prim_sm.state aggiunto\ngestione degli errori di tipo aggiunto\nalcuni Codice pulizia\nAggiornamento io-package.json",
+        "es": "prim_sm.state añadido\nmanejo de errores tipo añadido\nalgunos Código de limpieza\nActualización io-package.json",
+        "pl": "prim _ sm.state added\nobsługa dodanych błędów typu\nniektóre Czyszczenie kodu\nAktualizuj jo- package.json",
+        "uk": "prim_sm.state додано\nобробка помилок типу\nдеякі Код очищення\nОновлення io-package.json",
+        "zh-cn": "已添加 prim_ sm. state\n处理类型错误\n一些代码清理\n更新 io- package.json"
+      },
       "1.2.6": {
         "en": "unused parameter deleted",
         "de": "ungenutzter parameter gelöscht",
@@ -80,19 +93,6 @@
         "pl": "obecnie używa się elementów rct. (w wersji 1.2.0 odczytano tylko power_mng.bat_next_calib_date)",
         "uk": "налаштовані елементи ректу тепер будуть використані. ( в 1.2.0 тільки power_mng.bat_next_calib_date was read)",
         "zh-cn": "现在将使用整套配件。 (在1.2.0中,只有权力_mng.bat_next_calib_date 宣读)"
-      },
-      "1.2.0": {
-        "en": "Connection state on Stop from Adapter corrected\ndepencies updated",
-        "de": "Anschlusszustand auf Stopp vom Adapter korrigiert\ndepene aktualisiert",
-        "ru": "Соединение состояния на Stop from Adapter исправлено\nчастоты обновлены",
-        "pt": "Estado de conexão em Parar de Adapter corrigido\ncompetências atualizadas",
-        "nl": "Connectie staat op Stop van Adapter correct\n_",
-        "fr": "État de connexion sur Stop from Adapter corrigé\ndepencies updated",
-        "it": "Stato di connessione su Stop da Adattatore corretto\nspese aggiornate",
-        "es": "Estado de conexión en Stop from Adapter corregido\ndepencies updated",
-        "pl": "Połączenie stanu z Stop od Adaptera skorygowane\ndepozyty",
-        "uk": "Стан з'єднання на стопі від адаптера, виправленого\ndepencies оновлений",
-        "zh-cn": "纠正的阿道道站站站区\n最新资料"
       }
     },
     "titleLang": {
@@ -128,9 +128,9 @@
       "rct",
       "pv"
     ],
-     "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
     },
     "platform": "Javascript/Node.js",
     "icon": "rct-logo.square.png",
