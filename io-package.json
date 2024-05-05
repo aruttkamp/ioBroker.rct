@@ -128,13 +128,17 @@
       "rct",
       "pv"
     ],
-    "license": "MIT",
+     "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+    },
     "platform": "Javascript/Node.js",
     "icon": "rct-logo.square.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/aruttkamp/ioBroker.rct/main/admin/rct-logo.square.png",
     "readme": "https://github.com/aruttkamp/ioBroker.rct/blob/main/README.md",
     "loglevel": "info",
+    "tier": 3,
     "mode": "daemon",
     "type": "energy",
     "compact": true,
@@ -143,7 +147,7 @@
     "materialize": true,
     "dependencies": [
       {
-        "js-controller": ">=2.0.0"
+        "js-controller": ">=3.3.22"
       }
     ]
   },
