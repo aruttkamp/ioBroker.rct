@@ -146,7 +146,8 @@
     "dataSource": "poll",
     "noConfig": true,
     "adminUI": {
-      "config": "none"
+      "config": "none",
+      "tab": "materialize"
     },
     "dependencies": [
       {
