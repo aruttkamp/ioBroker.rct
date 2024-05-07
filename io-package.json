@@ -144,9 +144,10 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
+    "materialize": true,
     "adminUI": {
       "config": "json"
-    }
+    },
     "dependencies": [
       {
         "js-controller": ">=3.3.22"
