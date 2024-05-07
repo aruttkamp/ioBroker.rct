@@ -145,7 +145,7 @@
     "connectionType": "local",
     "dataSource": "poll",
     "adminUI": {
-      "config": "none"
+      "config": "json"
     }
     "dependencies": [
       {
