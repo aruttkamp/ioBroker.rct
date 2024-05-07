@@ -144,8 +144,9 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
+    "noConfig": true,
     "adminUI": {
-      "config": "json"
+      "config": "none"
     },
     "dependencies": [
       {
