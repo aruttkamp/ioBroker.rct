@@ -147,8 +147,7 @@
     "materialize": true,
     "noConfig": true,
     "adminUI": {
-      "config": "none",
-      "tab": "materialize"
+      "config": "none"
     },
     "dependencies": [
       {
