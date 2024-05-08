@@ -144,6 +144,7 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
+    "materialize": true,
     "noConfig": true,
     "adminUI": {
       "config": "none",
