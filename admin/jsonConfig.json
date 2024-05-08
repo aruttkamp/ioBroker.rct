@@ -16,12 +16,12 @@
                  },
                 "rct_ip": {
                     "newLine": true,
-                    "type": "ip",
+                    "type": "text",
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
                     "label": "RCT ip-address",
-                    "help": "Local RCT inverter ip-address"
+                    "help": "Local RCT inverter ip-address (i.e. 192.168.0.10)"
                 },
                "rct_refresh": {
                     "type": "number",
@@ -31,7 +31,7 @@
                     "md": 6,
                     "lg": 6,
                     "label": "Refresh interval",
-                    "help": "Desired refresh interval for elements"
+                    "help": "Desired refresh interval for elements in seconds (10 - 3600)"
                 },
               "rct_elements": {
                     "newLine": true,
