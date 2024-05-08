@@ -1,0 +1,21 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "rct_ip": {
+            "type": "text",
+            "label": "rct_ip",
+            "newLine": true
+        },
+       "rct_refresh": {
+            "type": "number",
+            "label": "rct_refresh",
+            "newLine": true
+        },
+        "rct_elements": {
+            "type": "text",
+            "label": "rct_elements",
+            "newLine": true
+        }
+    }
+}
