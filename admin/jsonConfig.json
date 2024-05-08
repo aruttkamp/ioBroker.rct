@@ -1,36 +1,40 @@
 {
     "i18n": true,
-    "type": "panel",
     "items": {
-         "_Headline1": {
+        "_options": {
+            "type": "panel",
+            "items": {
+                "_Headline1": {
                     "newLine": true,
                     "type": "header",
                     "size": 2,
                     "text": "General Settings"
-         }
-        "rct_ip": {
-            "type": "text",
-            "sm": 12,
-            "md": 6,
-            "lg": 6,
-            "label": "Local RCT inverter IP address",
-            "newLine": true
-        },
-       "rct_refresh": {
-            "type": "number",
-            "sm": 12,
-            "md": 6,
-            "lg": 6,
-            "label": "Desired refresh interval",
-            "newLine": true
-        },
-        "rct_elements": {
-            "type": "text",
-            "sm": 12,
-            "md": 6,
-            "lg": 6,
-            "label": "Desired elements to be fetched from inverter",
-            "newLine": true
+                 },
+                "rct_ip": {
+                    "type": "text",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Local RCT inverter ip-address",
+                    "newLine": true
+                },
+               "rct_refresh": {
+                    "type": "number",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Refresh interval",
+                    "newLine": true
+                },
+              "rct_elements": {
+                    "type": "text",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Elements to be fetched from inverter",
+                    "newLine": true
+                }
+            }
         }
     }
 }
