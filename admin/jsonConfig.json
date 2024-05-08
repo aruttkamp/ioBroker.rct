@@ -15,15 +15,15 @@
                     "type": "text",
                     "sm": 12,
                     "md": 6,
-                    "lg": 12,
+                    "lg": 6,
                     "label": "RCT ip-address",
                     "help": "Local RCT inverter ip-address"
                 },
                "rct_refresh": {
                     "type": "number",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 12,
+                    "md": 12,
+                    "lg": 6,
                     "label": "Refresh interval",
                     "help": "Desired refresh interval for elements"
                 },
