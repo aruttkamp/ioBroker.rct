@@ -64,7 +64,12 @@ None
 ### **WORK IN PROGRESS**
 * (NCIceWolf) Implementation of new adminUI
 * (Andreas Ruttkamp) index_m.html deleted
-
+* (Andreas Ruttkamp) Datatype battery_stack_cycles corrected
+* (NCIceWolf) style.css deleted (not needed for json admin)
+* (NCIceWolf) removed tab-materialize (leftover from initial adapter creation)
+* (NCIceWolf) updated minimum js-controller version to >= 5.0.0 (current: 5.0.19)
+* (NCIceWolf) added minimum admin version to >= 5.0.0 (current stable : 6.13.16), could even be >= 6.0.0
+* (NCIceWolf) prepared translations (further handling -> https://github.com/ioBroker/adapter-dev#manage-translations)
 
 ### 1.2.7 (2024-05-05)
 * (Andreas Ruttkamp) prim_sm.state added
