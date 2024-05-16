@@ -61,7 +61,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.8 (2024-05-16)
 * (NCIceWolf) Implementation of new adminUI
 * (Andreas Ruttkamp) index_m.html deleted
 * (Andreas Ruttkamp) Datatype battery_stack_cycles corrected
