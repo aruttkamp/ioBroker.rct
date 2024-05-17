@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "news": {
+      "1.2.9": {
+        "en": "wrong type for next_calib_date corrected",
+        "de": "falscher typ für next_calib_date korrigiert",
+        "ru": "неправильный тип для следующего_calib_date исправить",
+        "pt": "tipo errado para next_calib_date corrigido",
+        "nl": "verkeerd type voor next_calib_date gecorrigeerd",
+        "fr": "mauvais type pour next_calib_date corrigé",
+        "it": "tipo sbagliato per successivo_calib_date corretto",
+        "es": "tipo incorrecto para next_calib_date corregido",
+        "pl": "nieprawidłowy typ dla następnego _ calib _ date poprawiony",
+        "uk": "неправильний тип для наступного_calib_date виправлено",
+        "zh-cn": "下一个校正日期错误的类型"
+      },
       "1.2.8": {
         "en": "Implementation of new adminUI\nindex_m.html deleted\nDatatype battery_stack_cycles corrected\nstyle.css deleted (not needed for json admin)\nremoved tab-materialize (leftover from initial adapter creation)\nupdated minimum js-controller version to >= 5.0.0 (current: 5.0.19)\nadded minimum admin version to >= 5.0.0 (current stable : 6.13.16), could even be >= 6.0.0\nprepared translations (further handling -> https://github.com/ioBroker/adapter-dev#manage-translations)",
         "de": "Implementierung von neuen adminUI\nindex_m.html gelöscht\nDatentyp Battery_stack_cycles korrigiert\nstyle.css gelöscht (nicht für json admin benötigt)\nentfernte tab-materialisierung (links von der ersten adapter-erstellung)\naktualisierte minimale js-controller-version auf >= 5.0.0 (current: 5.0.19)\nzusätzliche minimale admin-version zu >= 5.0.0 (aktuell stabil : 6.13.16), könnte sogar >= 6.0.0\nvorbereitete Übersetzungen (weitere Bearbeitung -> https://github.com/ioBroker/adapter-dev#manage-translations)",
@@ -80,19 +93,6 @@
         "pl": "prim _ sm.state added\nstany do dodania baterii\nAusgabe der Datenpunkte power _ mng.soc _ min und soc _ min _ island korrigiert",
         "uk": "prim_sm.state додано\nстани для акумулятора\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
         "zh-cn": "已添加 prim_ sm. state\n添加电池状态\n(原始内容存档于2018-09-26). Ausgabe der Datenpunkte power_mng.soc_min und soc_min_sirland korrigiert"
-      },
-      "1.2.2": {
-        "en": "data type for power_mng.bat_next_calib_date corrected)\ndata type for battery.stack_cycles[x] corrected)",
-        "de": "datentyp für power_mng.bat_next_calib_date korrigiert)\ndatentyp für battery.stack_cycles[x] korrigiert)",
-        "ru": "тип данных для power_mng.bat_next_calib_date исправлено)\nтип данных для battery.stack_cycles[x] исправлено)",
-        "pt": "tipo de dados para power_mng.bat_next_calib_date corrigido)\ntipo de dados para battery.stack_cycles[x] corrigido)",
-        "nl": "data type voor macht\ndata type voor batterijen",
-        "fr": "type de données pour power_mng.bat_next_calib_date corrigé)\ntype de données pour batterie.stack_cycles[x] corrigé)",
-        "it": "tipo di dati per power_mng.bat_next_calib_date corretto)\ntipo di dati per batteria.stack_cycles[x] corretto)",
-        "es": "tipo de datos para power_mng.bat_next_calib_date corregido)\ntipo de datos para batería.stack_cycles[x] corregido)",
-        "pl": "poprawiony typ danych dla zasilania\ntyp danych dla baterii.stack_cyclesx skorygowany)",
-        "uk": "тип даних для power_mng.bat_next_calib_date виправлено)\nтип даних для акумулятора.stack_cycles[x] виправлено)",
-        "zh-cn": "电力数据类型:mng.bat_next_calib_最新纠正)\n电池组的数据类型:stack_循环s[x]"
       }
     },
     "titleLang": {
