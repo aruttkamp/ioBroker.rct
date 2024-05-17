@@ -1238,7 +1238,7 @@ rct.cmdReverse['9A33F9B7'] = { name: 'power_mng.schedule[5]', type: 'STRING', un
 rct.cmdReverse['A7FA5C5D'] = { name: 'power_mng.u_acc_mix_lp', type: 'FLOAT', unit: 'V', description: 'Battery voltage',ioBrokerType: 'number' };
 rct.cmdReverse['A95EE214'] = { name: 'power_mng.model.bat_power_change', type: 'FLOAT', unit: '', description: '',ioBrokerType: 'number' };
 rct.cmdReverse['AEF76FA1'] = { name: 'power_mng.minimum_discharge_voltage', type: 'FLOAT', unit: 'V', description: 'Min. battery discharge voltage',ioBrokerType: 'number' };
-rct.cmdReverse['B6623608'] = { name: 'power_mng.bat_next_calib_date', type: 'UINT32', unit: '', description: 'Next battery calibration',ioBrokerType: 'number' };
+rct.cmdReverse['B6623608'] = { name: 'power_mng.bat_next_calib_date', type: 'INT32', unit: '', description: 'Next battery calibration',ioBrokerType: 'number' };
 rct.cmdReverse['BD008E29'] = { name: 'power_mng.battery_power_extern', type: 'FLOAT', unit: 'W', description: 'Battery target power (positive = discharge)',ioBrokerType: 'number' };
 rct.cmdReverse['BD3A23C3'] = { name: 'power_mng.soc_charge', type: 'FLOAT', unit: '', description: 'SOC min maintenance charge',ioBrokerType: 'number' };
 rct.cmdReverse['CE266F0F'] = { name: 'power_mng.soc_min', type: 'FLOAT',precision: 1, multiplier: 100, unit: '', description: 'Min SOC target',ioBrokerType: 'number' };
