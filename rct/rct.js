@@ -60,6 +60,8 @@ rct.reconnect = function (host, iobInstance) {
 			__client = null;
 			__connection = false;
 		}
+		clearTimeout(__reconnect);
+
 	}
 };
 
@@ -89,12 +91,14 @@ rct.process = function (host, rctElements, iobInstance) {
 		} catch (err) {
 			iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
 		}
+		clearTimeout(__reconnect);
+		clearInterval(__refreshTimeout);
 		}
 	}
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
+		
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
-
 		if (!__connection) {
 			iobInstance.log.info(`RCT: connected to server at ${host}`);
 			iobInstance.setState('info.connection',true,true);
@@ -128,6 +132,8 @@ rct.process = function (host, rctElements, iobInstance) {
 		__client.resetAndDestroy();
 		__client = null;
 		__connection = false;
+		clearTimeout(__reconnect);
+		clearInterval(__refreshTimeout);
 		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
 	});
 
