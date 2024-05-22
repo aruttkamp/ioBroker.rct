@@ -111,7 +111,6 @@ class Rct extends utils.Adapter {
 			// ...
 			// clearInterval(interval1);
 			rct.end(this.config.rct_ip, this);
-			iobInstance.log.info('RCT: disconnected from server(main)');
 			this.setState('info.connection',false,true);
 			callback();
 		} catch (e) {
