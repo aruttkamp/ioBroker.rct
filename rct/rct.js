@@ -53,7 +53,6 @@ rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
 			__client.end();
-			__client = null;
 			iobInstance.log.info(`RCT: disconnecting from server`);
 		} catch (err) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
@@ -81,7 +80,7 @@ rct.end = function (host, iobInstance) {
 
 rct.process = function (host, rctElements, iobInstance) {
 
-	if (__client) {
+	if (__client.destroyed==false) {
 		try {
 			__client.destroy();
 			iobInstance.log.error('RCT: connection error! Previous stream not closed!');
