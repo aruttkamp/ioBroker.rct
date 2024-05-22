@@ -62,8 +62,13 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
 ### 1.2.9 (2024-05-17)
 * (Andreas Ruttkamp) wrong type for next_calib_date corrected
+* (NCIceWolf) some improvements on connect / disconnect 
+
 
 ### 1.2.8 (2024-05-16)
 * (NCIceWolf) Implementation of new adminUI
