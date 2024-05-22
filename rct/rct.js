@@ -6,7 +6,7 @@ const rct = require('./rct_core2.js');
 module.exports = rct;
 
 // flag for local debugging
-const DEBUG_CONSOLE = false;
+const DEBUG_CONSOLE = true;
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
@@ -53,10 +53,12 @@ rct.reconnect = function () {
 	if (__client) {
 		try {
 			__client.end();
-			console.log.info('RCT: disconnecting from server');
+			if (DEBUG_CONSOLE==true) {
+				console.log(`INFO RCT: disconnecting from server`);
 			
 		} catch (err) {
-			console.log.error('RCT: reconnection not working!');
+			if (DEBUG_CONSOLE==true) {
+				console.log(`DEBUG RCT: reconnection not working!`);
 			__client.destroy();
 		}
 	}
