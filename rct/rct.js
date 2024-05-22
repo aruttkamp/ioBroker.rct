@@ -53,6 +53,8 @@ rct.reconnect = function () {
 	if (__client) {
 		try {
 			__client.end();
+			iobInstance.log.info('RCT: disconnecting from server');
+			
 		} catch (err) {
 			iobInstance.log.error('RCT: reconnection not working!');
 			__client.destroy();
@@ -128,6 +130,10 @@ rct.process = function (host, rctElements, iobInstance) {
 		__client = null;
 		__connection = false;
 		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
+	});
+
+	__client.on('close', () => {
+		iobInstance.log.info('RCT: disconnected from server');
 	});
 
 	let dataBuffer = Buffer.alloc(0);
