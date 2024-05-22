@@ -54,13 +54,9 @@ rct.reconnect = function (host, iobInstance) {
 		try {
 			__client.end();
 			__client = null;
-			if (DEBUG_CONSOLE==true) {
-				console.log(`INFO RCT: disconnecting from server`);
-			}
+			iobInstance.log.info(`RCT: disconnecting from server`);
 		} catch (err) {
-			if (DEBUG_CONSOLE==true) {
-				console.log(`DEBUG RCT: reconnection not working!`);
-			}
+			iobInstance.log.error(`RCT: reconnection not working!`);
 			__client.destroy();
 			__client = null;
 		}
@@ -71,7 +67,7 @@ rct.end = function (host, iobInstance) {
 	clearTimeout(__reconnect);
 	clearInterval(__refreshTimeout);
 	__connection = false;
-	iobInstance.log.info('RCT: disconnected from server');
+	iobInstance.log.info('RCT: connection with server fully terminated');
 	if (__client) {
 		try {
 			__client.end();
@@ -95,7 +91,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
-		__reconnect = setTimeout(rct.reconnect, 2000);
+		__reconnect = setTimeout(rct.reconnect(host, iobInstance), 2000);
 
 		if (!__connection) {
 			iobInstance.log.info(`RCT: connected to server at ${host}`);
