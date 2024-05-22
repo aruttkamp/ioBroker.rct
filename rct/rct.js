@@ -55,6 +55,7 @@ rct.reconnect = function () {
 			__client.end();
 		} catch (err) {
 			iobInstance.log.error('RCT: reconnection not working!');
+			__client.destroy();
 		}
 	}
 };
@@ -69,7 +70,7 @@ rct.end = function () {
 			__client.end();
 			__client = null;
 		} catch (err) {
-			// ignore
+			__client.destroy();
 		}
 	}
 
@@ -77,6 +78,15 @@ rct.end = function () {
 
 rct.process = function (host, rctElements, iobInstance) {
 
+	if (__client) {
+		try {
+			__client.destroy();
+			iobInstance.log.error('RCT: connection error! Previous stream not closed!');
+		} catch (err) {
+			iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
+		}
+	}
+	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 		__reconnect = setTimeout(rct.reconnect, 2000);
 
@@ -110,14 +120,14 @@ rct.process = function (host, rctElements, iobInstance) {
 
 	__client.on('error', (err) => {
 		iobInstance.log.error('RCT: connection error, please check ip address and network!');
-		try {
+		/*try {
 			__client.end();
 		} catch (err) {
 			// ignore
-		}
+		}*/
 		__client = null;
 		__connection = false;
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh) || 15000);
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (60000);
 	});
 
 	let dataBuffer = Buffer.alloc(0);
@@ -208,9 +218,8 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 
 	__client.on('end', () => {
-		/*
-  		iobInstance.log.info('RCT: disconnected from server');
-		console.log('disconnected from server');
+  		if (DEBUG_CONSOLE) console.debug('RCT: connection successfully closed.');
+		/*console.log('disconnected from server');
 		// clear refresh timeout and reconnect
 		if (__refreshTimeout) {
 			clearTimeout(__refreshTimeout);
