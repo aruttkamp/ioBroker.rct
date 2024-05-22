@@ -29,8 +29,9 @@ Other elements can be found in the code (file "rct/rc_core2.js"). Since this is 
 
 The object "battery.bat_status" indicates the status of a connected battery:
 * 0 -> charge/discharge (normal operation)
-*	3 -> Update? ( not sure ) 
-*	5 -> Start ? ( not sure )
+* 1 -> idle (no CAN-connection to inverter)
+* 3 -> connecting (inverter -> battery)
+* 5 -> synchronizing (inverter -> battery)
 * 8 -> calibrating - charging phase (0% --> 100%)
 * 1024 -> calibrating - discharge phase (xx% --> 0%)
 * 2048 -> balancing

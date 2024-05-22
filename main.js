@@ -96,7 +96,6 @@ class Rct extends utils.Adapter {
 		}
 
 		console.debug('onReady() rct.process(): start processing');
-		//this.setState('info.connection',true);
 		rct.process(this.config.rct_ip, rctElements, this);
 	}
 
@@ -104,15 +103,15 @@ class Rct extends utils.Adapter {
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
 	 * @param {() => void} callback
 	 */
-	onUnload(callback) {
+	async onUnload(callback) {
 		try {
 			// Here you must clear all timeouts or intervals that may still be active
 			// clearTimeout(timeout1);
 			// clearTimeout(timeout2);
 			// ...
 			// clearInterval(interval1);
+			rct.end(this.config.rct_ip, this);
 			this.setState('info.connection',false,true);
-			rct.end();
 			callback();
 		} catch (e) {
 			callback();
