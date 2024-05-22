@@ -55,10 +55,11 @@ rct.reconnect = function () {
 			__client.end();
 			if (DEBUG_CONSOLE==true) {
 				console.log(`INFO RCT: disconnecting from server`);
-			
+			}
 		} catch (err) {
 			if (DEBUG_CONSOLE==true) {
 				console.log(`DEBUG RCT: reconnection not working!`);
+			}
 			__client.destroy();
 		}
 	}
