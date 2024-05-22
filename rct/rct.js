@@ -58,6 +58,7 @@ rct.reconnect = function (host, iobInstance) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
 			__client.destroy();
 			__client = null;
+			__connection = false;
 		}
 	}
 };
@@ -66,7 +67,7 @@ rct.end = function (host, iobInstance) {
 	clearTimeout(__reconnect);
 	clearInterval(__refreshTimeout);
 	__connection = false;
-	iobInstance.log.info('RCT: connection with server fully terminated');
+	iobInstance.log.info('RCT: connection with server terminated');
 	if (__client) {
 		try {
 			__client.end();
@@ -222,8 +223,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 
 	__client.on('end', () => {
-  		if (DEBUG_CONSOLE) console.debug('RCT: connection successfully closed.');
-		/*console.log('disconnected from server');
+		/*iobInstance.log.info('disconnected from server');
 		// clear refresh timeout and reconnect
 		if (__refreshTimeout) {
 			clearTimeout(__refreshTimeout);
