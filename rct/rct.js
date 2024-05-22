@@ -53,10 +53,10 @@ rct.reconnect = function () {
 	if (__client) {
 		try {
 			__client.end();
-			iobInstance.log.info('RCT: disconnecting from server');
+			console.log.info('RCT: disconnecting from server');
 			
 		} catch (err) {
-			iobInstance.log.error('RCT: reconnection not working!');
+			console.log.error('RCT: reconnection not working!');
 			__client.destroy();
 		}
 	}
