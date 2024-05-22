@@ -87,7 +87,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		if (__client.destroyed===false) {
 		try {
 			__client.resetAndDestroy();
-			iobInstance.log.error('RCT: connection error! Previous stream not closed!');
+			iobInstance.log.error('RCT: connection error! Previous stream was not closed correctly!');
 		} catch (err) {
 			iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
 		}
