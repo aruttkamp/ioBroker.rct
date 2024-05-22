@@ -69,7 +69,7 @@ rct.end = function (host, iobInstance) {
 	clearTimeout(__reconnect);
 	clearInterval(__refreshTimeout);
 	__connection = false;
-	iobInstance.log.info('RCT: connection with server terminated');
+	iobInstance.log.info(`RCT: terminated connection to server at ${host}`);
 	if (__client) {
 		try {
 			__client.end();
