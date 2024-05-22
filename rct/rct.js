@@ -129,7 +129,6 @@ rct.process = function (host, rctElements, iobInstance) {
 
 	__client.on('error', (err) => {
 		iobInstance.log.error('RCT: connection error, please check ip address and network!');
-		__client.destroy();
 		__client = null;
 		__connection = false;
 		clearTimeout(__reconnect);
