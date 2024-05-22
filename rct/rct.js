@@ -49,10 +49,11 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	return { channelName, stateName, stateFullName };
 };
 
-rct.reconnect = function () {
+rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
 			__client.end();
+			__client = null;
 			if (DEBUG_CONSOLE==true) {
 				console.log(`INFO RCT: disconnecting from server`);
 			}
@@ -61,11 +62,12 @@ rct.reconnect = function () {
 				console.log(`DEBUG RCT: reconnection not working!`);
 			}
 			__client.destroy();
+			__client = null;
 		}
 	}
 };
 
-rct.end = function () {
+rct.end = function (host, iobInstance) {
 	clearTimeout(__reconnect);
 	clearInterval(__refreshTimeout);
 	__connection = false;
