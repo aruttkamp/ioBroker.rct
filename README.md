@@ -64,10 +64,10 @@ None
 -->
 
 ### **WORK IN PROGRESS**
+* (NCIceWolf) some improvements on connect / disconnect 
 
 ### 1.2.9 (2024-05-17)
 * (Andreas Ruttkamp) wrong type for next_calib_date corrected
-* (NCIceWolf) some improvements on connect / disconnect 
 
 
 ### 1.2.8 (2024-05-16)
