@@ -127,7 +127,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		}*/
 		__client = null;
 		__connection = false;
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), (60000);
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
 	});
 
 	let dataBuffer = Buffer.alloc(0);
