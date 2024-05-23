@@ -29,7 +29,7 @@ Other elements can be found in the code (file "rct/rc_core2.js"). Since this is 
 
 The object "battery.bat_status" indicates the status of a connected battery:
 * 0 -> charge/discharge (normal operation)
-* 1 -> idle (no CAN-connection to inverter)
+* 1 -> idle (no CAN-connection inverter -> battery)
 * 3 -> connecting (inverter -> battery)
 * 5 -> synchronizing (inverter -> battery)
 * 8 -> calibrating - charging phase (0% --> 100%)
@@ -43,10 +43,10 @@ The object "inverter_state" indicates the status of the inverter
 *	3 -> 'Efficiency (debug state for development purposes)'
 *	4 -> 'Insulation check'
 *	5 -> 'Island check (decision where to go - grid connected or island)'
-*	6 -> 'Power check (decision if enougth energy to start or not'
-*	7 -> 'Symmetry (DC-link alignment'
+*	6 -> 'Power check (decision if enougth energy to start or not)'
+*	7 -> 'Symmetry (DC-link alignment)'
 *	8 -> 'Relays test'
-*	9 -> 'Grid Passive (inverter get power from grid without bridge clocking'
+*	9 -> 'Grid Passive (inverter get power from grid without bridge clocking)'
 *	10 -> 'Prepare Bat passive'
 *	11 -> 'Battery passice (off-grid)'
 *	12 -> 'Hardwaretest'
