@@ -1,5 +1,7 @@
 {
     "i18n": true,
+    "type": "tabs",
+    "iconPosition": "top",
     "items": {
         "_general": {
             "type": "panel",
