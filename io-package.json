@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.9",
+    "version": "1.2.10",
     "news": {
+      "1.2.10": {
+        "en": "some improvements on connect / disconnect  \nLittle code corrections",
+        "de": "einige verbesserungen am anschluss / trennen\nKleine Codekorrekturen",
+        "ru": "некоторые улучшения при подключении/отключении\nМаленькие исправления кода",
+        "pt": "algumas melhorias na conexão / desconexão\nPequenas correções de código",
+        "nl": "enkele verbeteringen op verbinding / verbreken\nKleine codecorrecties",
+        "fr": "quelques améliorations sur connexion / déconnexion\nPeu de corrections de code",
+        "it": "alcuni miglioramenti su connessione / disconnessione\nPiccole correzioni di codice",
+        "es": "algunas mejoras en conexión / desconexión\nPequeñas correcciones del código",
+        "pl": "pewne ulepszenia dotyczące połączenia / odłączenia\nMałe korekty kodu",
+        "uk": "деякі поліпшення для підключення / відключення\nВиправлення коду",
+        "zh-cn": "连接/ 断开的一些改进\n小代码校正"
+      },
       "1.2.9": {
         "en": "wrong type for next_calib_date corrected",
         "de": "falscher typ für next_calib_date korrigiert",
@@ -80,19 +93,6 @@
         "pl": "Adapter nieuruchomiony w 1.2.3 - stały",
         "uk": "Адаптер не працює в 1.2.3 - фіксований",
         "zh-cn": "1.2.3 - 固定状态下不运行的适配器"
-      },
-      "1.2.3": {
-        "en": "prim_sm.state added\nstates for battery added\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "de": "prim_sm.state hinzugefügt\nzustände für batterie hinzugefügt\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island",
-        "ru": "prim_sm.state\nсостояния для добавления аккумулятора\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "pt": "prim_sm.state adicionado\nestados para bateria adicionada\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island",
-        "nl": "prim_sm.state toegevoegd\nstaat voor batterij toegevoegd\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "fr": "prim_sm.state ajouté\nétats pour batterie ajoutée\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "it": "prim_sm.state aggiunto\nstati per batteria aggiunto\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "es": "prim_sm.state añadido\nestados para la batería añadido\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "pl": "prim _ sm.state added\nstany do dodania baterii\nAusgabe der Datenpunkte power _ mng.soc _ min und soc _ min _ island korrigiert",
-        "uk": "prim_sm.state додано\nстани для акумулятора\nAusgabe der Datenpunkte power_mng.soc_min und soc_min_island korrigiert",
-        "zh-cn": "已添加 prim_ sm. state\n添加电池状态\n(原始内容存档于2018-09-26). Ausgabe der Datenpunkte power_mng.soc_min und soc_min_sirland korrigiert"
       }
     },
     "titleLang": {
