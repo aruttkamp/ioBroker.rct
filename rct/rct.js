@@ -100,7 +100,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 	}
 
-	__client = net.createConnection({ host, port: 8899 }, () => {dev-server
+	__client = net.createConnection({ host, port: 8899 }, () => {
 
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		if (!__connection) {
