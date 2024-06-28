@@ -62,6 +62,11 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (NCIceWolf) Tippfehler korrigiert
+
+
 ### 1.2.10 (2024-06-28)
 * (NCIceWolf) some improvements on connect / disconnect  
 * (Andreas Ruttkamp) Little code corrections
