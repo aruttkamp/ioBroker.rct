@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.10",
+    "version": "1.2.11",
     "news": {
+      "1.2.11": {
+        "en": "Tippfehler korrigiert",
+        "de": "Was ist das",
+        "ru": "Tippfehler",
+        "pt": "Máquina de montagem automática",
+        "nl": "Tippfehler korrigiert",
+        "fr": "Tippfehler karrigiert",
+        "it": "Traduzione:",
+        "es": "Tippfehler korrigiert",
+        "pl": "Tippfehler korrigiert",
+        "uk": "Tippfehler korrigiert",
+        "zh-cn": "Tippfehler 科尔里吉埃特"
+      },
       "1.2.10": {
         "en": "some improvements on connect / disconnect  \nLittle code corrections",
         "de": "einige verbesserungen am anschluss / trennen\nKleine Codekorrekturen",
@@ -80,19 +93,6 @@
         "pl": "błędna pisownia w rct _ core2 poprawiona\nBrak ack: true added (wydanie: # 89)\npoprawione typy danych (wydanie: # 106)\nzmiany poprawnego połączenia luzującego (wydanie: # 114)",
         "uk": "пробити в rct_core2 виправлено\nПомилки ack:true added ( question:#89)\nвиправлено типи даних ( question:#106)\nзміни для виправлення з'єднання лоосів ( question:#114 )",
         "zh-cn": "在 rct_core2 中错拼\n缺少 ack: truth 添加(问题:#89)\n数据类型更正( 问题 : # 106)\n更改以更正脱机连接( 问题 : # 114)"
-      },
-      "1.2.4": {
-        "en": "Adapter not running in 1.2.3 - fixed",
-        "de": "Adapter nicht läuft in 1.2.3 - fixiert",
-        "ru": "Адаптер не работает в 1.2.3 - фиксированный",
-        "pt": "Adaptador não executado em 1.2.3 - fixo",
-        "nl": "Adapter werkt niet in 1.2.3 - vast",
-        "fr": "Adaptateur ne fonctionnant pas en 1.2.3 - fixe",
-        "it": "Adattatore non attivo in 1.2.3 - fisso",
-        "es": "Adaptador que no se ejecuta en 1.2.3 - fijo",
-        "pl": "Adapter nieuruchomiony w 1.2.3 - stały",
-        "uk": "Адаптер не працює в 1.2.3 - фіксований",
-        "zh-cn": "1.2.3 - 固定状态下不运行的适配器"
       }
     },
     "titleLang": {
