@@ -63,6 +63,7 @@ rct.inverter_state = {
 
 rct.battery_state = {
 	0: 'normal mode/idle',
+	1: 'idle (no CAN-connection to inverter)',
 	3: 'Update?',
 	5: 'Start ?',
 	8: 'calibrating - charging phase (0% --> 100%)',

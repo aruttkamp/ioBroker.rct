@@ -34,9 +34,13 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	let channelName, stateName, stateFullName;
 
 	if (elements.length === 1) {
-		channelName = '';
-		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
-		stateFullName = stateName;
+		if (name === 'android_description') {
+			stateFullName = 'android_description'}
+		else{
+			channelName = '';
+			stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
+			stateFullName = stateName;
+		}
 	} else {
 		channelName = elements.shift();
 		stateName = elements.join('_').replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
@@ -85,19 +89,19 @@ rct.process = function (host, rctElements, iobInstance) {
 
 	if (__client) {
 		if (__client.destroyed===false) {
-		try {
-			__client.resetAndDestroy();
-			iobInstance.log.error('RCT: connection error! Previous stream was not closed correctly!');
-		} catch (err) {
-			iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
-		}
-		clearTimeout(__reconnect);
-		clearInterval(__refreshTimeout);
+			try {
+				__client.resetAndDestroy();
+				iobInstance.log.error('RCT: connection error! Previous stream was not closed correctly!');
+			} catch (err) {
+				iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
+			}
+			clearTimeout(__reconnect);
+			clearInterval(__refreshTimeout);
 		}
 	}
-	
-	__client = net.createConnection({ host, port: 8899 }, () => {
-		
+
+	__client = net.createConnection({ host, port: 8899 }, () => {dev-server
+
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		if (!__connection) {
 			iobInstance.log.info(`RCT: connected to server at ${host}`);
