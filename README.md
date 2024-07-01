@@ -63,11 +63,11 @@ None
   ### **WORK IN PROGRESS**
 -->
 ### 1.2.11 (2024-06-28)
-* (NCIceWolf) Tippfehler korrigiert
+* (NCIceWolf) mistyping corrected
 
 ### 1.2.10 (2024-06-28)
-* (NCIceWolf) some improvements on connect / disconnect  
-* (Andreas Ruttkamp) Little code corrections
+* (NCIceWolf) stability improvements for data connection to inverter
+* (Andreas Ruttkamp) some code corrections
 
 ### 1.2.9 (2024-05-17)
 * (Andreas Ruttkamp) wrong type for next_calib_date corrected
