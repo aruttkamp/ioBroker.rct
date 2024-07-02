@@ -131,19 +131,41 @@ rct.process = function (host, rctElements, iobInstance) {
 		requestElements();
 	});
 
+	
+	// Verbindungsüberwachende Maßnahmen
+	if (DEBUG_CONSOLE==true) {
+	__client.on('connectionAttempt', () => {
+		//Test ob ein Verbindungsversuch stattfinden.
+		iobInstance.log.info(`RCT: attempting interval connection to server at ${host}`);
+	});
+	__client.on('connectionAttemptFailed', () => {
+		//Test ob der Verbindungsversuch gescheitert ist.
+		iobInstance.log.error(`RCT: attempted interval connection to server at ${host} failed!!`);
+	});
+	__client.on('connect', () => {
+		//Test ob eine Verbindung erfolgreich hergestellt wurde.
+		iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
+	});
+	__client.on('close', () => {
+		//Test ob eine Verbindung erfolgreich abgebaut wurde.
+		iobInstance.log.info(`RCT: interval connection to server at ${host} successfully closed`);
+	});
+	__client.on('end', () => {
+		iobInstance.log.info(`RCT: terminating interval connection to server at ${host}`);
+	});
+	}
+	
 	__client.on('error', (err) => {
 		iobInstance.log.error('RCT: connection error, please check ip address and network!');
 		__client = null;
 		__connection = false;
 		clearTimeout(__reconnect);
 		clearInterval(__refreshTimeout);
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
 	});
 
-	__client.on('close', () => {
-		//Test ob die Verbindung sauber abgebaut wurde.
-		//iobInstance.log.info('RCT: disconnected from server');
-	});
+
+
 
 	let dataBuffer = Buffer.alloc(0);
 
@@ -231,16 +253,6 @@ rct.process = function (host, rctElements, iobInstance) {
 			handleData(); // continue and check if new data is available;
 		}
 	}
-
-	__client.on('end', () => {
-		/*iobInstance.log.info('disconnected from server');
-		// clear refresh timeout and reconnect
-		if (__refreshTimeout) {
-			clearTimeout(__refreshTimeout);
-		}
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), ((1000 * iobInstance.config.rct_refresh) - __reconnect));
-  		*/
-	});
 
 	function getFrameLength(buf) {
 		const cmd = buf.readInt8(1);
