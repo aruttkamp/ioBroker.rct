@@ -95,7 +95,7 @@ rct.process = function (host, rctElements, iobInstance) {
 				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
 				clearTimeout(__reconnect);
 				clearInterval(__refreshTimeout);
-				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
 				__connection = false;
 				return;
 			} catch (err) {
