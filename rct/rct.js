@@ -56,7 +56,8 @@ rct.getStateInfo = function (rctName, iobInstance) {
 rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
-			__client.end();
+			__client.destroySoon();
+			//__client.end();
 			//iobInstance.log.info(`RCT: disconnecting from server`);
 		} catch (err) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
@@ -88,7 +89,7 @@ rct.end = function (host, iobInstance) {
 rct.process = function (host, rctElements, iobInstance) {
 
 	if (__client) {
-		if (__client.destroyed===false) {
+		if (!__client.destroyed) {
 			try {
 				__client.resetAndDestroy();
 				iobInstance.log.error('RCT: connection error! Previous stream was not closed correctly!');
@@ -104,7 +105,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		if (!__connection) {
-			iobInstance.log.info(`RCT: connected to server at ${host}`);
+			iobInstance.log.info(`RCT: Initial connection successful to server at ${host}!`);
 			iobInstance.setState('info.connection',true,true);
 			clearInterval(__refreshTimeout);
 			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
