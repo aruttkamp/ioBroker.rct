@@ -134,7 +134,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	if (DEBUG_CONSOLE==true) {
 	__client.on('close', () => {
 		//Test ob eine Verbindung erfolgreich abgebaut wurde.
-		iobInstance.log.info(`RCT: interval connection to server at ${host} successfully closed`);
+		iobInstance.log.info(`RCT: interval connection to server at ${host} closed`);
 	});
 	__client.on('end', () => {
 		iobInstance.log.info(`RCT: terminating interval connection to server at ${host}`);
