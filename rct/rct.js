@@ -56,7 +56,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
-			__client.destroySoon();
+			__client.destroy();
 			//__client.end();
 			//iobInstance.log.info(`RCT: disconnecting from server`);
 		} catch (err) {
