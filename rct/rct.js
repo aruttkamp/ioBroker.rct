@@ -144,7 +144,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	__client.on('connect', () => {
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		//Test ob eine Verbindung erfolgreich hergestellt wurde.
-		iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
+		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
 	});
 	
 	__client.on('error', (err) => {
