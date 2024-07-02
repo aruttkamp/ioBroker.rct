@@ -91,17 +91,11 @@ rct.process = function (host, rctElements, iobInstance) {
 		if (!__client.destroyed) {
 			try {
 				__client.resetAndDestroy();
-				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
 				__client = null;
-				__connection = false;
-				clearTimeout(__reconnect);
-				clearInterval(__refreshTimeout);
-				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
 			} catch (err) {
 				iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
 			}
-			//clearTimeout(__reconnect);
-			//clearInterval(__refreshTimeout);
 		}
 	}
 
