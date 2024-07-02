@@ -94,6 +94,10 @@ rct.process = function (host, rctElements, iobInstance) {
 				__client = null;
 				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
 				clearTimeout(__reconnect);
+				clearInterval(__refreshTimeout);
+				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+				__connection = false;
+				return;
 			} catch (err) {
 				iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
 			}
@@ -101,14 +105,6 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 
 	__client = net.createConnection({ host, port: 8899 }, () => {
-
-		if (!__connection) {
-			iobInstance.log.info(`RCT: Initial connection successful to server at ${host}!`);
-			iobInstance.setState('info.connection',true,true);
-			clearInterval(__refreshTimeout);
-			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
-			__connection = true;
-		}
 
 		function requestElements() {
 			//Test ob refresh ordnungsgemäß funktioniert.
@@ -143,6 +139,14 @@ rct.process = function (host, rctElements, iobInstance) {
 	}
 	
 	__client.on('connect', () => {
+		if (!__connection) {
+			iobInstance.log.info(`RCT: Initial connection successful to server at ${host}!`);
+			iobInstance.setState('info.connection',true,true);
+			clearInterval(__refreshTimeout);
+			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
+			__connection = true;
+		}
+		
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		//Test ob eine Verbindung erfolgreich hergestellt wurde.
 		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
@@ -152,6 +156,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		iobInstance.log.error('RCT: connection error, please check ip address and network!');
 		__client = null;
 		__connection = false;
+		iobInstance.setState('info.connection',false,true);
 		clearTimeout(__reconnect);
 		clearInterval(__refreshTimeout);
 		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
