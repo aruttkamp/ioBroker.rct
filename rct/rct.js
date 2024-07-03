@@ -88,28 +88,23 @@ rct.end = function (host, iobInstance) {
 rct.process = function (host, rctElements, iobInstance) {
 
 	if (__client) {
-		if (__client.destroyed===false) {
+		if (!__client.destroyed) {
 			try {
 				__client.resetAndDestroy();
-				iobInstance.log.error('RCT: connection error! Previous stream was not closed correctly!');
+				__client = null;
+				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
+				clearTimeout(__reconnect);
+				clearInterval(__refreshTimeout);
+				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
+				__connection = false;
+				return;
 			} catch (err) {
 				iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
 			}
-			clearTimeout(__reconnect);
-			clearInterval(__refreshTimeout);
 		}
 	}
 
 	__client = net.createConnection({ host, port: 8899 }, () => {
-
-		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
-		if (!__connection) {
-			iobInstance.log.info(`RCT: connected to server at ${host}`);
-			iobInstance.setState('info.connection',true,true);
-			clearInterval(__refreshTimeout);
-			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
-			__connection = true;
-		}
 
 		function requestElements() {
 			//Test ob refresh ordnungsgemäß funktioniert.
@@ -131,18 +126,40 @@ rct.process = function (host, rctElements, iobInstance) {
 		requestElements();
 	});
 
+	
+	// Verbindungsüberwachende Maßnahmen
+	if (DEBUG_CONSOLE==true) {
+	__client.on('close', () => {
+		//Test ob eine Verbindung erfolgreich abgebaut wurde.
+		iobInstance.log.info(`RCT: interval connection to server at ${host} closed`);
+	});
+	__client.on('end', () => {
+		iobInstance.log.info(`RCT: terminating interval connection to server at ${host}`);
+	});
+	}
+	
+	__client.on('connect', () => {
+		if (!__connection) {
+			iobInstance.log.info(`RCT: Initial connection successful to server at ${host}!`);
+			iobInstance.setState('info.connection',true,true);
+			clearInterval(__refreshTimeout);
+			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
+			__connection = true;
+		}
+		
+		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+		//Test ob eine Verbindung erfolgreich hergestellt wurde.
+		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
+	});
+	
 	__client.on('error', (err) => {
 		iobInstance.log.error('RCT: connection error, please check ip address and network!');
 		__client = null;
 		__connection = false;
+		iobInstance.setState('info.connection',false,true);
 		clearTimeout(__reconnect);
 		clearInterval(__refreshTimeout);
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
-	});
-
-	__client.on('close', () => {
-		//Test ob die Verbindung sauber abgebaut wurde.
-		//iobInstance.log.info('RCT: disconnected from server');
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
 	});
 
 	let dataBuffer = Buffer.alloc(0);
@@ -231,16 +248,6 @@ rct.process = function (host, rctElements, iobInstance) {
 			handleData(); // continue and check if new data is available;
 		}
 	}
-
-	__client.on('end', () => {
-		/*iobInstance.log.info('disconnected from server');
-		// clear refresh timeout and reconnect
-		if (__refreshTimeout) {
-			clearTimeout(__refreshTimeout);
-		}
-		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), ((1000 * iobInstance.config.rct_refresh) - __reconnect));
-  		*/
-	});
 
 	function getFrameLength(buf) {
 		const cmd = buf.readInt8(1);
