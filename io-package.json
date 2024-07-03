@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.11",
+    "version": "1.2.12",
     "news": {
+      "1.2.12": {
+        "en": "Dependabot suggested updates\nImproving connectivity to inverter",
+        "de": "Dependabot schlug Updates vor\nVerbesserung der Anbindung an Wechselrichter",
+        "ru": "Dependabot предложил обновления\nУлучшение связи с инверторами",
+        "pt": "Dependeabot sugeriu atualizações\nMelhorar a conectividade ao inversor",
+        "nl": "Dependabot voorgestelde updates\nVerbetering van de connectiviteit met omvormer",
+        "fr": "Dependabot propose des mises à jour\nAmélioration de la connectivité à l'inverseur",
+        "it": "Dependabot ha suggerito aggiornamenti\nMigliorare la connettività per inverter",
+        "es": "Dependabot sugirió actualizaciones\nMejora de la conectividad al inversor",
+        "pl": "Subendabot sugerowane aktualizacje\nPoprawa łączności z falownikiem",
+        "uk": "В залежності від запропонованих оновлень\nПокращення підключення до інвертора",
+        "zh-cn": "取决于建议的更新\n改进与反转器的连接"
+      },
       "1.2.11": {
         "en": "Tippfehler korrigiert",
         "de": "Was ist das",
@@ -80,19 +93,6 @@
         "pl": "niewykorzystany parametr usunięty",
         "uk": "невикористаний параметр видалений",
         "zh-cn": "未使用的参数已删除"
-      },
-      "1.2.5": {
-        "en": "misspelling in rct_core2 corrected\nMissing ack:true added ( issue:#89)\ndatatypes corrected ( issue:#106)\nchanges to correct loosing connection ( issue:#114 )",
-        "de": "fehler in rct_core2 korrigiert\nFehlen von ack:true add (Ausgabe:#89)\nkorrigierte datentypen (ausgabe:#106)\nänderungen der korrekten loosingverbindung (ausgabe:#114)",
-        "ru": "rct_core2 исправить\nПропавший ак: Истинная добавленная (вопрос:#89)\nисправлены (выпуск:#106)\nизменения для исправления разграбления соединения (выпуск:#114)",
-        "pt": "erroneamente corrigido em rct_core2\nFalta de ack:true adicionado ( questão:#89)\ndatatypes corrigidos ( questão:#106)\nalterações na conexão de saque correta ( questão:#114 )",
-        "nl": "foutspelling in rct_core2 gecorrigeerd\nOntbrekende ack:true toegevoegd (nummer:#89)\ngecorrigeerd datatypes (nummer:#106)\nwijzigingen in de juiste losverbinding (nummer:#114)",
-        "fr": "faute orthographique dans rct_core2 corrigé\nAck manquant:true ajouté (numéro: #89)\ntypes de données corrigés (numéro:#106)\nmodifications pour corriger la connexion de retrait ( issue:#114 )",
-        "it": "misspelling in rct_core2 corretto\nMissing ack:true aggiunto (edizione: #89)\ntipi di dati corretti (edizione: #106)\nmodifiche alla corretta connessione di loosing (edizione: #114 )",
-        "es": "error en rct_core2 corregido\nFaltando ack:true añadido ( número:#89)\ndatatypes corrected ( issue:#106)\ncambios para corregir la conexión de saqueo ( número:#114 )",
-        "pl": "błędna pisownia w rct _ core2 poprawiona\nBrak ack: true added (wydanie: # 89)\npoprawione typy danych (wydanie: # 106)\nzmiany poprawnego połączenia luzującego (wydanie: # 114)",
-        "uk": "пробити в rct_core2 виправлено\nПомилки ack:true added ( question:#89)\nвиправлено типи даних ( question:#106)\nзміни для виправлення з'єднання лоосів ( question:#114 )",
-        "zh-cn": "在 rct_core2 中错拼\n缺少 ack: truth 添加(问题:#89)\n数据类型更正( 问题 : # 106)\n更改以更正脱机连接( 问题 : # 114)"
       }
     },
     "titleLang": {
