@@ -62,6 +62,11 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) Dependabot suggested updates
+* (NCIceWolf) Improving connectivity to inverter
+
 ### 1.2.11 (2024-06-28)
 * (NCIceWolf) mistyping corrected
 
