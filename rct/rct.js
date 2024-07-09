@@ -10,6 +10,7 @@ const DEBUG_CONSOLE = true;
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
+let __connectAttempt = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
@@ -65,7 +66,6 @@ rct.reconnect = function (host, iobInstance) {
 			__connection = false;
 		}
 		clearTimeout(__reconnect);
-
 	}
 };
 
@@ -90,7 +90,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	if (__client) {
 		if (!__client.destroyed) {
 			try {
-				__client.resetAndDestroy();
+				__client.destroy();
 				__client = null;
 				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
 				clearTimeout(__reconnect);
@@ -99,21 +99,22 @@ rct.process = function (host, rctElements, iobInstance) {
 				__connection = false;
 				return;
 			} catch (err) {
-				iobInstance.log.error('RCT: connection error! Previous stream not closed and closure failed!');
+				iobInstance.log.error('RCT: connection error! Previous interval connection not successful and closure failed!');
 			}
 		}
 	}
-
+	
+	if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting interval connection to server at ${host}`);
+	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 
 		function requestElements() {
-			//Test ob refresh ordnungsgemäß funktioniert.
-			//iobInstance.log.info('request Elements');
 
 			if (!__client) {
 				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to server at ${host} failed! Data retrieval not possible!`);
 				return;
 			}
+			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: Requesting elements from inverter`);
 			rctElements.forEach((e) => {
 				if (rct.cmd[e]) {
 					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
@@ -124,7 +125,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			});
 		}
 
-		requestElements();
+		// requestElements();
 	});
 
 	
@@ -149,6 +150,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 		
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+		requestElements();
 		//Test ob eine Verbindung erfolgreich hergestellt wurde.
 		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
 	});
