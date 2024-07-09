@@ -57,7 +57,7 @@ rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
 			__client.end();
-			//iobInstance.log.info(`RCT: disconnecting from server`);
+			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting to terminate interval connection to server at ${host}`);
 		} catch (err) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
 			__client.destroy();
@@ -111,6 +111,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			//iobInstance.log.info('request Elements');
 
 			if (!__client) {
+				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to server at ${host} failed! Data retrieval not possible!`);
 				return;
 			}
 			rctElements.forEach((e) => {
