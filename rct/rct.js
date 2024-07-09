@@ -108,24 +108,6 @@ rct.process = function (host, rctElements, iobInstance) {
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 
-		function requestElements() {
-
-			if (!__client) {
-				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to server at ${host} failed! Data retrieval not possible!`);
-				return;
-			}
-			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: Requesting elements from inverter`);
-			rctElements.forEach((e) => {
-				if (rct.cmd[e]) {
-					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
-				}
-				if (!__client) {
-					return;
-				}
-			});
-		}
-
-		// requestElements();
 	});
 
 	
@@ -148,9 +130,26 @@ rct.process = function (host, rctElements, iobInstance) {
 			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
 			__connection = true;
 		}
+
+		function requestElements() {
+
+			if (!__client) {
+				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to server at ${host} failed! Data retrieval not possible!`);
+				return;
+			}
+			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: Requesting elements from inverter`);
+			rctElements.forEach((e) => {
+				if (rct.cmd[e]) {
+					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
+				}
+				if (!__client) {
+					return;
+				}
+			});
+		}
+		requestElements();
 		
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
-		requestElements();
 		//Test ob eine Verbindung erfolgreich hergestellt wurde.
 		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
 	});
