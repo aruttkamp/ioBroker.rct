@@ -58,7 +58,7 @@ rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
 			__client.end();
-			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting to terminate interval connection to server at ${host}`);
+			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting to terminate interval connection to inverter at ${host}`);
 		} catch (err) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
 			__client.destroy();
@@ -73,7 +73,7 @@ rct.end = function (host, iobInstance) {
 	clearTimeout(__reconnect);
 	clearInterval(__refreshTimeout);
 	__connection = false;
-	iobInstance.log.info(`RCT: terminated connection to server at ${host}`);
+	iobInstance.log.info(`RCT: terminated connection to inverter at ${host}`);
 	if (__client) {
 		try {
 			__client.end();
@@ -104,37 +104,36 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 	}
 	
-	if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting interval connection to server at ${host}`);
+	if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting interval connection to inverter at ${host}`);
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
-
 	});
-
 	
 	// Verbindungsüberwachende Maßnahmen
 	if (DEBUG_CONSOLE==true) {
 	__client.on('close', () => {
 		//Test ob eine Verbindung erfolgreich abgebaut wurde.
-		iobInstance.log.info(`RCT: interval connection to server at ${host} closed`);
+		iobInstance.log.info(`RCT: interval connection to inverter at ${host} closed`);
 	});
 	__client.on('end', () => {
-		iobInstance.log.info(`RCT: terminating interval connection to server at ${host}`);
+		//Test ob eine Verbindung erfolgreich abgebaut werden soll.
+		iobInstance.log.info(`RCT: terminating interval connection to inverter at ${host}`);
 	});
 	}
 	
 	__client.on('connect', () => {
 		if (!__connection) {
-			iobInstance.log.info(`RCT: Initial connection successful to server at ${host}!`);
+			iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
 			iobInstance.setState('info.connection',true,true);
 			clearInterval(__refreshTimeout);
 			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
 			__connection = true;
 		}
-		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
+		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to inverter at ${host} successfully established`);
 		function requestElements() {
 
 			if (!__client) {
-				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to server at ${host} failed! Data retrieval not possible!`);
+				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
 				return;
 			}
 			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: Requesting elements from inverter`);
@@ -153,7 +152,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	});
 	
 	__client.on('error', (err) => {
-		iobInstance.log.error('RCT: connection error, please check ip address and network!');
+		iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!');
 		__client = null;
 		__connection = false;
 		iobInstance.setState('info.connection',false,true);
