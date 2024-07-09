@@ -130,7 +130,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
 			__connection = true;
 		}
-
+		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
 		function requestElements() {
 
 			if (!__client) {
@@ -150,8 +150,6 @@ rct.process = function (host, rctElements, iobInstance) {
 		requestElements();
 		
 		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
-		//Test ob eine Verbindung erfolgreich hergestellt wurde.
-		if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to server at ${host} successfully established`);
 	});
 	
 	__client.on('error', (err) => {
