@@ -92,7 +92,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			try {
 				__client.destroy();
 				__client = null;
-				iobInstance.log.error('RCT: Connection error! Previous interval connection not successfully completed!');
+				iobInstance.log.warn('RCT: Connection error! Previous interval connection not successfully completed!');
 				clearTimeout(__reconnect);
 				clearInterval(__refreshTimeout);
 				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
