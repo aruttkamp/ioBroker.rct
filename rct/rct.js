@@ -136,7 +136,7 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
 					return;
 				}*/
-				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Requesting elements from inverter`);
+				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Requesting elements "` + rctElements + `" from inverter`);
 				rctElements.forEach((e) => {
 					if (rct.cmd[e]) {
 						__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
@@ -144,7 +144,6 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (!__client) {
 						return;
 					}
-					//if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements + `" received from inverter`);
 				});
 			}
 			requestElements();
@@ -233,7 +232,7 @@ rct.process = function (host, rctElements, iobInstance) {
 					iobInstance.setState(stateInfo.stateFullName, response.result, true);
 				}
 			} else {
-				if (DEBUG_CONSOLE) console.debug(`RCT: received, but not requested: ${txt}`);
+				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
 			}
 
 		} else {
