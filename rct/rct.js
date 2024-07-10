@@ -92,19 +92,19 @@ rct.process = function (host, rctElements, iobInstance) {
 			try {
 				__client.destroy();
 				__client = null;
-				iobInstance.log.error('RCT: connection error! Previous interval connection not successful!');
+				iobInstance.log.error('RCT: Connection error! Previous interval connection not successfully completed!');
 				clearTimeout(__reconnect);
 				clearInterval(__refreshTimeout);
 				__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
 				__connection = false;
 				return;
 			} catch (err) {
-				iobInstance.log.error('RCT: connection error! Previous interval connection not successful and closure failed!');
+				iobInstance.log.error('RCT: Connection error! Previous interval connection not successful and closure failed!');
 			}
 		}
 	}
 	
-	if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: starting interval connection to inverter at ${host}`);
+	if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Starting interval connection to inverter at ${host}`);
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 	});
@@ -112,11 +112,11 @@ rct.process = function (host, rctElements, iobInstance) {
 		if (DEBUG_CONSOLE==true) {
 			__client.on('close', () => {
 				//Test ob eine Verbindung erfolgreich abgebaut wurde.
-				iobInstance.log.debug(`RCT: interval connection to inverter at ${host} closed`);
+				iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
 			});
 		__client.on('end', () => {
 				//Test ob eine Verbindung erfolgreich abgebaut werden soll.
-				iobInstance.log.debug(`RCT: terminating interval connection to inverter at ${host}`);
+				iobInstance.log.debug(`RCT: Terminating interval connection to inverter at ${host}`);
 			});
 		}
 	
@@ -129,7 +129,7 @@ rct.process = function (host, rctElements, iobInstance) {
 				__connection = true;
 			}
 		
-			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: interval connection to inverter at ${host} successfully established`);
+			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} successfully established`);
 			
 			function requestElements() {
 				/*if (!__client) {
@@ -236,7 +236,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			}
 
 		} else {
-			console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
+			if (DEBUG_CONSOLE) iobInstance.log.debug('NOTICE: CRC not valid', cmdBuffer, response.id);
 		}
 
 		if (response.crcOk) {
