@@ -147,7 +147,7 @@ rct.process = function (host, rctElements, iobInstance) {
 				});
 			}
 			requestElements();
-			__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 1000);
+			__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
 		});
 	
 		__client.on('error', (err) => {
