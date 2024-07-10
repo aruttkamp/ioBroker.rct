@@ -226,17 +226,18 @@ rct.process = function (host, rctElements, iobInstance) {
 			else txt = response.infoText;
 
 			if (response.name && rctElements.includes(response.name)) {
+				//iobInstance.log.debug(`RCT: result: ${txt}`);
 				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: received: ${txt}`);
 				const stateInfo = rct.getStateInfo(response.name, iobInstance);
 				if (stateInfo) {
 					iobInstance.setState(stateInfo.stateFullName, response.result, true);
 				}
 			} else {
-				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
+				if (DEBUG_CONSOLE) console.debug(`RCT: received, but not requested: ${txt}`);
 			}
 
 		} else {
-			if (DEBUG_CONSOLE) iobInstance.log.debug(`NOTICE: CRC not valid: ` + cmdBuffer + response.id + `!`);
+			console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
 		}
 
 		if (response.crcOk) {
