@@ -10,7 +10,6 @@ const DEBUG_CONSOLE = true;
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
-let __connectAttempt = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
