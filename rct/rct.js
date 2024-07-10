@@ -236,7 +236,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			}
 
 		} else {
-			if (DEBUG_CONSOLE) iobInstance.log.debug(`NOTICE: CRC not valid: ` + cmdBuffer, response.id + `!`);
+			if (DEBUG_CONSOLE) iobInstance.log.debug(`NOTICE: CRC not valid: ` + cmdBuffer + response.id + `!`);
 		}
 
 		if (response.crcOk) {
