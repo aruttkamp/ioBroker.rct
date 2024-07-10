@@ -144,7 +144,7 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (!__client) {
 						return;
 					}
-					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements + `" received from inverter`);
+					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements.stateFullName + `" received from inverter`);
 				});
 			}
 			requestElements();
