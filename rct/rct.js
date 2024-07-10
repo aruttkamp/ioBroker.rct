@@ -107,6 +107,7 @@ rct.process = function (host, rctElements, iobInstance) {
 	if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting interval connection to inverter at ${host}`);
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
+	});
 		// Verbindungsüberwachende Maßnahmen
 		if (DEBUG_CONSOLE==true) {
 			__client.on('close', () => {
@@ -183,7 +184,6 @@ rct.process = function (host, rctElements, iobInstance) {
 
 			handleData();
 		});
-	});
 	
 	let dataBuffer = Buffer.alloc(0);
 	function handleData() {
