@@ -58,7 +58,7 @@ rct.reconnect = function (host, iobInstance) {
 	if (__client) {
 		try {
 			__client.end();
-			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting to terminate interval connection to inverter at ${host}`);
+			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: starting to terminate interval connection to inverter at ${host}`);
 		} catch (err) {
 			iobInstance.log.error(`RCT: reconnection not working!`);
 			__client.destroy();
@@ -104,7 +104,7 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 	}
 	
-	if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: starting interval connection to inverter at ${host}`);
+	if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: starting interval connection to inverter at ${host}`);
 	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 	});
@@ -112,11 +112,11 @@ rct.process = function (host, rctElements, iobInstance) {
 		if (DEBUG_CONSOLE==true) {
 			__client.on('close', () => {
 				//Test ob eine Verbindung erfolgreich abgebaut wurde.
-				iobInstance.log.info(`RCT: interval connection to inverter at ${host} closed`);
+				iobInstance.log.debug(`RCT: interval connection to inverter at ${host} closed`);
 			});
 		__client.on('end', () => {
 				//Test ob eine Verbindung erfolgreich abgebaut werden soll.
-				iobInstance.log.info(`RCT: terminating interval connection to inverter at ${host}`);
+				iobInstance.log.debug(`RCT: terminating interval connection to inverter at ${host}`);
 			});
 		}
 	
@@ -129,7 +129,7 @@ rct.process = function (host, rctElements, iobInstance) {
 				__connection = true;
 			}
 		
-			if (DEBUG_CONSOLE) iobInstance.log.info(`RCT: interval connection to inverter at ${host} successfully established`);
+			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: interval connection to inverter at ${host} successfully established`);
 			
 			function requestElements() {
 				/*if (!__client) {
@@ -144,7 +144,7 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (!__client) {
 						return;
 					}
-					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rct.cmd[e] + `" received from inverter`);
+					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements.e + `" received from inverter`);
 				});
 			}
 			requestElements();
