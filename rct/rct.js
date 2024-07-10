@@ -144,11 +144,11 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (!__client) {
 						return;
 					}
-					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements.stateFullName + `" received from inverter`);
+					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rct.cmd[e] + `" received from inverter`);
 				});
 			}
 			requestElements();
-			__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+			__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 1000);
 		});
 	
 		__client.on('error', (err) => {
