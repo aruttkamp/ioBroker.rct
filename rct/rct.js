@@ -144,7 +144,7 @@ rct.process = function (host, rctElements, iobInstance) {
 					if (!__client) {
 						return;
 					}
-					if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements.[e] + `" received from inverter`);
+					//if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Element "` + rctElements + `" received from inverter`);
 				});
 			}
 			requestElements();
@@ -227,7 +227,7 @@ rct.process = function (host, rctElements, iobInstance) {
 			else txt = response.infoText;
 
 			if (response.name && rctElements.includes(response.name)) {
-				//iobInstance.log.debug(`RCT: result: ${txt}`);
+				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: result: ${txt}`);
 				const stateInfo = rct.getStateInfo(response.name, iobInstance);
 				if (stateInfo) {
 					iobInstance.setState(stateInfo.stateFullName, response.result, true);
