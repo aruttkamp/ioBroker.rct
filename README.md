@@ -62,6 +62,16 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (NCIceWolf) Added multiple debugging messages
+* (NCIceWolf) Corrected debug messages to be shown as debug, not info
+* (NCIceWolf) corrected connection abortion if not successfully established
+* (NCIceWolf) elements from inverter are only requested once a connection is successfully established
+* (NCIceWolf) added requested and received elements to/from inverter to debug * (NCIceWolf) logging
+merged recent dependabot suggestions   
+* (Andreas Ruttkamp) Dependabot suggested updates
+* (Andreas Ruttkamp) some Code cosmetics
+
 ### 1.2.12 (2024-07-03)
 * (Andreas Ruttkamp) Dependabot suggested updates
 * (NCIceWolf) Improving connectivity to inverter

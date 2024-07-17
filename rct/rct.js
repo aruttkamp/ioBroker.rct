@@ -34,13 +34,9 @@ rct.getStateInfo = function (rctName, iobInstance) {
 	let channelName, stateName, stateFullName;
 
 	if (elements.length === 1) {
-		if (name === 'android_description') {
-			stateFullName = 'android_description'}
-		else {
-			channelName = '';
-			stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
-			stateFullName = stateName;
-		}
+		channelName = '';
+		stateName = name.name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
+		stateFullName = stateName;
 	} else {
 		channelName = elements.shift();
 		stateName = elements.join('_').replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
@@ -102,87 +98,86 @@ rct.process = function (host, rctElements, iobInstance) {
 			}
 		}
 	}
-	
+
 	if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Starting interval connection to inverter at ${host}`);
-	
 	__client = net.createConnection({ host, port: 8899 }, () => {
 	});
-		// Verbindungsüberwachende Maßnahmen
-		if (DEBUG_CONSOLE==true) {
-			__client.on('close', () => {
-				//Test ob eine Verbindung erfolgreich abgebaut wurde.
-				iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
-			});
+	// Verbindungsüberwachende Maßnahmen
+	if (DEBUG_CONSOLE==true) {
+		__client.on('close', () => {
+			//Test ob eine Verbindung erfolgreich abgebaut wurde.
+			iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
+		});
 		__client.on('end', () => {
-				//Test ob eine Verbindung erfolgreich abgebaut werden soll.
-				iobInstance.log.debug(`RCT: Terminating interval connection to inverter at ${host}`);
+			//Test ob eine Verbindung erfolgreich abgebaut werden soll.
+			iobInstance.log.debug(`RCT: Terminating interval connection to inverter at ${host}`);
+		});
+	}
+
+	__client.on('connect', () => {
+		if (!__connection) {
+			iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
+			iobInstance.setState('info.connection',true,true);
+			clearInterval(__refreshTimeout);
+			__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
+			__connection = true;
+		}
+
+		if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} successfully established`);
+
+		function requestElements() {
+			/*if (!__client) {
+				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
+				return;
+			}*/
+			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Requesting elements "` + rctElements + `" from inverter`);
+			rctElements.forEach((e) => {
+				if (rct.cmd[e]) {
+					__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
+				}
+				if (!__client) {
+					return;
+				}
 			});
 		}
-	
-		__client.on('connect', () => {
-			if (!__connection) {
-				iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
-				iobInstance.setState('info.connection',true,true);
-				clearInterval(__refreshTimeout);
-				__refreshTimeout = setInterval(() => rct.process(host, rctElements, iobInstance), (1000 * iobInstance.config.rct_refresh));
-				__connection = true;
-			}
-		
-			if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} successfully established`);
-			
-			function requestElements() {
-				/*if (!__client) {
-					if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
-					return;
-				}*/
-				if (DEBUG_CONSOLE) iobInstance.log.debug(`RCT: Requesting elements "` + rctElements + `" from inverter`);
-				rctElements.forEach((e) => {
-					if (rct.cmd[e]) {
-						__client.write(getFrame(rct.const.command_byte_read, rct['cmd'][e].id));
+		requestElements();
+		__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+	});
+
+	__client.on('error', (err) => {
+		iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!');
+		__client = null;
+		__connection = false;
+		iobInstance.setState('info.connection',false,true);
+		clearTimeout(__reconnect);
+		clearInterval(__refreshTimeout);
+		__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+	});
+
+	__client.on('data', (data) => {
+
+		function escaping(element, index, array) {
+			if (element == rct.const.stop_byte_value) {
+				// console.log('DEBUG escaping()', element, index, array);
+				if (index < array.length - 1) {
+					if (array[index + 1] == rct.const.start_byte_value || array[index + 1] == rct.const.stop_byte_value) {
+						// console.log('DEBUG: dropping escape character');
+						return false; // ignore escape character
+					} else {
+						// console.log('DEBUG: NOT dropping escape character');
 					}
-					if (!__client) {
-						return;
-					}
-				});
+
+				} else console.log('NOTICE: not handling escape character at end of buffer');
 			}
-			requestElements();
-			__reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
-		});
-	
-		__client.on('error', (err) => {
-			iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!');
-			__client = null;
-			__connection = false;
-			iobInstance.setState('info.connection',false,true);
-			clearTimeout(__reconnect);
-			clearInterval(__refreshTimeout);
-			__refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
-		});
-		
-		__client.on('data', (data) => {
-			
-			function escaping(element, index, array) {
-				if (element == rct.const.stop_byte_value) {
-					// console.log('DEBUG escaping()', element, index, array);
-					if (index < array.length - 1) {
-						if (array[index + 1] == rct.const.start_byte_value || array[index + 1] == rct.const.stop_byte_value) {
-							// console.log('DEBUG: dropping escape character');
-							return false; // ignore escape character
-						} else {
-							// console.log('DEBUG: NOT dropping escape character');
-						}
+			return true;
+		}
 
-					} else console.log('NOTICE: not handling escape character at end of buffer');
-				}
-				return true;
-			}
+		console.log('DEBUG data received', data);
+		dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
-			console.log('DEBUG data received', data);
-			dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
+		handleData();
+	});
 
-			handleData();
-		});
-	
 	let dataBuffer = Buffer.alloc(0);
 	function handleData() {
 
