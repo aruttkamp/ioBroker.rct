@@ -67,8 +67,8 @@ None
 * (NCIceWolf) Corrected debug messages to be shown as debug, not info
 * (NCIceWolf) corrected connection abortion if not successfully established
 * (NCIceWolf) elements from inverter are only requested once a connection is successfully established
-* (NCIceWolf) added requested and received elements to/from inverter to debug * (NCIceWolf) logging
-merged recent dependabot suggestions   
+* (NCIceWolf) added requested and received elements to/from inverter to debug logging
+* (NCIceWolf) merged recent dependabot suggestions   
 * (Andreas Ruttkamp) Dependabot suggested updates
 * (Andreas Ruttkamp) some Code cosmetics
 
