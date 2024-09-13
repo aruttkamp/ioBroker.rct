@@ -1,6 +1,6 @@
 {
   "name": "iobroker.rct",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "RCT Power photovolatics power converter",
   "author": {
     "name": "Andreas Ruttkamp",

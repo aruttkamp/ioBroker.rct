@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.13",
+    "version": "1.2.14",
     "news": {
+      "1.2.14": {
+        "en": "removed .npmignore",
+        "de": "entfernen .npmignore",
+        "ru": "удален .npmignore",
+        "pt": "removido .npmignore",
+        "nl": "verwijderd .npmignore",
+        "fr": "enlevé .npmignore",
+        "it": "rimosso .npmignore",
+        "es": "eliminado .npmignore",
+        "pl": "usunięty .npmignore",
+        "uk": "видалено .npmignore",
+        "zh-cn": "已删除 .npmignore"
+      },
       "1.2.13": {
         "en": "* Added multiple debugging messages\n* Corrected debug messages to be shown as debug, not info\n* corrected connection abortion if not successfully established\n* elements from inverter are only requested once a connection is successfully established\n* added requested and received elements to/from inverter to debug * (NCIceWolf) logging\nmerged recent dependabot suggestions   \n* Dependabot suggested updates\n* some Code cosmetics",
         "de": "* Mehrere Debugging-Nachrichten hinzugefügt\n* Korrigierte Debug-Nachrichten, die als Debug angezeigt werden sollen, nicht info\n* korrigierte anschlussabortion, wenn nicht erfolgreich etabliert\n* elemente des wechselrichters werden nur angefordert, wenn eine verbindung erfolgreich aufgebaut ist\n* hinzugefügt angeforderte und empfangene Elemente zu / von Wechselrichter zu Debug * (NCIceWolf) Protokollierung\nzusammengeführte neue abhängigkeitabot-vorschläge\n* Dependabot schlägt Updates vor\n* einige Code Kosmetik",
@@ -80,19 +93,6 @@
         "pl": "Wdrożenie nowej adminUI\nindex _ m.html usunięty\nPoprawiony typ baterii _ stosu _ cykli\nstyle.css usunięte (nie jest potrzebne dla json admin)\nusunięty tab- materialize (pozostałości z początkowego tworzenia adaptera)\nzaktualizowana minimalna wersja kontrolera js- controllera do > = 5.0.0 (prąd: 5.0.19)\ndodana minimalna wersja admin do > = 5.0.0 (aktualna stabilność: 6.13.16), może nawet być > = 6.0.0\nprzygotowane tłumaczenia (dalsza obsługa - > https: / / github.com / ioBroker / adapter- dev # manage- translations)",
         "uk": "Реалізація нового адміністратора\nindex_m.html видалено\nБатарея даних_stack_cycles виправлено\njavascript licenses api веб-сайт go1.13.8\nвидалено вкладка-матеріалізацію (ліворуч від початкового створення адаптера)\nоновлюється мінімальна версія js-controller до >= 5.0.0 (поточна: 5.0.19)\nдодано мінімальну версію адміністратора до >= 5.0.0 (поточна стабільна : 6.13.16), навіть може бути >= 6.0.0\nпідготовлені переклади https://github.com/ioBroker/adapter-dev#manage-translations)",
         "zh-cn": "实施新的行政管理单位\n索引_ m.html 删除\n数据类型电池_stack_循环修正\n样式.cs 删除( json 管理员不需要)\n删除了标签材料化( 初始适配器创建时留下的)\n更新最小 js 控制器版本至 qq 5. 0. 0 (当前: 5.0. 19)\n在 qq 5.0.0 中添加最小管理员版本(当前稳定:6.13.16),甚至可能为 qq 6.0.0\n准备的翻译(进一步处理 - > https://github.com/ioBroker/adapter-dev#manage-translations) 互联网档案馆的存檔,存档日期2013-12-11"
-      },
-      "1.2.7": {
-        "en": "prim_sm.state added\nhandling of type errors added\nsome Code cleaning\nUpdate io-package.json",
-        "de": "prim_sm.state hinzugefügt\nhandhabung von typfehlern hinzugefügt\neinige Code Reinigung\nUpdate io-package.json",
-        "ru": "prim_sm.state\nобработка добавленных ошибок типа\nнекоторые коды очистки\nОбновление io-package.json",
-        "pt": "prim_sm.state adicionado\nmanipulação de erros de tipo adicionados\nalguns códigos de limpeza\nAtualizar io-package.json",
-        "nl": "prim_sm.state toegevoegd\nbehandeling van typefouten toegevoegd\nsommige code reiniging\nBijwerken io-package.json",
-        "fr": "prim_sm.state ajouté\nmanipulation des erreurs de type ajoutées\ncertains nettoyage de code\nMettre à jour io-package.json",
-        "it": "prim_sm.state aggiunto\ngestione degli errori di tipo aggiunto\nalcuni Codice pulizia\nAggiornamento io-package.json",
-        "es": "prim_sm.state añadido\nmanejo de errores tipo añadido\nalgunos Código de limpieza\nActualización io-package.json",
-        "pl": "prim _ sm.state added\nobsługa dodanych błędów typu\nniektóre Czyszczenie kodu\nAktualizuj jo- package.json",
-        "uk": "prim_sm.state додано\nобробка помилок типу\nдеякі Код очищення\nОновлення io-package.json",
-        "zh-cn": "已添加 prim_ sm. state\n处理类型错误\n一些代码清理\n更新 io- package.json"
       }
     },
     "titleLang": {
