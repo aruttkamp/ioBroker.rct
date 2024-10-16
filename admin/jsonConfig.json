@@ -2,6 +2,9 @@
     "i18n": true,
     "type": "tabs",
     "iconPosition": "top",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
     "items": {
         "_general": {
             "type": "panel",
@@ -11,17 +14,27 @@
                     "newLine": true,
                     "type": "header",
                     "size": 1,
+                    "xs": 12,
                     "sm": 12,
-                    "md": 12,
-                    "lg": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "text": "General Settings"
                  },
+                "dividerHdr": {
+                    "newLine": true,
+                    "type": "header",
+                    "text": "DIVIDER",
+                    "size": 2
+                },
                 "rct_ip": {
                     "newLine": true,
                     "type": "text",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "label": "RCT ip-address",
                     "help": "Local RCT inverter ip-address (i.e. 192.168.0.10)"
                 },
@@ -29,18 +42,22 @@
                     "type": "number",
                     "min": 10,
                     "max": 3600,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "label": "Refresh interval",
                     "help": "Desired refresh interval for elements in seconds (10 - 3600)"
                 },
               "rct_elements": {
                     "newLine": true,
                     "type": "text",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 12,
+                    "lg": 4,
+                    "xl": 4,
                     "label": "Elements",
                     "help": "Elements to be fetched from inverter (leave blank for standard)"
                 }
