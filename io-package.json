@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.14",
+    "version": "1.2.15",
     "news": {
+      "1.2.15": {
+        "en": "update deps\ninclude node.js 22 testing\nIMPLEMENTING eslint 9",
+        "de": "update deps\numfassen node.js 22 testen\nIMPLEMENT-Schiene 9",
+        "ru": "обновление депсов\nвключают node.js 22\nIMPLEMENTING eslint 9",
+        "pt": "atualização deps\nincluem testes node.js 22\nIMPLEMENTO Eslint 9",
+        "nl": "update deps\nomvatten node.js 22 testen\nUitvoering",
+        "fr": "mettre à jour les deps\ny compris test node.js 22\nMISE EN ŒUVRE de l'essence 9",
+        "it": "aggiornamento dep\nincludere node.js 22 test\nIMPLEMENTO eslint 9",
+        "es": "actualización de los deps\nincluye node.js 22 pruebas\nIMPLEMENTING eslint 9",
+        "pl": "aktualizacje deps\nobejmują node.js 22 badania\nWPROWADZENIE W ŻYCIE 9",
+        "uk": "оновлення deps\nвключають тестування node.js 22\nУтеплення еслінта 9",
+        "zh-cn": "更新代码\n22次测试\n执行第9条"
+      },
       "1.2.14": {
         "en": "removed .npmignore",
         "de": "entfernen .npmignore",
@@ -80,19 +93,6 @@
         "pl": "nieprawidłowy typ dla następnego _ calib _ date poprawiony",
         "uk": "неправильний тип для наступного_calib_date виправлено",
         "zh-cn": "下一个校正日期错误的类型"
-      },
-      "1.2.8": {
-        "en": "Implementation of new adminUI\nindex_m.html deleted\nDatatype battery_stack_cycles corrected\nstyle.css deleted (not needed for json admin)\nremoved tab-materialize (leftover from initial adapter creation)\nupdated minimum js-controller version to >= 5.0.0 (current: 5.0.19)\nadded minimum admin version to >= 5.0.0 (current stable : 6.13.16), could even be >= 6.0.0\nprepared translations (further handling -> https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "de": "Implementierung von neuen adminUI\nindex_m.html gelöscht\nDatentyp Battery_stack_cycles korrigiert\nstyle.css gelöscht (nicht für json admin benötigt)\nentfernte tab-materialisierung (links von der ersten adapter-erstellung)\naktualisierte minimale js-controller-version auf >= 5.0.0 (current: 5.0.19)\nzusätzliche minimale admin-version zu >= 5.0.0 (aktuell stabil : 6.13.16), könnte sogar >= 6.0.0\nvorbereitete Übersetzungen (weitere Bearbeitung -> https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "ru": "Внедрение нового adminUI\nindex_m.html\nDatatype Battery_stack_cycles corrected\nstyle.cs удален (не требуется для json admin)\nудаленная вкладка-материализация (слева от первоначального создания адаптера)\nобновленная версия с минимальными js-controller до >= 5.0.0 (текущий: 5.0.19)\n>= 5.0.0 (текущий стабильный: 6.13.16), может быть даже >= 6.0.0\nподготовленные переводы (дальнейшая обработка -> https://github.com/ioBroker/adapter-dev#manage-translations",
-        "pt": "Implementação de novos administradores\nindex_m.html excluído\nDatatype battery_stack_cycles corrigido\nstyle.css excluído (não é necessário para json admin)\nseparador-materialize (esquerda da criação inicial do adaptador)\natualizado versão mínima js-controller para >= 5.0.0 (current: 5.0.19)\nadicionado versão admin mínima para >= 5.0.0 (atual estável : 6.13.16), pode até ser >= 6.0.0\ntraduções preparadas (tratamento mais amplo -> https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "nl": "Uitvoering van nieuwe adminUI\nindex_m.html verwijderd\nDatatype batterij_stack_cycles gecorrigeerd\nstyle.css verwijderd (niet nodig voor json admin)\nverwijderde tab-materialisatie (links van de eerste adapter creatie)\nde waarde van alle gebruikte materialen niet hoger is dan 20% van de prijs af fabriek van het product\neen minimale adminversie toegevoegd aan > 5.0.0 (huidige stabiele versie: 6.13.16), zou zelfs < 6.0.0 kunnen zijn\nvoorbereide vertalingen (verdere verwerking -> https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "fr": "Mise en œuvre de la nouvelle administration\nindex_m.html supprimé\nType de données batterie_stack_cycles corrigés\nstyle.css supprimé (pas nécessaire pour json admin)\nsupprimé tab-matérialize (à gauche de la création initiale de l'adaptateur)\nmise à jour de la version minimale de js-controller à >= 5.0.0 (actuel : 5.0.19)\najout d'une version administrative minimale à >= 5.0.0 (actuelle stable : 6.13.16), pourrait même être >= 6.0.0\ndes traductions préparées (traitement supplémentaire -> https://github.com/ioBroker/adaptation-dev#gestion-traductions)",
-        "it": "Attuazione della nuova amministrazione\nindex_m.html cancellato\nDatatype batteria_stack_cycles corretto\nstyle.css cancellato (non necessario per json admin)\nrimosso scheda-materializzare (sinistra dalla creazione dell'adattatore iniziale)\nversione js-controller minima aggiornata a >= 5.0.0 (corrente: 5.0.19)\naggiunta versione minima di amministrazione a >= 5.0.0 (attuale stabile: 6.13.16), potrebbe anche essere >= 6.0.0\ntraduzioni preparate (massima gestione) https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "es": "Aplicación del nuevo adminUI\nindex_m.html borrado\nBatería de tipo Datatype_stack_cycles corregido\nestilo.css eliminado (no necesario para json admin)\ntab-materializar quitado (izquierda de la creación del adaptador inicial)\nversión mínima actualizada js-controller a √= 5.0.0 (actual: 5.0.19)\nañadida la versión mínima de administración a не= 5.0.0 (estable actual : 6.13.16), podría incluso ser не= 6.0.0\ntraducciones preparadas (acondicionado - título https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "pl": "Wdrożenie nowej adminUI\nindex _ m.html usunięty\nPoprawiony typ baterii _ stosu _ cykli\nstyle.css usunięte (nie jest potrzebne dla json admin)\nusunięty tab- materialize (pozostałości z początkowego tworzenia adaptera)\nzaktualizowana minimalna wersja kontrolera js- controllera do > = 5.0.0 (prąd: 5.0.19)\ndodana minimalna wersja admin do > = 5.0.0 (aktualna stabilność: 6.13.16), może nawet być > = 6.0.0\nprzygotowane tłumaczenia (dalsza obsługa - > https: / / github.com / ioBroker / adapter- dev # manage- translations)",
-        "uk": "Реалізація нового адміністратора\nindex_m.html видалено\nБатарея даних_stack_cycles виправлено\njavascript licenses api веб-сайт go1.13.8\nвидалено вкладка-матеріалізацію (ліворуч від початкового створення адаптера)\nоновлюється мінімальна версія js-controller до >= 5.0.0 (поточна: 5.0.19)\nдодано мінімальну версію адміністратора до >= 5.0.0 (поточна стабільна : 6.13.16), навіть може бути >= 6.0.0\nпідготовлені переклади https://github.com/ioBroker/adapter-dev#manage-translations)",
-        "zh-cn": "实施新的行政管理单位\n索引_ m.html 删除\n数据类型电池_stack_循环修正\n样式.cs 删除( json 管理员不需要)\n删除了标签材料化( 初始适配器创建时留下的)\n更新最小 js 控制器版本至 qq 5. 0. 0 (当前: 5.0. 19)\n在 qq 5.0.0 中添加最小管理员版本(当前稳定:6.13.16),甚至可能为 qq 6.0.0\n准备的翻译(进一步处理 - > https://github.com/ioBroker/adapter-dev#manage-translations) 互联网档案馆的存檔,存档日期2013-12-11"
       }
     },
     "titleLang": {

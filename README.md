@@ -62,7 +62,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.15 (2024-12-15)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) include node.js 22 testing
 * (Andreas Ruttkamp) IMPLEMENTING eslint 9
