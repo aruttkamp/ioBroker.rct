@@ -31,8 +31,6 @@ class Rct extends utils.Adapter {
     async onReady() {
         // Initialize your adapter here
 
-        const iobInstance = this;
-
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
         this.log.info(`config rct_ip: ${this.config.rct_ip}`);
@@ -67,7 +65,7 @@ class Rct extends utils.Adapter {
                     const { channelName, stateName, stateFullName } = stateInfo;
 
                     if (channelName) {
-                        await iobInstance.setObjectNotExistsAsync(channelName, {
+                        await this.setObjectNotExistsAsync(channelName, {
                             type: 'channel',
                             common: { name: channelName },
                             native: {},
@@ -85,17 +83,17 @@ class Rct extends utils.Adapter {
                         common.min = 0;
                         common.max = 100;
                     }
-                    await iobInstance.setObjectNotExistsAsync(stateFullName, {
+                    await this.setObjectNotExistsAsync(stateFullName, {
                         type: 'state',
                         common,
                         native: {},
                     });
                 } else {
-                    iobInstance.log.info(`rct state not defined: ${e}`);
+                    this.log.info(`rct state not defined: ${e}`);
                 }
             }
         } catch (err) {
-            this.log.error('Error during state creation / cancelling initialization');
+            this.log.error('Error during state creation / cancelling initialization' & err);
         }
 
         console.debug('onReady() rct.process(): start processing');
@@ -118,7 +116,7 @@ class Rct extends utils.Adapter {
             this.setState('info.connection', false, true);
             callback();
         } catch (e) {
-            callback();
+            callback(e);
         }
     }
 

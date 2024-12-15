@@ -59,7 +59,7 @@ rct.reconnect = function (host, iobInstance) {
                 iobInstance.log.debug(`RCT: starting to terminate interval connection to inverter at ${host}`);
             }
         } catch (err) {
-            iobInstance.log.error(`RCT: reconnection not working!`);
+            iobInstance.log.error(`RCT: reconnection not working!` & err);
             __client.destroy();
             __client = null;
             __connection = false;
@@ -78,7 +78,7 @@ rct.end = function (host, iobInstance) {
             __client.end();
             __client = null;
         } catch (err) {
-            __client.destroy();
+            __client.destroy(err);
         }
     }
 };
@@ -96,7 +96,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 return;
             } catch (err) {
                 iobInstance.log.error(
-                    'RCT: Connection error! Previous interval connection not successful and closure failed!',
+                    'RCT: Connection error! Previous interval connection not successful and closure failed!' & err,
                 );
             }
         }
@@ -156,7 +156,7 @@ rct.process = function (host, rctElements, iobInstance) {
     });
 
     __client.on('error', err => {
-        iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!');
+        iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!' & err);
         __client = null;
         __connection = false;
         iobInstance.setState('info.connection', false, true);
