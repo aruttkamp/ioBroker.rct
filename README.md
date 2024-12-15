@@ -65,6 +65,7 @@ None
 ### **WORK IN PROGRESS**
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) include node.js 22 testing
+* (Andreas Ruttkamp) IMPLEMENTING eslint 9
 
 ### 1.2.14 (2024-09-13)
 * (Andreas Ruttkamp) removed .npmignore
