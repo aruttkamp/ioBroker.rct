@@ -62,7 +62,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.16 (2024-12-16)
 * (NCIceWolf) Changed admin to type "panel"
 
 ### 1.2.15 (2024-12-15)

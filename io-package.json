@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.15",
+    "version": "1.2.16",
     "news": {
+      "1.2.16": {
+        "en": "Changed admin to type \"panel\"",
+        "de": "Admin geändert zum Typ \"panel\"",
+        "ru": "Измененный администратор для типа \"панель\"",
+        "pt": "Administrador alterado para digitar \"panel\"",
+        "nl": "Veranderde admin naar type \"paneel\"",
+        "fr": "Changed admin to type \"panel\"",
+        "it": "Modificato da admin per digitare \"panel\"",
+        "es": "Administración cambiada para escribir \"panel\"",
+        "pl": "Zmieniono admin na typ \"panel\"",
+        "uk": "Змінений адміністратор для типу \"панель\"",
+        "zh-cn": "管理员改为“ 平面” 键入"
+      },
       "1.2.15": {
         "en": "update deps\ninclude node.js 22 testing\nIMPLEMENTING eslint 9",
         "de": "update deps\numfassen node.js 22 testen\nIMPLEMENT-Schiene 9",
@@ -80,19 +93,6 @@
         "pl": "pewne ulepszenia dotyczące połączenia / odłączenia\nMałe korekty kodu",
         "uk": "деякі поліпшення для підключення / відключення\nВиправлення коду",
         "zh-cn": "连接/ 断开的一些改进\n小代码校正"
-      },
-      "1.2.9": {
-        "en": "wrong type for next_calib_date corrected",
-        "de": "falscher typ für next_calib_date korrigiert",
-        "ru": "неправильный тип для следующего_calib_date исправить",
-        "pt": "tipo errado para next_calib_date corrigido",
-        "nl": "verkeerd type voor next_calib_date gecorrigeerd",
-        "fr": "mauvais type pour next_calib_date corrigé",
-        "it": "tipo sbagliato per successivo_calib_date corretto",
-        "es": "tipo incorrecto para next_calib_date corregido",
-        "pl": "nieprawidłowy typ dla następnego _ calib _ date poprawiony",
-        "uk": "неправильний тип для наступного_calib_date виправлено",
-        "zh-cn": "下一个校正日期错误的类型"
       }
     },
     "titleLang": {
