@@ -62,7 +62,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.17 (2025-01-01)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) update copyright
 

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.16",
+    "version": "1.2.17",
     "news": {
+      "1.2.17": {
+        "en": "update deps\nupdate copyright",
+        "de": "update deps\naktualisierung des urheberrechts",
+        "ru": "обновление депсов\nобновление авторских прав",
+        "pt": "atualização deps\natualizar direitos autorais",
+        "nl": "update deps\ncopyright bijwerken",
+        "fr": "mettre à jour les deps\nmettre à jour le droit d'auteur",
+        "it": "aggiornamento dep\naggiornamento copyright",
+        "es": "actualización de los deps\nactualización de derechos de autor",
+        "pl": "aktualizacje deps\naktualizacja praw autorskich",
+        "uk": "оновлення deps\nоновлення авторського права",
+        "zh-cn": "更新代码\n更新版权"
+      },
       "1.2.16": {
         "en": "Changed admin to type \"panel\"",
         "de": "Admin geändert zum Typ \"panel\"",
@@ -80,19 +93,6 @@
         "pl": "Tippfehler korrigiert",
         "uk": "Tippfehler korrigiert",
         "zh-cn": "Tippfehler 科尔里吉埃特"
-      },
-      "1.2.10": {
-        "en": "some improvements on connect / disconnect  \nLittle code corrections",
-        "de": "einige verbesserungen am anschluss / trennen\nKleine Codekorrekturen",
-        "ru": "некоторые улучшения при подключении/отключении\nМаленькие исправления кода",
-        "pt": "algumas melhorias na conexão / desconexão\nPequenas correções de código",
-        "nl": "enkele verbeteringen op verbinding / verbreken\nKleine codecorrecties",
-        "fr": "quelques améliorations sur connexion / déconnexion\nPeu de corrections de code",
-        "it": "alcuni miglioramenti su connessione / disconnessione\nPiccole correzioni di codice",
-        "es": "algunas mejoras en conexión / desconexión\nPequeñas correcciones del código",
-        "pl": "pewne ulepszenia dotyczące połączenia / odłączenia\nMałe korekty kodu",
-        "uk": "деякі поліпшення для підключення / відключення\nВиправлення коду",
-        "zh-cn": "连接/ 断开的一些改进\n小代码校正"
       }
     },
     "titleLang": {
