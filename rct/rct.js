@@ -25,7 +25,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
     // if '[' comes before first '.', replace it by '.' and hence make it part of state name
     if (name.search(/\[/) < name.search(/\./)) {
-        name = name.replace('[', '.');
+        name = name.replace(/\[/g, '.');
     }
 
     const elements = name.split('.');
