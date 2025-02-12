@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ioBroker/testing-action-check@070b1f092f89f19651a1d344fe9461cebb5811ce #v1.0.7
+      - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '18.x'
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
@@ -47,7 +47,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - uses: ioBroker/testing-action-adapter@6a0eacfceb10a95eec95578012eb3ebc213715c3 #v1.09
+      - uses: ioBroker/testing-action-adapter@v1
         with:
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}
@@ -75,7 +75,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: ioBroker/testing-action-deploy@fe46ae1f940278ce28ae5a2d1356a31f79454827 #v1.2.2
+      - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '18.x'
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
