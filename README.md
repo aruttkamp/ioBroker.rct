@@ -7,7 +7,7 @@
 ![Number of Installations (latest)](https://iobroker.live/badges/rct-installed.svg)
 ![Number of Installations (stable)](https://iobroker.live/badges/rct-stable.svg)
 
-[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/release/npm/ioBroker.rct)](https://img.shields.io/librariesio/release/npm/ioBroker.rct)
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/aruttkamp/ioBroker.rct)](https://img.shields.io/librariesio/github/aruttkamp/ioBroker.rct)
 
 [![NPM](https://nodei.co/npm/iobroker.rct.png?downloads=true)](https://nodei.co/npm/iobroker.rct/)
 
