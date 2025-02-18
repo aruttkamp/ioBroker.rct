@@ -46,7 +46,7 @@ class Rct extends utils.Adapter {
         //refresh vorbelegen wenn nicht definiert
         if (!this.config.rct_refresh) {
             this.config.rct_refresh = 10;
-        }   
+        }
 
         if (!this.config.debug_logging) {
             this.config.debug_logging = false;
