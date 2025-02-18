@@ -56,7 +56,7 @@
                     "xl": 8,
                     "label": "Elements",
                     "help": "Elements to be fetched from inverter (leave blank for standard)"
-                };
+                },
                 "_dividerHdr2": {
                     "newLine": true,
                     "type": "header",
