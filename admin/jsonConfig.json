@@ -66,12 +66,14 @@
                 "debug_logging": {
                     "newLine": true,
                     "type": "checkbox",
+                    "label": "Enable debug logging for inverter communication (beware: excessive logging!!)",
+                    "tooltip": "Enable debugging",
                     "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 8,
                     "xl": 8,
-                    "label": "Enable debug logging for inverter communication (beware: excessive logging!!)"
+                    "default": false
                 }
             }
         }
