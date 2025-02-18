@@ -12,6 +12,11 @@ rct.initialize = function(config) {
     }
 };
 
+const config = {
+    debug_logging: false,
+};
+rct.initialize(config);
+
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
