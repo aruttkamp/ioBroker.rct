@@ -4,7 +4,14 @@ const rct = require('./rct_core2.js');
 module.exports = rct;
 
 // flag for local debugging
-const DEBUG_CONSOLE = iobInstance.debug_logging;
+rct.initialize = function(config) {
+    this.config = config;
+    this.DEBUG_CONSOLE = this.config.debug_logging;
+    if (this.DEBUG_CONSOLE) {
+        console.log("Debug logging is enabled");
+    }
+};
+
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
