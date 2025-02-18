@@ -6,8 +6,8 @@ module.exports = rct;
 // flag for local debugging
 rct.initialize = function(config) {
     this.config = config;
-    this.DEBUG_CONSOLE = this.config.debug_logging;
-    if (this.DEBUG_CONSOLE) {
+    DEBUG_CONSOLE = this.config.debug_logging;
+    if (DEBUG_CONSOLE) {
         console.log("Debug logging is enabled");
     }
 };
