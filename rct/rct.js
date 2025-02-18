@@ -4,18 +4,12 @@ const rct = require('./rct_core2.js');
 module.exports = rct;
 
 // flag for local debugging
-rct.initialize = function(config) {
-    this.config = config;
-    DEBUG_CONSOLE = this.config.debug_logging;
+rct.initialize = function(debug) {
+    DEBUG_CONSOLE = debug;
     if (DEBUG_CONSOLE) {
         console.log("Debug logging is enabled");
     }
 };
-
-const config = {
-    debug_logging: false,
-};
-rct.initialize(config);
 
 let __refreshTimeout = null;
 let __reconnect = null;
