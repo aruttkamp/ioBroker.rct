@@ -4,7 +4,7 @@ const rct = require('./rct_core2.js');
 module.exports = rct;
 
 // flag for local debugging
-const DEBUG_CONSOLE = false;
+const DEBUG_CONSOLE = this.config.debug_logging;
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
