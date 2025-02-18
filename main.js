@@ -48,6 +48,10 @@ class Rct extends utils.Adapter {
             this.config.rct_refresh = 10;
         }   
 
+        if (!this.config.debug_logging) {
+            this.config.debug_logging = false;
+        }   
+
         //Wenn keine Elemente konfiguriert sind - Defaultwerte laden
         if (!this.config.rct_elements) {
             this.config.rct_elements =
