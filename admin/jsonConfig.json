@@ -17,7 +17,7 @@
                     "lg": 12,
                     "xl": 12
                  },
-                "dividerHdr": {
+                "_dividerHdr": {
                     "newLine": true,
                     "type": "header",
                     "text": "",
@@ -34,7 +34,7 @@
                     "label": "RCT ip-address",
                     "help": "Local RCT inverter ip-address (i.e. 192.168.0.10)"
                 },
-               "rct_refresh": {
+                "rct_refresh": {
                     "type": "number",
                     "min": 10,
                     "max": 3600,
@@ -46,7 +46,7 @@
                     "label": "Refresh interval",
                     "help": "Desired refresh interval for elements in seconds (10 - 3600)"
                 },
-              "rct_elements": {
+                "rct_elements": {
                     "newLine": true,
                     "type": "text",
                     "xs": 12,
@@ -56,6 +56,24 @@
                     "xl": 8,
                     "label": "Elements",
                     "help": "Elements to be fetched from inverter (leave blank for standard)"
+                },
+                "_dividerHdr2": {
+                    "newLine": true,
+                    "type": "header",
+                    "text": "",
+                    "size": 2
+                },
+                "debug_logging": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "label": "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)",
+                    "tooltip": "Enable debugging",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 8,
+                    "xl": 8,
+                    "default": false
                 }
             }
         }

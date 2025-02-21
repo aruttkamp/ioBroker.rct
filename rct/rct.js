@@ -4,7 +4,14 @@ const rct = require('./rct_core2.js');
 module.exports = rct;
 
 // flag for local debugging
-const DEBUG_CONSOLE = false;
+let DEBUG_CONSOLE = false;
+rct.initialize = function (debug) {
+    DEBUG_CONSOLE = debug;
+    if (DEBUG_CONSOLE) {
+        console.log('Debug logging is enabled');
+    }
+};
+
 let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
@@ -25,7 +32,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
     // if '[' comes before first '.', replace it by '.' and hence make it part of state name
     if (name.search(/\[/) < name.search(/\./)) {
-        name = name.replace('[', '.');
+        name = name.replace(/\[/g, '.');
     }
 
     const elements = name.split('.');
