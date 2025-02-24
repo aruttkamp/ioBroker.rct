@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.17",
+    "version": "1.2.18",
     "news": {
+      "1.2.18": {
+        "en": "Debug mode in Admin added\nupdate dependencies",
+        "de": "Debug-Modus in Admin hinzugefügt\naktualisierung der abhängigkeiten",
+        "ru": "Режим Debug в Admin добавлен\nобновление зависимостей",
+        "pt": "Modo de depuração no Admin adicionado\ndependências",
+        "nl": "Debugmodus in Admin toegevoegd\nafhankelijkheden bijwerken",
+        "fr": "Mode débogue dans Admin ajouté\nmettre à jour les dépendances",
+        "it": "Modalità Debug in Admin aggiunto\naggiornamento dipendenze",
+        "es": "Modo de depuración en Admin añadido\ndependencias de actualización",
+        "pl": "Tryb debugowania w Admin dodany\naktualizacji zależności",
+        "uk": "Режим Debug в Доданому адміністратору\nоновлення залежності",
+        "zh-cn": "添加管理器中的调试模式\n更新依赖关系"
+      },
       "1.2.17": {
         "en": "update deps\nupdate copyright",
         "de": "update deps\naktualisierung des urheberrechts",
@@ -80,19 +93,6 @@
         "pl": "Subendabot sugerowane aktualizacje\nPoprawa łączności z falownikiem",
         "uk": "В залежності від запропонованих оновлень\nПокращення підключення до інвертора",
         "zh-cn": "取决于建议的更新\n改进与反转器的连接"
-      },
-      "1.2.11": {
-        "en": "Tippfehler korrigiert",
-        "de": "Was ist das",
-        "ru": "Tippfehler",
-        "pt": "Máquina de montagem automática",
-        "nl": "Tippfehler korrigiert",
-        "fr": "Tippfehler karrigiert",
-        "it": "Traduzione:",
-        "es": "Tippfehler korrigiert",
-        "pl": "Tippfehler korrigiert",
-        "uk": "Tippfehler korrigiert",
-        "zh-cn": "Tippfehler 科尔里吉埃特"
       }
     },
     "titleLang": {
