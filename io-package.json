@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.18",
+    "version": "1.2.19",
     "news": {
+      "1.2.19": {
+        "en": "update deps\nminimum version for admin now 7.4.10",
+        "de": "update deps\nmindestversion für admin jetzt 7.4.10",
+        "ru": "обновление deps\nминимальная версия для администратора 7.4.10",
+        "pt": "atualização deps\nversão mínima para admin agora 7.4.10",
+        "nl": "update deps\nminimale versie voor admin nu 7.4.10",
+        "fr": "mettre à jour les deps\nversion minimale pour admin maintenant 7.4.10",
+        "it": "aggiornamento dep\nversione minima per admin ora 7.4.10",
+        "es": "actualización de los deps\nversión mínima para admin 7.4.10",
+        "pl": "aktualizacje deps\nminimalna wersja dla admin teraz 7.4.10",
+        "uk": "оновлення deps\nмінімальна версія для адміністратора тепер 7.4.10",
+        "zh-cn": "更新代码\n最低版本,现为7.4.10"
+      },
       "1.2.18": {
         "en": "Debug mode in Admin added\nupdate dependencies",
         "de": "Debug-Modus in Admin hinzugefügt\naktualisierung der abhängigkeiten",
@@ -80,19 +93,6 @@
         "pl": "* Dodano wiele wiadomości debugujących\n* Skorygowane wiadomości debugowania, które mają być wyświetlane jako debug, nie informacje\n* skorygowana aborcja połączenia, jeśli nie została ustalona\n* elementy z inwertera są wymagane tylko po nawiązaniu połączenia\n* dodano wymagane i otrzymane elementy do / z inwertera do debugowania * (NCIceWolf) logowanie\npołączone ostatnie sugestie dotyczące zależności\n* Dependabot sugerowane aktualizacje\n* niektóre kosmetyki Code",
         "uk": "* Додано кілька повідомлень про відключення\n* Виправлено видалення повідомлень, які будуть показані як debug, не інформація\n* виправлено з'єднання аборту, якщо не вдало встановлено\n* елементи з інвертора застосовуються тільки після того, як з'єднання успішно встановлено\n* додано запитані та отримані елементи до / з інвертора до debug * (NCIceWolf) журналювання\nз'єднання останніх пропозицій\n* В залежності від запропонованих оновлень\n* деякі косметичні засоби",
         "zh-cn": "* 添加多个调试消息\n* 更正的调试消息将显示为调试,而不是信息\n* 如果未能成功确定,纠正连接堕胎\n* 仅在连接成功建立后才请求反向元素\n* 向/从反转器调试 * (NCIceWolf) 日志添加已请求和接收的元素\n最近合并的依赖性建议\n* 取决于建议的更新\n*一些密码化妆品"
-      },
-      "1.2.12": {
-        "en": "Dependabot suggested updates\nImproving connectivity to inverter",
-        "de": "Dependabot schlug Updates vor\nVerbesserung der Anbindung an Wechselrichter",
-        "ru": "Dependabot предложил обновления\nУлучшение связи с инверторами",
-        "pt": "Dependeabot sugeriu atualizações\nMelhorar a conectividade ao inversor",
-        "nl": "Dependabot voorgestelde updates\nVerbetering van de connectiviteit met omvormer",
-        "fr": "Dependabot propose des mises à jour\nAmélioration de la connectivité à l'inverseur",
-        "it": "Dependabot ha suggerito aggiornamenti\nMigliorare la connettività per inverter",
-        "es": "Dependabot sugirió actualizaciones\nMejora de la conectividad al inversor",
-        "pl": "Subendabot sugerowane aktualizacje\nPoprawa łączności z falownikiem",
-        "uk": "В залежності від запропонованих оновлень\nПокращення підключення до інвертора",
-        "zh-cn": "取决于建议的更新\n改进与反转器的连接"
       }
     },
     "titleLang": {

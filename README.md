@@ -62,8 +62,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.2.19 (2025-04-01)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) minimum version for admin now 7.4.10
 
