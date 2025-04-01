@@ -62,6 +62,11 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) update deps
+* (Andreas Ruttkamp) minimum version for admin now 7.4.10
+
 ### 1.2.18 (2025-02-24)
 * (NCIceWolf) Debug mode in Admin added
 * (NCIceWolf) update dependencies
