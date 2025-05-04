@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.19",
+    "version": "1.2.20",
     "news": {
+      "1.2.20": {
+        "en": "update deps\nminimum node.js version changed to 20",
+        "de": "update deps\nminimal node.js-version geändert auf 20",
+        "ru": "обновление deps\nминимальная версия node.js изменена на 20",
+        "pt": "atualização deps\nversão node.js mínima mudou para 20",
+        "nl": "update deps\nminimum node.js versie gewijzigd naar 20",
+        "fr": "mettre à jour les deps\nversion minimum node.js changée à 20",
+        "it": "aggiornamento dep\nversione minima node.js cambiata a 20",
+        "es": "actualización de los deps\nversión mínimo node.js cambiado a 20",
+        "pl": "aktualizacje deps\nwersja minimum node.js zmieniona na 20",
+        "uk": "оновлення deps\nмінімальна версія node.js змінилася до 20",
+        "zh-cn": "更新代码\n最小节点.js版本改为20"
+      },
       "1.2.19": {
         "en": "update deps\nminimum version for admin now 7.4.10",
         "de": "update deps\nmindestversion für admin jetzt 7.4.10",
@@ -80,19 +93,6 @@
         "pl": "usunięty .npmignore",
         "uk": "видалено .npmignore",
         "zh-cn": "已删除 .npmignore"
-      },
-      "1.2.13": {
-        "en": "* Added multiple debugging messages\n* Corrected debug messages to be shown as debug, not info\n* corrected connection abortion if not successfully established\n* elements from inverter are only requested once a connection is successfully established\n* added requested and received elements to/from inverter to debug * (NCIceWolf) logging\nmerged recent dependabot suggestions   \n* Dependabot suggested updates\n* some Code cosmetics",
-        "de": "* Mehrere Debugging-Nachrichten hinzugefügt\n* Korrigierte Debug-Nachrichten, die als Debug angezeigt werden sollen, nicht info\n* korrigierte anschlussabortion, wenn nicht erfolgreich etabliert\n* elemente des wechselrichters werden nur angefordert, wenn eine verbindung erfolgreich aufgebaut ist\n* hinzugefügt angeforderte und empfangene Elemente zu / von Wechselrichter zu Debug * (NCIceWolf) Protokollierung\nzusammengeführte neue abhängigkeitabot-vorschläge\n* Dependabot schlägt Updates vor\n* einige Code Kosmetik",
-        "ru": "* Добавлено несколько отладочных сообщений\n* Исправленные отладочные сообщения должны быть показаны как отладки, а не информация\n* исправил аборт, если не был успешно установлен\n* элементы от инвертора запрашиваются только после того, как соединение будет успешно установлено\n* добавлены запрошенные и полученные элементы для/от инвертора до отладки * (NCIceWolf)\nобъединенные последние предложения\n* Dependabot предложил обновления\n* некоторые косметические средства",
-        "pt": "* Adicionado várias mensagens de depuração\n* Mensagens de depuração corrigidas a serem mostradas como debug, não info\n* aborto de conexão corrigida se não for estabelecida com sucesso\n* os elementos do inversor só são solicitados uma vez que uma conexão é estabelecida com sucesso\n* adicionados elementos solicitados e recebidos para/de inversor para depuração * (NCIceWolf) log\nmescladas recentes sugestões de dependabot\n* Dependeabot sugeriu atualizações\n* alguns cosméticos Código",
-        "nl": "* Meerdere debugberichten toegevoegd\n* Gecorrigeerde debug-berichten die getoond moeten worden als debug, geen info\n* gecorrigeerde verbinding abortus indien niet met succes vastgesteld\n* elementen van omvormer worden alleen gevraagd als een verbinding succesvol is ingesteld\n* toegevoegd gevraagde en ontvangen elementen van/van omvormer naar debug * (NCIceWolf) logging\nsamengevoegde recente dependabot suggesties\n* Dependabot voorgestelde updates\n* sommige Code cosmetica",
-        "fr": "* Ajout de plusieurs messages de débogage\n* Messages de débogage corrigés à afficher comme débogage, pas info\n* avortement de connexion corrigé si pas établi avec succès\n* les éléments de l'onduleur ne sont demandés qu'une fois la connexion établie avec succès\n* ajout d'éléments demandés et reçus pour/de l'onduleur au débogage * (NCIceWolf)\nfusion de suggestions récentes de dépendance\n* Dependabot propose des mises à jour\n* certains produits cosmétiques Code",
-        "it": "* Aggiunto più messaggi di debugging\n* Messaggi di debug corretti da mostrare come debug, non informazioni\n* aborto di connessione corretto se non stabilito con successo\n* gli elementi da inverter sono richiesti solo una volta che una connessione è stabilita con successo\n* aggiunto richiesto e ricevuto elementi da/da inverter a debug * (NCIceWolf) logging\nunito recenti suggerimenti dipendeabot\n* Dependabot ha suggerito aggiornamenti\n* alcuni cosmetici Codice",
-        "es": "* Añadido varios mensajes de depuración\n* Mensajes de depuración corregidos que se muestran como depuración, no info\n* aborto por conexión corregida si no se establece con éxito\n* los elementos del inversor sólo se solicitan una vez que se establezca una conexión con éxito\n* añadido elementos solicitados y recibidos para / desde inverter a depurar * (NCIceWolf) logging\nsugerencias recientes de la base\n* Dependabot sugirió actualizaciones\n* algunos cosméticos de código",
-        "pl": "* Dodano wiele wiadomości debugujących\n* Skorygowane wiadomości debugowania, które mają być wyświetlane jako debug, nie informacje\n* skorygowana aborcja połączenia, jeśli nie została ustalona\n* elementy z inwertera są wymagane tylko po nawiązaniu połączenia\n* dodano wymagane i otrzymane elementy do / z inwertera do debugowania * (NCIceWolf) logowanie\npołączone ostatnie sugestie dotyczące zależności\n* Dependabot sugerowane aktualizacje\n* niektóre kosmetyki Code",
-        "uk": "* Додано кілька повідомлень про відключення\n* Виправлено видалення повідомлень, які будуть показані як debug, не інформація\n* виправлено з'єднання аборту, якщо не вдало встановлено\n* елементи з інвертора застосовуються тільки після того, як з'єднання успішно встановлено\n* додано запитані та отримані елементи до / з інвертора до debug * (NCIceWolf) журналювання\nз'єднання останніх пропозицій\n* В залежності від запропонованих оновлень\n* деякі косметичні засоби",
-        "zh-cn": "* 添加多个调试消息\n* 更正的调试消息将显示为调试,而不是信息\n* 如果未能成功确定,纠正连接堕胎\n* 仅在连接成功建立后才请求反向元素\n* 向/从反转器调试 * (NCIceWolf) 日志添加已请求和接收的元素\n最近合并的依赖性建议\n* 取决于建议的更新\n*一些密码化妆品"
       }
     },
     "titleLang": {
