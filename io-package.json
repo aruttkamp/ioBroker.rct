@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.20",
+    "version": "1.2.21",
     "news": {
+      "1.2.21": {
+        "en": "minimum node.js version changed to 20",
+        "de": "minimal node.js-version geändert auf 20",
+        "ru": "минимальная версия node.js изменена на 20",
+        "pt": "versão node.js mínima mudou para 20",
+        "nl": "minimum node.js versie gewijzigd naar 20",
+        "fr": "version minimum node.js changée à 20",
+        "it": "versione minima node.js cambiata a 20",
+        "es": "versión mínimo node.js cambiado a 20",
+        "pl": "wersja minimum node.js zmieniona na 20",
+        "uk": "мінімальна версія node.js змінилася до 20",
+        "zh-cn": "最小节点.js版本改为20"
+      },
       "1.2.20": {
         "en": "update deps\nminimum node.js version changed to 20",
         "de": "update deps\nminimal node.js-version geändert auf 20",
@@ -80,19 +93,6 @@
         "pl": "aktualizacje deps\nobejmują node.js 22 badania\nWPROWADZENIE W ŻYCIE 9",
         "uk": "оновлення deps\nвключають тестування node.js 22\nУтеплення еслінта 9",
         "zh-cn": "更新代码\n22次测试\n执行第9条"
-      },
-      "1.2.14": {
-        "en": "removed .npmignore",
-        "de": "entfernen .npmignore",
-        "ru": "удален .npmignore",
-        "pt": "removido .npmignore",
-        "nl": "verwijderd .npmignore",
-        "fr": "enlevé .npmignore",
-        "it": "rimosso .npmignore",
-        "es": "eliminado .npmignore",
-        "pl": "usunięty .npmignore",
-        "uk": "видалено .npmignore",
-        "zh-cn": "已删除 .npmignore"
       }
     },
     "titleLang": {
