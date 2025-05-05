@@ -63,9 +63,6 @@ None
   ### **WORK IN PROGRESS**
 -->
 ### 1.2.21 (2025-05-04)
-* (Andreas Ruttkamp) minimum node.js version changed to 20
-
-### 1.2.20 (2025-05-04)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) minimum node.js version changed to 20
 
