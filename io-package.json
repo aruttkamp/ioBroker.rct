@@ -16,19 +16,6 @@
         "uk": "мінімальна версія node.js змінилася до 20",
         "zh-cn": "最小节点.js版本改为20"
       },
-      "1.2.20": {
-        "en": "update deps\nminimum node.js version changed to 20",
-        "de": "update deps\nminimal node.js-version geändert auf 20",
-        "ru": "обновление deps\nминимальная версия node.js изменена на 20",
-        "pt": "atualização deps\nversão node.js mínima mudou para 20",
-        "nl": "update deps\nminimum node.js versie gewijzigd naar 20",
-        "fr": "mettre à jour les deps\nversion minimum node.js changée à 20",
-        "it": "aggiornamento dep\nversione minima node.js cambiata a 20",
-        "es": "actualización de los deps\nversión mínimo node.js cambiado a 20",
-        "pl": "aktualizacje deps\nwersja minimum node.js zmieniona na 20",
-        "uk": "оновлення deps\nмінімальна версія node.js змінилася до 20",
-        "zh-cn": "更新代码\n最小节点.js版本改为20"
-      },
       "1.2.19": {
         "en": "update deps\nminimum version for admin now 7.4.10",
         "de": "update deps\nmindestversion für admin jetzt 7.4.10",
