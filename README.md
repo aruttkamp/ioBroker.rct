@@ -62,6 +62,10 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) update deps
+* (Andreas Ruttkamp) testing node24 implemented
+
 ### 1.2.21 (2025-05-04)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) minimum node.js version changed to 20
