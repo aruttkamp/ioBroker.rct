@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.21",
+    "version": "1.2.22",
     "news": {
+      "1.2.22": {
+        "en": "update deps\ntesting node24 implemented",
+        "de": "update deps\nprüfknoten24 implementiert",
+        "ru": "обновление deps\nреализовано тестирование узла 24",
+        "pt": "atualização deps\nteste node24 implementado",
+        "nl": "update deps\ntestknoop24 geïmplementeerd",
+        "fr": "mettre à jour les deps\ntesting node24 mis en œuvre",
+        "it": "aggiornamento dep\ntest node24 implementato",
+        "es": "actualización de los deps\nnodo24 aplicado",
+        "pl": "aktualizacje deps\nzaimplementowany węzeł testowy24",
+        "uk": "оновлення deps\nвипробувальний вузол24 реалізований",
+        "zh-cn": "更新代码\n测试节点24已执行"
+      },
       "1.2.21": {
         "en": "minimum node.js version changed to 20",
         "de": "minimal node.js-version geändert auf 20",
