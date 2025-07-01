@@ -4,7 +4,7 @@
     "items": {
         "General": {
             "type": "panel",
-            "label": "General settings",
+            "label": "General Settings",
             "items": {
                 "_Headline1": {
                     "newLine": true,

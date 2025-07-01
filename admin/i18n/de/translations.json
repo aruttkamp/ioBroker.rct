@@ -1,1 +1,11 @@
-{}
+{
+  "General Settings": "Allgemeine Einstellungen",
+  "RCT ip-address": "RCT IP-Adresse",
+  "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Lokale IP-Adresse des RCT-Wechselrichters (z. B. 192.168.0.10)",
+  "Refresh interval": "Aktualisierungsintervall",
+  "Desired refresh interval for elements in seconds (10 - 3600)": "Gewünschtes Aktualisierungsintervall für Elemente in Sekunden (10 – 3600)",
+  "Elements": "Elemente",
+  "Elements to be fetched from inverter (leave blank for standard)": "Vom Wechselrichter abzurufende Elemente (für Standard leer lassen)",
+  "Enable debugging": "Erweiterte Debug-Protokollierung aktivieren",
+  "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Aktivieren Sie die Debug-Protokollierung für die Wechselrichterkommunikation (Achtung: übermäßige Protokollierung, nur zur kurzfristigen Fehlerbehebung verwenden!!)"
+}
