@@ -1,9 +1,0 @@
-{
-  "General settings": "General settings",
-  "RCT ip-address": "RCT ip-address",
-  "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Local RCT inverter ip-address (i.e. 192.168.0.10)",
-  "Refresh interval": "Refresh interval",
-  "Desired refresh interval for elements in seconds (10 - 3600)": "Desired refresh interval for elements in seconds (10 - 3600)",
-  "Elements": "Elements",
-  "Elements to be fetched from inverter (leave blank for standard)": "Elements to be fetched from inverter (leave blank for standard)"
-}

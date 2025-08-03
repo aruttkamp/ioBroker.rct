@@ -62,6 +62,11 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (Andreas Ruttkamp) enhancement issue #241
+
+
 ### 1.2.22 (2025-06-02)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) testing node24 implemented

@@ -4960,5 +4960,16 @@ rct.cmdReverse['FF2A258B'] = {
     description: 'Server to connect to to wait for commands, usually used by the vendor service personell',
     ioBrokerType: 'string',
 };
+// Ergänzung 2. Batterieturm #241
+rct.cmd['battery_placeholder[0].soc'] = { serial: 0, id: '8B4BE168' };
+rct.cmdReverse['8B4BE168'] = {
+    name: 'battery_placeholder[0].soc',
+    type: 'FLOAT',
+    precision: 1,
+    multiplier: 100,
+    unit: '%',
+    description: 'SOC (State of charge)',
+    ioBrokerType: 'number',
+};
 
 module.exports = rct;
