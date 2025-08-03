@@ -1,9 +1,11 @@
 {
-  "General settings": "General settings",
+  "General Settings": "General Settings",
   "RCT ip-address": "RCT ip-address",
   "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Local RCT inverter ip-address (i.e. 192.168.0.10)",
   "Refresh interval": "Refresh interval",
   "Desired refresh interval for elements in seconds (10 - 3600)": "Desired refresh interval for elements in seconds (10 - 3600)",
   "Elements": "Elements",
-  "Elements to be fetched from inverter (leave blank for standard)": "Elements to be fetched from inverter (leave blank for standard)"
+  "Elements to be fetched from inverter (leave blank for standard)": "Elements to be fetched from inverter (leave blank for standard)",
+  "Enable debugging": "Enable debugging",
+  "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)"
 }
