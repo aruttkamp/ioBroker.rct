@@ -62,10 +62,8 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.2.23 (2025-08-19)
 * (Andreas Ruttkamp) enhancement issue #241
-
 
 ### 1.2.22 (2025-06-02)
 * (Andreas Ruttkamp) update deps

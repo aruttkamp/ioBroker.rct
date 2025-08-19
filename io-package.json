@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.22",
+    "version": "1.2.23",
     "news": {
+      "1.2.23": {
+        "en": "enhancement issue #241",
+        "de": "erweiterung problem #241",
+        "ru": "проблема улучшения #241",
+        "pt": "problema de realce #241",
+        "nl": "verbetering probleem #241",
+        "fr": "numéro d'amélioration #241",
+        "it": "problema di valorizzazione #241",
+        "es": "cuestión de mejora #241",
+        "pl": "numer rozszerzenia # 241",
+        "uk": "питання підвищення #241",
+        "zh-cn": "增强问题 241"
+      },
       "1.2.22": {
         "en": "update deps\ntesting node24 implemented",
         "de": "update deps\nprüfknoten24 implementiert",
@@ -80,19 +93,6 @@
         "pl": "Zmieniono admin na typ \"panel\"",
         "uk": "Змінений адміністратор для типу \"панель\"",
         "zh-cn": "管理员改为“ 平面” 键入"
-      },
-      "1.2.15": {
-        "en": "update deps\ninclude node.js 22 testing\nIMPLEMENTING eslint 9",
-        "de": "update deps\numfassen node.js 22 testen\nIMPLEMENT-Schiene 9",
-        "ru": "обновление депсов\nвключают node.js 22\nIMPLEMENTING eslint 9",
-        "pt": "atualização deps\nincluem testes node.js 22\nIMPLEMENTO Eslint 9",
-        "nl": "update deps\nomvatten node.js 22 testen\nUitvoering",
-        "fr": "mettre à jour les deps\ny compris test node.js 22\nMISE EN ŒUVRE de l'essence 9",
-        "it": "aggiornamento dep\nincludere node.js 22 test\nIMPLEMENTO eslint 9",
-        "es": "actualización de los deps\nincluye node.js 22 pruebas\nIMPLEMENTING eslint 9",
-        "pl": "aktualizacje deps\nobejmują node.js 22 badania\nWPROWADZENIE W ŻYCIE 9",
-        "uk": "оновлення deps\nвключають тестування node.js 22\nУтеплення еслінта 9",
-        "zh-cn": "更新代码\n22次测试\n执行第9条"
       }
     },
     "titleLang": {
