@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.23",
+    "version": "1.2.24",
     "news": {
+      "1.2.24": {
+        "en": "dev dependencies updated\nminimum version for admin now 7.6.17\nminimum version for js controller now 6.0.11",
+        "de": "dev abhängigkeiten aktualisiert\nmindestversion für admin jetzt 7.6.17\nmindestversion für js controller jetzt 6.0.11",
+        "ru": "обновленные зависимости dev\nминимальная версия для администратора 7.6.17\nминимальная версия для контроллера js 6.0.11",
+        "pt": "dev dependências atualizadas\nversão mínima para administrador agora 7.6.17\nversão mínima para o controlador js agora 6.0.11",
+        "nl": "dev afhankelijkheden bijgewerkt\nminimale versie voor admin nu 7.6.17\nminimale versie voor js controller nu 6.0.11",
+        "fr": "dev dépendances mises à jour\nversion minimale pour admin maintenant 7.6.17\nversion minimale pour le contrôleur js maintenant 6.0.11",
+        "it": "sviluppo dipendenze aggiornate\nversione minima per admin ora 7.6.17\nversione minima per controller js ora 6.0.11",
+        "es": "dev dependencies updated\nversión mínima para admin 7.6.17\nversión mínima para js controlador ahora 6.0.11",
+        "pl": "dev zaktualizowane zależności\nminimalna wersja dla admin teraz 7.6.17\nminimalna wersja sterownika js teraz 6.0.11",
+        "uk": "dev залежності оновлені\nмінімальна версія для адміністратора тепер 7.6.17\nмінімальна версія для контролера js тепер 6.0.11",
+        "zh-cn": "更新非依赖性\n最低版本,目前为7.6.17\njs 控制器现在最小版本 6.0.11"
+      },
       "1.2.23": {
         "en": "enhancement issue #241",
         "de": "erweiterung problem #241",
@@ -80,19 +93,6 @@
         "pl": "aktualizacje deps\naktualizacja praw autorskich",
         "uk": "оновлення deps\nоновлення авторського права",
         "zh-cn": "更新代码\n更新版权"
-      },
-      "1.2.16": {
-        "en": "Changed admin to type \"panel\"",
-        "de": "Admin geändert zum Typ \"panel\"",
-        "ru": "Измененный администратор для типа \"панель\"",
-        "pt": "Administrador alterado para digitar \"panel\"",
-        "nl": "Veranderde admin naar type \"paneel\"",
-        "fr": "Changed admin to type \"panel\"",
-        "it": "Modificato da admin per digitare \"panel\"",
-        "es": "Administración cambiada para escribir \"panel\"",
-        "pl": "Zmieniono admin na typ \"panel\"",
-        "uk": "Змінений адміністратор для типу \"панель\"",
-        "zh-cn": "管理员改为“ 平面” 键入"
       }
     },
     "titleLang": {

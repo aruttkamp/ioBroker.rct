@@ -62,7 +62,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.24 (2025-09-01)
 * (Andreas Ruttkamp) dev dependencies updated
 * (Andreas Ruttkamp) minimum version for admin now 7.6.17
 * (Andreas Ruttkamp) minimum version for js controller now 6.0.11
