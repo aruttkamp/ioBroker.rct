@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.24",
+    "version": "1.2.25",
     "news": {
+      "1.2.25": {
+        "en": "repro checker issues resolved\nnpm trusted publishing integrated",
+        "de": "repro checker probleme behoben\nnpm trusted publishing integriert",
+        "ru": "решены вопросы проверки pro checker\nnpm доверенное издание интегрировано",
+        "pt": "problemas do verificador repro resolvidos\nnpm publicação de confiança integrada",
+        "nl": "repro controleproblemen opgelost\nnpm vertrouwd publiceren geïntegreerd",
+        "fr": "problèmes de repro checker résolus\nnpm publication de confiance intégrée",
+        "it": "repro checker problemi risolti\nnpm affidabile pubblicazione integrata",
+        "es": "problemas de revisión resueltos\nedición integrada de confianza",
+        "pl": "rozwiązane kwestie repro checker\nnpm zaufane publikacje zintegrowane",
+        "uk": "проблеми репровізора вирішені\nnpm перевірене видання інтегроване",
+        "zh-cn": "重新检查器问题得到解决\nnpm 信任的出版集成"
+      },
       "1.2.24": {
         "en": "dev dependencies updated\nminimum version for admin now 7.6.17\nminimum version for js controller now 6.0.11",
         "de": "dev abhängigkeiten aktualisiert\nmindestversion für admin jetzt 7.6.17\nmindestversion für js controller jetzt 6.0.11",
@@ -80,19 +93,6 @@
         "pl": "Tryb debugowania w Admin dodany\naktualizacji zależności",
         "uk": "Режим Debug в Доданому адміністратору\nоновлення залежності",
         "zh-cn": "添加管理器中的调试模式\n更新依赖关系"
-      },
-      "1.2.17": {
-        "en": "update deps\nupdate copyright",
-        "de": "update deps\naktualisierung des urheberrechts",
-        "ru": "обновление депсов\nобновление авторских прав",
-        "pt": "atualização deps\natualizar direitos autorais",
-        "nl": "update deps\ncopyright bijwerken",
-        "fr": "mettre à jour les deps\nmettre à jour le droit d'auteur",
-        "it": "aggiornamento dep\naggiornamento copyright",
-        "es": "actualización de los deps\nactualización de derechos de autor",
-        "pl": "aktualizacje deps\naktualizacja praw autorskich",
-        "uk": "оновлення deps\nоновлення авторського права",
-        "zh-cn": "更新代码\n更新版权"
       }
     },
     "titleLang": {
