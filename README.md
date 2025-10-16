@@ -63,7 +63,8 @@ None
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (Andreas Ruttkamp) repro checker isuues resolved
+* (Andreas Ruttkamp) repro checker issues resolved
+* (Andreas Ruttkamp) npm trusted publishing integrated
 
 ### 1.2.24 (2025-09-01)
 * (Andreas Ruttkamp) dev dependencies updated
