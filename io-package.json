@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.25",
+    "version": "1.2.26",
     "news": {
+      "1.2.26": {
+        "en": "correct handling for parameter without \".\" ( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "de": "korrekte Handhabung für Parameter ohne \".\" (gitter_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "ru": "корректная обработка для параметра без \". ( grid_offset/android_description ) [#262] (https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "pt": "( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "nl": "correcte behandeling voor parameter zonder \".\" (raster_offset / android_description) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "fr": "( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "it": "corretta gestione dei parametri senza \"\" (gr_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "es": "correcto manejo para parámetro sin \".\" ( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "pl": "\"(grid _ offset / android _ description) [# 262] (https: / / github.com / aruttkamp / ioBroker.rct / issues / 262)",
+        "uk": "[#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
+        "zh-cn": "正确处理参数时没有“.”(网格_offset / android_description ) [# 262] (https://github.com/aruttkamp/ioBroker.rct/issues/262)"
+      },
       "1.2.25": {
         "en": "repro checker issues resolved\nnpm trusted publishing integrated",
         "de": "repro checker probleme behoben\nnpm trusted publishing integriert",
@@ -80,19 +93,6 @@
         "pl": "aktualizacje deps\nminimalna wersja dla admin teraz 7.4.10",
         "uk": "оновлення deps\nмінімальна версія для адміністратора тепер 7.4.10",
         "zh-cn": "更新代码\n最低版本,现为7.4.10"
-      },
-      "1.2.18": {
-        "en": "Debug mode in Admin added\nupdate dependencies",
-        "de": "Debug-Modus in Admin hinzugefügt\naktualisierung der abhängigkeiten",
-        "ru": "Режим Debug в Admin добавлен\nобновление зависимостей",
-        "pt": "Modo de depuração no Admin adicionado\ndependências",
-        "nl": "Debugmodus in Admin toegevoegd\nafhankelijkheden bijwerken",
-        "fr": "Mode débogue dans Admin ajouté\nmettre à jour les dépendances",
-        "it": "Modalità Debug in Admin aggiunto\naggiornamento dipendenze",
-        "es": "Modo de depuración en Admin añadido\ndependencias de actualización",
-        "pl": "Tryb debugowania w Admin dodany\naktualizacji zależności",
-        "uk": "Режим Debug в Доданому адміністратору\nоновлення залежності",
-        "zh-cn": "添加管理器中的调试模式\n更新依赖关系"
       }
     },
     "titleLang": {
