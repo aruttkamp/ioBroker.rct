@@ -4284,7 +4284,13 @@ rct.cmdReverse['E6AC95E5'] = {
     description: 'Detection threshold',
     ioBrokerType: 'number',
 };
-rct.cmdReverse['EBC62737'] = { name: 'android_description', type: 'STRING', unit: '', description: 'Device name',ioBrokerType: 'string' };
+rct.cmdReverse['EBC62737'] = {
+    name: 'android_description',
+    type: 'STRING',
+    unit: '',
+    description: 'Device name',
+    ioBrokerType: 'string',
+};
 rct.cmdReverse['F2BE0C9C'] = {
     name: 'p_buf_available',
     type: 'FLOAT',
