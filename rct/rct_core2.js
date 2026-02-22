@@ -596,7 +596,7 @@ rct.cmd['osci_struct.error'] = { serial: 0, id: 'DABD323E' };
 rct.cmd['svnversion'] = { serial: 0, id: 'DDD1C2D0' };
 rct.cmd['i_dc_slow_max'] = { serial: 0, id: 'E14B8679' };
 rct.cmd['phase_shift_threshold'] = { serial: 0, id: 'E6AC95E5' };
-//rct.cmd['android_description'] = { serial: 0, id: 'EBC62737' };
+rct.cmd['android_description'] = { serial: 0, id: 'EBC62737' };
 rct.cmd['p_buf_available'] = { serial: 0, id: 'F2BE0C9C' };
 rct.cmd['power_mng.schedule[0]'] = { serial: 0, id: '011F41DB' };
 rct.cmd['power_mng.battery_power'] = { serial: 0, id: '1156DFD0' };
@@ -4284,7 +4284,7 @@ rct.cmdReverse['E6AC95E5'] = {
     description: 'Detection threshold',
     ioBrokerType: 'number',
 };
-//rct.cmdReverse['EBC62737'] = { name: 'android_description', type: 'STRING', unit: '', description: 'Device name',ioBrokerType: 'string' };
+rct.cmdReverse['EBC62737'] = { name: 'android_description', type: 'STRING', unit: '', description: 'Device name',ioBrokerType: 'string' };
 rct.cmdReverse['F2BE0C9C'] = {
     name: 'p_buf_available',
     type: 'FLOAT',
