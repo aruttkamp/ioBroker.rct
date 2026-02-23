@@ -18,20 +18,20 @@ let __client = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
-    //Übergebenen Parameter zerlegen und Korrekt in Channel und State füllen
-    //
-    //Prüfen ob Parameter bekannt ist.
+
     if (!rct.cmd[rctName]) {
         iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
         return false;
     }
-    //Zuweisen Name
-    let name = rctName;
-    // remove all ']' characters
+
+    let name = String(rctName);
+
     name = name.replace(/]/g, '');
 
-    // if '[' comes before first '.', replace it by '.' and hence make it part of state name
-    if (name.search(/\[/) < name.search(/\./)) {
+    const dotPos = name.indexOf('.');
+    const bracketPos = name.indexOf('[');
+
+    if (bracketPos !== -1 && (dotPos === -1 || bracketPos < dotPos)) {
         name = name.replace(/\[/g, '.');
     }
 
@@ -40,21 +40,17 @@ rct.getStateInfo = function (rctName, iobInstance) {
     let channelName, stateName, stateFullName;
 
     if (elements.length === 1) {
-        channelName = '';
+        channelName = 'general'; // stabil für ioBroker Objektbaum
         stateName = name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
-        stateFullName = stateName;
     } else {
         channelName = elements.shift();
-        stateName = elements
-            .join('_')
+        stateName = elements.join('_')
             .replace(/(\.|\[)/g, '_')
             .replace(/_+/g, '_');
-        stateFullName = `${channelName}.${stateName}`;
     }
 
-    if (DEBUG_CONSOLE == true) {
-        console.log(`DEBUG ${channelName} > ${stateName} > ${stateFullName}`);
-    }
+    stateFullName = `${channelName}.${stateName}`;
+
     return { channelName, stateName, stateFullName };
 };
 
