@@ -1,4 +1,4 @@
-const net = require('net');
+const net = require('node:net');
 const rct = require('./rct_core2.js');
 
 module.exports = rct;
