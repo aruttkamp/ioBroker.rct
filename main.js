@@ -10,7 +10,7 @@ const utils = require('@iobroker/adapter-core');
 const rct = require('./rct/rct.js');
 
 // Load your modules here, e.g.:
-// const fs = require("fs");
+// const fs = require("node:fs");
 
 class Rct extends utils.Adapter {
     /**
