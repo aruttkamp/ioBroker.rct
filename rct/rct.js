@@ -18,7 +18,6 @@ let __client = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
-
     if (!rct.cmd[rctName]) {
         iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
         return false;
@@ -44,7 +43,8 @@ rct.getStateInfo = function (rctName, iobInstance) {
         stateName = name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
     } else {
         channelName = elements.shift();
-        stateName = elements.join('_')
+        stateName = elements
+            .join('_')
             .replace(/(\.|\[)/g, '_')
             .replace(/_+/g, '_');
     }
