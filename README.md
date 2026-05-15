@@ -64,6 +64,9 @@ None
 -->
 ### **WORK IN PROGRESS**
 - (copilot) Adapter requires node.js >= 22 now
+- (Andreas Ruttkamp) dependencies updated
+- (Andreas Ruttkamp) minimum version for admin now 7.6.20
+
 
 ### 1.2.26 (2026-02-22)
 * (Andreas Ruttkamp) correct handling for parameter without "." ( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)
