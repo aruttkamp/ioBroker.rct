@@ -18,7 +18,6 @@ let __client = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
-
     if (!rct.cmd[rctName]) {
         iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
         return false;
@@ -44,7 +43,8 @@ rct.getStateInfo = function (rctName, iobInstance) {
         stateName = name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
     } else {
         channelName = elements.shift();
-        stateName = elements.join('_')
+        stateName = elements
+            .join('_')
             .replace(/(\.|\[)/g, '_')
             .replace(/_+/g, '_');
     }
@@ -239,7 +239,9 @@ rct.process = function (host, rctElements, iobInstance) {
 
         // Debug-Info for complete frames
         if (DEBUG_CONSOLE) {
-            iobInstance.log.debug(`Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`);
+            iobInstance.log.debug(
+                `Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`,
+            );
         }
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
