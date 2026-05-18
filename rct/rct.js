@@ -5,10 +5,10 @@ module.exports = rct;
 
 // flag for local debugging
 let DEBUG_CONSOLE = false;
-rct.initialize = function (debug) {
+rct.initialize = function (debug, iobInstance) {
     DEBUG_CONSOLE = debug;
-    if (DEBUG_CONSOLE) {
-        this.log.info('Debug logging is enabled');
+    if (DEBUG_CONSOLE && iobInstance) {
+        iobInstance.log.info('Debug logging is enabled');
     }
 };
 
@@ -182,13 +182,15 @@ rct.process = function (host, rctElements, iobInstance) {
                     }
                     // console.log('DEBUG: NOT dropping escape character');
                 } else {
-                    console.log('NOTICE: not handling escape character at end of buffer');
+                    iobInstance.log.info('NOTICE: not handling escape character at end of buffer');
                 }
             }
             return true;
         }
 
-        iobInstance.log.debug('DEBUG data received', data);
+        if (DEBUG_CONSOLE) {
+    		iobInstance.log.debug('DEBUG data received', data);
+		}
         dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
         handleData();
@@ -223,8 +225,10 @@ rct.process = function (host, rctElements, iobInstance) {
             iobInstance.log.debug('DEBUG handleData()', byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
         }
         if (dataBuffer.length < frameLength) {
-            iobInstance.log.debug('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
-            return;
+            if (DEBUG_CONSOLE) {
+				iobInstance.log.debug('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
+			}
+			return;
         }
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
