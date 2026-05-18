@@ -62,7 +62,7 @@ rct.reconnect = function (host, iobInstance) {
                 iobInstance.log.debug(`RCT: starting to terminate interval connection to inverter at ${host}`);
             }
         } catch (err) {
-            iobInstance.log.error(`RCT: reconnection not working!` & err);
+            iobInstance.log.error(`RCT: reconnection not working: ${err}!`);
             __client.destroy();
             __client = null;
             __connection = false;
@@ -99,7 +99,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 return;
             } catch (err) {
                 iobInstance.log.error(
-                    'RCT: Connection error! Previous interval connection not successful and closure failed!' & err,
+                    `RCT: Connection error! Previous interval connection not successful and closure failed: ${err}`,
                 );
             }
         }
@@ -159,7 +159,7 @@ rct.process = function (host, rctElements, iobInstance) {
     });
 
     __client.on('error', err => {
-        iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!' & err);
+        iobInstance.log.error(`RCT: Connection error, please check configured inverter ip address and network: ${err}`);
         __client = null;
         __connection = false;
         iobInstance.setState('info.connection', false, true);
@@ -346,13 +346,13 @@ rct.process = function (host, rctElements, iobInstance) {
         switch (response.dataType) {
             case 'FLOAT':
                 //console.log(response.name);
-                //console.log('response.data : ' && response.data);
-                //console.log('länge//' && response.data.length);
+                //console.log('response.data : ' + response.data);
+                //console.log('länge: ' + response.data.length);
                 if (response.data.length === 4) {
                     result = response.data.readFloatBE();
                 }
-                //console.log('result'&& result);
-                //console.log('multiplier: ' && response.multiplier);
+                //console.log('result: ' + result);
+                //console.log('multiplier: ' + response.multiplier);
                 //if (response.multiplier !== undefinded) response.mulitplier=100;
                 if (response.multiplier !== undefined) {
                     result = result * response.multiplier;
