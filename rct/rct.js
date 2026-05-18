@@ -8,7 +8,7 @@ let DEBUG_CONSOLE = false;
 rct.initialize = function (debug) {
     DEBUG_CONSOLE = debug;
     if (DEBUG_CONSOLE) {
-        console.log('Debug logging is enabled');
+        this.log.info('Debug logging is enabled');
     }
 };
 
@@ -110,7 +110,7 @@ rct.process = function (host, rctElements, iobInstance) {
     }
     __client = net.createConnection({ host, port: 8899 }, () => {});
     // Verbindungsüberwachende Maßnahmen
-    if (DEBUG_CONSOLE == true) {
+    if (DEBUG_CONSOLE) {
         __client.on('close', () => {
             //Test ob eine Verbindung erfolgreich abgebaut wurde.
             iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
@@ -188,7 +188,7 @@ rct.process = function (host, rctElements, iobInstance) {
             return true;
         }
 
-        console.log('DEBUG data received', data);
+        iobInstance.log.debug('DEBUG data received', data);
         dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
         handleData();
@@ -199,7 +199,7 @@ rct.process = function (host, rctElements, iobInstance) {
         while (dataBuffer.length && dataBuffer[0] != 43) {
             if (dataBuffer[0] != 0) {
                 if (DEBUG_CONSOLE) {
-                    console.log('DEBUG: skipping', dataBuffer[0]);
+                    iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
                 } // FIXME: regularly skipping 0 values - no idea why
             }
             dataBuffer = dataBuffer.slice(1);
@@ -219,11 +219,11 @@ rct.process = function (host, rctElements, iobInstance) {
         } // not enough data
 
         const frameLength = getFrameLength(dataBuffer);
-        if (DEBUG_CONSOLE == true) {
-            console.log('DEBUG handleData()', byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug('DEBUG handleData()', byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
         }
         if (dataBuffer.length < frameLength) {
-            console.log('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
+            iobInstance.log.debug('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
             return;
         }
 
@@ -253,11 +253,11 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             } else {
                 if (DEBUG_CONSOLE) {
-                    console.debug(`RCT: received, but not requested: ${txt}`);
+                    iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
                 }
             }
         } else {
-            console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
+            iobInstance.log.info('NOTICE: CRC not valid', cmdBuffer, response.id);
         }
 
         if (response.crcOk) {
@@ -302,7 +302,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
         if (!rct.cmdReverse[response.id]) {
             if (DEBUG_CONSOLE) {
-                console.debug(`RCT: unknown response.id ${response.id}`);
+                iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
             }
             return response;
         }
