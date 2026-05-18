@@ -182,7 +182,7 @@ rct.process = function (host, rctElements, iobInstance) {
                     }
                     // console.log('DEBUG: NOT dropping escape character');
                 } else {
-                    iobInstance.log.info('NOTICE: not handling escape character at end of buffer');
+                    iobInstance.log.debug('NOTICE: not handling escape character at end of buffer');
                 }
             }
             return true;
@@ -261,7 +261,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             }
         } else {
-            iobInstance.log.info('NOTICE: CRC not valid', cmdBuffer, response.id);
+            iobInstance.log.debug('NOTICE: CRC not valid', cmdBuffer, response.id);
         }
 
         if (response.crcOk) {
