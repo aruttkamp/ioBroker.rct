@@ -5,10 +5,10 @@ module.exports = rct;
 
 // flag for local debugging
 let DEBUG_CONSOLE = false;
-rct.initialize = function (debug) {
+rct.initialize = function (debug, iobInstance) {
     DEBUG_CONSOLE = debug;
-    if (DEBUG_CONSOLE) {
-        console.log('Debug logging is enabled');
+    if (DEBUG_CONSOLE && iobInstance) {
+        iobInstance.log.info('Debug logging is enabled');
     }
 };
 
@@ -18,7 +18,6 @@ let __client = null;
 let __connection = false;
 
 rct.getStateInfo = function (rctName, iobInstance) {
-
     if (!rct.cmd[rctName]) {
         iobInstance.log.warn(`Invalid RCT name: ${rctName}`);
         return false;
@@ -44,7 +43,8 @@ rct.getStateInfo = function (rctName, iobInstance) {
         stateName = name.replace(/(\.|\[)/g, '_').replace(/_+/g, '_');
     } else {
         channelName = elements.shift();
-        stateName = elements.join('_')
+        stateName = elements
+            .join('_')
             .replace(/(\.|\[)/g, '_')
             .replace(/_+/g, '_');
     }
@@ -62,7 +62,7 @@ rct.reconnect = function (host, iobInstance) {
                 iobInstance.log.debug(`RCT: starting to terminate interval connection to inverter at ${host}`);
             }
         } catch (err) {
-            iobInstance.log.error(`RCT: reconnection not working!` & err);
+            iobInstance.log.error(`RCT: reconnection not working: ${err}!`);
             __client.destroy();
             __client = null;
             __connection = false;
@@ -99,7 +99,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 return;
             } catch (err) {
                 iobInstance.log.error(
-                    'RCT: Connection error! Previous interval connection not successful and closure failed!' & err,
+                    `RCT: Connection error! Previous interval connection not successful and closure failed: ${err}`,
                 );
             }
         }
@@ -110,7 +110,7 @@ rct.process = function (host, rctElements, iobInstance) {
     }
     __client = net.createConnection({ host, port: 8899 }, () => {});
     // Verbindungsüberwachende Maßnahmen
-    if (DEBUG_CONSOLE == true) {
+    if (DEBUG_CONSOLE) {
         __client.on('close', () => {
             //Test ob eine Verbindung erfolgreich abgebaut wurde.
             iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
@@ -120,6 +120,8 @@ rct.process = function (host, rctElements, iobInstance) {
             iobInstance.log.debug(`RCT: Terminating interval connection to inverter at ${host}`);
         });
     }
+
+    let dataBuffer = Buffer.alloc(0);
 
     __client.on('connect', () => {
         if (!__connection) {
@@ -159,7 +161,7 @@ rct.process = function (host, rctElements, iobInstance) {
     });
 
     __client.on('error', err => {
-        iobInstance.log.error('RCT: Connection error, please check configured inverter ip address and network!' & err);
+        iobInstance.log.error(`RCT: Connection error, please check configured inverter ip address and network: ${err}`);
         __client = null;
         __connection = false;
         iobInstance.setState('info.connection', false, true);
@@ -170,36 +172,37 @@ rct.process = function (host, rctElements, iobInstance) {
 
     __client.on('data', data => {
         function escaping(element, index, array) {
-            if (element == rct.const.stop_byte_value) {
+            if (element === rct.const.stop_byte_value) {
                 // console.log('DEBUG escaping()', element, index, array);
                 if (index < array.length - 1) {
                     if (
-                        array[index + 1] == rct.const.start_byte_value ||
-                        array[index + 1] == rct.const.stop_byte_value
+                        array[index + 1] === rct.const.start_byte_value ||
+                        array[index + 1] === rct.const.stop_byte_value
                     ) {
                         // console.log('DEBUG: dropping escape character');
                         return false; // ignore escape character
                     }
                     // console.log('DEBUG: NOT dropping escape character');
                 } else {
-                    console.log('NOTICE: not handling escape character at end of buffer');
+                    iobInstance.log.debug('NOTICE: not handling escape character at end of buffer');
                 }
             }
             return true;
         }
 
-        console.log('DEBUG data received', data);
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug('DEBUG data received', data);
+        }
         dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
         handleData();
     });
 
-    let dataBuffer = Buffer.alloc(0);
     function handleData() {
-        while (dataBuffer.length && dataBuffer[0] != 43) {
-            if (dataBuffer[0] != 0) {
+        while (dataBuffer.length && dataBuffer[0] !== 43) {
+            if (dataBuffer[0] !== 0) {
                 if (DEBUG_CONSOLE) {
-                    console.log('DEBUG: skipping', dataBuffer[0]);
+                    iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
                 } // FIXME: regularly skipping 0 values - no idea why
             }
             dataBuffer = dataBuffer.slice(1);
@@ -214,17 +217,31 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 		*/
 
+        // Early return for no data in buffer
         if (dataBuffer.length < 5) {
             return;
-        } // not enough data
+        }
 
         const frameLength = getFrameLength(dataBuffer);
-        if (DEBUG_CONSOLE == true) {
-            console.log('DEBUG handleData()', byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
-        }
+
+        // Early return for incomplete frames
         if (dataBuffer.length < frameLength) {
-            console.log('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
+            if (DEBUG_CONSOLE) {
+                iobInstance.log.debug('Frame incomplete', {
+                    received: dataBuffer.length,
+                    required: frameLength,
+                    waiting: frameLength - dataBuffer.length,
+                    preview: byteArray2HexString(dataBuffer.slice(0, 8), true),
+                });
+            }
             return;
+        }
+
+        // Debug-Info for complete frames
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug(
+                `Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`,
+            );
         }
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
@@ -253,11 +270,11 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             } else {
                 if (DEBUG_CONSOLE) {
-                    console.debug(`RCT: received, but not requested: ${txt}`);
+                    iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
                 }
             }
         } else {
-            console.log('NOTICE: CRC not valid', cmdBuffer, response.id);
+            iobInstance.log.debug('NOTICE: CRC not valid', cmdBuffer, response.id);
         }
 
         if (response.crcOk) {
@@ -269,7 +286,7 @@ rct.process = function (host, rctElements, iobInstance) {
         const cmd = buf.readInt8(1);
 
         //check for short or long response
-        if (cmd == 3 || cmd == 6) {
+        if (cmd === 3 || cmd === 6) {
             return 6 + buf.readUInt16LE(2); // long response
         }
         return 5 + buf.readUInt8(2); // short response
@@ -278,11 +295,11 @@ rct.process = function (host, rctElements, iobInstance) {
     function parseResponse(buf) {
         const response = {};
 
-        response.crcOk = buf.slice(-2).readUInt16BE() == rct.crc(buf.slice(1, -2));
+        response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
 
         response.cmd = buf.readInt8(1);
 
-        if (response.cmd == 3 || response.cmd == 6) {
+        if (response.cmd === 3 || response.cmd === 6) {
             // long response
             response.length = buf.readUInt16BE(2);
             response.id = byteArray2HexString(buf.slice(4, 8));
@@ -302,7 +319,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
         if (!rct.cmdReverse[response.id]) {
             if (DEBUG_CONSOLE) {
-                console.debug(`RCT: unknown response.id ${response.id}`);
+                iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
             }
             return response;
         }
@@ -342,13 +359,13 @@ rct.process = function (host, rctElements, iobInstance) {
         switch (response.dataType) {
             case 'FLOAT':
                 //console.log(response.name);
-                //console.log('response.data : ' && response.data);
-                //console.log('länge//' && response.data.length);
+                //console.log('response.data : ' + response.data);
+                //console.log('länge: ' + response.data.length);
                 if (response.data.length === 4) {
                     result = response.data.readFloatBE();
                 }
-                //console.log('result'&& result);
-                //console.log('multiplier: ' && response.multiplier);
+                //console.log('result: ' + result);
+                //console.log('multiplier: ' + response.multiplier);
                 //if (response.multiplier !== undefinded) response.mulitplier=100;
                 if (response.multiplier !== undefined) {
                     result = result * response.multiplier;
@@ -456,17 +473,17 @@ rct.process = function (host, rctElements, iobInstance) {
         let result = '';
         for (const i in arr) {
             // eslint-disable-next-line no-prototype-builtins
-            if (arr.hasOwnProperty(i)) {
+            if (Object.prototype.hasOwnProperty.call(arr, i)) {
                 let str = arr[i].toString(16);
                 // Pad to two digits, truncate to last two if too long.  Again,
                 // I'm not sure what your needs are for the case, you may want
                 // to handle errors in some other way.
                 str =
-                    str.length == 0
+                    str.length === 0
                         ? '00'
-                        : str.length == 1
+                        : str.length === 1
                           ? `0${str}`
-                          : str.length == 2
+                          : str.length === 2
                             ? str
                             : str.substring(str.length - 2, str.length);
 

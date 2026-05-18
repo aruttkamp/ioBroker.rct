@@ -48,10 +48,12 @@ class Rct extends utils.Adapter {
             this.config.rct_refresh = 10;
         }
 
+        //debug logging vorbelegen wenn nicht definiert
         if (!this.config.debug_logging) {
             this.config.debug_logging = false;
         }
-        rct.initialize(this.config.debug_logging);
+        //debug Information wird an rct.js übergeben
+        rct.initialize(this.config.debug_logging, this);
 
         //Wenn keine Elemente konfiguriert sind - Defaultwerte laden
         if (!this.config.rct_elements) {
@@ -98,10 +100,10 @@ class Rct extends utils.Adapter {
                 }
             }
         } catch (err) {
-            this.log.error('Error during state creation / cancelling initialization' & err);
+            this.log.error(`Error during state creation / cancelling initialization: ${err}`);
         }
 
-        console.debug('onReady() rct.process(): start processing');
+        this.log.debug('Adapter initialization completed: start processing');
         rct.process(this.config.rct_ip, rctElements, this);
     }
 
