@@ -238,10 +238,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
 		// Debug-Info for complete frames
 		if (DEBUG_CONSOLE) {
-    		iobInstance.log.debug('Processing frame', {
-        		size: frameLength,
-        		type: frameLength === 6 ? 'short' : 'long'
-    		});
+    		iobInstance.log.debug(`Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`);
 		}
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
