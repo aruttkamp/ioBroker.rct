@@ -100,7 +100,7 @@ class Rct extends utils.Adapter {
                 }
             }
         } catch (err) {
-            this.log.error('Error during state creation / cancelling initialization: ${err}');
+            this.log.error(`Error during state creation / cancelling initialization: ${err}`);
         }
 
         this.log.debug('Adapter initialization completed: start processing');
