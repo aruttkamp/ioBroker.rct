@@ -216,20 +216,33 @@ rct.process = function (host, rctElements, iobInstance) {
 		}
 		*/
 
-        if (dataBuffer.length < 5) {
+        // Early return for no data in buffer
+		if (dataBuffer.length < 5) {
             return;
-        } // not enough data
+        }
 
         const frameLength = getFrameLength(dataBuffer);
-        if (DEBUG_CONSOLE) {
-            iobInstance.log.debug('DEBUG handleData()', byteArray2HexString(dataBuffer, true), dataBuffer.length, frameLength);
-        }
-        if (dataBuffer.length < frameLength) {
-            if (DEBUG_CONSOLE) {
-				iobInstance.log.debug('DEBUG full frame not yet received', dataBuffer, dataBuffer.length, frameLength);
-			}
-			return;
-        }
+
+		// Early return for incomplete frames
+		if (dataBuffer.length < frameLength) {
+    		if (DEBUG_CONSOLE) {
+        		iobInstance.log.debug('Frame incomplete', {
+            		received: dataBuffer.length,
+            		required: frameLength,
+            		waiting: frameLength - dataBuffer.length,
+            		preview: byteArray2HexString(dataBuffer.slice(0, 8), true)
+        		});
+    		}
+    		return;
+		}
+
+		// Debug-Info for complete frames
+		if (DEBUG_CONSOLE) {
+    		iobInstance.log.debug('Processing frame', {
+        		size: frameLength,
+        		type: frameLength === 6 ? 'short' : 'long'
+    		});
+		}
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
         dataBuffer = dataBuffer.slice(frameLength);
