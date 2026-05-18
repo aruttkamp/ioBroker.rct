@@ -121,6 +121,8 @@ rct.process = function (host, rctElements, iobInstance) {
         });
     }
 
+    let dataBuffer = Buffer.alloc(0);
+
     __client.on('connect', () => {
         if (!__connection) {
             iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
@@ -170,12 +172,12 @@ rct.process = function (host, rctElements, iobInstance) {
 
     __client.on('data', data => {
         function escaping(element, index, array) {
-            if (element == rct.const.stop_byte_value) {
+            if (element === rct.const.stop_byte_value) {
                 // console.log('DEBUG escaping()', element, index, array);
                 if (index < array.length - 1) {
                     if (
-                        array[index + 1] == rct.const.start_byte_value ||
-                        array[index + 1] == rct.const.stop_byte_value
+                        array[index + 1] === rct.const.start_byte_value ||
+                        array[index + 1] === rct.const.stop_byte_value
                     ) {
                         // console.log('DEBUG: dropping escape character');
                         return false; // ignore escape character
@@ -189,17 +191,16 @@ rct.process = function (host, rctElements, iobInstance) {
         }
 
         if (DEBUG_CONSOLE) {
-    		iobInstance.log.debug('DEBUG data received', data);
-		}
+            iobInstance.log.debug('DEBUG data received', data);
+        }
         dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
 
         handleData();
     });
 
-    let dataBuffer = Buffer.alloc(0);
     function handleData() {
-        while (dataBuffer.length && dataBuffer[0] != 43) {
-            if (dataBuffer[0] != 0) {
+        while (dataBuffer.length && dataBuffer[0] !== 43) {
+            if (dataBuffer[0] !== 0) {
                 if (DEBUG_CONSOLE) {
                     iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
                 } // FIXME: regularly skipping 0 values - no idea why
@@ -217,29 +218,29 @@ rct.process = function (host, rctElements, iobInstance) {
 		*/
 
         // Early return for no data in buffer
-		if (dataBuffer.length < 5) {
+        if (dataBuffer.length < 5) {
             return;
         }
 
         const frameLength = getFrameLength(dataBuffer);
 
-		// Early return for incomplete frames
-		if (dataBuffer.length < frameLength) {
-    		if (DEBUG_CONSOLE) {
-        		iobInstance.log.debug('Frame incomplete', {
-            		received: dataBuffer.length,
-            		required: frameLength,
-            		waiting: frameLength - dataBuffer.length,
-            		preview: byteArray2HexString(dataBuffer.slice(0, 8), true)
-        		});
-    		}
-    		return;
-		}
+        // Early return for incomplete frames
+        if (dataBuffer.length < frameLength) {
+            if (DEBUG_CONSOLE) {
+                iobInstance.log.debug('Frame incomplete', {
+                    received: dataBuffer.length,
+                    required: frameLength,
+                    waiting: frameLength - dataBuffer.length,
+                    preview: byteArray2HexString(dataBuffer.slice(0, 8), true),
+                });
+            }
+            return;
+        }
 
-		// Debug-Info for complete frames
-		if (DEBUG_CONSOLE) {
-    		iobInstance.log.debug(`Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`);
-		}
+        // Debug-Info for complete frames
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug(`Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`);
+        }
 
         const cmdBuffer = dataBuffer.slice(0, frameLength);
         dataBuffer = dataBuffer.slice(frameLength);
@@ -283,7 +284,7 @@ rct.process = function (host, rctElements, iobInstance) {
         const cmd = buf.readInt8(1);
 
         //check for short or long response
-        if (cmd == 3 || cmd == 6) {
+        if (cmd === 3 || cmd === 6) {
             return 6 + buf.readUInt16LE(2); // long response
         }
         return 5 + buf.readUInt8(2); // short response
@@ -292,11 +293,11 @@ rct.process = function (host, rctElements, iobInstance) {
     function parseResponse(buf) {
         const response = {};
 
-        response.crcOk = buf.slice(-2).readUInt16BE() == rct.crc(buf.slice(1, -2));
+        response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
 
         response.cmd = buf.readInt8(1);
 
-        if (response.cmd == 3 || response.cmd == 6) {
+        if (response.cmd === 3 || response.cmd === 6) {
             // long response
             response.length = buf.readUInt16BE(2);
             response.id = byteArray2HexString(buf.slice(4, 8));
@@ -470,17 +471,17 @@ rct.process = function (host, rctElements, iobInstance) {
         let result = '';
         for (const i in arr) {
             // eslint-disable-next-line no-prototype-builtins
-            if (arr.hasOwnProperty(i)) {
+            if (Object.prototype.hasOwnProperty.call(arr, i)) {
                 let str = arr[i].toString(16);
                 // Pad to two digits, truncate to last two if too long.  Again,
                 // I'm not sure what your needs are for the case, you may want
                 // to handle errors in some other way.
                 str =
-                    str.length == 0
+                    str.length === 0
                         ? '00'
-                        : str.length == 1
+                        : str.length === 1
                           ? `0${str}`
-                          : str.length == 2
+                          : str.length === 2
                             ? str
                             : str.substring(str.length - 2, str.length);
 
