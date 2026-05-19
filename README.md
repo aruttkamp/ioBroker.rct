@@ -69,7 +69,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 1.2.27 (2026-05-19)
 - (copilot) Adapter requires node.js >= 22 now
 - (Andreas Ruttkamp) dependencies updated
 - (Andreas Ruttkamp) minimum version for admin now 7.6.20
