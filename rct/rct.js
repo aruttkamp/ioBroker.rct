@@ -472,7 +472,6 @@ rct.process = function (host, rctElements, iobInstance) {
     function byteArray2HexString(arr, format) {
         let result = '';
         for (const i in arr) {
-            // eslint-disable-next-line no-prototype-builtins
             if (Object.prototype.hasOwnProperty.call(arr, i)) {
                 let str = arr[i].toString(16);
                 // Pad to two digits, truncate to last two if too long.  Again,
