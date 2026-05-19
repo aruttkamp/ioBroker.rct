@@ -1,21 +1,8 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.27",
+    "version": "1.2.26",
     "news": {
-      "1.2.27": {
-        "en": "Adapter requires node.js >= 22 now\ndependencies updated\nminimum version for admin now 7.6.20",
-        "de": "Adapter benötigt node.js >= 22 jetzt\naktualisierte abhängigkeiten\nmindestversion für admin jetzt 7.6.20",
-        "ru": "Адаптер требует node.js >= 22 сейчас\nобновленные зависимости\nминимальная версия для администратора 7.6.20",
-        "pt": "Adaptador requer nod.js >= 22 agora\ndependências atualizadas\nversão mínima para administrador agora 7.6.20",
-        "nl": "Voor de adapter zijn node.js < 22 nu nodig\nafhankelijkheden bijgewerkt\nminimale versie voor admin nu 7.6.20",
-        "fr": "Adaptateur nécessite node.js >= 22 maintenant\ndépendances mises à jour\nversion minimale pour admin maintenant 7.6.20",
-        "it": "Adattatore richiede node.js >= 22 ora\ndipendenze aggiornate\nversione minima per admin ora 7.6.20",
-        "es": "Adaptador requiere node.js ю= 22 ahora\ndependencias actualizadas\nversión mínima para admin 7.6.20",
-        "pl": "Adapter wymaga node.js > = 22\nzaktualizowane zależności\nminimalna wersja dla admin teraz 7.6.20",
-        "uk": "Адаптер вимагає node.js >= 22 тепер\nоновлені залежності\nмінімальна версія для адміністратора зараз 7.6.20",
-        "zh-cn": "适配器需要节点.js 现在22\n更新依赖关系\n最低版本,现为7.6.20"
-      },
       "1.2.26": {
         "en": "correct handling for parameter without \".\" ( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
         "de": "korrekte Handhabung für Parameter ohne \".\" (gitter_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)",
