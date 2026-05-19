@@ -695,6 +695,14 @@ rct.cmd['wifi.connected_ap_ssid'] = { serial: 0, id: 'F8DECCE6' };
 rct.cmd['wifi.service_ip'] = { serial: 0, id: 'F9FD0D61' };
 rct.cmd['wifi.server_ip'] = { serial: 0, id: 'FF2A258B' };
 
+// cell-voltages
+rct.cmd['battery.cells[0]'] = { serial: 0, id: 'F8C0D255' };
+rct.cmd['battery.cells[1]'] = { serial: 0, id: '8EF6FBBD' };
+rct.cmd['battery.cells[2]'] = { serial: 0, id: '69B8FF28' };
+rct.cmd['battery.cells[3]'] = { serial: 0, id: 'C8609C8E' };
+rct.cmd['battery.cells[4]'] = { serial: 0, id: '1348AB07' };
+rct.cmd['battery.cells[5]'] = { serial: 0, id: '62D645D9' };
+
 rct.cmdReverse = {};
 rct.cmdReverse['0AFDD6CF'] = {
     name: 'acc_conv.i_acc_lp_fast',
@@ -839,6 +847,7 @@ rct.cmdReverse['FC5AA529'] = {
 rct.cmdReverse['03D9C51F'] = {
     name: 'battery.cells_stat[0].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -909,6 +918,7 @@ rct.cmdReverse['0DE3D20D'] = {
 rct.cmdReverse['0EF60C7E'] = {
     name: 'battery.cells_stat[3].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -944,6 +954,7 @@ rct.cmdReverse['18D1E9E0'] = {
 rct.cmdReverse['18F98B6D'] = {
     name: 'battery.cells_stat[3].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -972,6 +983,7 @@ rct.cmdReverse['1F73B6A4'] = {
 rct.cmdReverse['21961B58'] = {
     name: 'battery.current',
     type: 'FLOAT',
+    precision: 3,
     unit: 'A',
     description: 'Battery current',
     ioBrokerType: 'number',
@@ -1021,6 +1033,7 @@ rct.cmdReverse['2A30A97E'] = {
 rct.cmdReverse['2AACCAA7'] = {
     name: 'battery.max_cell_voltage',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1070,6 +1083,7 @@ rct.cmdReverse['381B8BF9'] = {
 rct.cmdReverse['3A7D5F53'] = {
     name: 'battery.cells_stat[1].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1098,6 +1112,7 @@ rct.cmdReverse['41B11ECF'] = {
 rct.cmdReverse['428CCF46'] = {
     name: 'battery.cells_stat[5].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1126,6 +1141,7 @@ rct.cmdReverse['4B51A539'] = {
 rct.cmdReverse['4CB7C0DC'] = {
     name: 'battery.min_cell_voltage',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1133,6 +1149,7 @@ rct.cmdReverse['4CB7C0DC'] = {
 rct.cmdReverse['4D985F33'] = {
     name: 'battery.cells_stat[5].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1252,6 +1269,7 @@ rct.cmdReverse['61EAC702'] = {
 rct.cmdReverse['6213589B'] = {
     name: 'battery.cells_stat[6].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1294,6 +1312,7 @@ rct.cmdReverse['6974798A'] = {
 rct.cmdReverse['6DB1FDDC'] = {
     name: 'battery.cells_stat[4].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1392,6 +1411,7 @@ rct.cmdReverse['7FF6252C'] = {
 rct.cmdReverse['804A3266'] = {
     name: 'battery.cells_stat[6].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1413,6 +1433,7 @@ rct.cmdReverse['885BB57E'] = {
 rct.cmdReverse['889DC27F'] = {
     name: 'battery.cells_stat[0].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1629,6 +1650,7 @@ rct.cmdReverse['B0EBE75A'] = {
 rct.cmdReverse['B4E053D4'] = {
     name: 'battery.cells_stat[1].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1771,6 +1793,7 @@ rct.cmdReverse['DFF966E3'] = {
 rct.cmdReverse['E7177DEE'] = {
     name: 'battery.cells_stat[2].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1806,6 +1829,7 @@ rct.cmdReverse['EEA3F59B'] = {
 rct.cmdReverse['EECDFEFC'] = {
     name: 'battery.cells_stat[2].u_min.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1841,6 +1865,7 @@ rct.cmdReverse['F3FD8CE6'] = {
 rct.cmdReverse['F54BC06D'] = {
     name: 'battery.cells_stat[4].u_max.value',
     type: 'FLOAT',
+    precision: 3,
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -4975,6 +5000,54 @@ rct.cmdReverse['8B4BE168'] = {
     multiplier: 100,
     unit: '%',
     description: 'SOC (State of charge)',
+    ioBrokerType: 'number',
+};
+
+// cell-voltages
+rct.cmdReverse['F8C0D255'] = {
+    name: 'battery.cells[0]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['8EF6FBBD'] = {
+    name: 'battery.cells[1]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+
+rct.cmdReverse['69B8FF28'] = {
+    name: 'battery.cells[2]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+
+rct.cmdReverse['C8609C8E'] = {
+    name: 'battery.cells[3]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+
+rct.cmdReverse['1348AB07'] = {
+    name: 'battery.cells[4]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+
+rct.cmdReverse['62D645D9'] = {
+    name: 'battery.cells[5]',
+    type: 'cell_voltage',
+    unit: '',
+    description: '',
     ioBrokerType: 'number',
 };
 

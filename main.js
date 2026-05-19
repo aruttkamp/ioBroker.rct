@@ -82,6 +82,7 @@ class Rct extends utils.Adapter {
                     const rct_id = rct.cmd[e].id;
                     const name = rct.cmdReverse[rct_id].description || stateName;
                     const unit = (rct.cmdReverse[rct_id].unit || '').trim();
+                    const rct_type = rct.cmdReverse[rct_id].type;
                     const type = rct.cmdReverse[rct_id].ioBrokerType;
 
                     //const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
@@ -90,11 +91,23 @@ class Rct extends utils.Adapter {
                         common.min = 0;
                         common.max = 100;
                     }
-                    await this.setObjectNotExistsAsync(stateFullName, {
-                        type: 'state',
-                        common,
-                        native: {},
-                    });
+                    if (rct_type == 'cell_voltage') {
+                        const cells = 24;
+                        for (let i = 0; i < cells; i++) {
+                            await this.setObjectNotExistsAsync(stateFullName + '_' + i, {
+                                type: 'state',
+                                common,
+                                native: {},
+                            });
+                        }
+                    }else {
+                        await this.setObjectNotExistsAsync(stateFullName, {
+                            type: 'state',
+                            common,
+                            native: {},
+                        });
+                    }
+
                 } else {
                     this.log.info(`rct state not defined: ${e}`);
                 }
