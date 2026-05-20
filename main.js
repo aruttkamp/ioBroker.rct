@@ -94,20 +94,19 @@ class Rct extends utils.Adapter {
                     if (rct_type == 'cell_voltage') {
                         const cells = 24;
                         for (let i = 0; i < cells; i++) {
-                            await this.setObjectNotExistsAsync(stateFullName + '_' + i, {
+                            await this.setObjectNotExistsAsync(`${stateFullName}_${i}`, {
                                 type: 'state',
                                 common,
                                 native: {},
                             });
                         }
-                    }else {
+                    } else {
                         await this.setObjectNotExistsAsync(stateFullName, {
                             type: 'state',
                             common,
                             native: {},
                         });
                     }
-
                 } else {
                     this.log.info(`rct state not defined: ${e}`);
                 }

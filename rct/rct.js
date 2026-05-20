@@ -269,8 +269,8 @@ rct.process = function (host, rctElements, iobInstance) {
                     if (response.dataType == 'cell_voltage') {
                         let i = 0;
                         response.result.forEach(r => {
-                            iobInstance.setState(stateInfo.stateFullName + '_' + i, parseFloat(r.V.toFixed(3)), true);
-                        
+                            iobInstance.setState(`${stateInfo.stateFullName}_${i}`, parseFloat(r.V.toFixed(3)), true);
+
                             //iobInstance.log.info(
                             //    `${r.zelle.toString().padStart(5)} | ` +
                             //    `${r.rohwert.toString().padStart(9)} | ` +
@@ -279,7 +279,7 @@ rct.process = function (host, rctElements, iobInstance) {
                             //);
                             i++;
                         });
-                    }else {
+                    } else {
                         iobInstance.setState(stateInfo.stateFullName, response.result, true);
                     }
                 }
@@ -432,15 +432,15 @@ rct.process = function (host, rctElements, iobInstance) {
             case 'STRING':
                 response.result = response.data.Buffer;
                 break;
-	        case 'cell_voltage':
+            case 'cell_voltage':
                 response.result = decodeRCTCells(response.data);
                 break;
             case 'RAW':
                 iobInstance.log.info('RAW');
-                iobInstance.log.info('response.data : ' + response.data);
-                iobInstance.log.info('response.data Hex : ' + response.data.toString("hex"));
-                iobInstance.log.info('response.data Buf : ' + response.data.Buffer);                
-                response.result = response.data.toString("hex");
+                iobInstance.log.info(`response.data : ${response.data}`);
+                iobInstance.log.info(`response.data Hex : ${response.data.toString('hex')}`);
+                iobInstance.log.info(`response.data Buf : ${response.data.Buffer}`);
+                response.result = response.data.toString('hex');
                 break;
             case 'ENUM':
                 break;
@@ -479,49 +479,48 @@ rct.process = function (host, rctElements, iobInstance) {
         return Buffer.from(baFrame);
     }
 
-function decodeRCTCells(buffer) {
-    const result = [];
-    // 4 Bytes pro Wert
-    const cellCount = Math.floor(buffer.length / 4);
+    function decodeRCTCells(buffer) {
+        const result = [];
+        // 4 Bytes pro Wert
+        const cellCount = Math.floor(buffer.length / 4);
 
-    for (let i = 0; i < cellCount; i++) {
-        const offset = i * 4;
+        for (let i = 0; i < cellCount; i++) {
+            const offset = i * 4;
 
-        // Little Endian uint32 lesen
-        const value = buffer.readUInt32LE(offset);
+            // Little Endian uint32 lesen
+            const value = buffer.readUInt32LE(offset);
 
-        // Skalierung (Möglichkeit D)
-        const mV = value / 256;
-        const V = mV / 1000;
-        //iobInstance.log.info(V);
+            // Skalierung (Möglichkeit D)
+            const mV = value / 256;
+            const V = mV / 1000;
+            //iobInstance.log.info(V);
 
-        result.push({
-            zelle: i + 1,
-            rohwert: value,
-            mV: mV,
-            V: V
-        });
-    }
+            result.push({
+                zelle: i + 1,
+                rohwert: value,
+                mV: mV,
+                V: V,
+            });
+        }
 
-    return result;
+        return result;
 
-
-    //for (let i = 0; i < totalCells; i++) {
+        //for (let i = 0; i < totalCells; i++) {
         // Ein Float32 (4 Bytes) pro Zelle auslesen
         // RCT nutzt meist Little-Endian (readFloatLE)
-    //    try {
-    //        let voltage = buffer.readFloatLE(i * 4);
-            
-            // Plausibilitäts-Check: LiFePO4 Zellen liegen zwischen 2.0V und 3.7V
-    //        if (voltage > 0 && voltage < 5) {
-                //setState(`javascript.0.RCT_Batterie.Zelle_${(i + 1).toString().padStart(2, '0')}`, parseFloat(voltage.toFixed(3)), true);
-    //            iobInstance.log.info('cell voltage :' && parseFloat(voltage.toFixed(3)))
-    //        }
-    //    } catch (e) {
-    //        iobInstance.log.info(`Fehler beim Lesen von Zelle ${i + 1}: ` + e);
-    //    }
-    //}
-}
+        //    try {
+        //        let voltage = buffer.readFloatLE(i * 4);
+
+        // Plausibilitäts-Check: LiFePO4 Zellen liegen zwischen 2.0V und 3.7V
+        //        if (voltage > 0 && voltage < 5) {
+        //setState(`javascript.0.RCT_Batterie.Zelle_${(i + 1).toString().padStart(2, '0')}`, parseFloat(voltage.toFixed(3)), true);
+        //            iobInstance.log.info('cell voltage :' && parseFloat(voltage.toFixed(3)))
+        //        }
+        //    } catch (e) {
+        //        iobInstance.log.info(`Fehler beim Lesen von Zelle ${i + 1}: ` + e);
+        //    }
+        //}
+    }
 
     function HexString2ByteArray(str) {
         const result = [];
