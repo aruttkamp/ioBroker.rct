@@ -43,7 +43,7 @@ The object "battery.bat_status" indicates the status of a connected battery:
 * 1024 -> calibrating - discharge phase (xx% --> 0%)
 * 2048 -> balancing
 	
-The object "inverter_state" indicates the status of the inverter
+The object "prim_sm.state" indicates the status of the inverter
 *	0 -> 'Standby'
 *	1 -> 'Initialization'
 *	2 -> 'Standby'
