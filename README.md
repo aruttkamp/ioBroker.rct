@@ -93,7 +93,9 @@ Improve Logging Consistency and Debug Handling
 ### 1.2.23 (2025-08-19)
 * (Andreas Ruttkamp) enhancement issue #241
 
-[Older changelogs can be found there](CHANGELOG_OLD.md)## License
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
+## License
 MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

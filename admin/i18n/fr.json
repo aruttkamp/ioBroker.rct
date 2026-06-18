@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "Paramètres généraux",
+    "General Settings": "Paramètres généraux",
+    "RCT ip-address": "Adresse IP du RCT",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Adresse IP locale de l'onduleur RCT (ex. 192.168.0.10)",
+    "Refresh interval": "Intervalle d'actualisation",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "Intervalle d'actualisation souhaité en secondes (10 - 3600)",
+    "Elements": "Éléments",
+    "Elements to be fetched from inverter (leave blank for standard)": "Éléments à récupérer depuis l'onduleur (laisser vide pour le standard)",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Activer la journalisation de débogage (attention : journalisation excessive, utiliser uniquement brièvement!!)",
+    "Enable debugging": "Activer le débogage"
+}

@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "Algemene instellingen",
+    "General Settings": "Algemene instellingen",
+    "RCT ip-address": "RCT IP-adres",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Lokaal IP-adres van de RCT-omvormer (bijv. 192.168.0.10)",
+    "Refresh interval": "Verversingsinterval",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "Gewenst verversingsinterval in seconden (10 - 3600)",
+    "Elements": "Elementen",
+    "Elements to be fetched from inverter (leave blank for standard)": "Van de omvormer op te halen elementen (leeg laten voor standaard)",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Debug-logging inschakelen (let op: overmatige logging, alleen kort gebruiken!!)",
+    "Enable debugging": "Debugging inschakelen"
+}

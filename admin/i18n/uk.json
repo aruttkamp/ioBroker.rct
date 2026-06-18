@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "Загальні налаштування",
+    "General Settings": "Загальні налаштування",
+    "RCT ip-address": "IP-адреса RCT",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Локальна IP-адреса інвертора RCT (наприклад, 192.168.0.10)",
+    "Refresh interval": "Інтервал оновлення",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "Бажаний інтервал оновлення в секундах (10 - 3600)",
+    "Elements": "Елементи",
+    "Elements to be fetched from inverter (leave blank for standard)": "Елементи для отримання з інвертора (залиште порожнім для стандартних)",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Увімкнути журналювання налагодження (увага: надмірне журналювання, використовувати лише короткочасно!!)",
+    "Enable debugging": "Увімкнути налагодження"
+}
