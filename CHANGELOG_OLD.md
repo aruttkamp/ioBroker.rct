@@ -1,4 +1,8 @@
 # Older changes
+## 1.2.23 (2025-08-19)
+* (Andreas Ruttkamp) enhancement issue #241
+
+
 ## 1.2.22 (2025-06-02)
 * (Andreas Ruttkamp) update deps
 * (Andreas Ruttkamp) testing node24 implemented

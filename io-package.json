@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.27",
+    "version": "1.2.28",
     "news": {
+      "1.2.28": {
+        "en": "Improve Logging Consistency and Debug Handling\n#320",
+        "de": "Verbesserung der Protokollierungskonsistenz und des Debugging-Handlings\n#320",
+        "ru": "Улучшение согласованности логирования и обработки отладочной информации.\n#320",
+        "pt": "Melhorar a consistência do registro de logs e o tratamento de depuração.\n#320",
+        "nl": "Verbeter de consistentie van logboekregistratie en de afhandeling van debugs.\n#320",
+        "fr": "Amélioration de la cohérence des journaux et de la gestion du débogage\n#320",
+        "it": "Migliorare la coerenza della registrazione e la gestione del debug\n#320",
+        "es": "Mejorar la coherencia del registro y la gestión de depuración.\n#320",
+        "pl": "Poprawa spójności rejestrowania i obsługi debugowania\n#320",
+        "uk": "Покращення узгодженості ведення журналу та обробки налагодження\n#320",
+        "zh-cn": "改进日志记录一致性和调试处理\n#320"
+      },
       "1.2.27": {
         "en": "Adapter requires node.js >= 22 now\ndependencies updated\nminimum version for admin now 7.6.20",
         "de": "Adapter benötigt node.js >= 22 jetzt\naktualisierte abhängigkeiten\nmindestversion für admin jetzt 7.6.20",
@@ -80,19 +93,6 @@
         "pl": "aktualizacje deps\nzaimplementowany węzeł testowy24",
         "uk": "оновлення deps\nвипробувальний вузол24 реалізований",
         "zh-cn": "更新代码\n测试节点24已执行"
-      },
-      "1.2.21": {
-        "en": "minimum node.js version changed to 20",
-        "de": "minimal node.js-version geändert auf 20",
-        "ru": "минимальная версия node.js изменена на 20",
-        "pt": "versão node.js mínima mudou para 20",
-        "nl": "minimum node.js versie gewijzigd naar 20",
-        "fr": "version minimum node.js changée à 20",
-        "it": "versione minima node.js cambiata a 20",
-        "es": "versión mínimo node.js cambiado a 20",
-        "pl": "wersja minimum node.js zmieniona na 20",
-        "uk": "мінімальна версія node.js змінилася до 20",
-        "zh-cn": "最小节点.js版本改为20"
       }
     },
     "titleLang": {
