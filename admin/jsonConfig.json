@@ -16,7 +16,7 @@
                     "md": 12,
                     "lg": 12,
                     "xl": 12
-                 },
+                },
                 "_dividerHdr": {
                     "newLine": true,
                     "type": "header",

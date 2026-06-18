@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "Ustawienia ogólne",
+    "General Settings": "Ustawienia ogólne",
+    "RCT ip-address": "Adres IP RCT",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Lokalny adres IP falownika RCT (np. 192.168.0.10)",
+    "Refresh interval": "Interwał odświeżania",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "Żądany interwał odświeżania w sekundach (10 - 3600)",
+    "Elements": "Elementy",
+    "Elements to be fetched from inverter (leave blank for standard)": "Elementy do pobrania z falownika (pozostaw puste dla standardu)",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Włącz rejestrowanie debugowania (uwaga: nadmierne rejestrowanie, używaj tylko krótkoterminowo!!)",
+    "Enable debugging": "Włącz debugowanie"
+}

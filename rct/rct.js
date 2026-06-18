@@ -94,7 +94,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 iobInstance.log.warn('RCT: Connection error! Previous interval connection not successfully completed!');
                 clearTimeout(__reconnect);
                 clearInterval(__refreshTimeout);
-                __refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
+                __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
                 __connection = false;
                 return;
             } catch (err) {
@@ -128,7 +128,7 @@ rct.process = function (host, rctElements, iobInstance) {
             iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
             iobInstance.setState('info.connection', true, true);
             clearInterval(__refreshTimeout);
-            __refreshTimeout = setInterval(
+            __refreshTimeout = iobInstance.setInterval(
                 () => rct.process(host, rctElements, iobInstance),
                 1000 * iobInstance.config.rct_refresh,
             );
@@ -157,7 +157,7 @@ rct.process = function (host, rctElements, iobInstance) {
             });
         }
         requestElements();
-        __reconnect = setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 2000);
     });
 
     __client.on('error', err => {
@@ -167,7 +167,7 @@ rct.process = function (host, rctElements, iobInstance) {
         iobInstance.setState('info.connection', false, true);
         clearTimeout(__reconnect);
         clearInterval(__refreshTimeout);
-        __refreshTimeout = setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+        __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
     });
 
     __client.on('data', data => {

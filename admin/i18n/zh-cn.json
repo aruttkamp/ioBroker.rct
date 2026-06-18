@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "常规设置",
+    "General Settings": "常规设置",
+    "RCT ip-address": "RCT IP地址",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "RCT逆变器本地IP地址（例如 192.168.0.10）",
+    "Refresh interval": "刷新间隔",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "所需刷新间隔（秒，10 - 3600）",
+    "Elements": "元素",
+    "Elements to be fetched from inverter (leave blank for standard)": "从逆变器获取的元素（留空使用默认值）",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "启用调试日志（注意：日志量大，仅用于短期故障排查!!）",
+    "Enable debugging": "启用调试"
+}

@@ -1,1 +1,12 @@
-{}
+{
+    "General settings": "Общие настройки",
+    "General Settings": "Общие настройки",
+    "RCT ip-address": "IP-адрес RCT",
+    "Local RCT inverter ip-address (i.e. 192.168.0.10)": "Локальный IP-адрес инвертора RCT (например, 192.168.0.10)",
+    "Refresh interval": "Интервал обновления",
+    "Desired refresh interval for elements in seconds (10 - 3600)": "Желаемый интервал обновления в секундах (10 - 3600)",
+    "Elements": "Элементы",
+    "Elements to be fetched from inverter (leave blank for standard)": "Элементы для получения с инвертора (оставьте пустым для стандартных)",
+    "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)": "Включить журналирование отладки (внимание: чрезмерное журналирование, использовать только кратковременно!!)",
+    "Enable debugging": "Включить отладку"
+}
