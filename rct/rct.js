@@ -296,7 +296,7 @@ rct.process = function (host, rctElements, iobInstance) {
             if (actualLen >= 3) {
                 // RCT schreibt die Paketlänge meist in Byte 1 und 2 (Big Endian)
                 // (Achtung: Prüfe im Code, ob RCT die Länge exklusive oder inklusive Header rechnet!)
-               expectedLen = dataBuffer.readUInt16BE(1); 
+                expectedLen = dataBuffer.readUInt16BE(1); 
             }
 
             iobInstance.log.debug(
@@ -304,7 +304,7 @@ rct.process = function (host, rctElements, iobInstance) {
                     ` ├─ Sync-Byte (+):    ${isSyncOk ? 'OK (0x2b)' : `FEHLER (0x${dataBuffer[0].toString(16)})`}\n` +
                     ` ├─ Erwartete Länge:  ${expectedLen} Bytes (laut Header)\n` +
                     ` ├─ Empfangene Länge: ${actualLen} Bytes im aktuellen Puffer\n` +
-                    ` └─ Hex-Dump (Top20): ${dataBuffer.subarray(0, 20).toString('hex')}`
+                    ` └─ Hex-Dump (Top20): ${dataBuffer.subarray(0, 20).toString('hex')}`,
             );
             //iobInstance.log.debug(`NOTICE: CRC not valid: ${response.name}, ${response.description}, ${response.id}`);
         }
