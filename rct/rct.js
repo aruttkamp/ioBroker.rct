@@ -289,7 +289,24 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             }
         } else {
-            iobInstance.log.debug(`NOTICE: CRC not valid: ${response.name}, ${response.description}, ${response.id}`);
+			const actualLen = dataBuffer.length;
+            let expectedLen = "UNKNOWN";
+            let isSyncOk = dataBuffer[0] === 0x2B; // 0x2B ist das '+' Zeichen in Hex (RCT Start-Byte)
+
+            if (actualLen >= 3) {
+            // RCT schreibt die Paketlänge meist in Byte 1 und 2 (Big Endian)
+            // (Achtung: Prüfe im Code, ob RCT die Länge exklusive oder inklusive Header rechnet!)
+            expectedLen = dataBuffer.readUInt16BE(1); 
+            }
+
+            iobInstance.log.debug(
+              `[CRC ERROR DETAILS]\n` +
+              ` ├─ Sync-Byte (+):    ${isSyncOk ? 'OK (0x2b)' : `FEHLER (0x${dataBuffer[0].toString(16)})`}\n` +
+              ` ├─ Erwartete Länge:  ${expectedLen} Bytes (laut Header)\n` +
+              ` ├─ Empfangene Länge: ${actualLen} Bytes im aktuellen Puffer\n` +
+              ` └─ Hex-Dump (Top20): ${dataBuffer.subarray(0, 20).toString('hex')}`
+            );
+            //iobInstance.log.debug(`NOTICE: CRC not valid: ${response.name}, ${response.description}, ${response.id}`);
         }
 
         if (response.crcOk) {
