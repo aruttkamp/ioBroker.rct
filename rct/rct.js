@@ -296,7 +296,7 @@ rct.process = function (host, rctElements, iobInstance) {
             if (actualLen >= 3) {
                 // RCT schreibt die Paketlänge meist in Byte 1 und 2 (Big Endian)
                 // (Achtung: Prüfe im Code, ob RCT die Länge exklusive oder inklusive Header rechnet!)
-                expectedLen = dataBuffer.readUInt16BE(1); 
+                expectedLen = dataBuffer.readUInt16BE(1);
             }
 
             iobInstance.log.debug(
