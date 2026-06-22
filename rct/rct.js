@@ -290,13 +290,13 @@ rct.process = function (host, rctElements, iobInstance) {
             }
         } else {
 			const actualLen = dataBuffer.length;
-            let expectedLen = "UNKNOWN";
-            let isSyncOk = dataBuffer[0] === 0x2B; // 0x2B ist das '+' Zeichen in Hex (RCT Start-Byte)
+            let expectedLen = 'UNKNOWN';
+            let isSyncOk = dataBuffer[0] === '0x2B'; // 0x2B ist das '+' Zeichen in Hex (RCT Start-Byte)
 
             if (actualLen >= 3) {
-            // RCT schreibt die Paketlänge meist in Byte 1 und 2 (Big Endian)
-            // (Achtung: Prüfe im Code, ob RCT die Länge exklusive oder inklusive Header rechnet!)
-            expectedLen = dataBuffer.readUInt16BE(1); 
+              // RCT schreibt die Paketlänge meist in Byte 1 und 2 (Big Endian)
+              // (Achtung: Prüfe im Code, ob RCT die Länge exklusive oder inklusive Header rechnet!)
+              expectedLen = dataBuffer.readUInt16BE(1); 
             }
 
             iobInstance.log.debug(
