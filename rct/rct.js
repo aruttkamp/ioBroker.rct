@@ -453,14 +453,13 @@ rct.process = function (host, rctElements, iobInstance) {
                     }
                     const stateInfo = rct.getStateInfo(response.name, iobInstance);
                     if (stateInfo) {
-                        if (response.dataType == 'cell_voltage') {
-                            let i = 0;
-                            response.result.forEach(r => {
-                                iobInstance.setState(`
-								    ${stateInfo.stateFullName}_${i}`,
-									parseFloat(r.V.toFixed(3)),
-									true);
-                                i++;
+                        if (response.dataType === 'cell_voltage') {
+                            response.result.forEach((r, i) => {
+                                iobInstance.setState(
+                                    `${stateInfo.stateFullName}_${i}`,
+                                    parseFloat(r.V.toFixed(3)),
+                                    true,
+                                );
                             });
                         } else {
                             iobInstance.setState(stateInfo.stateFullName, response.result, true);
@@ -475,7 +474,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 // CRC not valid
                 const actualLen = cmdBuffer.length; // Length of faulty packet
                 let expectedLen = 'UNKNOWN';
-                let isSyncOk = cmdBuffer[0] === 0x2B;
+                let isSyncOk = cmdBuffer[0] === 0x2b;
 
                 if (actualLen >= 3) {
                     expectedLen = cmdBuffer.readUInt16bE(1);
