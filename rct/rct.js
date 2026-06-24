@@ -203,7 +203,7 @@ rct.process = function (host, rctElements, iobInstance) {
     // new data receive
     __client.on('data', data => {
         if (DEBUG_CONSOLE) {
-            iobInstance.log.debug('DEBUG raw data received: ' + data.toString('hex'));
+            iobInstance.log.debug(`DEBUG raw data received: + ${data.toString('hex')}`);
         }
 
         let unescaped = [];
@@ -456,7 +456,10 @@ rct.process = function (host, rctElements, iobInstance) {
                         if (response.dataType == 'cell_voltage') {
                             let i = 0;
                             response.result.forEach(r => {
-                                iobInstance.setState(`${stateInfo.stateFullName}_${i}`, parseFloat(r.V.toFixed(3)), true);
+                                iobInstance.setState(`
+								    ${stateInfo.stateFullName}_${i}`,
+									parseFloat(r.V.toFixed(3)),
+									true);
                                 i++;
                             });
                         } else {
