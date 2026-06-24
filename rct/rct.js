@@ -477,7 +477,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 let isSyncOk = cmdBuffer[0] === 0x2b;
 
                 if (actualLen >= 3) {
-                    expectedLen = cmdBuffer.readUInt16bE(1);
+                    expectedLen = cmdBuffer.readUInt16BE(1);
                 }
 
                 // Create CRC error details for faulty packet
