@@ -110,7 +110,7 @@ rct.process = function (host, rctElements, iobInstance) {
     }
     __client = net.createConnection({ host, port: 8899 }, () => {});
 
-	if (DEBUG_CONSOLE) {
+    if (DEBUG_CONSOLE) {
         __client.on('close', () => {
             // successful connection close
             iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
@@ -122,7 +122,7 @@ rct.process = function (host, rctElements, iobInstance) {
     }
 
     let pendingEscape = false;
-	let dataBuffer = Buffer.alloc(0);
+    let dataBuffer = Buffer.alloc(0);
 
     __client.on('connect', () => {
         if (!__connection) {
@@ -171,7 +171,7 @@ rct.process = function (host, rctElements, iobInstance) {
         __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
     });
 
-	// old data receive
+    // old data receive
     /* __client.on('data', data => {
         function escaping(element, index, array) {
             if (element === rct.const.stop_byte_value) {
@@ -200,8 +200,8 @@ rct.process = function (host, rctElements, iobInstance) {
         handleData();
     }); */
 
-	// new data receive
-	__client.on('data', data => {
+    // new data receive
+    __client.on('data', data => {
         if (DEBUG_CONSOLE) {
             iobInstance.log.debug('DEBUG raw data received: ' + data.toString('hex'));
         }
@@ -217,7 +217,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 unescaped.push(firstByte);
             } else {
                 // No escape byte, using complete packet:
-                unescaped.push(rct.const.stop_byte_value); 
+                unescaped.push(rct.const.stop_byte_value);
                 unescaped.push(firstByte);
             }
             pendingEscape = false;
@@ -252,7 +252,7 @@ rct.process = function (host, rctElements, iobInstance) {
         handleData();
     });
 
-	/* Old data handling:
+    /* Old data handling:
     function handleData() {
         while (dataBuffer.length && dataBuffer[0] !== 43) {
             if (dataBuffer[0] !== 0) {
@@ -367,8 +367,8 @@ rct.process = function (host, rctElements, iobInstance) {
         }
     }*/
 
-	// New data handling:
-	function handleData() {
+    // New data handling:
+    function handleData() {
         // Using a loop to empty buffer until no data left
         while (true) {
             // 1. Skip everything before RCT start-byte '+' (ASCII 43)
@@ -475,7 +475,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 let isSyncOk = cmdBuffer[0] === 0x2B;
 
                 if (actualLen >= 3) {
-                    expectedLen = cmdBuffer.readUInt16BE(1);
+                    expectedLen = cmdBuffer.readUInt16bE(1);
                 }
 
                 // Create CRC error details for faulty packet
@@ -484,7 +484,7 @@ rct.process = function (host, rctElements, iobInstance) {
                         ` ├─ Sync-Byte (+):    ${isSyncOk ? 'OK (0x2b)' : `ERROR (0x${cmdBuffer[0].toString(16)})`}\n` +
                         ` ├─ Expected length:  ${expectedLen} bytes (according to header)\n` +
                         ` ├─ Isolate-Frame:    ${actualLen} bytes extracted\n` +
-                        ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`
+                        ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
                 );
             }
         }
@@ -513,7 +513,7 @@ rct.process = function (host, rctElements, iobInstance) {
             response.id = byteArray2HexString(buf.slice(4, 8));
             response.data = buf.slice(8, -2);
         } else {
-			// short response
+            // short response
             response.length = buf.readUInt8(2);
             response.id = byteArray2HexString(buf.slice(3, 7));
             response.data = buf.slice(7, -2);
