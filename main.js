@@ -14,7 +14,7 @@ const rct = require('./rct/rct.js');
 
 class Rct extends utils.Adapter {
     /**
-     * @param {Partial<utils.AdapterOptions>} [options={}] Optional adapter options
+     * @param {Partial<utils.AdapterOptions>} [options] Optional adapter options
      */
     constructor(options) {
         super({
@@ -150,7 +150,7 @@ class Rct extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param {Partial<utils.AdapterOptions>} [options={}] Optional adapter options
+     * @param {Partial<utils.AdapterOptions>} [options] Optional adapter options
      */
     module.exports = options => new Rct(options);
 } else {
