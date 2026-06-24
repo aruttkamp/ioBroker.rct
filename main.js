@@ -14,7 +14,7 @@ const rct = require('./rct/rct.js');
 
 class Rct extends utils.Adapter {
     /**
-     * @param [options]
+     * @param {Partial<utils.AdapterOptions>} [options={}] Optional adapter options
      */
     constructor(options) {
         super({
@@ -122,7 +122,7 @@ class Rct extends utils.Adapter {
     /**
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      *
-     * @param callback
+     * @param {() => void} callback Callback function to execute after clean shutdown
      */
     async onUnload(callback) {
         try {
@@ -150,7 +150,7 @@ class Rct extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param [options]
+     * @param {Partial<utils.AdapterOptions>} [options={}] Optional adapter options
      */
     module.exports = options => new Rct(options);
 } else {
