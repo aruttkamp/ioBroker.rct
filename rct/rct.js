@@ -171,36 +171,7 @@ rct.process = function (host, rctElements, iobInstance) {
         __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
     });
 
-    // old data receive
-    /* __client.on('data', data => {
-        function escaping(element, index, array) {
-            if (element === rct.const.stop_byte_value) {
-                // console.log('DEBUG escaping()', element, index, array);
-                if (index < array.length - 1) {
-                    if (
-                        array[index + 1] === rct.const.start_byte_value ||
-                        array[index + 1] === rct.const.stop_byte_value
-                    ) {
-                        // console.log('DEBUG: dropping escape character');
-                        return false; // ignore escape character
-                    }
-                    // console.log('DEBUG: NOT dropping escape character');
-                } else {
-                    iobInstance.log.debug('NOTICE: not handling escape character at end of buffer');
-                }
-            }
-            return true;
-        }
-
-        if (DEBUG_CONSOLE) {
-            iobInstance.log.debug('DEBUG data received', data);
-        }
-        dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
-
-        handleData();
-    }); */
-
-    // new data receive
+    // Improved data receive
     __client.on('data', data => {
         if (DEBUG_CONSOLE) {
             iobInstance.log.debug(`DEBUG raw data received: + ${data.toString('hex')}`);
@@ -252,122 +223,7 @@ rct.process = function (host, rctElements, iobInstance) {
         handleData();
     });
 
-    /* Old data handling:
-    function handleData() {
-        while (dataBuffer.length && dataBuffer[0] !== 43) {
-            if (dataBuffer[0] !== 0) {
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
-                } // FIXME: regularly skipping 0 values - no idea why
-            }
-            dataBuffer = dataBuffer.slice(1);
-        }
-
-        //if (dataBuffer.length >= 4) {
-		//	if (dataBuffer[0]==65 && dataBuffer[1]==84 && dataBuffer[2]==43 && dataBuffer[3]==13) {
-		//		console.log('DEBUG skipping 65, 84, 43, 13 sequence');
-		//		dataBuffer = dataBuffer.slice(4);
-		//	}
-		//}
-		
-
-        // Early return for no data in buffer
-        if (dataBuffer.length < 5) {
-            return;
-        }
-
-        const frameLength = getFrameLength(dataBuffer);
-
-        // Early return for incomplete frames
-        if (dataBuffer.length < frameLength) {
-            if (DEBUG_CONSOLE) {
-                iobInstance.log.debug('Frame incomplete', {
-                    received: dataBuffer.length,
-                    required: frameLength,
-                    waiting: frameLength - dataBuffer.length,
-                    preview: byteArray2HexString(dataBuffer.slice(0, 8), true),
-                });
-            }
-            return;
-        }
-
-        // Debug-Info for complete frames
-        if (DEBUG_CONSOLE) {
-            iobInstance.log.debug(
-                `Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`,
-            );
-        }
-
-        const cmdBuffer = dataBuffer.slice(0, frameLength);
-        dataBuffer = dataBuffer.slice(frameLength);
-
-        const response = parseResponse(cmdBuffer);
-
-        if (response.crcOk) {
-            let txt;
-            if (response.description) {
-                txt = `${response.description}: ${response.result} ${response.unit}`;
-            } else if (response.name) {
-                txt = `${response.name}: ${response.result} ${response.unit}`;
-            } else {
-                txt = response.infoText;
-            }
-
-            if (response.name && rctElements.includes(response.name)) {
-                //iobInstance.log.debug(`RCT: result: ${txt}`);
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug(`RCT: received: ${txt}`);
-                }
-                const stateInfo = rct.getStateInfo(response.name, iobInstance);
-                if (stateInfo) {
-                    if (response.dataType == 'cell_voltage') {
-                        let i = 0;
-                        response.result.forEach(r => {
-                            iobInstance.setState(`${stateInfo.stateFullName}_${i}`, parseFloat(r.V.toFixed(3)), true);
-
-                            //iobInstance.log.info(
-                            //    `${r.zelle.toString().padStart(5)} | ` +
-                            //    `${r.rohwert.toString().padStart(9)} | ` +
-                            //    `${r.mV.toFixed(2).padStart(8)} | ` +
-                            //    `${r.V.toFixed(3)}`
-                            //);
-                            i++;
-                        });
-                    } else {
-                        iobInstance.setState(stateInfo.stateFullName, response.result, true);
-                    }
-                }
-            } else {
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
-                }
-            }
-        } else {
-            const actualLen = dataBuffer.length;
-            let expectedLen = 'UNKNOWN';
-            let isSyncOk = dataBuffer[0] === '0x2B'; // checking for '+' in Hex for RCT start byte
-
-            if (actualLen >= 3) {
-                // RCT writes packet length in byte 1 and 2 (big endian)
-                expectedLen = dataBuffer.readUInt16BE(1);
-            }
-
-            iobInstance.log.debug(
-                `[CRC ERROR DETAILS]\n` +
-                    ` ├─ Sync-Byte (+):    ${isSyncOk ? 'OK (0x2b)' : `ERROR (0x${dataBuffer[0].toString(16)})`}\n` +
-                    ` ├─ Expected length:  ${expectedLen} bytes (according to header)\n` +
-                    ` ├─ Received length: ${actualLen} bytes buffer\n` +
-                    ` └─ Hex-Dump (Top20): ${dataBuffer.subarray(0, 20).toString('hex')}`,
-            );
-            //iobInstance.log.debug(`NOTICE: CRC not valid: ${response.name}, ${response.description}, ${response.id}`);
-        }
-
-        if (response.crcOk) {
-            handleData(); // continue and check if new data is available;
-        }
-    }*/
-
-    // New data handling:
+    // Improved data handling:
     function handleData() {
         // Using a loop to empty buffer until no data left
         while (true) {
@@ -385,7 +241,7 @@ rct.process = function (host, rctElements, iobInstance) {
             /*
             if (dataBuffer.length >= 4) {
                 if (dataBuffer[0]==65 && dataBuffer[1]==84 && dataBuffer[2]==43 && dataBuffer[3]==13) {
-                    console.log('DEBUG skipping 65, 84, 43, 13 sequence');
+                    iobInstance.log.debug('DEBUG skipping 65, 84, 43, 13 sequence');
                     dataBuffer = dataBuffer.slice(4);
                     continue; // Schleife neu starten nach dem Schneiden!
                 }
@@ -432,13 +288,13 @@ rct.process = function (host, rctElements, iobInstance) {
 
             // Slicing packet from buffer
             const cmdBuffer = dataBuffer.slice(0, frameLength);
-            dataBuffer = dataBuffer.slice(frameLength);
 
             // Parse packet
             const response = parseResponse(cmdBuffer);
 
             if (response.crcOk) {
-                let txt;
+                dataBuffer = dataBuffer.slice(frameLength);
+				let txt;
                 if (response.description) {
                     txt = `${response.description}: ${response.result} ${response.unit}`;
                 } else if (response.name) {
@@ -472,20 +328,20 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             } else {
                 // CRC not valid
+				dataBuffer = dataBuffer.slice(1);
+				
                 const actualLen = cmdBuffer.length; // Length of faulty packet
-                let expectedLen = 'UNKNOWN';
+                // let expectedLen = 'UNKNOWN';
                 let isSyncOk = cmdBuffer[0] === 0x2b;
 
-                if (actualLen >= 3) {
-                    expectedLen = cmdBuffer.readUInt16BE(1);
-                }
+                // if (actualLen >= 3) {
+                //    expectedLen = cmdBuffer.readUInt16BE(1);
+                // }
 
                 // Create CRC error details for faulty packet
                 iobInstance.log.info(
-                    `[CRC ERROR DETAILS]\n` +
-                        ` ├─ Sync-Byte (+):    ${isSyncOk ? 'OK (0x2b)' : `ERROR (0x${cmdBuffer[0].toString(16)})`}\n` +
-                        ` ├─ Expected length:  ${expectedLen} bytes (according to header)\n` +
-                        ` ├─ Isolate-Frame:    ${actualLen} bytes extracted\n` +
+                    `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
+                        ` ├─ Extracted chunk: ${actualLen} bytes\n` +
                         ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
                 );
             }
@@ -643,7 +499,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 break;
         }
 
-        // console.log("DEBUG response:",response);
+        // iobInstance.log.debug("DEBUG response:",response);
         return response;
     }
 
