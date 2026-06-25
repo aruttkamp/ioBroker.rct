@@ -278,6 +278,13 @@ rct.process = function (host, rctElements, iobInstance) {
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
 
+                if (response.cmd === 0x01) {
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug(`[Echo Filter] Ignored reflected read request for ID ${response.id}`);
+                    }
+                    continue;
+                }
+                
                 // Received valid data, resetting reconnect timeout
                 clearTimeout(__reconnect);
                 __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 3000);
