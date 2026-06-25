@@ -25,7 +25,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
     let name = String(rctName);
 
-    name = name.replace(/]/g, '');
+    name = name.replace(/\]/g, '');
 
     const dotPos = name.indexOf('.');
     const bracketPos = name.indexOf('[');
@@ -108,7 +108,7 @@ rct.process = function (host, rctElements, iobInstance) {
     if (DEBUG_CONSOLE) {
         iobInstance.log.debug(`RCT: Starting interval connection to inverter at ${host}`);
     }
-    __client = net.createConnection({ host, port: 8899 }, () => {});
+    __client = net.createConnection({ host, port: 8899 });
 
     if (DEBUG_CONSOLE) {
         __client.on('close', () => {
@@ -141,10 +141,6 @@ rct.process = function (host, rctElements, iobInstance) {
         }
 
         function requestElements() {
-            /*if (!__client) {
-				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
-				return;
-			}*/
             if (DEBUG_CONSOLE) {
                 iobInstance.log.debug(`RCT: Requesting elements "${rctElements}" from inverter`);
             }
@@ -158,7 +154,7 @@ rct.process = function (host, rctElements, iobInstance) {
             });
         }
         requestElements();
-        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 7000);
+        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 6000);
     });
 
     __client.on('error', err => {
@@ -171,7 +167,6 @@ rct.process = function (host, rctElements, iobInstance) {
         __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
     });
 
-    // Improved data receive
     __client.on('data', data => {
         if (DEBUG_CONSOLE) {
             iobInstance.log.debug(`DEBUG raw data received: + ${data.toString('hex')}`);
@@ -223,11 +218,10 @@ rct.process = function (host, rctElements, iobInstance) {
         handleData();
     });
 
-    // Improved data handling:
     function handleData() {
         // Using a loop to empty buffer until no data left
         while (true) {
-            // 1. Skip everything before RCT start-byte '+' (ASCII 43)
+            // Skip everything before RCT start-byte '+' (ASCII 43)
             while (dataBuffer.length && dataBuffer[0] !== 43) {
                 if (dataBuffer[0] !== 0) {
                     if (DEBUG_CONSOLE) {
@@ -237,7 +231,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 dataBuffer = dataBuffer.slice(1);
             }
 
-            // Break if size smaller than minimum size for a RCT packet (5 bytes; header + minimum payload)
+            // Break if size smaller than minimum size for a RCT packet (5 bytes: header + minimum payload)
             if (dataBuffer.length < 5) {
                 return;
             }
@@ -279,10 +273,14 @@ rct.process = function (host, rctElements, iobInstance) {
             const cmdBuffer = dataBuffer.slice(0, frameLength);
 
             // Parse packet
-            const response = parseResponse(cmdBuffer);
+            const response = parseResponse(cmdBuffer, iobInstance);
 
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
+
+				// Received valid data, resetting reconnect timeout
+                clearTimeout(__reconnect);
+                __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 6000);
 
                 let txt;
                 if (response.description) {
@@ -322,299 +320,240 @@ rct.process = function (host, rctElements, iobInstance) {
                 const actualLen = cmdBuffer.length; // Length of faulty packet
 
                 // Create CRC error details for faulty packet
-                iobInstance.log.info(
+                iobInstance.log.debug(
                     `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
-                        ` ├─ Extracted chunk: ${actualLen} bytes\n` +
+                        ` ├─ Extracted frame: ${actualLen} bytes\n` +
                         ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
                 );
             }
         }
     }
+};
 
-    function getFrameLength(buf) {
-        const cmd = buf.readUInt8(1);
+function getFrameLength(buf) {
+    const cmd = buf.readUInt8(1);
+    //check for short or long response
+    if (cmd === 3 || cmd === 6) {
+        return 6 + buf.readUInt16BE(2); // long response
+    }
+    return 5 + buf.readUInt8(2); // short response
+}
 
-        //check for short or long response
-        if (cmd === 3 || cmd === 6) {
-            return 6 + buf.readUInt16BE(2); // long response
-        }
-        return 5 + buf.readUInt8(2); // short response
+function parseResponse(buf) {
+    const response = {};
+
+    response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
+
+    response.cmd = buf.readUInt8(1);
+
+    if (response.cmd === 3 || response.cmd === 6) {
+        // long response
+        response.length = buf.readUInt16BE(2);
+        response.id = byteArray2HexString(buf.slice(4, 8));
+        response.data = buf.slice(8, -2);
+    } else {
+        // short response
+        response.length = buf.readUInt8(2);
+        response.id = byteArray2HexString(buf.slice(3, 7));
+        response.data = buf.slice(7, -2);
     }
 
-    function parseResponse(buf) {
-        const response = {};
+    response.infoText = `${response.cmd} ${response.length - 4} ${response.id}`;
 
-        response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
-
-        response.cmd = buf.readInt8(1);
-
-        if (response.cmd === 3 || response.cmd === 6) {
-            // long response
-            response.length = buf.readUInt16BE(2);
-            response.id = byteArray2HexString(buf.slice(4, 8));
-            response.data = buf.slice(8, -2);
-        } else {
-            // short response
-            response.length = buf.readUInt8(2);
-            response.id = byteArray2HexString(buf.slice(3, 7));
-            response.data = buf.slice(7, -2);
-        }
-
-        response.infoText = `${response.cmd} ${response.length - 4} ${response.id}`;
-
-        // in case CRC is not ok, return here (as data might be faulty)
-        if (!response.crcOk) {
-            return response;
-        }
-
-        if (!rct.cmdReverse[response.id]) {
-            if (DEBUG_CONSOLE) {
-                iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
-            }
-            return response;
-        }
-
-        response.name = rct.cmdReverse[response.id].name;
-        response.description = rct.cmdReverse[response.id].description;
-        response.dataType = rct.cmdReverse[response.id].type;
-        response.dataLength = rct.cmdReverse[response.id].length;
-        response.multiplier = rct.cmdReverse[response.id].multiplier;
-        response.precision = rct.cmdReverse[response.id].precision;
-        response.unit = rct.cmdReverse[response.id].unit || '';
-
-        //		if (!response.dataType) {
-        //			switch (response.length - 4) {
-        //				case 1: response.dataType = 'uint1'; break;
-        //				case 2: response.dataType = 'uint2'; break;
-        //				case 4: response.dataType = 'float'; break;
-        //			}
-        //		}
-
-        //		if (response.dataType === 'uint4' && response.data.length !== 4) {
-        //			response.dataType = '';
-        //		}
-
-        //		if ((response.dataType === 'float' && response.data.length != 4) ||
-        //			(response.dataType === 'uint1' && response.data.length != 1) ||
-        //			(response.dataType === 'uint2' && response.data.length != 2) ||
-        //			(response.dataType === 'uint4' && response.data.length != 4)) {
-        //			iobInstance.log.debug(`NOTICE: wrong length for data type ${response}`);
-        //			iobInstance.log.debug(`NOTICE: ${response.data.length}`);
-        //			response.dataType = '';
-        //		}
-
-        let result;
-        switch (response.dataType) {
-            case 'FLOAT':
-                // iobInstance.log.debug(response.name);
-                // iobInstance.log.debug('response.data : ' + response.data);
-                // iobInstance.log.debug('länge: ' + response.data.length);
-                if (response.data.length === 4) {
-                    result = response.data.readFloatBE();
-                }
-                // iobInstance.log.debug('result: ' + result);
-                // iobInstance.log.debug('multiplier: ' + response.multiplier);
-                // if (response.multiplier !== undefinded) response.mulitplier=100;
-                if (response.multiplier !== undefined) {
-                    result = result * response.multiplier;
-                }
-                response.result = floatPrecision(result, response.precision);
-                break;
-            case 'UINT8':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt8();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT8':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt8();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'UINT16':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt16LE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT16':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt16BE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'UINT32':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt32LE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT32':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt32BE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'STRING':
-                response.result = response.data.Buffer;
-                break;
-            case 'cell_voltage':
-                response.result = decodeRCTCells(response.data);
-                break;
-            case 'RAW':
-                iobInstance.log.info('RAW');
-                iobInstance.log.info(`response.data : ${response.data}`);
-                iobInstance.log.info(`response.data Hex : ${response.data.toString('hex')}`);
-                iobInstance.log.info(`response.data Buf : ${response.data.Buffer}`);
-                response.result = response.data.toString('hex');
-                break;
-            case 'ENUM':
-                break;
-            default:
-                response.result = '';
-                break;
-        }
-
-        // iobInstance.log.debug("DEBUG response:",response);
+    // in case CRC is not ok, return here (as data might be faulty)
+    if (!response.crcOk) {
         return response;
     }
 
-    function floatPrecision(number, precision) {
-        if (precision === undefined) {
-            precision = 1;
+    if (!rct.cmdReverse[response.id]) {
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
         }
-        return Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision);
+        return response;
     }
 
-    function getFrame(command, id, data = '') {
-        let sTmp = '';
-        sTmp += command;
-        sTmp += byte2HexString((id.length + data.length) / 2);
-        sTmp += id;
-        sTmp += data;
+    response.name = rct.cmdReverse[response.id].name;
+    response.description = rct.cmdReverse[response.id].description;
+    response.dataType = rct.cmdReverse[response.id].type;
+    response.dataLength = rct.cmdReverse[response.id].length;
+    response.multiplier = rct.cmdReverse[response.id].multiplier;
+    response.precision = rct.cmdReverse[response.id].precision;
+    response.unit = rct.cmdReverse[response.id].unit || '';
 
-        const baFrame = HexString2ByteArray(rct.const.start_byte + sTmp);
 
-        // iobInstance.log.debug('DEBUG: baFrame', rct.const.start_byte + sTmp);
+    let result = 0;
+    switch (response.dataType) {
+        case 'FLOAT':
+            if (response.data.length >= 4) {
+                result = response.data.readFloatBE();
+            } else {
+                if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: FLOAT data too short (${response.data.length} bytes) for ID ${response.id}`);
+				result = 0;
+			}
 
-        const crc = rct.crc(HexString2ByteArray(sTmp));
-        baFrame.push(crc >> 8);
-        baFrame.push(crc & 0xff);
-
-        // iobInstance.log.debug("DEBUG: getFrame()",byteArray2HexString(baFrame));
-        return Buffer.from(baFrame);
-    }
-
-    function decodeRCTCells(buffer) {
-        const result = [];
-        // 4 Bytes pro Wert
-        const cellCount = Math.floor(buffer.length / 4);
-
-        for (let i = 0; i < cellCount; i++) {
-            const offset = i * 4;
-
-            // Little Endian uint32 lesen
-            const value = buffer.readUInt32LE(offset);
-
-            // Skalierung (Möglichkeit D)
-            const mV = value / 256;
-            const V = mV / 1000;
-            // iobInstance.log.info(V);
-
-            result.push({
-                zelle: i + 1,
-                rohwert: value,
-                mV: mV,
-                V: V,
-            });
-        }
-
-        return result;
-
-        // for (let i = 0; i < totalCells; i++) {
-        // Ein Float32 (4 Bytes) pro Zelle auslesen
-        // RCT nutzt meist Little-Endian (readFloatLE)
-        //    try {
-        //        let voltage = buffer.readFloatLE(i * 4);
-
-        // Plausibilitäts-Check: LiFePO4 Zellen liegen zwischen 2.0V und 3.7V
-        //        if (voltage > 0 && voltage < 5) {
-        //setState(`javascript.0.RCT_Batterie.Zelle_${(i + 1).toString().padStart(2, '0')}`, parseFloat(voltage.toFixed(3)), true);
-        //            iobInstance.log.info('cell voltage :' && parseFloat(voltage.toFixed(3)))
-        //        }
-        //    } catch (e) {
-        //        iobInstance.log.info(`Fehler beim Lesen von Zelle ${i + 1}: ` + e);
-        //    }
-        //}
-    }
-
-    function HexString2ByteArray(str) {
-        const result = [];
-        // Ignore any trailing single digit; I don't know what your needs
-        // are for this case, so you may want to throw an error or convert
-        // the lone digit depending on your needs.
-        str = str.replace(' ', '');
-
-        while (str.length >= 2) {
-            result.push(parseInt(str.substring(0, 2), 16));
-            str = str.substring(2, str.length);
-        }
-
-        return result;
-    }
-
-    function byteArray2HexString(arr, format) {
-        let result = '';
-        for (const i in arr) {
-            if (Object.prototype.hasOwnProperty.call(arr, i)) {
-                let str = arr[i].toString(16);
-                // Pad to two digits, truncate to last two if too long.  Again,
-                // I'm not sure what your needs are for the case, you may want
-                // to handle errors in some other way.
-                str =
-                    str.length === 0
-                        ? '00'
-                        : str.length === 1
-                          ? `0${str}`
-                          : str.length === 2
-                            ? str
-                            : str.substring(str.length - 2, str.length);
-
-                str = str.toUpperCase();
-                if (format && str === '2B') {
-                    str = ' 2B';
-                } // seperate commands with leading space
-                if (format && str === '2D') {
-                    str = ' !!!2D!!! ';
-                } // mark stop/escape byte
-                result += str;
+            if (response.multiplier !== undefined) {
+                result = result * response.multiplier;
             }
-        }
-        return result;
+            response.result = floatPrecision(result, response.precision);
+            break;
+
+        case 'UINT8':
+            if (response.data.length >= 1) {
+                response.result = response.data.readUInt8();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT8':
+            if (response.data.length >= 1) {
+                response.result = response.data.readInt8();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'UINT16':
+            if (response.data.length >= 2) {
+                response.result = response.data.readUInt16BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT16':
+            if (response.data.length >= 2) {
+                response.result = response.data.readInt16BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'UINT32':
+            if (response.data.length >= 4) {
+                response.result = response.data.readUInt32BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT32':
+            if (response.data.length >= 4) {
+                response.result = response.data.readInt32BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'STRING':
+            response.result = response.data.toString('utf8').replace(/\0/g, '');
+            break;
+
+		case 'cell_voltage':
+            response.result = decodeRCTCells(response.data);
+            break;
+
+        case 'RAW':
+            if (DEBUG_CONSOLE) {
+                iobInstance.log.debug(`RAW response for ${response.name}`);
+                iobInstance.log.debug(`Hex Dump: ${response.data.toString('hex')}`);
+            }
+            response.result = response.data.toString('hex');
+            break;
+
+        case 'ENUM':
+            response.result = '';
+            break;
+
+        default:
+            response.result = '';
+            break;
     }
 
-    function byte2HexString(byte) {
-        let result = byte.toString(16);
+    // iobInstance.log.debug("DEBUG response:",response);
+    return response;
+}
 
-        // Pad to two digits, truncate to last two if too long.  Again,
-        // I'm not sure what your needs are for the case, you may want
-        // to handle errors in some other way.
-        result =
-            result.length === 0
-                ? '00'
-                : result.length === 1
-                  ? `0${result}`
-                  : result.length === 2
-                    ? result
-                    : result.substring(result.length - 2, result.length);
-
-        return result;
+function floatPrecision(number, precision) {
+    if (precision === undefined) {
+        precision = 1;
     }
-};
+    return Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision);
+}
+
+function getFrame(command, id, data = '') {
+    let sTmp = '';
+    sTmp += command;
+    sTmp += byte2HexString((id.length + data.length) / 2);
+    sTmp += id;
+    sTmp += data;
+
+    const baFrame = HexString2ByteArray(rct.const.start_byte + sTmp);
+
+    const crc = rct.crc(HexString2ByteArray(sTmp));
+    baFrame.push(crc >> 8);
+    baFrame.push(crc & 0xff);
+
+    return Buffer.from(baFrame);
+}
+
+function decodeRCTCells(buffer) {
+    const result = [];
+    // 4 bytes per value
+    const cellCount = Math.floor(buffer.length / 4);
+
+    for (let i = 0; i < cellCount; i++) {
+        const offset = i * 4;
+
+        // Little Endian uint32 lesen
+        const value = buffer.readUInt32BE(offset);
+
+        // Skalierung (Möglichkeit D)
+        const mV = value / 256;
+        const V = mV / 1000;
+        // iobInstance.log.info(V);
+
+        result.push({
+            zelle: i + 1,
+            rohwert: value,
+            mV: mV,
+            V: V,
+        });
+    }
+
+    return result;
+}
+
+function HexString2ByteArray(str) {
+    const result = [];
+    // Ignore any trailing single digit; I don't know what your needs
+    // are for this case, so you may want to throw an error or convert
+    // the lone digit depending on your needs.
+    str = str.replace(' ', '');
+
+    while (str.length >= 2) {
+        result.push(parseInt(str.substring(0, 2), 16));
+        str = str.substring(2, str.length);
+    }
+
+    return result;
+}
+
+function byteArray2HexString(arr, format) {
+    let result = '';
+    for (let i = 0; i < arr.length; i++) {
+        let str = arr[i].toString(16).padStart(2, '0').toUpperCase();
+        if (format && str === '2B') {
+            str = ' 2B';
+        } 
+        if (format && str === '2D') {
+            str = ' !!!2D!!! ';
+        } 
+        result += str;
+    }
+    return result;
+}
+
+function byte2HexString(byte) {
+    return byte.toString(16).padStart(2, '0').toUpperCase();
+}
