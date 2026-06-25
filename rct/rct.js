@@ -154,7 +154,7 @@ rct.process = function (host, rctElements, iobInstance) {
             });
         }
         requestElements();
-        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 6000);
+        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 3000);
     });
 
     __client.on('error', err => {
@@ -280,7 +280,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
                 // Received valid data, resetting reconnect timeout
                 clearTimeout(__reconnect);
-                __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 6000);
+                __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 3000);
 
                 let txt;
                 if (response.description) {
