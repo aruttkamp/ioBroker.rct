@@ -237,17 +237,6 @@ rct.process = function (host, rctElements, iobInstance) {
                 dataBuffer = dataBuffer.slice(1);
             }
 
-            // Check if this is still necessary:
-            /*
-            if (dataBuffer.length >= 4) {
-                if (dataBuffer[0]==65 && dataBuffer[1]==84 && dataBuffer[2]==43 && dataBuffer[3]==13) {
-                    iobInstance.log.debug('DEBUG skipping 65, 84, 43, 13 sequence');
-                    dataBuffer = dataBuffer.slice(4);
-                    continue; // Schleife neu starten nach dem Schneiden!
-                }
-            }
-            */
-
             // Break if size smaller than minimum size for a RCT packet (5 bytes; header + minimum payload)
             if (dataBuffer.length < 5) {
                 return;
@@ -294,7 +283,7 @@ rct.process = function (host, rctElements, iobInstance) {
 
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
-				let txt;
+	            let txt;
                 if (response.description) {
                     txt = `${response.description}: ${response.result} ${response.unit}`;
                 } else if (response.name) {
@@ -328,15 +317,8 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             } else {
                 // CRC not valid
-				dataBuffer = dataBuffer.slice(1);
-				
+	            dataBuffer = dataBuffer.slice(1);
                 const actualLen = cmdBuffer.length; // Length of faulty packet
-                // let expectedLen = 'UNKNOWN';
-                let isSyncOk = cmdBuffer[0] === 0x2b;
-
-                // if (actualLen >= 3) {
-                //    expectedLen = cmdBuffer.readUInt16BE(1);
-                // }
 
                 // Create CRC error details for faulty packet
                 iobInstance.log.info(
@@ -349,11 +331,11 @@ rct.process = function (host, rctElements, iobInstance) {
     }
 
     function getFrameLength(buf) {
-        const cmd = buf.readInt8(1);
+        const cmd = buf.readUInt8(1);
 
         //check for short or long response
         if (cmd === 3 || cmd === 6) {
-            return 6 + buf.readUInt16LE(2); // long response
+            return 6 + buf.readUInt16BE(2); // long response
         }
         return 5 + buf.readUInt8(2); // short response
     }
