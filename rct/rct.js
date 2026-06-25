@@ -317,7 +317,7 @@ rct.process = function (host, rctElements, iobInstance) {
                 }
             } else {
                 // CRC not valid
-	            dataBuffer = dataBuffer.slice(1);
+                dataBuffer = dataBuffer.slice(1);
                 const actualLen = cmdBuffer.length; // Length of faulty packet
 
                 // Create CRC error details for faulty packet
