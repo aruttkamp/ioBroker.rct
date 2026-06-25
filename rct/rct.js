@@ -278,7 +278,7 @@ rct.process = function (host, rctElements, iobInstance) {
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
 
-				// Received valid data, resetting reconnect timeout
+                // Received valid data, resetting reconnect timeout
                 clearTimeout(__reconnect);
                 __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 6000);
 
@@ -339,7 +339,7 @@ function getFrameLength(buf) {
     return 5 + buf.readUInt8(2); // short response
 }
 
-function parseResponse(buf) {
+function parseResponse(buf, iobInstance) {
     const response = {};
 
     response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
@@ -387,8 +387,12 @@ function parseResponse(buf) {
             if (response.data.length >= 4) {
                 result = response.data.readFloatBE();
             } else {
-                if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: FLOAT data too short (${response.data.length} bytes) for ID ${response.id}`);
-				result = 0;
+                if (DEBUG_CONSOLE) {
+                    iobInstance.log.warn(
+                        `RCT: FLOAT data too short (${response.data.length} bytes) for ID ${response.id}`,
+                    );
+                }
+                result = 0;
 			}
 
             if (response.multiplier !== undefined) {
@@ -505,13 +509,12 @@ function decodeRCTCells(buffer) {
     for (let i = 0; i < cellCount; i++) {
         const offset = i * 4;
 
-        // Little Endian uint32 lesen
+        // Reading big Endian uint32
         const value = buffer.readUInt32BE(offset);
 
-        // Skalierung (Möglichkeit D)
+        // Scaling
         const mV = value / 256;
         const V = mV / 1000;
-        // iobInstance.log.info(V);
 
         result.push({
             zelle: i + 1,
@@ -545,10 +548,10 @@ function byteArray2HexString(arr, format) {
         let str = arr[i].toString(16).padStart(2, '0').toUpperCase();
         if (format && str === '2B') {
             str = ' 2B';
-        } 
+        }
         if (format && str === '2D') {
             str = ' !!!2D!!! ';
-        } 
+        }
         result += str;
     }
     return result;
