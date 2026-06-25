@@ -380,7 +380,6 @@ function parseResponse(buf, iobInstance) {
     response.precision = rct.cmdReverse[response.id].precision;
     response.unit = rct.cmdReverse[response.id].unit || '';
 
-
     let result = 0;
     switch (response.dataType) {
         case 'FLOAT':
@@ -393,7 +392,7 @@ function parseResponse(buf, iobInstance) {
                     );
                 }
                 result = 0;
-			}
+            }
 
             if (response.multiplier !== undefined) {
                 result = result * response.multiplier;
@@ -453,7 +452,7 @@ function parseResponse(buf, iobInstance) {
             response.result = response.data.toString('utf8').replace(/\0/g, '');
             break;
 
-		case 'cell_voltage':
+        case 'cell_voltage':
             response.result = decodeRCTCells(response.data);
             break;
 
