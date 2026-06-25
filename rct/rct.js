@@ -283,8 +283,8 @@ rct.process = function (host, rctElements, iobInstance) {
 
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
-				
-	            let txt;
+
+                let txt;
                 if (response.description) {
                     txt = `${response.description}: ${response.result} ${response.unit}`;
                 } else if (response.name) {
