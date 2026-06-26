@@ -94,12 +94,10 @@ function scheduleBackoff(host, rctElements, iobInstance, reason) {
     const backoffMs = Math.min(900000, baseRefreshMs * Math.pow(3, __consecutiveErrors - 1));
 
     if (__consecutiveErrors === 1) {
-        iobInstance.log.warn(
-            `RCT: ${reason}. Inverter unreachable. Retrying in ${Math.round(backoffMs / 1000)}s...`,
-        );
+        iobInstance.log.warn(`RCT: ${reason}. Inverter unreachable. Retrying in ${Math.round(backoffMs / 1000)}s...`);
     } else if (__consecutiveErrors === 2) {
         iobInstance.log.warn(
-            `RCT: Inverter still offline (Attempt 2). Nighttime or longer Outage detected. Entering silent nighttime backoff mode.`,
+            `RCT: Inverter still offline (Attempt 2). Confirmed outage. Entering silent nighttime backoff mode.`,
         );
     } else {
         iobInstance.log.debug(
@@ -115,7 +113,7 @@ function scheduleBackoff(host, rctElements, iobInstance, reason) {
     if (__client) {
         try {
             __client.destroy();
-        } catch (e) {
+        } catch (_err) {
             // ignore
         }
         __client = null;
@@ -156,7 +154,7 @@ rct.process = function (host, rctElements, iobInstance) {
             );
             __consecutiveErrors = 0;
         }
-        
+
         if (!__connection) {
             iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
             iobInstance.setState('info.connection', true, true);
