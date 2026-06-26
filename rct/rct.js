@@ -16,6 +16,7 @@ let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
 let __connection = false;
+let __consecutiveErrors = 0;
 
 rct.getStateInfo = function (rctName, iobInstance) {
     if (!rct.cmd[rctName]) {
@@ -25,7 +26,7 @@ rct.getStateInfo = function (rctName, iobInstance) {
 
     let name = String(rctName);
 
-    name = name.replace(/]/g, '');
+    name = name.replace(/\]/g, '');
 
     const dotPos = name.indexOf('.');
     const bracketPos = name.indexOf('[');
@@ -85,45 +86,75 @@ rct.end = function (host, iobInstance) {
         }
     }
 };
-rct.process = function (host, rctElements, iobInstance) {
+
+function scheduleBackoff(host, rctElements, iobInstance, reason) {
+    __consecutiveErrors++;
+
+    const baseRefreshMs = iobInstance.config.rct_refresh * 1000;
+    const backoffMs = Math.min(900000, baseRefreshMs * Math.pow(3, __consecutiveErrors - 1));
+
+    if (__consecutiveErrors === 1) {
+        iobInstance.log.warn(`RCT: ${reason}. Inverter unreachable. Retrying in ${Math.round(backoffMs / 1000)}s...`);
+    } else if (__consecutiveErrors === 2) {
+        iobInstance.log.warn(
+            `RCT: Inverter still offline (Attempt 2). Confirmed outage. Entering silent nighttime backoff mode.`,
+        );
+    } else {
+        iobInstance.log.debug(
+            `RCT: Inverter still offline (Attempt ${__consecutiveErrors}). Next retry in ${Math.round(backoffMs / 1000)}s.`,
+        );
+    }
+
+    clearTimeout(__reconnect);
+    clearInterval(__refreshTimeout);
+    __connection = false;
+    iobInstance.setState('info.connection', false, true);
+
     if (__client) {
-        if (!__client.destroyed) {
-            try {
-                __client.destroy();
-                __client = null;
-                iobInstance.log.warn('RCT: Connection error! Previous interval connection not successfully completed!');
-                clearTimeout(__reconnect);
-                clearInterval(__refreshTimeout);
-                __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
-                __connection = false;
-                return;
-            } catch (err) {
-                iobInstance.log.error(
-                    `RCT: Connection error! Previous interval connection not successful and closure failed: ${err}`,
-                );
-            }
+        try {
+            __client.destroy();
+        } catch {
+            // ignore
         }
+        __client = null;
+    }
+
+    __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), backoffMs);
+}
+
+rct.process = function (host, rctElements, iobInstance) {
+    if (__client && !__client.destroyed) {
+        scheduleBackoff(host, rctElements, iobInstance, 'Previous connection hung');
+        return;
     }
 
     if (DEBUG_CONSOLE) {
         iobInstance.log.debug(`RCT: Starting interval connection to inverter at ${host}`);
     }
-    __client = net.createConnection({ host, port: 8899 }, () => {});
-    // Verbindungsüberwachende Maßnahmen
+    __client = net.createConnection({ host, port: 8899 });
+
     if (DEBUG_CONSOLE) {
         __client.on('close', () => {
-            //Test ob eine Verbindung erfolgreich abgebaut wurde.
+            // successful connection close
             iobInstance.log.debug(`RCT: Interval connection to inverter at ${host} closed`);
         });
         __client.on('end', () => {
-            //Test ob eine Verbindung erfolgreich abgebaut werden soll.
+            // closing connection to inverter
             iobInstance.log.debug(`RCT: Terminating interval connection to inverter at ${host}`);
         });
     }
 
+    let pendingEscape = false;
     let dataBuffer = Buffer.alloc(0);
 
     __client.on('connect', () => {
+        if (__consecutiveErrors > 0) {
+            iobInstance.log.info(
+                `RCT: Inverter is back online! (Recovered automatically after ${__consecutiveErrors} failed attempts)`,
+            );
+            __consecutiveErrors = 0;
+        }
+
         if (!__connection) {
             iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
             iobInstance.setState('info.connection', true, true);
@@ -140,10 +171,6 @@ rct.process = function (host, rctElements, iobInstance) {
         }
 
         function requestElements() {
-            /*if (!__client) {
-				if (DEBUG_CONSOLE) iobInstance.log.warn(`RCT: interval connection to inverter at ${host} failed! Data retrieval not possible!`);
-				return;
-			}*/
             if (DEBUG_CONSOLE) {
                 iobInstance.log.debug(`RCT: Requesting elements "${rctElements}" from inverter`);
             }
@@ -157,431 +184,411 @@ rct.process = function (host, rctElements, iobInstance) {
             });
         }
         requestElements();
-        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 2000);
+        __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 3000);
     });
 
     __client.on('error', err => {
-        iobInstance.log.error(`RCT: Connection error, please check configured inverter ip address and network: ${err}`);
-        __client = null;
-        __connection = false;
-        iobInstance.setState('info.connection', false, true);
-        clearTimeout(__reconnect);
-        clearInterval(__refreshTimeout);
-        __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+        scheduleBackoff(host, rctElements, iobInstance, `Network error (${err.code || 'REFUSED'})`);
     });
 
     __client.on('data', data => {
-        function escaping(element, index, array) {
-            if (element === rct.const.stop_byte_value) {
-                // console.log('DEBUG escaping()', element, index, array);
-                if (index < array.length - 1) {
-                    if (
-                        array[index + 1] === rct.const.start_byte_value ||
-                        array[index + 1] === rct.const.stop_byte_value
-                    ) {
-                        // console.log('DEBUG: dropping escape character');
-                        return false; // ignore escape character
-                    }
-                    // console.log('DEBUG: NOT dropping escape character');
-                } else {
-                    iobInstance.log.debug('NOTICE: not handling escape character at end of buffer');
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug(`DEBUG raw data received: + ${data.toString('hex')}`);
+        }
+
+        let unescaped = [];
+        let i = 0;
+
+        // Checking packet for escape byte
+        if (pendingEscape) {
+            const firstByte = data[0];
+            if (firstByte === rct.const.start_byte_value || firstByte === rct.const.stop_byte_value) {
+                // Discarding escape byte and saving the current byte:
+                unescaped.push(firstByte);
+            } else {
+                // No escape byte, using complete packet:
+                unescaped.push(rct.const.stop_byte_value);
+                unescaped.push(firstByte);
+            }
+            pendingEscape = false;
+            i = 1;
+        }
+
+        // Handling data packet
+        while (i < data.length) {
+            const currentByte = data[i];
+
+            if (currentByte === rct.const.stop_byte_value) {
+                // Break if this is the RCT stop-byte
+                if (i === data.length - 1) {
+                    pendingEscape = true;
+                    break;
+                }
+
+                const nextByte = data[i + 1];
+                if (nextByte === rct.const.start_byte_value || nextByte === rct.const.stop_byte_value) {
+                    unescaped.push(nextByte);
+                    i += 2; // Data packet completely handled
+                    continue;
                 }
             }
-            return true;
+
+            unescaped.push(currentByte);
+            i++;
         }
 
-        if (DEBUG_CONSOLE) {
-            iobInstance.log.debug('DEBUG data received', data);
-        }
-        dataBuffer = Buffer.concat([dataBuffer, data.filter(escaping)]);
-
+        // Appending checked bytes to buffer
+        dataBuffer = Buffer.concat([dataBuffer, Buffer.from(unescaped)]);
         handleData();
     });
 
     function handleData() {
-        while (dataBuffer.length && dataBuffer[0] !== 43) {
-            if (dataBuffer[0] !== 0) {
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
-                } // FIXME: regularly skipping 0 values - no idea why
-            }
-            dataBuffer = dataBuffer.slice(1);
-        }
-
-        /*
-		if (dataBuffer.length >= 4) {
-			if (dataBuffer[0]==65 && dataBuffer[1]==84 && dataBuffer[2]==43 && dataBuffer[3]==13) {
-				console.log('DEBUG skipping 65, 84, 43, 13 sequence');
-				dataBuffer = dataBuffer.slice(4);
-			}
-		}
-		*/
-
-        // Early return for no data in buffer
-        if (dataBuffer.length < 5) {
-            return;
-        }
-
-        const frameLength = getFrameLength(dataBuffer);
-
-        // Early return for incomplete frames
-        if (dataBuffer.length < frameLength) {
-            if (DEBUG_CONSOLE) {
-                iobInstance.log.debug('Frame incomplete', {
-                    received: dataBuffer.length,
-                    required: frameLength,
-                    waiting: frameLength - dataBuffer.length,
-                    preview: byteArray2HexString(dataBuffer.slice(0, 8), true),
-                });
-            }
-            return;
-        }
-
-        // Debug-Info for complete frames
-        if (DEBUG_CONSOLE) {
-            iobInstance.log.debug(
-                `Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`,
-            );
-        }
-
-        const cmdBuffer = dataBuffer.slice(0, frameLength);
-        dataBuffer = dataBuffer.slice(frameLength);
-
-        const response = parseResponse(cmdBuffer);
-
-        if (response.crcOk) {
-            let txt;
-            if (response.description) {
-                txt = `${response.description}: ${response.result} ${response.unit}`;
-            } else if (response.name) {
-                txt = `${response.name}: ${response.result} ${response.unit}`;
-            } else {
-                txt = response.infoText;
-            }
-
-            if (response.name && rctElements.includes(response.name)) {
-                //iobInstance.log.debug(`RCT: result: ${txt}`);
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug(`RCT: received: ${txt}`);
+        // Using a loop to empty buffer until no data left
+        while (true) {
+            // Skip everything before RCT start-byte '+' (ASCII 43)
+            while (dataBuffer.length && dataBuffer[0] !== 43) {
+                if (dataBuffer[0] !== 0) {
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug('DEBUG: skipping', dataBuffer[0]);
+                    }
                 }
-                const stateInfo = rct.getStateInfo(response.name, iobInstance);
-                if (stateInfo) {
-                    if (response.dataType == 'cell_voltage') {
-                        let i = 0;
-                        response.result.forEach(r => {
-                            iobInstance.setState(`${stateInfo.stateFullName}_${i}`, parseFloat(r.V.toFixed(3)), true);
+                dataBuffer = dataBuffer.slice(1);
+            }
 
-                            //iobInstance.log.info(
-                            //    `${r.zelle.toString().padStart(5)} | ` +
-                            //    `${r.rohwert.toString().padStart(9)} | ` +
-                            //    `${r.mV.toFixed(2).padStart(8)} | ` +
-                            //    `${r.V.toFixed(3)}`
-                            //);
-                            i++;
-                        });
-                    } else {
-                        iobInstance.setState(stateInfo.stateFullName, response.result, true);
+            // Break if size smaller than minimum size for a RCT packet (5 bytes: header + minimum payload)
+            if (dataBuffer.length < 5) {
+                return;
+            }
+
+            // 43 = '+', 1 = read command, 4 = length (0 Payload Bytes)
+            // In case the inverter mirrors our read request, delete it
+            if (dataBuffer[0] === 43 && dataBuffer[1] === 1 && dataBuffer[2] === 4) {
+                if (dataBuffer.length >= 9) {
+                    const echoedId = byteArray2HexString(dataBuffer.slice(3, 7));
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug(`[Echo Filter] Dropped reflected read request for ID ${echoedId}`);
+                    }
+                    dataBuffer = dataBuffer.slice(9);
+                    continue;
+                }
+            }
+            // ----------------------------------------------
+
+            // Check expected frame length
+            const frameLength = getFrameLength(dataBuffer);
+
+            // Sanity-check against corrupt length data in header bytes
+            if (frameLength > 2048 || frameLength < 5) {
+                if (DEBUG_CONSOLE) {
+                    iobInstance.log.debug(`DEBUG: Invalid frame length detected (${frameLength}). Dropping sync byte.`);
+                }
+                dataBuffer = dataBuffer.slice(1);
+                continue;
+            }
+
+            // If current packet is not completely in buffer yet:
+            // break and wait for missing data
+            if (dataBuffer.length < frameLength) {
+                if (DEBUG_CONSOLE) {
+                    iobInstance.log.debug('Frame incomplete', {
+                        received: dataBuffer.length,
+                        required: frameLength,
+                        waiting: frameLength - dataBuffer.length,
+                        preview: byteArray2HexString(dataBuffer.slice(0, 8), true),
+                    });
+                }
+                return;
+            }
+
+            // Debug info for completed frames
+            if (DEBUG_CONSOLE) {
+                iobInstance.log.debug(
+                    `Processing frame: size=${frameLength}, type=${frameLength === 6 ? 'short' : 'long'}`,
+                );
+            }
+
+            const cmdBuffer = dataBuffer.slice(0, frameLength);
+            const response = parseResponse(cmdBuffer, iobInstance);
+
+            if (response.crcOk) {
+                dataBuffer = dataBuffer.slice(frameLength);
+
+                let txt;
+                if (response.description) {
+                    txt = `${response.description}: ${response.result} ${response.unit}`;
+                } else if (response.name) {
+                    txt = `${response.name}: ${response.result} ${response.unit}`;
+                } else {
+                    txt = response.infoText;
+                }
+
+                if (response.name && rctElements.includes(response.name)) {
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug(`RCT: received: ${txt}`);
+                    }
+                    const stateInfo = rct.getStateInfo(response.name, iobInstance);
+                    if (stateInfo) {
+                        if (response.dataType === 'cell_voltage') {
+                            response.result.forEach((r, i) => {
+                                iobInstance.setState(
+                                    `${stateInfo.stateFullName}_${i}`,
+                                    parseFloat(r.V.toFixed(3)),
+                                    true,
+                                );
+                            });
+                        } else {
+                            iobInstance.setState(stateInfo.stateFullName, response.result, true);
+                        }
+                    }
+                } else {
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
                     }
                 }
             } else {
+                // CRC not valid
+                dataBuffer = dataBuffer.slice(1);
+                const actualLen = cmdBuffer.length; // Length of faulty packet
+
+                // Create CRC error details for faulty packet
                 if (DEBUG_CONSOLE) {
-                    iobInstance.log.debug(`RCT: received, but not requested: ${txt}`);
+                    iobInstance.log.debug(
+                        `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
+                            ` ├─ Extracted frame: ${actualLen} bytes\n` +
+                            ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
+                    );
                 }
             }
-        } else {
-            iobInstance.log.debug('NOTICE: CRC not valid', cmdBuffer, response.id);
-        }
-
-        if (response.crcOk) {
-            handleData(); // continue and check if new data is available;
         }
     }
+};
 
-    function getFrameLength(buf) {
-        const cmd = buf.readInt8(1);
+function getFrameLength(buf) {
+    const cmd = buf.readUInt8(1);
+    //check for short or long response
+    if (cmd === 3 || cmd === 6) {
+        return 6 + buf.readUInt16BE(2); // long response
+    }
+    return 5 + buf.readUInt8(2); // short response
+}
 
-        //check for short or long response
-        if (cmd === 3 || cmd === 6) {
-            return 6 + buf.readUInt16LE(2); // long response
-        }
-        return 5 + buf.readUInt8(2); // short response
+function parseResponse(buf, iobInstance) {
+    const response = {};
+
+    response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
+
+    response.cmd = buf.readUInt8(1);
+
+    if (response.cmd === 3 || response.cmd === 6) {
+        // long response
+        response.length = buf.readUInt16BE(2);
+        response.id = byteArray2HexString(buf.slice(4, 8));
+        response.data = buf.slice(8, -2);
+    } else {
+        // short response
+        response.length = buf.readUInt8(2);
+        response.id = byteArray2HexString(buf.slice(3, 7));
+        response.data = buf.slice(7, -2);
     }
 
-    function parseResponse(buf) {
-        const response = {};
+    response.infoText = `${response.cmd} ${response.length - 4} ${response.id}`;
 
-        response.crcOk = buf.slice(-2).readUInt16BE() === rct.crc(buf.slice(1, -2));
-
-        response.cmd = buf.readInt8(1);
-
-        if (response.cmd === 3 || response.cmd === 6) {
-            // long response
-            response.length = buf.readUInt16BE(2);
-            response.id = byteArray2HexString(buf.slice(4, 8));
-            response.data = buf.slice(8, -2);
-        } else {
-            response.length = buf.readUInt8(2);
-            response.id = byteArray2HexString(buf.slice(3, 7));
-            response.data = buf.slice(7, -2);
-        }
-
-        response.infoText = `${response.cmd} ${response.length - 4} ${response.id}`;
-
-        // in case CRC is not ok, return here (as data might be faulty)
-        if (!response.crcOk) {
-            return response;
-        }
-
-        if (!rct.cmdReverse[response.id]) {
-            if (DEBUG_CONSOLE) {
-                iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
-            }
-            return response;
-        }
-
-        response.name = rct.cmdReverse[response.id].name;
-        response.description = rct.cmdReverse[response.id].description;
-        response.dataType = rct.cmdReverse[response.id].type;
-        response.dataLength = rct.cmdReverse[response.id].length;
-        response.multiplier = rct.cmdReverse[response.id].multiplier;
-        response.precision = rct.cmdReverse[response.id].precision;
-        response.unit = rct.cmdReverse[response.id].unit || '';
-
-        //		if (!response.dataType) {
-        //			switch (response.length - 4) {
-        //				case 1: response.dataType = 'uint1'; break;
-        //				case 2: response.dataType = 'uint2'; break;
-        //				case 4: response.dataType = 'float'; break;
-        //				default: console.log('DEBUG unknown dataType', response.length - 4); break;
-        //			}
-        //		}
-
-        //		if (response.dataType === 'uint4' && response.data.length !== 4) {
-        //			console.log('DEBUG: wrong length for uint4: ', response);
-        //			response.dataType = '';
-        //		}
-
-        //		if ((response.dataType === 'float' && response.data.length != 4) ||
-        //			(response.dataType === 'uint1' && response.data.length != 1) ||
-        //			(response.dataType === 'uint2' && response.data.length != 2) ||
-        //			(response.dataType === 'uint4' && response.data.length != 4)) {
-        //			console.log('NOTICE: wrong length for data type', response);
-        //			console.log('NOTICE: ', response.data.length);
-        //			response.dataType = '';
-        //		}
-
-        let result;
-        switch (response.dataType) {
-            case 'FLOAT':
-                //console.log(response.name);
-                //console.log('response.data : ' + response.data);
-                //console.log('länge: ' + response.data.length);
-                if (response.data.length === 4) {
-                    result = response.data.readFloatBE();
-                }
-                //console.log('result: ' + result);
-                //console.log('multiplier: ' + response.multiplier);
-                //if (response.multiplier !== undefinded) response.mulitplier=100;
-                if (response.multiplier !== undefined) {
-                    result = result * response.multiplier;
-                }
-                response.result = floatPrecision(result, response.precision);
-                break;
-            case 'UINT8':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt8();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT8':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt8();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'UINT16':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt16LE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT16':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt16BE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'UINT32':
-                if (response.data.length > 0) {
-                    response.result = response.data.readUInt32LE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'INT32':
-                if (response.data.length > 0) {
-                    response.result = response.data.readInt32BE();
-                } else {
-                    response.result = 0;
-                }
-                break;
-            case 'STRING':
-                response.result = response.data.Buffer;
-                break;
-            case 'cell_voltage':
-                response.result = decodeRCTCells(response.data);
-                break;
-            case 'RAW':
-                iobInstance.log.info('RAW');
-                iobInstance.log.info(`response.data : ${response.data}`);
-                iobInstance.log.info(`response.data Hex : ${response.data.toString('hex')}`);
-                iobInstance.log.info(`response.data Buf : ${response.data.Buffer}`);
-                response.result = response.data.toString('hex');
-                break;
-            case 'ENUM':
-                break;
-            default:
-                response.result = '';
-                break;
-        }
-
-        //console.log("DEBUG response:",response);
+    // in case CRC is not ok, return here (as data might be faulty)
+    if (!response.crcOk) {
         return response;
     }
 
-    function floatPrecision(number, precision) {
-        if (precision === undefined) {
-            precision = 1;
+    if (!rct.cmdReverse[response.id]) {
+        if (DEBUG_CONSOLE) {
+            iobInstance.log.debug(`RCT: unknown response.id ${response.id}`);
         }
-        return Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision);
+        return response;
     }
 
-    function getFrame(command, id, data = '') {
-        let sTmp = '';
-        sTmp += command;
-        sTmp += byte2HexString((id.length + data.length) / 2);
-        sTmp += id;
-        sTmp += data;
+    response.name = rct.cmdReverse[response.id].name;
+    response.description = rct.cmdReverse[response.id].description;
+    response.dataType = rct.cmdReverse[response.id].type;
+    response.dataLength = rct.cmdReverse[response.id].length;
+    response.multiplier = rct.cmdReverse[response.id].multiplier;
+    response.precision = rct.cmdReverse[response.id].precision;
+    response.unit = rct.cmdReverse[response.id].unit || '';
 
-        const baFrame = HexString2ByteArray(rct.const.start_byte + sTmp);
-
-        //console.log('DEBUG: baFrame', rct.const.start_byte + sTmp);
-
-        const crc = rct.crc(HexString2ByteArray(sTmp));
-        baFrame.push(crc >> 8);
-        baFrame.push(crc & 0xff);
-
-        // console.log("DEBUG: getFrame()",byteArray2HexString(baFrame));
-        return Buffer.from(baFrame);
-    }
-
-    function decodeRCTCells(buffer) {
-        const result = [];
-        // 4 Bytes pro Wert
-        const cellCount = Math.floor(buffer.length / 4);
-
-        for (let i = 0; i < cellCount; i++) {
-            const offset = i * 4;
-
-            // Little Endian uint32 lesen
-            const value = buffer.readUInt32LE(offset);
-
-            // Skalierung (Möglichkeit D)
-            const mV = value / 256;
-            const V = mV / 1000;
-            //iobInstance.log.info(V);
-
-            result.push({
-                zelle: i + 1,
-                rohwert: value,
-                mV: mV,
-                V: V,
-            });
-        }
-
-        return result;
-
-        //for (let i = 0; i < totalCells; i++) {
-        // Ein Float32 (4 Bytes) pro Zelle auslesen
-        // RCT nutzt meist Little-Endian (readFloatLE)
-        //    try {
-        //        let voltage = buffer.readFloatLE(i * 4);
-
-        // Plausibilitäts-Check: LiFePO4 Zellen liegen zwischen 2.0V und 3.7V
-        //        if (voltage > 0 && voltage < 5) {
-        //setState(`javascript.0.RCT_Batterie.Zelle_${(i + 1).toString().padStart(2, '0')}`, parseFloat(voltage.toFixed(3)), true);
-        //            iobInstance.log.info('cell voltage :' && parseFloat(voltage.toFixed(3)))
-        //        }
-        //    } catch (e) {
-        //        iobInstance.log.info(`Fehler beim Lesen von Zelle ${i + 1}: ` + e);
-        //    }
-        //}
-    }
-
-    function HexString2ByteArray(str) {
-        const result = [];
-        // Ignore any trailing single digit; I don't know what your needs
-        // are for this case, so you may want to throw an error or convert
-        // the lone digit depending on your needs.
-        str = str.replace(' ', '');
-
-        while (str.length >= 2) {
-            result.push(parseInt(str.substring(0, 2), 16));
-            str = str.substring(2, str.length);
-        }
-
-        return result;
-    }
-
-    function byteArray2HexString(arr, format) {
-        let result = '';
-        for (const i in arr) {
-            if (Object.prototype.hasOwnProperty.call(arr, i)) {
-                let str = arr[i].toString(16);
-                // Pad to two digits, truncate to last two if too long.  Again,
-                // I'm not sure what your needs are for the case, you may want
-                // to handle errors in some other way.
-                str =
-                    str.length === 0
-                        ? '00'
-                        : str.length === 1
-                          ? `0${str}`
-                          : str.length === 2
-                            ? str
-                            : str.substring(str.length - 2, str.length);
-
-                str = str.toUpperCase();
-                if (format && str === '2B') {
-                    str = ' 2B';
-                } // seperate commands with leading space
-                if (format && str === '2D') {
-                    str = ' !!!2D!!! ';
-                } // mark stop/escape byte
-                result += str;
+    let result = 0;
+    switch (response.dataType) {
+        case 'FLOAT':
+            if (response.data.length >= 4) {
+                result = response.data.readFloatBE();
+            } else {
+                if (DEBUG_CONSOLE) {
+                    iobInstance.log.warn(
+                        `RCT: FLOAT data too short (${response.data.length} bytes) for ID ${response.id}`,
+                    );
+                }
+                result = 0;
             }
+
+            if (response.multiplier !== undefined) {
+                result = result * response.multiplier;
+            }
+            response.result = floatPrecision(result, response.precision);
+            break;
+
+        case 'UINT8':
+            if (response.data.length >= 1) {
+                response.result = response.data.readUInt8();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT8':
+            if (response.data.length >= 1) {
+                response.result = response.data.readInt8();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'UINT16':
+            if (response.data.length >= 2) {
+                response.result = response.data.readUInt16BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT16':
+            if (response.data.length >= 2) {
+                response.result = response.data.readInt16BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'UINT32':
+            if (response.data.length >= 4) {
+                response.result = response.data.readUInt32BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'INT32':
+            if (response.data.length >= 4) {
+                response.result = response.data.readInt32BE();
+            } else {
+                response.result = 0;
+            }
+            break;
+
+        case 'STRING':
+            response.result = response.data.toString('utf8').replace(/\0/g, '');
+            break;
+
+        case 'cell_voltage':
+            response.result = decodeRCTCells(response.data);
+            break;
+
+        case 'RAW':
+            if (DEBUG_CONSOLE) {
+                iobInstance.log.debug(`RAW response for ${response.name}`);
+                iobInstance.log.debug(`Hex Dump: ${response.data.toString('hex')}`);
+            }
+            response.result = response.data.toString('hex');
+            break;
+
+        case 'ENUM':
+            response.result = '';
+            break;
+
+        default:
+            response.result = '';
+            break;
+    }
+
+    // iobInstance.log.debug("DEBUG response:",response);
+    return response;
+}
+
+function floatPrecision(number, precision) {
+    if (precision === undefined) {
+        precision = 1;
+    }
+    return Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision);
+}
+
+function getFrame(command, id, data = '') {
+    let sTmp = '';
+    sTmp += command;
+    sTmp += byte2HexString((id.length + data.length) / 2);
+    sTmp += id;
+    sTmp += data;
+
+    const baFrame = HexString2ByteArray(rct.const.start_byte + sTmp);
+
+    const crc = rct.crc(HexString2ByteArray(sTmp));
+    baFrame.push(crc >> 8);
+    baFrame.push(crc & 0xff);
+
+    return Buffer.from(baFrame);
+}
+
+function decodeRCTCells(buffer) {
+    const result = [];
+    // 4 bytes per value
+    const cellCount = Math.floor(buffer.length / 4);
+
+    for (let i = 0; i < cellCount; i++) {
+        const offset = i * 4;
+
+        // Reading big Endian uint32
+        const value = buffer.readUInt32BE(offset);
+
+        // Scaling
+        const mV = value / 256;
+        const V = mV / 1000;
+
+        result.push({
+            zelle: i + 1,
+            rohwert: value,
+            mV: mV,
+            V: V,
+        });
+    }
+
+    return result;
+}
+
+function HexString2ByteArray(str) {
+    const result = [];
+    // Ignore any trailing single digit; I don't know what your needs
+    // are for this case, so you may want to throw an error or convert
+    // the lone digit depending on your needs.
+    str = str.replace(' ', '');
+
+    while (str.length >= 2) {
+        result.push(parseInt(str.substring(0, 2), 16));
+        str = str.substring(2, str.length);
+    }
+
+    return result;
+}
+
+function byteArray2HexString(arr, format) {
+    let result = '';
+    for (let i = 0; i < arr.length; i++) {
+        let str = arr[i].toString(16).padStart(2, '0').toUpperCase();
+        if (format && str === '2B') {
+            str = ' 2B';
         }
-        return result;
+        if (format && str === '2D') {
+            str = ' !!!2D!!! ';
+        }
+        result += str;
     }
+    return result;
+}
 
-    function byte2HexString(byte) {
-        let result = byte.toString(16);
-
-        // Pad to two digits, truncate to last two if too long.  Again,
-        // I'm not sure what your needs are for the case, you may want
-        // to handle errors in some other way.
-        result =
-            result.length === 0
-                ? '00'
-                : result.length === 1
-                  ? `0${result}`
-                  : result.length === 2
-                    ? result
-                    : result.substring(result.length - 2, result.length);
-
-        return result;
-    }
-};
+function byte2HexString(byte) {
+    return byte.toString(16).padStart(2, '0').toUpperCase();
+}
