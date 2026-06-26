@@ -27,10 +27,10 @@ Read values of a RCT Power photovoltaics power converter.
 
 ## REMARKS
 
-IMPORTANT: The RCT Inverter cannot distinguish between different clients asking for data.
-Opening the "RCT Power App" on a smartphone / tablet or running other adapters asking for data (like EVCC) while this adapter is running, always leads to the adapter receiving unrequested data (visible in debug mode).
-Starting with v1.2.29, this data will be discarded by the adapter and should not affect functionality anymore.
-Still this is not recommended for a prolongued period!
+**IMPORTANT:
+The RCT Inverter cannot distinguish between different clients asking for data.**
+Opening the "RCT Power App" on a smartphone / tablet or running other adapters sending queries to the inverter (like EVCC), always leads to the adapter receiving unrequested data (visible in debug mode).
+This data will be discarded and only requested data will be handled.
 
 By using the "RCT Elements" field, one may select which data shall be read from the power converter.
 If nothing is entered here, default will be used:
