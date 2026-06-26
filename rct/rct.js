@@ -284,9 +284,6 @@ rct.process = function (host, rctElements, iobInstance) {
                     }
                     continue;
                 }
-                // Received valid data, resetting reconnect timeout
-                clearTimeout(__reconnect);
-                __reconnect = iobInstance.setTimeout(() => rct.reconnect(host, iobInstance), 3000);
 
                 let txt;
                 if (response.description) {
