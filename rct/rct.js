@@ -113,7 +113,7 @@ function scheduleBackoff(host, rctElements, iobInstance, reason) {
     if (__client) {
         try {
             __client.destroy();
-        } catch (_err) {
+        } catch {
             // ignore
         }
         __client = null;
