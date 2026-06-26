@@ -16,6 +16,7 @@ let __refreshTimeout = null;
 let __reconnect = null;
 let __client = null;
 let __connection = false;
+let __consecutiveErrors = 0;
 
 rct.getStateInfo = function (rctName, iobInstance) {
     if (!rct.cmd[rctName]) {
@@ -85,24 +86,48 @@ rct.end = function (host, iobInstance) {
         }
     }
 };
-rct.process = function (host, rctElements, iobInstance) {
+
+function scheduleBackoff(host, rctElements, iobInstance, reason) {
+    __consecutiveErrors++;
+
+    const baseRefreshMs = iobInstance.config.rct_refresh * 1000;
+    const backoffMs = Math.min(900000, baseRefreshMs * Math.pow(3, __consecutiveErrors - 1));
+
+    if (__consecutiveErrors === 1) {
+        iobInstance.log.warn(
+            `RCT: ${reason}. Inverter unreachable. Retrying in ${Math.round(backoffMs / 1000)}s...`,
+        );
+    } else if (__consecutiveErrors === 2) {
+        iobInstance.log.warn(
+            `RCT: Inverter still offline (Attempt 2). Nighttime or longer Outage detected. Entering silent nighttime backoff mode.`,
+        );
+    } else {
+        iobInstance.log.debug(
+            `RCT: Inverter still offline (Attempt ${__consecutiveErrors}). Next retry in ${Math.round(backoffMs / 1000)}s.`,
+        );
+    }
+
+    clearTimeout(__reconnect);
+    clearInterval(__refreshTimeout);
+    __connection = false;
+    iobInstance.setState('info.connection', false, true);
+
     if (__client) {
-        if (!__client.destroyed) {
-            try {
-                __client.destroy();
-                __client = null;
-                iobInstance.log.warn('RCT: Connection error! Previous interval connection not successfully completed!');
-                clearTimeout(__reconnect);
-                clearInterval(__refreshTimeout);
-                __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 60000);
-                __connection = false;
-                return;
-            } catch (err) {
-                iobInstance.log.error(
-                    `RCT: Connection error! Previous interval connection not successful and closure failed: ${err}`,
-                );
-            }
+        try {
+            __client.destroy();
+        } catch (e) {
+            // ignore
         }
+        __client = null;
+    }
+
+    __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), backoffMs);
+}
+
+rct.process = function (host, rctElements, iobInstance) {
+    if (__client && !__client.destroyed) {
+        scheduleBackoff(host, rctElements, iobInstance, 'Previous connection hung');
+        return;
     }
 
     if (DEBUG_CONSOLE) {
@@ -125,6 +150,13 @@ rct.process = function (host, rctElements, iobInstance) {
     let dataBuffer = Buffer.alloc(0);
 
     __client.on('connect', () => {
+        if (__consecutiveErrors > 0) {
+            iobInstance.log.info(
+                `RCT: Inverter is back online! (Recovered automatically after ${__consecutiveErrors} failed attempts)`,
+            );
+            __consecutiveErrors = 0;
+        }
+        
         if (!__connection) {
             iobInstance.log.info(`RCT: Initial connection successful to inverter at ${host}!`);
             iobInstance.setState('info.connection', true, true);
@@ -158,13 +190,7 @@ rct.process = function (host, rctElements, iobInstance) {
     });
 
     __client.on('error', err => {
-        iobInstance.log.error(`RCT: Connection error, please check configured inverter ip address and network: ${err}`);
-        __client = null;
-        __connection = false;
-        iobInstance.setState('info.connection', false, true);
-        clearTimeout(__reconnect);
-        clearInterval(__refreshTimeout);
-        __refreshTimeout = iobInstance.setTimeout(() => rct.process(host, rctElements, iobInstance), 120000);
+        scheduleBackoff(host, rctElements, iobInstance, `Network error (${err.code || 'REFUSED'})`);
     });
 
     __client.on('data', data => {
