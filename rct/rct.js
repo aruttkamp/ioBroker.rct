@@ -323,11 +323,13 @@ rct.process = function (host, rctElements, iobInstance) {
                 const actualLen = cmdBuffer.length; // Length of faulty packet
 
                 // Create CRC error details for faulty packet
-                iobInstance.log.debug(
+                if (DEBUG_CONSOLE) {
+                    iobInstance.log.debug(
                     `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
                         ` ├─ Extracted frame: ${actualLen} bytes\n` +
                         ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
-                );
+                    );
+                }
             }
         }
     }
