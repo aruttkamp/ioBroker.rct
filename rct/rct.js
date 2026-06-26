@@ -325,9 +325,9 @@ rct.process = function (host, rctElements, iobInstance) {
                 // Create CRC error details for faulty packet
                 if (DEBUG_CONSOLE) {
                     iobInstance.log.debug(
-                    `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
-                        ` ├─ Extracted frame: ${actualLen} bytes\n` +
-                        ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
+                        `[Stream recovery] False Start detected. Dropped 0x2b. \n` +
+                            ` ├─ Extracted frame: ${actualLen} bytes\n` +
+                            ` └─ Hex-Dump (Top20): ${cmdBuffer.subarray(0, 20).toString('hex')}`,
                     );
                 }
             }
