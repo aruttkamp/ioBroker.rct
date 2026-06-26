@@ -236,6 +236,20 @@ rct.process = function (host, rctElements, iobInstance) {
                 return;
             }
 
+            // 43 = '+', 1 = read command, 4 = length (0 Payload Bytes)
+            // In case the inverter mirrors our read request, delete it
+            if (dataBuffer[0] === 43 && dataBuffer[1] === 1 && dataBuffer[2] === 4) {
+                if (dataBuffer.length >= 9) {
+                    const echoedId = byteArray2HexString(dataBuffer.slice(3, 7));
+                    if (DEBUG_CONSOLE) {
+                        iobInstance.log.debug(`[Echo Filter] Dropped reflected read request for ID ${echoedId}`);
+                    }
+                    dataBuffer = dataBuffer.slice(9);
+                    continue;
+                }
+            }
+            // ----------------------------------------------
+
             // Check expected frame length
             const frameLength = getFrameLength(dataBuffer);
 
@@ -269,21 +283,11 @@ rct.process = function (host, rctElements, iobInstance) {
                 );
             }
 
-            // Slicing packet from buffer
             const cmdBuffer = dataBuffer.slice(0, frameLength);
-
-            // Parse packet
             const response = parseResponse(cmdBuffer, iobInstance);
 
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
-
-                if (response.cmd === 0x01) {
-                    if (DEBUG_CONSOLE) {
-                        iobInstance.log.debug(`[Echo Filter] Ignored reflected read request for ID ${response.id}`);
-                    }
-                    continue;
-                }
 
                 let txt;
                 if (response.description) {
