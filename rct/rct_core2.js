@@ -1076,6 +1076,8 @@ rct.cmdReverse['3503B92D'] = {
 rct.cmdReverse['381B8BF9'] = {
     name: 'battery.soh',
     type: 'FLOAT',
+    precision: 1,
+    multiplier: 100,
     unit: '%',
     description: 'SOH (State of Health)',
     ioBrokerType: 'number',
