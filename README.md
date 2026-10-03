@@ -78,7 +78,7 @@ None
 - (Andreas Ruttkamp) Update dependencies
 - (Andreas Ruttkamp) Nodejs 26 for testiung included
 - (Andreas Ruttkamp) correct email in licence
-- (Andreas Ruttkamp) add missing data types 
+- (Andreas Ruttkamp) add missing data types [#361](https://github.com/aruttkamp/ioBroker.rct/issues/361)
 - (Andreas Ruttkamp) add battery.cells_stat[n] ( shows 12 Datapoints u-min,u_max,t_min,t_max,_index,_time and _value)
 - (Andreas Ruttkamp) add battery.cells_[n] additionally write the temperature
 
