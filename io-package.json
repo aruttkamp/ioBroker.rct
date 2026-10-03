@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "rct",
-    "version": "1.2.29",
+    "version": "1.2.30",
     "news": {
+      "1.2.30": {
+        "en": "Update dependencies\nNodejs 26 for testiung included\ncorrect email in licence\nadd missing data types [#361](https://github.com/aruttkamp/ioBroker.rct/issues/361)\nadd battery.cells_stat[n] ( shows 12 Datapoints u-min,u_max,t_min,t_max,_index,_time and _value)\nadd battery.cells_[n] additionally write the temperature",
+        "de": "Abhängigkeiten updaten\nKnoten 26 zum Testen enthalten\nRichtige Lizenz-E-Mail\nFehlende Datentypen [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nadd battery.cells_stat [n] (zeigt 12 Datenpunkte u-min, u_max, t_min, t_max, _index, _time und _value)\nAkkuzellen hinzufügen_ [n] zusätzlich Temperatur",
+        "ru": "Обновить зависимости\nВключены узлы 26 для тестирования\nправильный адрес электронной почты в лицензии\nдобавить недостающие типы данных [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nдобавьте battery.cells_stat [n] (показывает 12 точек данных u-min, u_max, t_min, t_max, _index, _time и _value)\nдобавьте battery.cells_ [n] дополнительно напишите температуру",
+        "pt": "Atualizar dependências\nInclui o Nodejs 26 para teste\nemail correto na licença\nadicione dados faltantes [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nadicionar battery.cells_stat [n] (mostra 12 pontos u-min, u_max, t_min, t_max, _index, _time e _value)\nadicione battery.cells_ [n] e escreva a temperatura",
+        "nl": "Afhankelijkheden bijwerken\nNodes 26 om te testen inbegrepen\ncorrect e-mailadres in licentie\nontbrekende gegevenstypen toevoegen [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nbattery.cells_stat [n] toevoegen (toont 12 datapunten u-min, u_max, t_min, t_max, _index, _time en _value)\nbatterij toevoegen. Cells_ [n] schrijf bovendien de temperatuur op",
+        "fr": "Mettre à jour les dépendances\nNodejs 26 pour les tests inclus\ne-mail correct dans la licence\najout de types de données [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nadd battery.cells_stat [n] (affiche 12 points de données u-min, u_max, t_min, t_max, _index, _time et _value)\nadd battery.cells_ [n] écrivez en plus la température",
+        "it": "Aggiorna dipendenze\nNodi 26 per i test inclusi\nemail corretta in licenza\nmancano tipi di dati [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\naggiungi battery.cells_stat [n] (mostra 12 punti dati u-min, u_max, t_min, t_max, _index, _time e _value)\nadd battery.cells_ [n] scriva inoltre la temperatura",
+        "es": "Actualizar dependencias\nNodo 26 de prueba incluido\nemail correcto en la licencia\nañadir tipos de datos faltantes [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nañadir battery.cells_stat [n] (muestra 12 puntos de datos u-min, u_max, t_min, t_max, _index, _time y _value)\nañadir batería.celdas_ [n] escriba además la temperatura",
+        "pl": "Zaktualizuj zależności\nNodejs 26 do testowania w zestawie\npoprawna wiadomość e-mail w licencji\ndodaj brakujące typy danych [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\ndodaj battery.cells_stat [n] (pokazuje 12 punktów danych u-min, u_max, t_min, t_max, _index, _time i _value)\ndodaj battery.cells_ [n] dodatkowo zapisz temperaturę",
+        "uk": "Оновлення залежностей\nNodejs 26 для тестування включено\nправильна електронна пошта в ліцензії\nдодати відсутні типи даних [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\nдодати battery.cells_stat [n] (показує 12 точок даних u-min, u_max, t_min, t_max, _index, _time та _value)\nдодати battery.cells_ [n] додатково запишіть температуру",
+        "zh-cn": "更新依赖关系\n包括用于测试的 Nodejs 26\n许可证中的电子邮件地址正确\n添加缺失的数据类型 [#361] (https://github.com/aruttkamp/ioBroker.rct/issues/361)\n添加 battery.cells_stat [n]（显示 12 个数据点 u-min、u_max、t_min、t_max、_index、_time 和 _value）\n添加电池。cells_ [n] 另外写下温度"
+      },
       "1.2.29": {
         "en": "Update dependencies",
         "de": "Abhängigkeiten aktualisieren",
@@ -80,19 +93,6 @@
         "pl": "dev zaktualizowane zależności\nminimalna wersja dla admin teraz 7.6.17\nminimalna wersja sterownika js teraz 6.0.11",
         "uk": "dev залежності оновлені\nмінімальна версія для адміністратора тепер 7.6.17\nмінімальна версія для контролера js тепер 6.0.11",
         "zh-cn": "更新非依赖性\n最低版本,目前为7.6.17\njs 控制器现在最小版本 6.0.11"
-      },
-      "1.2.23": {
-        "en": "enhancement issue #241",
-        "de": "erweiterung problem #241",
-        "ru": "проблема улучшения #241",
-        "pt": "problema de realce #241",
-        "nl": "verbetering probleem #241",
-        "fr": "numéro d'amélioration #241",
-        "it": "problema di valorizzazione #241",
-        "es": "cuestión de mejora #241",
-        "pl": "numer rozszerzenia # 241",
-        "uk": "питання підвищення #241",
-        "zh-cn": "增强问题 241"
       }
     },
     "titleLang": {
