@@ -86,17 +86,18 @@ class Rct extends utils.Adapter {
                     const type = rct.cmdReverse[rct_id].ioBrokerType;
 
                     //const common = { name, type: 'number', unit, role: 'value', read: true, write: false };
-                    const common = { name, type, unit, role: 'value', read: true, write: false };
+                    const role = type === 'boolean' ? 'indicator' : 'value';
+                    const common = { name, type, unit, role, read: true, write: false };
                     if (unit === '%') {
                         common.min = 0;
                         common.max = 100;
                     }
-                    if (rct_type == 'cell_voltage' || rct_type == 'cell_resist') {
-                        const cells = 24;
-                        for (let i = 0; i < cells; i++) {
-                            await this.setObjectNotExistsAsync(`${stateFullName}_${i}`, {
+                    const subStates = rct.getSubStates(rct_type);
+                    if (subStates) {
+                        for (const s of subStates) {
+                            await this.setObjectNotExistsAsync(`${stateFullName}${s.suffix}`, {
                                 type: 'state',
-                                common,
+                                common: { ...common, unit: s.unit },
                                 native: {},
                             });
                         }

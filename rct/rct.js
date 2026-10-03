@@ -5,6 +5,10 @@ module.exports = rct;
 
 // flag for local debugging
 let DEBUG_CONSOLE = false;
+
+const CELLS_PER_MODULE = 24;
+const CELL_STAT_ENTRIES = ['u_min', 'u_max', 't_min', 't_max'];
+
 rct.initialize = function (debug, iobInstance) {
     DEBUG_CONSOLE = debug;
     if (DEBUG_CONSOLE && iobInstance) {
@@ -313,11 +317,12 @@ rct.process = function (host, rctElements, iobInstance) {
             if (response.crcOk) {
                 dataBuffer = dataBuffer.slice(frameLength);
 
+                const value = typeof response.result === 'object' ? JSON.stringify(response.result) : response.result;
                 let txt;
                 if (response.description) {
-                    txt = `${response.description}: ${response.result} ${response.unit}`;
+                    txt = `${response.description}: ${value} ${response.unit}`;
                 } else if (response.name) {
-                    txt = `${response.name}: ${response.result} ${response.unit}`;
+                    txt = `${response.name}: ${value} ${response.unit}`;
                 } else {
                     txt = response.infoText;
                 }
@@ -327,26 +332,18 @@ rct.process = function (host, rctElements, iobInstance) {
                         iobInstance.log.debug(`RCT: received: ${txt}`);
                     }
                     const stateInfo = rct.getStateInfo(response.name, iobInstance);
-                    if (stateInfo) {
-                        if (response.dataType === 'cell_voltage') {
-                            response.result.forEach((r, i) => {
-                                iobInstance.setState(
-                                    `${stateInfo.stateFullName}_${i}`,
-                                    parseFloat(r.V.toFixed(3)),
-                                    true,
-                                );
-                            });
-                        } else if (response.dataType === 'cell_resist') {
-                            response.result.forEach((r, i) => {
-                                iobInstance.setState(
-                                    `${stateInfo.stateFullName}_${i}`,
-                                    parseFloat(r.mOhm.toFixed(3)),
-                                    true,
-                                );
-                            });
-                        } else {
-                            iobInstance.setState(stateInfo.stateFullName, response.result, true);
+                    if (stateInfo && response.result === undefined) {
+                        // invalid payload (wrong length) - keep last valid value instead of writing 0
+                        iobInstance.log.debug(
+                            `RCT: discarded ${response.name}: unexpected data length ${response.data.length} (${response.data.toString('hex')})`,
+                        );
+                    } else if (stateInfo && rct.getSubStates(response.dataType)) {
+                        // composite types: result maps state suffix -> value
+                        for (const [suffix, v] of Object.entries(response.result)) {
+                            iobInstance.setState(`${stateInfo.stateFullName}${suffix}`, v, true);
                         }
+                    } else if (stateInfo) {
+                        iobInstance.setState(stateInfo.stateFullName, response.result, true);
                     }
                 } else {
                     if (DEBUG_CONSOLE) {
@@ -421,77 +418,57 @@ function parseResponse(buf, iobInstance) {
     response.precision = rct.cmdReverse[response.id].precision;
     response.unit = rct.cmdReverse[response.id].unit || '';
 
-    let result = 0;
-    switch (response.dataType) {
-        case 'FLOAT':
-            if (response.data.length >= 4) {
-                result = response.data.readFloatBE();
-            } else {
-                if (DEBUG_CONSOLE) {
-                    iobInstance.log.warn(
-                        `RCT: FLOAT data too short (${response.data.length} bytes) for ID ${response.id}`,
-                    );
-                }
-                result = 0;
-            }
+    // payload length must match the data type exactly (same as rctclient); otherwise the frame is discarded
+    const expectedLength = DATA_LENGTH[response.dataType];
+    if (expectedLength !== undefined && response.data.length !== expectedLength) {
+        return response;
+    }
 
+    switch (response.dataType) {
+        case 'FLOAT': {
+            let result = response.data.readFloatBE();
             if (response.multiplier !== undefined) {
                 result = result * response.multiplier;
             }
             response.result = floatPrecision(result, response.precision);
             break;
+        }
+
+        case 'BOOL':
+            response.result = response.data.readUInt8() !== 0;
+            break;
 
         case 'UINT8':
-            if (response.data.length >= 1) {
-                response.result = response.data.readUInt8();
-            } else {
-                response.result = 0;
-            }
+        case 'ENUM':
+            response.result = response.data.readUInt8();
             break;
 
         case 'INT8':
-            if (response.data.length >= 1) {
-                response.result = response.data.readInt8();
-            } else {
-                response.result = 0;
-            }
+            response.result = response.data.readInt8();
             break;
 
         case 'UINT16':
-            if (response.data.length >= 2) {
-                response.result = response.data.readUInt16BE();
-            } else {
-                response.result = 0;
-            }
+            response.result = response.data.readUInt16BE();
             break;
 
         case 'INT16':
-            if (response.data.length >= 2) {
-                response.result = response.data.readInt16BE();
-            } else {
-                response.result = 0;
-            }
+            response.result = response.data.readInt16BE();
             break;
 
         case 'UINT32':
-            if (response.data.length >= 4) {
-                response.result = response.data.readUInt32BE();
-            } else {
-                response.result = 0;
-            }
+            response.result = response.data.readUInt32BE();
             break;
 
         case 'INT32':
-            if (response.data.length >= 4) {
-                response.result = response.data.readInt32BE();
-            } else {
-                response.result = 0;
-            }
+            response.result = response.data.readInt32BE();
             break;
 
-        case 'STRING':
-            response.result = response.data.toString('utf8').replace(/\0/g, '');
+        case 'STRING': {
+            // string ends at the first \0, anything behind it is padding / garbage
+            const end = response.data.indexOf(0);
+            response.result = response.data.toString('utf8', 0, end === -1 ? response.data.length : end);
             break;
+        }
 
         case 'cell_voltage':
             response.result = decodeRCTCells(response.data);
@@ -499,6 +476,10 @@ function parseResponse(buf, iobInstance) {
 
         case 'cell_resist':
             response.result = decodeRCTCellResistances(response.data);
+            break;
+
+        case 'cell_stat':
+            response.result = decodeRCTCellStatistics(response.data);
             break;
 
         case 'RAW':
@@ -509,16 +490,13 @@ function parseResponse(buf, iobInstance) {
             response.result = response.data.toString('hex');
             break;
 
-        case 'ENUM':
-            response.result = '';
-            break;
-
         default:
             response.result = '';
             break;
     }
 
     // iobInstance.log.debug("DEBUG response:",response);
+
     return response;
 }
 
@@ -545,43 +523,79 @@ function getFrame(command, id, data = '') {
     return Buffer.from(baFrame);
 }
 
-function decodeRCTCells(buffer) {
-    const result = [];
-    // 4 bytes per cell: temperature (uint8, °C), voltage (uint16 little-endian, mV), status byte
-    const cellCount = Math.floor(buffer.length / 4);
+// expected payload length in bytes per data type
+const DATA_LENGTH = {
+    BOOL: 1,
+    UINT8: 1,
+    INT8: 1,
+    ENUM: 1,
+    UINT16: 2,
+    INT16: 2,
+    UINT32: 4,
+    INT32: 4,
+    FLOAT: 4,
+    cell_voltage: CELLS_PER_MODULE * 4,
+    cell_resist: CELLS_PER_MODULE * 4,
+    cell_stat: 48,
+};
 
-    for (let i = 0; i < cellCount; i++) {
-        const offset = i * 4;
-
-        const mV = buffer.readUInt16LE(offset + 1);
-
-        result.push({
-            zelle: i + 1,
-            temperature: buffer.readUInt8(offset),
-            mV: mV,
-            V: mV / 1000,
-            status: buffer.readUInt8(offset + 3),
-        });
+/**
+ * Returns the sub states (suffix and unit) a composite data type is written to, or null for simple types.
+ *
+ * @param {string} rctType data type from rct.cmdReverse
+ * @returns {Array<{suffix: string, unit: string}> | null} sub states
+ */
+rct.getSubStates = function (rctType) {
+    const cells = [...Array(CELLS_PER_MODULE).keys()];
+    switch (rctType) {
+        case 'cell_voltage':
+            return [
+                ...cells.map(i => ({ suffix: `_${i}`, unit: 'V' })),
+                ...cells.map(i => ({ suffix: `_temp_${i}`, unit: '°C' })),
+            ];
+        case 'cell_resist':
+            return cells.map(i => ({ suffix: `_${i}`, unit: 'mΩ' }));
+        case 'cell_stat':
+            // same state names as the single objects battery.cells_stat[n].u_min.index etc.
+            return CELL_STAT_ENTRIES.flatMap(e => [
+                { suffix: `_${e}_index`, unit: '' },
+                { suffix: `_${e}_time`, unit: '' },
+                { suffix: `_${e}_value`, unit: e.startsWith('u') ? 'V' : '°C' },
+            ]);
+        default:
+            return null;
     }
+};
 
+function decodeRCTCells(buffer) {
+    const result = {};
+    // 4 bytes per cell: temperature (uint8, °C), voltage (uint16 little-endian, mV), status byte
+    for (let i = 0; i < CELLS_PER_MODULE; i++) {
+        const offset = i * 4;
+        result[`_${i}`] = buffer.readUInt16LE(offset + 1) / 1000;
+        result[`_temp_${i}`] = buffer.readUInt8(offset);
+    }
     return result;
 }
 
 function decodeRCTCellResistances(buffer) {
-    const result = [];
+    const result = {};
     // 4 bytes per cell: big-endian uint16 in 1/256 mOhm, followed by 2 padding bytes
-    const cellCount = Math.floor(buffer.length / 4);
-
-    for (let i = 0; i < cellCount; i++) {
-        const value = buffer.readUInt16BE(i * 4);
-
-        result.push({
-            zelle: i + 1,
-            rohwert: value,
-            mOhm: value / 256,
-        });
+    for (let i = 0; i < CELLS_PER_MODULE; i++) {
+        result[`_${i}`] = floatPrecision(buffer.readUInt16BE(i * 4) / 256, 3);
     }
+    return result;
+}
 
+function decodeRCTCellStatistics(buffer) {
+    const result = {};
+    // 4 entries (u_min, u_max, t_min, t_max) of 3 little-endian values: cell index (uint32), timestamp (uint32), value (float)
+    CELL_STAT_ENTRIES.forEach((e, n) => {
+        const offset = n * 12;
+        result[`_${e}_index`] = buffer.readUInt32LE(offset);
+        result[`_${e}_time`] = buffer.readUInt32LE(offset + 4);
+        result[`_${e}_value`] = floatPrecision(buffer.readFloatLE(offset + 8), e.startsWith('u') ? 3 : 1);
+    });
     return result;
 }
 

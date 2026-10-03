@@ -704,6 +704,63 @@ rct.cmd['battery.cells[4]'] = { serial: 0, id: '1348AB07' };
 rct.cmd['battery.cells[5]'] = { serial: 0, id: '62D645D9' };
 rct.cmd['battery.cells[6]'] = { serial: 0, id: '40FF01B7' };
 
+// boolean, enum and battery module statistics objects (from rctclient registry)
+rct.cmd['battery.cells_stat[0]'] = { serial: 0, id: '34A164E7' };
+rct.cmd['battery.cells_stat[1]'] = { serial: 0, id: 'FB796780' };
+rct.cmd['battery.cells_stat[2]'] = { serial: 0, id: '74FD4609' };
+rct.cmd['battery.cells_stat[3]'] = { serial: 0, id: '01676FA6' };
+rct.cmd['battery.cells_stat[4]'] = { serial: 0, id: '0DACF21B' };
+rct.cmd['battery.cells_stat[5]'] = { serial: 0, id: '23E55DA0' };
+rct.cmd['battery.cells_stat[6]'] = { serial: 0, id: 'F99E8CC8' };
+rct.cmd['com_service'] = { serial: 0, id: '8FC89B10' };
+rct.cmd['cs_struct.is_tuned'] = { serial: 0, id: '2703A771' };
+rct.cmd['dc_conv.dc_conv_struct[0].enabled'] = { serial: 0, id: '701A0482' };
+rct.cmd['dc_conv.dc_conv_struct[0].mpp.enable_scan'] = { serial: 0, id: '6476A836' };
+rct.cmd['dc_conv.dc_conv_struct[1].enabled'] = { serial: 0, id: 'FED51BD2' };
+rct.cmd['dc_conv.dc_conv_struct[1].mpp.enable_scan'] = { serial: 0, id: '8DD1C728' };
+rct.cmd['detect_phase_shift_enable'] = { serial: 0, id: '0CC4BDAA' };
+rct.cmd['display_struct.blink'] = { serial: 0, id: '8EC4116E' };
+rct.cmd['display_struct.display_dir'] = { serial: 0, id: '67BF3003' };
+rct.cmd['flash_rtc.flag_time_auto_switch'] = { serial: 0, id: '3903A5E9' };
+rct.cmd['frt.enabled'] = { serial: 0, id: 'FD72CC0D' };
+rct.cmd['i_ac_extern_connected'] = { serial: 0, id: 'C3A3F070' };
+rct.cmd['inv_struct.force_dh'] = { serial: 0, id: '7940547B' };
+rct.cmd['io_board.alarm_home_relay_mode'] = { serial: 0, id: '5EE03C45' };
+rct.cmd['io_board.alarm_home_value'] = { serial: 0, id: 'F42D4DD0' };
+rct.cmd['io_board.io1_polarity'] = { serial: 0, id: '0DF45696' };
+rct.cmd['io_board.io1_usage'] = { serial: 0, id: '90F123FA' };
+rct.cmd['io_board.io2_polarity'] = { serial: 0, id: '7C556C7A' };
+rct.cmd['io_board.io2_usage'] = { serial: 0, id: '4F330E08' };
+rct.cmd['io_board.s0_direction'] = { serial: 0, id: '792A7B79' };
+rct.cmd['modbus.mode'] = { serial: 0, id: '31ED1B75' };
+rct.cmd['net.update_slaves'] = { serial: 0, id: '5E540FB2' };
+rct.cmd['net.use_network_filter'] = { serial: 0, id: '5D1B0835' };
+rct.cmd['nsm.apm'] = { serial: 0, id: '7232F7AF' };
+rct.cmd['nsm.pf_hysteresis'] = { serial: 0, id: 'EE049B1F' };
+rct.cmd['nsm.pf_use_p_max'] = { serial: 0, id: 'F3FD6C4C' };
+rct.cmd['nsm.pu_mode'] = { serial: 0, id: '7AF779C1' };
+rct.cmd['nsm.pu_use'] = { serial: 0, id: '81AF854E' };
+rct.cmd['nsm.q_u_hysteresis'] = { serial: 0, id: 'A33D0954' };
+rct.cmd['nsm.q_u_sel'] = { serial: 0, id: 'C07E02CE' };
+rct.cmd['nsm.rpm'] = { serial: 0, id: 'C3352B17' };
+rct.cmd['phase_3_mode'] = { serial: 0, id: '4E3CB7F8' };
+rct.cmd['power_mng.battery_type'] = { serial: 0, id: '682CDDA1' };
+rct.cmd['power_mng.feed_asymmetrical'] = { serial: 0, id: '9F52F968' };
+rct.cmd['power_mng.force_inv_class'] = { serial: 0, id: 'C7459513' };
+rct.cmd['power_mng.is_grid'] = { serial: 0, id: '97E203F9' };
+rct.cmd['power_mng.is_island_only'] = { serial: 0, id: 'C9900716' };
+rct.cmd['power_mng.power_lim_src_index'] = { serial: 0, id: '99EE89CB' };
+rct.cmd['power_mng.soc_strategy'] = { serial: 0, id: 'F168B748' };
+rct.cmd['power_mng.use_grid_power_enable'] = { serial: 0, id: '36A9E9A6' };
+rct.cmd['prim_sm.is_thin_layer'] = { serial: 0, id: '3AFEF139' };
+rct.cmd['prim_sm.minigrid_flag'] = { serial: 0, id: 'FB5DE9C5' };
+rct.cmd['prim_sm.phase_3_mode'] = { serial: 0, id: 'CF005C54' };
+rct.cmd['rb485.available'] = { serial: 0, id: '437B8122' };
+rct.cmd['wifi.connect_to_wifi'] = { serial: 0, id: '5673D737' };
+rct.cmd['wifi.sockb_protocol'] = { serial: 0, id: '0BA16A10' };
+rct.cmd['wifi.use_ethernet'] = { serial: 0, id: 'B7C85C51' };
+rct.cmd['wifi.use_wifi'] = { serial: 0, id: 'D5790CE1' };
+
 rct.cmdReverse = {};
 rct.cmdReverse['0AFDD6CF'] = {
     name: 'acc_conv.i_acc_lp_fast',
@@ -904,7 +961,7 @@ rct.cmdReverse['09923C1E'] = {
 };
 rct.cmdReverse['0CFA8BC4'] = {
     name: 'battery.stack_cycles[1]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1019,14 +1076,14 @@ rct.cmdReverse['265EACF6'] = {
 };
 rct.cmdReverse['27C39CEA'] = {
     name: 'battery.stack_cycles[6]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
 };
 rct.cmdReverse['2A30A97E'] = {
     name: 'battery.stack_cycles[5]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1236,7 +1293,7 @@ rct.cmdReverse['5A120CE4'] = {
 };
 rct.cmdReverse['5A9EEFF0'] = {
     name: 'battery.stack_cycles[4]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1250,7 +1307,7 @@ rct.cmdReverse['5AF50FD7'] = {
 };
 rct.cmdReverse['5BA122A5'] = {
     name: 'battery.stack_cycles[2]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1450,7 +1507,7 @@ rct.cmdReverse['88BBF8CB'] = {
 };
 rct.cmdReverse['89B25F4B'] = {
     name: 'battery.stack_cycles[3]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -1603,7 +1660,7 @@ rct.cmdReverse['A6871A4D'] = {
 };
 rct.cmdReverse['A6C4FD4A'] = {
     name: 'battery.stack_cycles[0]',
-    type: 'INT16',
+    type: 'UINT16',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -4489,7 +4546,7 @@ rct.cmdReverse['AEF76FA1'] = {
 };
 rct.cmdReverse['B6623608'] = {
     name: 'power_mng.bat_next_calib_date',
-    type: 'INT32',
+    type: 'UINT32',
     unit: '',
     description: 'Next battery calibration',
     ioBrokerType: 'number',
@@ -4680,7 +4737,7 @@ rct.cmdReverse['751E80CA'] = {
 };
 rct.cmdReverse['5F33284E'] = {
     name: 'prim_sm.state',
-    type: 'UINT8',
+    type: 'ENUM',
     unit: '',
     description: '',
     ioBrokerType: 'number',
@@ -5059,6 +5116,393 @@ rct.cmdReverse['40FF01B7'] = {
     unit: 'V',
     description: '',
     ioBrokerType: 'number',
+};
+
+// boolean, enum and battery module statistics objects (from rctclient registry)
+rct.cmdReverse['34A164E7'] = {
+    name: 'battery.cells_stat[0]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['FB796780'] = {
+    name: 'battery.cells_stat[1]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['74FD4609'] = {
+    name: 'battery.cells_stat[2]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['01676FA6'] = {
+    name: 'battery.cells_stat[3]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['0DACF21B'] = {
+    name: 'battery.cells_stat[4]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['23E55DA0'] = {
+    name: 'battery.cells_stat[5]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['F99E8CC8'] = {
+    name: 'battery.cells_stat[6]',
+    type: 'cell_stat',
+    unit: '',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['8FC89B10'] = {
+    name: 'com_service',
+    type: 'ENUM',
+    unit: '',
+    description: 'COM service',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['2703A771'] = {
+    name: 'cs_struct.is_tuned',
+    type: 'BOOL',
+    unit: '',
+    description: 'Current sensors are tuned',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['701A0482'] = {
+    name: 'dc_conv.dc_conv_struct[0].enabled',
+    type: 'BOOL',
+    unit: '',
+    description: 'Solar generator A connected',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['6476A836'] = {
+    name: 'dc_conv.dc_conv_struct[0].mpp.enable_scan',
+    type: 'BOOL',
+    unit: '',
+    description: 'Enable rescan for global MPP on solar generator A',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['FED51BD2'] = {
+    name: 'dc_conv.dc_conv_struct[1].enabled',
+    type: 'BOOL',
+    unit: '',
+    description: 'Solar generator B connected',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['8DD1C728'] = {
+    name: 'dc_conv.dc_conv_struct[1].mpp.enable_scan',
+    type: 'BOOL',
+    unit: '',
+    description: 'Enable rescan for global MPP on solar generator B',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['0CC4BDAA'] = {
+    name: 'detect_phase_shift_enable',
+    type: 'BOOL',
+    unit: '',
+    description: 'Enable active island detection',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['8EC4116E'] = {
+    name: 'display_struct.blink',
+    type: 'BOOL',
+    unit: '',
+    description: 'Display blinking enable',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['67BF3003'] = {
+    name: 'display_struct.display_dir',
+    type: 'BOOL',
+    unit: '',
+    description: 'Rotate display',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['3903A5E9'] = {
+    name: 'flash_rtc.flag_time_auto_switch',
+    type: 'BOOL',
+    unit: '',
+    description: 'Automatically adjust clock for daylight saving time',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['FD72CC0D'] = {
+    name: 'frt.enabled',
+    type: 'BOOL',
+    unit: '',
+    description: 'Enable FRT',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['C3A3F070'] = {
+    name: 'i_ac_extern_connected',
+    type: 'BOOL',
+    unit: '',
+    description: 'Current sensors detected',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['7940547B'] = {
+    name: 'inv_struct.force_dh',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['5EE03C45'] = {
+    name: 'io_board.alarm_home_relay_mode',
+    type: 'ENUM',
+    unit: '',
+    description: 'Multifunctional relay usage',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['F42D4DD0'] = {
+    name: 'io_board.alarm_home_value',
+    type: 'ENUM',
+    unit: '',
+    description: 'Evaluated value',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['0DF45696'] = {
+    name: 'io_board.io1_polarity',
+    type: 'BOOL',
+    unit: '',
+    description: 'Inverted signal on input I/O 1',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['90F123FA'] = {
+    name: 'io_board.io1_usage',
+    type: 'ENUM',
+    unit: '',
+    description: 'Digital I/O 1 usage',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['7C556C7A'] = {
+    name: 'io_board.io2_polarity',
+    type: 'BOOL',
+    unit: '',
+    description: 'Inverted signal on input I/O 2',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['4F330E08'] = {
+    name: 'io_board.io2_usage',
+    type: 'ENUM',
+    unit: '',
+    description: 'Digital I/O 2 usage',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['792A7B79'] = {
+    name: 'io_board.s0_direction',
+    type: 'ENUM',
+    unit: '',
+    description: 'S0 inputs single or bidirectional',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['31ED1B75'] = {
+    name: 'modbus.mode',
+    type: 'ENUM',
+    unit: '',
+    description: 'RS485 working mode',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['5E540FB2'] = {
+    name: 'net.update_slaves',
+    type: 'BOOL',
+    unit: '',
+    description: 'Activate aut. update slaves',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['5D1B0835'] = {
+    name: 'net.use_network_filter',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['7232F7AF'] = {
+    name: 'nsm.apm',
+    type: 'ENUM',
+    unit: '',
+    description: 'Active power mode',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['EE049B1F'] = {
+    name: 'nsm.pf_hysteresis',
+    type: 'BOOL',
+    unit: '',
+    description: 'Hysteresis mode',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['F3FD6C4C'] = {
+    name: 'nsm.pf_use_p_max',
+    type: 'BOOL',
+    unit: '',
+    description: 'By over-frequency in P(f) use Pmax instead of Pmom (instant P).',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['7AF779C1'] = {
+    name: 'nsm.pu_mode',
+    type: 'BOOL',
+    unit: '',
+    description: 'P(U) mode 0: Pn 1: Pload',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['81AF854E'] = {
+    name: 'nsm.pu_use',
+    type: 'BOOL',
+    unit: '',
+    description: 'P(U) active',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['A33D0954'] = {
+    name: 'nsm.q_u_hysteresis',
+    type: 'BOOL',
+    unit: '',
+    description: 'Curve with hysteresis',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['C07E02CE'] = {
+    name: 'nsm.q_u_sel',
+    type: 'ENUM',
+    unit: '',
+    description: 'Voltage selection',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['C3352B17'] = {
+    name: 'nsm.rpm',
+    type: 'ENUM',
+    unit: '',
+    description: 'Reactive power mode',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['4E3CB7F8'] = {
+    name: 'phase_3_mode',
+    type: 'BOOL',
+    unit: '',
+    description: '3-phase feed in',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['682CDDA1'] = {
+    name: 'power_mng.battery_type',
+    type: 'ENUM',
+    unit: '',
+    description: 'Battery type',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['9F52F968'] = {
+    name: 'power_mng.feed_asymmetrical',
+    type: 'BOOL',
+    unit: '',
+    description: 'Allow asymmetrical feed',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['C7459513'] = {
+    name: 'power_mng.force_inv_class',
+    type: 'ENUM',
+    unit: '',
+    description: 'Change inverter class',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['97E203F9'] = {
+    name: 'power_mng.is_grid',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['C9900716'] = {
+    name: 'power_mng.is_island_only',
+    type: 'BOOL',
+    unit: '',
+    description: 'Island without power switch support',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['99EE89CB'] = {
+    name: 'power_mng.power_lim_src_index',
+    type: 'ENUM',
+    unit: '',
+    description: 'Power limit source',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['F168B748'] = {
+    name: 'power_mng.soc_strategy',
+    type: 'ENUM',
+    unit: '',
+    description: 'SOC target selection',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['36A9E9A6'] = {
+    name: 'power_mng.use_grid_power_enable',
+    type: 'BOOL',
+    unit: '',
+    description: 'Utilize external Inverter energy',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['3AFEF139'] = {
+    name: 'prim_sm.is_thin_layer',
+    type: 'BOOL',
+    unit: '',
+    description: 'Thin-film solar module',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['FB5DE9C5'] = {
+    name: 'prim_sm.minigrid_flag',
+    type: 'BOOL',
+    unit: '',
+    description: 'Minigrid support',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['CF005C54'] = {
+    name: 'prim_sm.phase_3_mode',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['437B8122'] = {
+    name: 'rb485.available',
+    type: 'BOOL',
+    unit: '',
+    description: 'Power Switch is available',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['5673D737'] = {
+    name: 'wifi.connect_to_wifi',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['0BA16A10'] = {
+    name: 'wifi.sockb_protocol',
+    type: 'ENUM',
+    unit: '',
+    description: 'Network mode of the unit: 0 = standalone, 1 = master unit, 2 = slave unit',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['B7C85C51'] = {
+    name: 'wifi.use_ethernet',
+    type: 'BOOL',
+    unit: '',
+    description: '',
+    ioBrokerType: 'boolean',
+};
+rct.cmdReverse['D5790CE1'] = {
+    name: 'wifi.use_wifi',
+    type: 'BOOL',
+    unit: '',
+    description: 'Enable Wi-Fi Access Point',
+    ioBrokerType: 'boolean',
 };
 
 module.exports = rct;
