@@ -78,6 +78,9 @@ None
 - (Andreas Ruttkamp) Update dependencies
 - (Andreas Ruttkamp) Nodejs 26 for testiung included
 - (Andreas Ruttkamp) correct email in licence
+- (Andreas Ruttkamp) add missing data types 
+- (Andreas Ruttkamp) add battery.cells_stat[n] ( shows 12 Datapoints u-min,u_max,t_min,t_max,_index,_time and _value)
+- (Andreas Ruttkamp) add battery.cells_[n] additionally write the temperature
 
 ### 1.2.29 (2026-08-10)
 - (Andreas Ruttkamp) Update dependencies
