@@ -702,6 +702,7 @@ rct.cmd['battery.cells[2]'] = { serial: 0, id: '69B8FF28' };
 rct.cmd['battery.cells[3]'] = { serial: 0, id: 'C8609C8E' };
 rct.cmd['battery.cells[4]'] = { serial: 0, id: '1348AB07' };
 rct.cmd['battery.cells[5]'] = { serial: 0, id: '62D645D9' };
+rct.cmd['battery.cells[6]'] = { serial: 0, id: '40FF01B7' };
 
 rct.cmdReverse = {};
 rct.cmdReverse['0AFDD6CF'] = {
@@ -1172,10 +1173,10 @@ rct.cmdReverse['4E699086'] = {
 };
 rct.cmdReverse['501A162D'] = {
     name: 'battery.cells_resist[5]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['50514732'] = {
     name: 'battery.cells_stat[6].u_min.index',
@@ -1292,10 +1293,10 @@ rct.cmdReverse['6445D856'] = {
 };
 rct.cmdReverse['649B10DA'] = {
     name: 'battery.cells_resist[0]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['65EED11B'] = {
     name: 'battery.voltage',
@@ -1363,10 +1364,10 @@ rct.cmdReverse['71765BD8'] = {
 };
 rct.cmdReverse['71CB0B57'] = {
     name: 'battery.cells_resist[1]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['7268CE4D'] = {
     name: 'battery.inv_cmd',
@@ -1537,10 +1538,10 @@ rct.cmdReverse['99396810'] = {
 };
 rct.cmdReverse['993C06F6'] = {
     name: 'battery.cells_resist[3]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['9D785E8C'] = {
     name: 'battery.bms_software_version',
@@ -1773,10 +1774,10 @@ rct.cmdReverse['DE9CBCB0'] = {
 };
 rct.cmdReverse['DEE1957F'] = {
     name: 'battery.cells_resist[4]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['DF0A735C'] = {
     name: 'battery.maximum_discharge_current',
@@ -1816,10 +1817,10 @@ rct.cmdReverse['EA77252E'] = {
 };
 rct.cmdReverse['EB4C2597'] = {
     name: 'battery.cells_resist[6]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['EEA3F59B'] = {
     name: 'battery.stack_software_version[5]',
@@ -1859,10 +1860,10 @@ rct.cmdReverse['F257D342'] = {
 };
 rct.cmdReverse['F3FD8CE6'] = {
     name: 'battery.cells_resist[2]',
-    type: 'STRING',
-    unit: '',
+    type: 'cell_resist',
+    unit: 'mΩ',
     description: '',
-    ioBrokerType: 'string',
+    ioBrokerType: 'number',
 };
 rct.cmdReverse['F54BC06D'] = {
     name: 'battery.cells_stat[4].u_max.value',
@@ -5009,14 +5010,14 @@ rct.cmdReverse['8B4BE168'] = {
 rct.cmdReverse['F8C0D255'] = {
     name: 'battery.cells[0]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };
 rct.cmdReverse['8EF6FBBD'] = {
     name: 'battery.cells[1]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };
@@ -5024,7 +5025,7 @@ rct.cmdReverse['8EF6FBBD'] = {
 rct.cmdReverse['69B8FF28'] = {
     name: 'battery.cells[2]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };
@@ -5032,7 +5033,7 @@ rct.cmdReverse['69B8FF28'] = {
 rct.cmdReverse['C8609C8E'] = {
     name: 'battery.cells[3]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };
@@ -5040,7 +5041,7 @@ rct.cmdReverse['C8609C8E'] = {
 rct.cmdReverse['1348AB07'] = {
     name: 'battery.cells[4]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };
@@ -5048,7 +5049,14 @@ rct.cmdReverse['1348AB07'] = {
 rct.cmdReverse['62D645D9'] = {
     name: 'battery.cells[5]',
     type: 'cell_voltage',
-    unit: '',
+    unit: 'V',
+    description: '',
+    ioBrokerType: 'number',
+};
+rct.cmdReverse['40FF01B7'] = {
+    name: 'battery.cells[6]',
+    type: 'cell_voltage',
+    unit: 'V',
     description: '',
     ioBrokerType: 'number',
 };

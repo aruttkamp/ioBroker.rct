@@ -336,6 +336,14 @@ rct.process = function (host, rctElements, iobInstance) {
                                     true,
                                 );
                             });
+                        } else if (response.dataType === 'cell_resist') {
+                            response.result.forEach((r, i) => {
+                                iobInstance.setState(
+                                    `${stateInfo.stateFullName}_${i}`,
+                                    parseFloat(r.mOhm.toFixed(3)),
+                                    true,
+                                );
+                            });
                         } else {
                             iobInstance.setState(stateInfo.stateFullName, response.result, true);
                         }
@@ -489,6 +497,10 @@ function parseResponse(buf, iobInstance) {
             response.result = decodeRCTCells(response.data);
             break;
 
+        case 'cell_resist':
+            response.result = decodeRCTCellResistances(response.data);
+            break;
+
         case 'RAW':
             if (DEBUG_CONSOLE) {
                 iobInstance.log.debug(`RAW response for ${response.name}`);
@@ -535,24 +547,38 @@ function getFrame(command, id, data = '') {
 
 function decodeRCTCells(buffer) {
     const result = [];
-    // 4 bytes per value
+    // 4 bytes per cell: temperature (uint8, °C), voltage (uint16 little-endian, mV), status byte
     const cellCount = Math.floor(buffer.length / 4);
 
     for (let i = 0; i < cellCount; i++) {
         const offset = i * 4;
 
-        // Reading big Endian uint32
-        const value = buffer.readUInt32BE(offset);
+        const mV = buffer.readUInt16LE(offset + 1);
 
-        // Scaling
-        const mV = value / 256;
-        const V = mV / 1000;
+        result.push({
+            zelle: i + 1,
+            temperature: buffer.readUInt8(offset),
+            mV: mV,
+            V: mV / 1000,
+            status: buffer.readUInt8(offset + 3),
+        });
+    }
+
+    return result;
+}
+
+function decodeRCTCellResistances(buffer) {
+    const result = [];
+    // 4 bytes per cell: big-endian uint16 in 1/256 mOhm, followed by 2 padding bytes
+    const cellCount = Math.floor(buffer.length / 4);
+
+    for (let i = 0; i < cellCount; i++) {
+        const value = buffer.readUInt16BE(i * 4);
 
         result.push({
             zelle: i + 1,
             rohwert: value,
-            mV: mV,
-            V: V,
+            mOhm: value / 256,
         });
     }
 

@@ -91,7 +91,7 @@ class Rct extends utils.Adapter {
                         common.min = 0;
                         common.max = 100;
                     }
-                    if (rct_type == 'cell_voltage') {
+                    if (rct_type == 'cell_voltage' || rct_type == 'cell_resist') {
                         const cells = 24;
                         for (let i = 0; i < cells; i++) {
                             await this.setObjectNotExistsAsync(`${stateFullName}_${i}`, {
