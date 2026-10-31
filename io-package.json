@@ -161,7 +161,63 @@
   "native": {
     "rct_ip": "",
     "rct_refresh": 10,
-    "rct_elements": ""
+    "debug_logging": false,
+    "rct_elements_battery": [
+      "battery.bat_status",
+      "battery.soc",
+      "battery.soc_target",
+      "battery.soc_target_high",
+      "battery.soc_target_low"
+    ],
+    "rct_elements_battery_cells": [],
+    "rct_elements_battery_modules": [],
+    "rct_elements_acc_conv": [],
+    "rct_elements_adc": [],
+    "rct_elements_bat_mng_struct": [],
+    "rct_elements_can_bus": [],
+    "rct_elements_db": [],
+    "rct_elements_dc_conv": [
+      "dc_conv.dc_conv_struct[0].p_dc_lp",
+      "dc_conv.dc_conv_struct[1].p_dc_lp"
+    ],
+    "rct_elements_display_struct": [],
+    "rct_elements_energy": [],
+    "rct_elements_fault": [
+      "fault[0].flt",
+      "fault[1].flt",
+      "fault[2].flt",
+      "fault[3].flt"
+    ],
+    "rct_elements_flash_rtc": [],
+    "rct_elements_g_sync": [
+      "g_sync.p_ac_grid_sum_lp",
+      "g_sync.p_ac_load_sum_lp",
+      "g_sync.p_ac_sum_lp",
+      "g_sync.p_acc_lp",
+      "g_sync.u_sg_avg[0]",
+      "g_sync.u_sg_avg[1]"
+    ],
+    "rct_elements_general": [],
+    "rct_elements_grid_mon": [],
+    "rct_elements_hw_test": [],
+    "rct_elements_io_board": [
+      "io_board.s0_external_power"
+    ],
+    "rct_elements_iso_struct": [],
+    "rct_elements_net": [],
+    "rct_elements_nsm": [],
+    "rct_elements_power_mng": [
+      "power_mng.is_heiphoss",
+      "power_mng.state",
+      "power_mng.u_acc_mix_lp"
+    ],
+    "rct_elements_prim_sm": [
+      "prim_sm.island_flag"
+    ],
+    "rct_elements_rb485": [],
+    "rct_elements_switch_on_cond": [],
+    "rct_elements_wifi": [],
+    "rct_elements_other": []
   },
   "objects": [],
   "instanceObjects": [
