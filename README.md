@@ -74,9 +74,22 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Andreas Ruttkamp) 
+Admin: jsonConfig with parameter selection per section
+parameters are selected per section (battery, dc_conv, g_sync, ...) in
+multi-select lists, generated from rct_core2 by tasks/build-admin-options.js
+(npm run build:admin, checked in npm run test:package)
+native.rct_elements (comma separated string) is migrated once to
+native.rct_elements_
+admin tabs connection / parameters / expert settings, ip validation,
+translations for all languages
+fix typo in rct.cmd for bat_mng_struct.k_reserve
+Co-Authored-By: Claude Opus 5.5 noreply@anthropic.com
+
 ### 1.2.30 (2026-10-03)
 - (Andreas Ruttkamp) Update dependencies
-- (Andreas Ruttkamp) Nodejs 26 for testiung included
+- (Andreas Ruttkamp) Nodejs 26 for testing included
 - (Andreas Ruttkamp) correct email in licence
 - (Andreas Ruttkamp) add missing data types [#361](https://github.com/aruttkamp/ioBroker.rct/issues/361)
 - (Andreas Ruttkamp) add battery.cells_stat[n] ( shows 12 Datapoints u-min,u_max,t_min,t_max,_index,_time and _value)
