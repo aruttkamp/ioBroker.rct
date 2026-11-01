@@ -1,38 +1,30 @@
 {
     "i18n": true,
-    "type": "panel",
+    "type": "tabs",
     "items": {
-        "General": {
+        "connection": {
             "type": "panel",
-            "label": "General settings",
+            "label": "Connection",
             "items": {
-                "_Headline1": {
-                    "newLine": true,
+                "_headerConnection": {
                     "type": "header",
-                    "text": "General Settings",
-                    "size": 1,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12
-                },
-                "_dividerHdr": {
-                    "newLine": true,
-                    "type": "header",
-                    "text": "",
-                    "size": 2
+                    "text": "RCT inverter",
+                    "size": 2,
+                    "newLine": true
                 },
                 "rct_ip": {
-                    "newLine": true,
                     "type": "text",
+                    "newLine": true,
                     "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 4,
                     "xl": 4,
                     "label": "RCT ip-address",
-                    "help": "Local RCT inverter ip-address (i.e. 192.168.0.10)"
+                    "help": "Local RCT inverter ip-address (i.e. 192.168.0.10)",
+                    "validator": "/^[A-Za-z0-9.:-]+$/.test(data.rct_ip || '')",
+                    "validatorErrorText": "Please enter a valid ip-address or hostname",
+                    "validatorNoSaveOnError": true
                 },
                 "rct_refresh": {
                     "type": "number",
@@ -45,34 +37,3802 @@
                     "xl": 4,
                     "label": "Refresh interval",
                     "help": "Desired refresh interval for elements in seconds (10 - 3600)"
+                }
+            }
+        },
+        "elements": {
+            "type": "panel",
+            "label": "Parameters",
+            "items": {
+                "_headerElements": {
+                    "type": "header",
+                    "text": "Parameters to be fetched from inverter",
+                    "size": 2,
+                    "newLine": true
                 },
-                "rct_elements": {
+                "_infoElements": {
+                    "type": "staticText",
+                    "text": "Select the parameters to be read cyclically. Without selection a standard set is used. For each parameter a state is created in the channel of the same name.",
                     "newLine": true,
-                    "type": "text",
                     "xs": 12,
                     "sm": 12,
                     "md": 12,
-                    "lg": 8,
-                    "xl": 8,
-                    "label": "Elements",
-                    "help": "Elements to be fetched from inverter (leave blank for standard)"
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_dividerHdr2": {
-                    "newLine": true,
+                "rct_elements_battery": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "battery (35)",
+                    "options": [
+                        {
+                            "label": "battery.ah_capacity",
+                            "value": "battery.ah_capacity",
+                            "description": "Battery capacity [Ah]"
+                        },
+                        {
+                            "label": "battery.bat_impedance.impedance_fine",
+                            "value": "battery.bat_impedance.impedance_fine",
+                            "description": "Battery circuit impedance"
+                        },
+                        {
+                            "label": "battery.bat_status",
+                            "value": "battery.bat_status"
+                        },
+                        {
+                            "label": "battery.bms_power_version",
+                            "value": "battery.bms_power_version",
+                            "description": "Software version BMS Power"
+                        },
+                        {
+                            "label": "battery.bms_sn",
+                            "value": "battery.bms_sn",
+                            "description": "BMS Serial Number"
+                        },
+                        {
+                            "label": "battery.bms_software_version",
+                            "value": "battery.bms_software_version",
+                            "description": "Software version BMS Master"
+                        },
+                        {
+                            "label": "battery.charged_amp_hours",
+                            "value": "battery.charged_amp_hours",
+                            "description": "Total charge flow into battery [Ah]"
+                        },
+                        {
+                            "label": "battery.current",
+                            "value": "battery.current",
+                            "description": "Battery current [A]"
+                        },
+                        {
+                            "label": "battery.cycles",
+                            "value": "battery.cycles",
+                            "description": "Battery charge / discharge cycles"
+                        },
+                        {
+                            "label": "battery.discharged_amp_hours",
+                            "value": "battery.discharged_amp_hours",
+                            "description": "Total charge flow from battery [Ah]"
+                        },
+                        {
+                            "label": "battery.efficiency",
+                            "value": "battery.efficiency",
+                            "description": "Battery efficiency (used energy / stored energy)"
+                        },
+                        {
+                            "label": "battery.inv_cmd",
+                            "value": "battery.inv_cmd"
+                        },
+                        {
+                            "label": "battery.max_cell_temperature",
+                            "value": "battery.max_cell_temperature"
+                        },
+                        {
+                            "label": "battery.max_cell_voltage",
+                            "value": "battery.max_cell_voltage"
+                        },
+                        {
+                            "label": "battery.maximum_charge_current",
+                            "value": "battery.maximum_charge_current",
+                            "description": "Max. charge current [A]"
+                        },
+                        {
+                            "label": "battery.maximum_charge_voltage",
+                            "value": "battery.maximum_charge_voltage",
+                            "description": "Max. charge voltage [V]"
+                        },
+                        {
+                            "label": "battery.maximum_charge_voltage_constant_u",
+                            "value": "battery.maximum_charge_voltage_constant_u",
+                            "description": "Max. charge voltage [V]"
+                        },
+                        {
+                            "label": "battery.maximum_discharge_current",
+                            "value": "battery.maximum_discharge_current",
+                            "description": "Max. discharge current [A]"
+                        },
+                        {
+                            "label": "battery.min_cell_temperature",
+                            "value": "battery.min_cell_temperature"
+                        },
+                        {
+                            "label": "battery.min_cell_voltage",
+                            "value": "battery.min_cell_voltage"
+                        },
+                        {
+                            "label": "battery.minimum_discharge_voltage",
+                            "value": "battery.minimum_discharge_voltage",
+                            "description": "Min. discharge voltage [V]"
+                        },
+                        {
+                            "label": "battery.minimum_discharge_voltage_constant_u",
+                            "value": "battery.minimum_discharge_voltage_constant_u",
+                            "description": "Min. discharge voltage [V]"
+                        },
+                        {
+                            "label": "battery.prog_sn",
+                            "value": "battery.prog_sn"
+                        },
+                        {
+                            "label": "battery.soc",
+                            "value": "battery.soc",
+                            "description": "SOC (State of charge) [%]"
+                        },
+                        {
+                            "label": "battery.soc_target",
+                            "value": "battery.soc_target",
+                            "description": "Target SOC [%]"
+                        },
+                        {
+                            "label": "battery.soc_target_high",
+                            "value": "battery.soc_target_high",
+                            "description": "SOC target high"
+                        },
+                        {
+                            "label": "battery.soc_target_low",
+                            "value": "battery.soc_target_low",
+                            "description": "SOC target low [%]"
+                        },
+                        {
+                            "label": "battery.soc_update_since",
+                            "value": "battery.soc_update_since"
+                        },
+                        {
+                            "label": "battery.soh",
+                            "value": "battery.soh",
+                            "description": "SOH (State of Health) [%]"
+                        },
+                        {
+                            "label": "battery.status",
+                            "value": "battery.status",
+                            "description": "Battery status"
+                        },
+                        {
+                            "label": "battery.status2",
+                            "value": "battery.status2",
+                            "description": "Battery extra status"
+                        },
+                        {
+                            "label": "battery.stored_energy",
+                            "value": "battery.stored_energy",
+                            "description": "Total energy flow into battery [Wh]"
+                        },
+                        {
+                            "label": "battery.temperature",
+                            "value": "battery.temperature",
+                            "description": "Battery temperature [°C]"
+                        },
+                        {
+                            "label": "battery.used_energy",
+                            "value": "battery.used_energy",
+                            "description": "Total energy flow from battery [Wh]"
+                        },
+                        {
+                            "label": "battery.voltage",
+                            "value": "battery.voltage",
+                            "description": "Battery voltage [V]"
+                        }
+                    ]
+                },
+                "rct_elements_battery_cells": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": {
+                        "de": "battery – Zellen (105)",
+                        "en": "battery – cells (105)",
+                        "es": "battery – celdas (105)",
+                        "fr": "battery – cellules (105)",
+                        "it": "battery – celle (105)",
+                        "nl": "battery – cellen (105)",
+                        "pl": "battery – ogniwa (105)",
+                        "pt": "battery – células (105)",
+                        "ru": "battery – ячейки (105)",
+                        "uk": "battery – комірки (105)",
+                        "zh-cn": "battery – 电芯 (105)"
+                    },
+                    "options": [
+                        {
+                            "label": "Module 0",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[0]",
+                                    "value": "battery.cells_resist[0]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0]",
+                                    "value": "battery.cells_stat[0]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_max.index",
+                                    "value": "battery.cells_stat[0].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_max.time",
+                                    "value": "battery.cells_stat[0].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_max.value",
+                                    "value": "battery.cells_stat[0].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_min.index",
+                                    "value": "battery.cells_stat[0].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_min.time",
+                                    "value": "battery.cells_stat[0].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].t_min.value",
+                                    "value": "battery.cells_stat[0].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_max.index",
+                                    "value": "battery.cells_stat[0].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_max.time",
+                                    "value": "battery.cells_stat[0].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_max.value",
+                                    "value": "battery.cells_stat[0].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_min.index",
+                                    "value": "battery.cells_stat[0].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_min.time",
+                                    "value": "battery.cells_stat[0].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[0].u_min.value",
+                                    "value": "battery.cells_stat[0].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[0]",
+                                    "value": "battery.cells[0]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 1",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[1]",
+                                    "value": "battery.cells_resist[1]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1]",
+                                    "value": "battery.cells_stat[1]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_max.index",
+                                    "value": "battery.cells_stat[1].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_max.time",
+                                    "value": "battery.cells_stat[1].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_max.value",
+                                    "value": "battery.cells_stat[1].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_min.index",
+                                    "value": "battery.cells_stat[1].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_min.time",
+                                    "value": "battery.cells_stat[1].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].t_min.value",
+                                    "value": "battery.cells_stat[1].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_max.index",
+                                    "value": "battery.cells_stat[1].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_max.time",
+                                    "value": "battery.cells_stat[1].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_max.value",
+                                    "value": "battery.cells_stat[1].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_min.index",
+                                    "value": "battery.cells_stat[1].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_min.time",
+                                    "value": "battery.cells_stat[1].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[1].u_min.value",
+                                    "value": "battery.cells_stat[1].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[1]",
+                                    "value": "battery.cells[1]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 2",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[2]",
+                                    "value": "battery.cells_resist[2]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2]",
+                                    "value": "battery.cells_stat[2]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_max.index",
+                                    "value": "battery.cells_stat[2].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_max.time",
+                                    "value": "battery.cells_stat[2].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_max.value",
+                                    "value": "battery.cells_stat[2].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_min.index",
+                                    "value": "battery.cells_stat[2].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_min.time",
+                                    "value": "battery.cells_stat[2].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].t_min.value",
+                                    "value": "battery.cells_stat[2].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_max.index",
+                                    "value": "battery.cells_stat[2].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_max.time",
+                                    "value": "battery.cells_stat[2].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_max.value",
+                                    "value": "battery.cells_stat[2].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_min.index",
+                                    "value": "battery.cells_stat[2].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_min.time",
+                                    "value": "battery.cells_stat[2].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[2].u_min.value",
+                                    "value": "battery.cells_stat[2].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[2]",
+                                    "value": "battery.cells[2]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 3",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[3]",
+                                    "value": "battery.cells_resist[3]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3]",
+                                    "value": "battery.cells_stat[3]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_max.index",
+                                    "value": "battery.cells_stat[3].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_max.time",
+                                    "value": "battery.cells_stat[3].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_max.value",
+                                    "value": "battery.cells_stat[3].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_min.index",
+                                    "value": "battery.cells_stat[3].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_min.time",
+                                    "value": "battery.cells_stat[3].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].t_min.value",
+                                    "value": "battery.cells_stat[3].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_max.index",
+                                    "value": "battery.cells_stat[3].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_max.time",
+                                    "value": "battery.cells_stat[3].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_max.value",
+                                    "value": "battery.cells_stat[3].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_min.index",
+                                    "value": "battery.cells_stat[3].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_min.time",
+                                    "value": "battery.cells_stat[3].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[3].u_min.value",
+                                    "value": "battery.cells_stat[3].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[3]",
+                                    "value": "battery.cells[3]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 4",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[4]",
+                                    "value": "battery.cells_resist[4]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4]",
+                                    "value": "battery.cells_stat[4]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_max.index",
+                                    "value": "battery.cells_stat[4].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_max.time",
+                                    "value": "battery.cells_stat[4].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_max.value",
+                                    "value": "battery.cells_stat[4].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_min.index",
+                                    "value": "battery.cells_stat[4].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_min.time",
+                                    "value": "battery.cells_stat[4].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].t_min.value",
+                                    "value": "battery.cells_stat[4].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_max.index",
+                                    "value": "battery.cells_stat[4].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_max.time",
+                                    "value": "battery.cells_stat[4].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_max.value",
+                                    "value": "battery.cells_stat[4].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_min.index",
+                                    "value": "battery.cells_stat[4].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_min.time",
+                                    "value": "battery.cells_stat[4].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[4].u_min.value",
+                                    "value": "battery.cells_stat[4].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[4]",
+                                    "value": "battery.cells[4]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 5",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[5]",
+                                    "value": "battery.cells_resist[5]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5]",
+                                    "value": "battery.cells_stat[5]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_max.index",
+                                    "value": "battery.cells_stat[5].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_max.time",
+                                    "value": "battery.cells_stat[5].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_max.value",
+                                    "value": "battery.cells_stat[5].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_min.index",
+                                    "value": "battery.cells_stat[5].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_min.time",
+                                    "value": "battery.cells_stat[5].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].t_min.value",
+                                    "value": "battery.cells_stat[5].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_max.index",
+                                    "value": "battery.cells_stat[5].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_max.time",
+                                    "value": "battery.cells_stat[5].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_max.value",
+                                    "value": "battery.cells_stat[5].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_min.index",
+                                    "value": "battery.cells_stat[5].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_min.time",
+                                    "value": "battery.cells_stat[5].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[5].u_min.value",
+                                    "value": "battery.cells_stat[5].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[5]",
+                                    "value": "battery.cells[5]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 6",
+                            "items": [
+                                {
+                                    "label": "battery.cells_resist[6]",
+                                    "value": "battery.cells_resist[6]",
+                                    "description": "[mΩ]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6]",
+                                    "value": "battery.cells_stat[6]"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_max.index",
+                                    "value": "battery.cells_stat[6].t_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_max.time",
+                                    "value": "battery.cells_stat[6].t_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_max.value",
+                                    "value": "battery.cells_stat[6].t_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_min.index",
+                                    "value": "battery.cells_stat[6].t_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_min.time",
+                                    "value": "battery.cells_stat[6].t_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].t_min.value",
+                                    "value": "battery.cells_stat[6].t_min.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_max.index",
+                                    "value": "battery.cells_stat[6].u_max.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_max.time",
+                                    "value": "battery.cells_stat[6].u_max.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_max.value",
+                                    "value": "battery.cells_stat[6].u_max.value"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_min.index",
+                                    "value": "battery.cells_stat[6].u_min.index"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_min.time",
+                                    "value": "battery.cells_stat[6].u_min.time"
+                                },
+                                {
+                                    "label": "battery.cells_stat[6].u_min.value",
+                                    "value": "battery.cells_stat[6].u_min.value"
+                                },
+                                {
+                                    "label": "battery.cells[6]",
+                                    "value": "battery.cells[6]",
+                                    "description": "[V]"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "rct_elements_battery_modules": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": {
+                        "de": "battery – Module (21)",
+                        "en": "battery – modules (21)",
+                        "es": "battery – módulos (21)",
+                        "fr": "battery – modules (21)",
+                        "it": "battery – moduli (21)",
+                        "nl": "battery – modules (21)",
+                        "pl": "battery – moduły (21)",
+                        "pt": "battery – módulos (21)",
+                        "ru": "battery – модули (21)",
+                        "uk": "battery – модулі (21)",
+                        "zh-cn": "battery – 模块 (21)"
+                    },
+                    "options": [
+                        {
+                            "label": "Module 0",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[0]",
+                                    "value": "battery.module_sn[0]",
+                                    "description": "Module 0 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[0]",
+                                    "value": "battery.stack_cycles[0]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[0]",
+                                    "value": "battery.stack_software_version[0]",
+                                    "description": "Software version stack 0"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 1",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[1]",
+                                    "value": "battery.module_sn[1]",
+                                    "description": "Module 1 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[1]",
+                                    "value": "battery.stack_cycles[1]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[1]",
+                                    "value": "battery.stack_software_version[1]",
+                                    "description": "Software version stack 1"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 2",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[2]",
+                                    "value": "battery.module_sn[2]",
+                                    "description": "Module 2 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[2]",
+                                    "value": "battery.stack_cycles[2]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[2]",
+                                    "value": "battery.stack_software_version[2]",
+                                    "description": "Software version stack 2"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 3",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[3]",
+                                    "value": "battery.module_sn[3]",
+                                    "description": "Module 3 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[3]",
+                                    "value": "battery.stack_cycles[3]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[3]",
+                                    "value": "battery.stack_software_version[3]",
+                                    "description": "Software version stack 3"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 4",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[4]",
+                                    "value": "battery.module_sn[4]",
+                                    "description": "Module 4 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[4]",
+                                    "value": "battery.stack_cycles[4]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[4]",
+                                    "value": "battery.stack_software_version[4]",
+                                    "description": "Software version stack 4"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 5",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[5]",
+                                    "value": "battery.module_sn[5]",
+                                    "description": "Module 5 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[5]",
+                                    "value": "battery.stack_cycles[5]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[5]",
+                                    "value": "battery.stack_software_version[5]",
+                                    "description": "Software version stack 5"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Module 6",
+                            "items": [
+                                {
+                                    "label": "battery.module_sn[6]",
+                                    "value": "battery.module_sn[6]",
+                                    "description": "Module 6 Serial Number"
+                                },
+                                {
+                                    "label": "battery.stack_cycles[6]",
+                                    "value": "battery.stack_cycles[6]"
+                                },
+                                {
+                                    "label": "battery.stack_software_version[6]",
+                                    "value": "battery.stack_software_version[6]",
+                                    "description": "Software version stack 6"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "rct_elements_acc_conv": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "acc_conv (6)",
+                    "options": [
+                        {
+                            "label": "acc_conv.i_acc_lp_fast",
+                            "value": "acc_conv.i_acc_lp_fast",
+                            "description": "Battery current [A]"
+                        },
+                        {
+                            "label": "acc_conv.i_acc_lp_slow",
+                            "value": "acc_conv.i_acc_lp_slow"
+                        },
+                        {
+                            "label": "acc_conv.i_charge_max",
+                            "value": "acc_conv.i_charge_max",
+                            "description": "Max. battery converter charge current [A]"
+                        },
+                        {
+                            "label": "acc_conv.i_discharge_max",
+                            "value": "acc_conv.i_discharge_max",
+                            "description": "Max. battery converter discharge current [A]"
+                        },
+                        {
+                            "label": "acc_conv.i_max",
+                            "value": "acc_conv.i_max",
+                            "description": "Max. battery converter current [A]"
+                        },
+                        {
+                            "label": "acc_conv.state_slow",
+                            "value": "acc_conv.state_slow"
+                        }
+                    ]
+                },
+                "rct_elements_adc": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "adc (5)",
+                    "options": [
+                        {
+                            "label": "adc.u_acc",
+                            "value": "adc.u_acc",
+                            "description": "Battery voltage (inverter) [V]"
+                        },
+                        {
+                            "label": "adc.u_ref_1_5v[0]",
+                            "value": "adc.u_ref_1_5v[0]",
+                            "description": "Reference voltage 1 [V]"
+                        },
+                        {
+                            "label": "adc.u_ref_1_5v[1]",
+                            "value": "adc.u_ref_1_5v[1]",
+                            "description": "Reference voltage 2 [V]"
+                        },
+                        {
+                            "label": "adc.u_ref_1_5v[2]",
+                            "value": "adc.u_ref_1_5v[2]",
+                            "description": "Reference voltage 3 [V]"
+                        },
+                        {
+                            "label": "adc.u_ref_1_5v[3]",
+                            "value": "adc.u_ref_1_5v[3]",
+                            "description": "Reference voltage 4 [V]"
+                        }
+                    ]
+                },
+                "rct_elements_bat_mng_struct": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "bat_mng_struct (9)",
+                    "options": [
+                        {
+                            "label": "bat_mng_struct.bat_calib_soc_thresh",
+                            "value": "bat_mng_struct.bat_calib_soc_thresh",
+                            "description": "Part of max historical SOC for battery calibration in advance"
+                        },
+                        {
+                            "label": "bat_mng_struct.bat_calib_soc_threshold",
+                            "value": "bat_mng_struct.bat_calib_soc_threshold",
+                            "description": "SOC threshold for battery calibration in advance"
+                        },
+                        {
+                            "label": "bat_mng_struct.count",
+                            "value": "bat_mng_struct.count"
+                        },
+                        {
+                            "label": "bat_mng_struct.k",
+                            "value": "bat_mng_struct.k",
+                            "description": "Forecast correction"
+                        },
+                        {
+                            "label": "bat_mng_struct.k_reserve",
+                            "value": "bat_mng_struct.k_reserve",
+                            "description": "Main reservation coefficient [0..2]"
+                        },
+                        {
+                            "label": "bat_mng_struct.k_trust",
+                            "value": "bat_mng_struct.k_trust",
+                            "description": "How fast the actual prediction can be trusted [0..10]"
+                        },
+                        {
+                            "label": "bat_mng_struct.profile_pdc",
+                            "value": "bat_mng_struct.profile_pdc"
+                        },
+                        {
+                            "label": "bat_mng_struct.profile_pdc_max",
+                            "value": "bat_mng_struct.profile_pdc_max"
+                        },
+                        {
+                            "label": "bat_mng_struct.profile_pext",
+                            "value": "bat_mng_struct.profile_pext"
+                        }
+                    ]
+                },
+                "rct_elements_can_bus": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "can_bus (6)",
+                    "options": [
+                        {
+                            "label": "can_bus.bms_update_response[0]",
+                            "value": "can_bus.bms_update_response[0]"
+                        },
+                        {
+                            "label": "can_bus.bms_update_response[1]",
+                            "value": "can_bus.bms_update_response[1]"
+                        },
+                        {
+                            "label": "can_bus.bms_update_state",
+                            "value": "can_bus.bms_update_state"
+                        },
+                        {
+                            "label": "can_bus.requested_id",
+                            "value": "can_bus.requested_id"
+                        },
+                        {
+                            "label": "can_bus.set_cell_resist",
+                            "value": "can_bus.set_cell_resist"
+                        },
+                        {
+                            "label": "can_bus.set_cell_v_t",
+                            "value": "can_bus.set_cell_v_t"
+                        }
+                    ]
+                },
+                "rct_elements_db": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "db (23)",
+                    "options": [
+                        {
+                            "label": "db.core_temp",
+                            "value": "db.core_temp",
+                            "description": "Core temperature [°C]"
+                        },
+                        {
+                            "label": "db.power_board.adc_m9V_meas",
+                            "value": "db.power_board.adc_m9V_meas"
+                        },
+                        {
+                            "label": "db.power_board.adc_p3V3_meas",
+                            "value": "db.power_board.adc_p3V3_meas"
+                        },
+                        {
+                            "label": "db.power_board.adc_p5V_W_meas",
+                            "value": "db.power_board.adc_p5V_W_meas"
+                        },
+                        {
+                            "label": "db.power_board.adc_p9V_meas",
+                            "value": "db.power_board.adc_p9V_meas"
+                        },
+                        {
+                            "label": "db.power_board.afi_i30",
+                            "value": "db.power_board.afi_i30",
+                            "description": "AFI 30 mA threshold [A]"
+                        },
+                        {
+                            "label": "db.power_board.afi_i60",
+                            "value": "db.power_board.afi_i60",
+                            "description": "AFI 60 mA threshold [A]"
+                        },
+                        {
+                            "label": "db.power_board.afi_i150",
+                            "value": "db.power_board.afi_i150",
+                            "description": "AFI 150 mA threshold [A]"
+                        },
+                        {
+                            "label": "db.power_board.afi_i300",
+                            "value": "db.power_board.afi_i300",
+                            "description": "AFI 300 mA threshold [A]"
+                        },
+                        {
+                            "label": "db.power_board.afi_t30",
+                            "value": "db.power_board.afi_t30",
+                            "description": "AFI 30 mA switching off time [s]"
+                        },
+                        {
+                            "label": "db.power_board.afi_t60",
+                            "value": "db.power_board.afi_t60",
+                            "description": "AFI 60 mA switching off time [s]"
+                        },
+                        {
+                            "label": "db.power_board.afi_t150",
+                            "value": "db.power_board.afi_t150",
+                            "description": "AFI 150 mA switching off time [s]"
+                        },
+                        {
+                            "label": "db.power_board.afi_t300",
+                            "value": "db.power_board.afi_t300",
+                            "description": "AFI 300 mA switching off time [s]"
+                        },
+                        {
+                            "label": "db.power_board.Calibr_Value_Mean",
+                            "value": "db.power_board.Calibr_Value_Mean"
+                        },
+                        {
+                            "label": "db.power_board.Current_AC_RMS",
+                            "value": "db.power_board.Current_AC_RMS"
+                        },
+                        {
+                            "label": "db.power_board.Current_Mean",
+                            "value": "db.power_board.Current_Mean"
+                        },
+                        {
+                            "label": "db.power_board.Current_Mean_Mean_AC",
+                            "value": "db.power_board.Current_Mean_Mean_AC"
+                        },
+                        {
+                            "label": "db.power_board.relays_state",
+                            "value": "db.power_board.relays_state"
+                        },
+                        {
+                            "label": "db.power_board.status",
+                            "value": "db.power_board.status",
+                            "description": "Power board status"
+                        },
+                        {
+                            "label": "db.power_board.version_boot",
+                            "value": "db.power_board.version_boot",
+                            "description": "PIC bootloader software version"
+                        },
+                        {
+                            "label": "db.power_board.version_main",
+                            "value": "db.power_board.version_main",
+                            "description": "PIC software version"
+                        },
+                        {
+                            "label": "db.temp1",
+                            "value": "db.temp1",
+                            "description": "Heat sink temperature [°C]"
+                        },
+                        {
+                            "label": "db.temp2",
+                            "value": "db.temp2",
+                            "description": "Heat sink (battery actuator) temperature [°C]"
+                        }
+                    ]
+                },
+                "rct_elements_dc_conv": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "dc_conv (20)",
+                    "options": [
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].enabled",
+                            "value": "dc_conv.dc_conv_struct[0].enabled",
+                            "description": "Solar generator A connected"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].mpp.enable_scan",
+                            "value": "dc_conv.dc_conv_struct[0].mpp.enable_scan",
+                            "description": "Enable rescan for global MPP on solar generator A"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].mpp.fixed_voltage",
+                            "value": "dc_conv.dc_conv_struct[0].mpp.fixed_voltage",
+                            "description": "Fixed voltage Solar generator A [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].mpp.mpp_step",
+                            "value": "dc_conv.dc_conv_struct[0].mpp.mpp_step",
+                            "description": "MPP search step on input A [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].p_dc",
+                            "value": "dc_conv.dc_conv_struct[0].p_dc",
+                            "description": "Solar generator A power [W]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].p_dc_lp",
+                            "value": "dc_conv.dc_conv_struct[0].p_dc_lp",
+                            "description": "Solar generator A power [W]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].rescan_correction",
+                            "value": "dc_conv.dc_conv_struct[0].rescan_correction",
+                            "description": "Last global rescan MPP correction on input A [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].u_sg_lp",
+                            "value": "dc_conv.dc_conv_struct[0].u_sg_lp",
+                            "description": "Solar generator A voltage [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[0].u_target",
+                            "value": "dc_conv.dc_conv_struct[0].u_target",
+                            "description": "MPP on input A [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].enabled",
+                            "value": "dc_conv.dc_conv_struct[1].enabled",
+                            "description": "Solar generator B connected"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].mpp.enable_scan",
+                            "value": "dc_conv.dc_conv_struct[1].mpp.enable_scan",
+                            "description": "Enable rescan for global MPP on solar generator B"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].mpp.fixed_voltage",
+                            "value": "dc_conv.dc_conv_struct[1].mpp.fixed_voltage",
+                            "description": "Fixed voltage Solar generator B [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].mpp.mpp_step",
+                            "value": "dc_conv.dc_conv_struct[1].mpp.mpp_step",
+                            "description": "MPP search step on input B [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].p_dc",
+                            "value": "dc_conv.dc_conv_struct[1].p_dc",
+                            "description": "Solar generator B power [W]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].p_dc_lp",
+                            "value": "dc_conv.dc_conv_struct[1].p_dc_lp",
+                            "description": "Solar generator B power [W]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].rescan_correction",
+                            "value": "dc_conv.dc_conv_struct[1].rescan_correction",
+                            "description": "Last global rescan MPP correction on input B [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].u_sg_lp",
+                            "value": "dc_conv.dc_conv_struct[1].u_sg_lp",
+                            "description": "Solar generator B voltage [V]"
+                        },
+                        {
+                            "label": "dc_conv.dc_conv_struct[1].u_target",
+                            "value": "dc_conv.dc_conv_struct[1].u_target",
+                            "description": "MPP on input B [V]"
+                        },
+                        {
+                            "label": "dc_conv.last_rescan",
+                            "value": "dc_conv.last_rescan",
+                            "description": "Last global rescan"
+                        },
+                        {
+                            "label": "dc_conv.start_voltage",
+                            "value": "dc_conv.start_voltage",
+                            "description": "Inverter DC-voltage start value [V]"
+                        }
+                    ]
+                },
+                "rct_elements_display_struct": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "display_struct (5)",
+                    "options": [
+                        {
+                            "label": "display_struct.blink",
+                            "value": "display_struct.blink",
+                            "description": "Display blinking enable"
+                        },
+                        {
+                            "label": "display_struct.brightness",
+                            "value": "display_struct.brightness",
+                            "description": "Display brightness, [0..255]"
+                        },
+                        {
+                            "label": "display_struct.contrast",
+                            "value": "display_struct.contrast",
+                            "description": "Display contrast"
+                        },
+                        {
+                            "label": "display_struct.display_dir",
+                            "value": "display_struct.display_dir",
+                            "description": "Rotate display"
+                        },
+                        {
+                            "label": "display_struct.variate_contrast",
+                            "value": "display_struct.variate_contrast",
+                            "description": "Display pixel test mode"
+                        }
+                    ]
+                },
+                "rct_elements_energy": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "energy (56)",
+                    "options": [
+                        {
+                            "label": "energy.e_ac_day",
+                            "value": "energy.e_ac_day",
+                            "description": "Day energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ac_day_sum",
+                            "value": "energy.e_ac_day_sum"
+                        },
+                        {
+                            "label": "energy.e_ac_month",
+                            "value": "energy.e_ac_month",
+                            "description": "Month energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ac_month_sum",
+                            "value": "energy.e_ac_month_sum"
+                        },
+                        {
+                            "label": "energy.e_ac_total",
+                            "value": "energy.e_ac_total",
+                            "description": "Total energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ac_total_sum",
+                            "value": "energy.e_ac_total_sum"
+                        },
+                        {
+                            "label": "energy.e_ac_year",
+                            "value": "energy.e_ac_year",
+                            "description": "Year energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ac_year_sum",
+                            "value": "energy.e_ac_year_sum"
+                        },
+                        {
+                            "label": "energy.e_dc_day_sum[0]",
+                            "value": "energy.e_dc_day_sum[0]"
+                        },
+                        {
+                            "label": "energy.e_dc_day_sum[1]",
+                            "value": "energy.e_dc_day_sum[1]"
+                        },
+                        {
+                            "label": "energy.e_dc_day[0]",
+                            "value": "energy.e_dc_day[0]",
+                            "description": "Solar generator A day energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_day[1]",
+                            "value": "energy.e_dc_day[1]",
+                            "description": "Solar generator B day energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_month_sum[0]",
+                            "value": "energy.e_dc_month_sum[0]"
+                        },
+                        {
+                            "label": "energy.e_dc_month_sum[1]",
+                            "value": "energy.e_dc_month_sum[1]"
+                        },
+                        {
+                            "label": "energy.e_dc_month[0]",
+                            "value": "energy.e_dc_month[0]",
+                            "description": "Solar generator A month energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_month[1]",
+                            "value": "energy.e_dc_month[1]",
+                            "description": "Solar generator B month energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_total_sum[0]",
+                            "value": "energy.e_dc_total_sum[0]"
+                        },
+                        {
+                            "label": "energy.e_dc_total_sum[1]",
+                            "value": "energy.e_dc_total_sum[1]"
+                        },
+                        {
+                            "label": "energy.e_dc_total[0]",
+                            "value": "energy.e_dc_total[0]",
+                            "description": "Solar generator A total energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_total[1]",
+                            "value": "energy.e_dc_total[1]",
+                            "description": "Solar generator B total energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_year_sum[0]",
+                            "value": "energy.e_dc_year_sum[0]"
+                        },
+                        {
+                            "label": "energy.e_dc_year_sum[1]",
+                            "value": "energy.e_dc_year_sum[1]"
+                        },
+                        {
+                            "label": "energy.e_dc_year[0]",
+                            "value": "energy.e_dc_year[0]",
+                            "description": "Solar generator A year energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_dc_year[1]",
+                            "value": "energy.e_dc_year[1]",
+                            "description": "Solar generator B year energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ext_day",
+                            "value": "energy.e_ext_day",
+                            "description": "External day energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ext_day_sum",
+                            "value": "energy.e_ext_day_sum"
+                        },
+                        {
+                            "label": "energy.e_ext_month",
+                            "value": "energy.e_ext_month",
+                            "description": "External month energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ext_month_sum",
+                            "value": "energy.e_ext_month_sum"
+                        },
+                        {
+                            "label": "energy.e_ext_total",
+                            "value": "energy.e_ext_total",
+                            "description": "External total energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ext_total_sum",
+                            "value": "energy.e_ext_total_sum"
+                        },
+                        {
+                            "label": "energy.e_ext_year",
+                            "value": "energy.e_ext_year",
+                            "description": "External year energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_ext_year_sum",
+                            "value": "energy.e_ext_year_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_day",
+                            "value": "energy.e_grid_feed_day",
+                            "description": "Day energy grid feed-in [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_day_sum",
+                            "value": "energy.e_grid_feed_day_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_month",
+                            "value": "energy.e_grid_feed_month",
+                            "description": "Month energy grid feed-in [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_month_sum",
+                            "value": "energy.e_grid_feed_month_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_total",
+                            "value": "energy.e_grid_feed_total",
+                            "description": "Total energy grid feed-in [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_total_sum",
+                            "value": "energy.e_grid_feed_total_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_year",
+                            "value": "energy.e_grid_feed_year",
+                            "description": "Year energy grid feed-in [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_feed_year_sum",
+                            "value": "energy.e_grid_feed_year_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_load_day",
+                            "value": "energy.e_grid_load_day",
+                            "description": "Day energy grid load [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_load_day_sum",
+                            "value": "energy.e_grid_load_day_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_load_month",
+                            "value": "energy.e_grid_load_month",
+                            "description": "Month energy grid load [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_load_month_sum",
+                            "value": "energy.e_grid_load_month_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_load_total",
+                            "value": "energy.e_grid_load_total",
+                            "description": "Total energy grid load [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_load_total_sum",
+                            "value": "energy.e_grid_load_total_sum"
+                        },
+                        {
+                            "label": "energy.e_grid_load_year",
+                            "value": "energy.e_grid_load_year",
+                            "description": "Year energy grid load [Wh]"
+                        },
+                        {
+                            "label": "energy.e_grid_load_year_sum",
+                            "value": "energy.e_grid_load_year_sum"
+                        },
+                        {
+                            "label": "energy.e_load_day",
+                            "value": "energy.e_load_day",
+                            "description": "Household day energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_load_day_sum",
+                            "value": "energy.e_load_day_sum"
+                        },
+                        {
+                            "label": "energy.e_load_month",
+                            "value": "energy.e_load_month",
+                            "description": "Household month energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_load_month_sum",
+                            "value": "energy.e_load_month_sum"
+                        },
+                        {
+                            "label": "energy.e_load_total",
+                            "value": "energy.e_load_total",
+                            "description": "Household total energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_load_total_sum",
+                            "value": "energy.e_load_total_sum"
+                        },
+                        {
+                            "label": "energy.e_load_year",
+                            "value": "energy.e_load_year",
+                            "description": "Household year energy [Wh]"
+                        },
+                        {
+                            "label": "energy.e_load_year_sum",
+                            "value": "energy.e_load_year_sum"
+                        }
+                    ]
+                },
+                "rct_elements_fault": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "fault (4)",
+                    "options": [
+                        {
+                            "label": "fault[0].flt",
+                            "value": "fault[0].flt",
+                            "description": "Error bit field 1"
+                        },
+                        {
+                            "label": "fault[1].flt",
+                            "value": "fault[1].flt",
+                            "description": "Error bit field 2"
+                        },
+                        {
+                            "label": "fault[2].flt",
+                            "value": "fault[2].flt",
+                            "description": "Error bit field 3"
+                        },
+                        {
+                            "label": "fault[3].flt",
+                            "value": "fault[3].flt",
+                            "description": "Error bit field 4"
+                        }
+                    ]
+                },
+                "rct_elements_flash_rtc": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "flash_rtc (7)",
+                    "options": [
+                        {
+                            "label": "flash_rtc.flag_time_auto_switch",
+                            "value": "flash_rtc.flag_time_auto_switch",
+                            "description": "Automatically adjust clock for daylight saving time"
+                        },
+                        {
+                            "label": "flash_rtc.rtc_mcc_quartz_max_diff",
+                            "value": "flash_rtc.rtc_mcc_quartz_max_diff",
+                            "description": "Maximum allowed quartz frequency difference between RTC and Microcontroller [ppm]"
+                        },
+                        {
+                            "label": "flash_rtc.rtc_mcc_quartz_ppm_difference",
+                            "value": "flash_rtc.rtc_mcc_quartz_ppm_difference",
+                            "description": "Quartz frequency difference between RTC and Microcontroller [ppm]"
+                        },
+                        {
+                            "label": "flash_rtc.time_stamp",
+                            "value": "flash_rtc.time_stamp",
+                            "description": "Actual date/time"
+                        },
+                        {
+                            "label": "flash_rtc.time_stamp_factory",
+                            "value": "flash_rtc.time_stamp_factory",
+                            "description": "Production date"
+                        },
+                        {
+                            "label": "flash_rtc.time_stamp_set",
+                            "value": "flash_rtc.time_stamp_set",
+                            "description": "Set date/time"
+                        },
+                        {
+                            "label": "flash_rtc.time_stamp_update",
+                            "value": "flash_rtc.time_stamp_update",
+                            "description": "Last update date"
+                        }
+                    ]
+                },
+                "rct_elements_g_sync": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "g_sync (47)",
+                    "options": [
+                        {
+                            "label": "g_sync.i_dr_eff[0]",
+                            "value": "g_sync.i_dr_eff[0]",
+                            "description": "Current phase 1 [A]"
+                        },
+                        {
+                            "label": "g_sync.i_dr_eff[1]",
+                            "value": "g_sync.i_dr_eff[1]",
+                            "description": "Current phase 2 [A]"
+                        },
+                        {
+                            "label": "g_sync.i_dr_eff[2]",
+                            "value": "g_sync.i_dr_eff[2]",
+                            "description": "Current phase 3 [A]"
+                        },
+                        {
+                            "label": "g_sync.i_dr_lp[0]",
+                            "value": "g_sync.i_dr_lp[0]",
+                            "description": "Current phase 1 (average) [A]"
+                        },
+                        {
+                            "label": "g_sync.i_dr_lp[1]",
+                            "value": "g_sync.i_dr_lp[1]",
+                            "description": "Current phase 2 (average) [A]"
+                        },
+                        {
+                            "label": "g_sync.i_dr_lp[2]",
+                            "value": "g_sync.i_dr_lp[2]",
+                            "description": "Current phase 3 (average) [A]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_grid_sum_lp",
+                            "value": "g_sync.p_ac_grid_sum_lp",
+                            "description": "Total grid power [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_load_sum_lp",
+                            "value": "g_sync.p_ac_load_sum_lp",
+                            "description": "Load household - external Power [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_load[0]",
+                            "value": "g_sync.p_ac_load[0]",
+                            "description": "Load household phase 1 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_load[1]",
+                            "value": "g_sync.p_ac_load[1]",
+                            "description": "Load household phase 2 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_load[2]",
+                            "value": "g_sync.p_ac_load[2]",
+                            "description": "Load household phase 3 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_lp[0]",
+                            "value": "g_sync.p_ac_lp[0]",
+                            "description": "AC power phase 1 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_lp[1]",
+                            "value": "g_sync.p_ac_lp[1]",
+                            "description": "AC power phase 2 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_lp[2]",
+                            "value": "g_sync.p_ac_lp[2]",
+                            "description": "AC power phase 3 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sc_sum",
+                            "value": "g_sync.p_ac_sc_sum",
+                            "description": "Grid power (ext. sensors) [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sc[0]",
+                            "value": "g_sync.p_ac_sc[0]",
+                            "description": "Grid power phase 1 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sc[1]",
+                            "value": "g_sync.p_ac_sc[1]",
+                            "description": "Grid power phase 2 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sc[2]",
+                            "value": "g_sync.p_ac_sc[2]",
+                            "description": "Grid power phase 3 [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sum",
+                            "value": "g_sync.p_ac_sum",
+                            "description": "Real power [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac_sum_lp",
+                            "value": "g_sync.p_ac_sum_lp",
+                            "description": "AC power [W]"
+                        },
+                        {
+                            "label": "g_sync.p_ac[0]",
+                            "value": "g_sync.p_ac[0]",
+                            "description": "AC1"
+                        },
+                        {
+                            "label": "g_sync.p_ac[1]",
+                            "value": "g_sync.p_ac[1]",
+                            "description": "AC2"
+                        },
+                        {
+                            "label": "g_sync.p_ac[2]",
+                            "value": "g_sync.p_ac[2]",
+                            "description": "AC3"
+                        },
+                        {
+                            "label": "g_sync.p_acc_lp",
+                            "value": "g_sync.p_acc_lp",
+                            "description": "Battery power [W]"
+                        },
+                        {
+                            "label": "g_sync.q_ac_sum_lp",
+                            "value": "g_sync.q_ac_sum_lp",
+                            "description": "Reactive power [var]"
+                        },
+                        {
+                            "label": "g_sync.q_ac[0]",
+                            "value": "g_sync.q_ac[0]",
+                            "description": "Reactive power phase 1 [var]"
+                        },
+                        {
+                            "label": "g_sync.q_ac[1]",
+                            "value": "g_sync.q_ac[1]",
+                            "description": "Reactive power phase 2 [var]"
+                        },
+                        {
+                            "label": "g_sync.q_ac[2]",
+                            "value": "g_sync.q_ac[2]",
+                            "description": "Reactive power phase 3 [var]"
+                        },
+                        {
+                            "label": "g_sync.s_ac_lp[0]",
+                            "value": "g_sync.s_ac_lp[0]",
+                            "description": "Apparent power phase 1 [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac_lp[1]",
+                            "value": "g_sync.s_ac_lp[1]",
+                            "description": "Apparent power phase 2 [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac_lp[2]",
+                            "value": "g_sync.s_ac_lp[2]",
+                            "description": "Apparent power phase 3 [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac_sum_lp",
+                            "value": "g_sync.s_ac_sum_lp",
+                            "description": "Apparent power [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac[0]",
+                            "value": "g_sync.s_ac[0]",
+                            "description": "Apparent power phase 1 [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac[1]",
+                            "value": "g_sync.s_ac[1]",
+                            "description": "Apparent power phase 2 [VA]"
+                        },
+                        {
+                            "label": "g_sync.s_ac[2]",
+                            "value": "g_sync.s_ac[2]",
+                            "description": "Apparent power phase 3 [VA]"
+                        },
+                        {
+                            "label": "g_sync.u_l_rms[0]",
+                            "value": "g_sync.u_l_rms[0]",
+                            "description": "AC voltage phase 1 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_l_rms[1]",
+                            "value": "g_sync.u_l_rms[1]",
+                            "description": "AC voltage phase 2 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_l_rms[2]",
+                            "value": "g_sync.u_l_rms[2]",
+                            "description": "AC voltage phase 3 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_ptp_rms[0]",
+                            "value": "g_sync.u_ptp_rms[0]",
+                            "description": "Phase to phase voltage 1 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_ptp_rms[1]",
+                            "value": "g_sync.u_ptp_rms[1]",
+                            "description": "Phase to phase voltage 2 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_ptp_rms[2]",
+                            "value": "g_sync.u_ptp_rms[2]",
+                            "description": "Phase to phase voltage 3 [V]"
+                        },
+                        {
+                            "label": "g_sync.u_sg_avg[0]",
+                            "value": "g_sync.u_sg_avg[0]",
+                            "description": "Solar generator A voltage [V]"
+                        },
+                        {
+                            "label": "g_sync.u_sg_avg[1]",
+                            "value": "g_sync.u_sg_avg[1]",
+                            "description": "Solar generator B voltage [V]"
+                        },
+                        {
+                            "label": "g_sync.u_zk_n_avg",
+                            "value": "g_sync.u_zk_n_avg",
+                            "description": "Negative buffer capacitor voltage [V]"
+                        },
+                        {
+                            "label": "g_sync.u_zk_p_avg",
+                            "value": "g_sync.u_zk_p_avg",
+                            "description": "Positive buffer capacitor voltage [V]"
+                        },
+                        {
+                            "label": "g_sync.u_zk_sum_avg",
+                            "value": "g_sync.u_zk_sum_avg",
+                            "description": "DC link voltage [V]"
+                        },
+                        {
+                            "label": "g_sync.u_zk_sum_mov_avg",
+                            "value": "g_sync.u_zk_sum_mov_avg",
+                            "description": "Actual DC link voltage [V]"
+                        }
+                    ]
+                },
+                "rct_elements_general": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "general (31)",
+                    "options": [
+                        {
+                            "label": "android_description",
+                            "value": "android_description",
+                            "description": "Device name"
+                        },
+                        {
+                            "label": "com_service",
+                            "value": "com_service",
+                            "description": "COM service"
+                        },
+                        {
+                            "label": "common_control_bits",
+                            "value": "common_control_bits",
+                            "description": "Bit coded function"
+                        },
+                        {
+                            "label": "current_sensor_max",
+                            "value": "current_sensor_max",
+                            "description": "Power Sensor current range [A]"
+                        },
+                        {
+                            "label": "detect_phase_shift_enable",
+                            "value": "detect_phase_shift_enable",
+                            "description": "Enable active island detection"
+                        },
+                        {
+                            "label": "flash_mem",
+                            "value": "flash_mem"
+                        },
+                        {
+                            "label": "flash_result",
+                            "value": "flash_result",
+                            "description": "Flash result"
+                        },
+                        {
+                            "label": "flash_state",
+                            "value": "flash_state",
+                            "description": "Flash state"
+                        },
+                        {
+                            "label": "grid_offset",
+                            "value": "grid_offset"
+                        },
+                        {
+                            "label": "i_ac_extern_connected",
+                            "value": "i_ac_extern_connected",
+                            "description": "Current sensors detected"
+                        },
+                        {
+                            "label": "i_ac_max_set",
+                            "value": "i_ac_max_set",
+                            "description": "Maximum AC throttle current [A]"
+                        },
+                        {
+                            "label": "i_bottom_max",
+                            "value": "i_bottom_max"
+                        },
+                        {
+                            "label": "i_dc_max",
+                            "value": "i_dc_max",
+                            "description": "Max. DC-component of Iac [A]"
+                        },
+                        {
+                            "label": "i_dc_slow_max",
+                            "value": "i_dc_slow_max",
+                            "description": "Max. slow DC-component of Iac [A]"
+                        },
+                        {
+                            "label": "i_dc_slow_time",
+                            "value": "i_dc_slow_time",
+                            "description": "Time for slow DC-component of Iac [s]"
+                        },
+                        {
+                            "label": "inverter_sn",
+                            "value": "inverter_sn",
+                            "description": "Serial number"
+                        },
+                        {
+                            "label": "last_successfull_flash_op",
+                            "value": "last_successfull_flash_op"
+                        },
+                        {
+                            "label": "max_phase_shift",
+                            "value": "max_phase_shift",
+                            "description": "Max. phase shift from 120 position [degrees]"
+                        },
+                        {
+                            "label": "p_buf_available",
+                            "value": "p_buf_available",
+                            "description": "Available buffer power [W]"
+                        },
+                        {
+                            "label": "parameter_file",
+                            "value": "parameter_file",
+                            "description": "Norm"
+                        },
+                        {
+                            "label": "phase_3_mode",
+                            "value": "phase_3_mode",
+                            "description": "3-phase feed in"
+                        },
+                        {
+                            "label": "phase_marker",
+                            "value": "phase_marker",
+                            "description": "Next phase after phase 1"
+                        },
+                        {
+                            "label": "phase_shift_threshold",
+                            "value": "phase_shift_threshold",
+                            "description": "Detection threshold"
+                        },
+                        {
+                            "label": "power_spring_bat",
+                            "value": "power_spring_bat"
+                        },
+                        {
+                            "label": "power_spring_down",
+                            "value": "power_spring_down"
+                        },
+                        {
+                            "label": "power_spring_offset",
+                            "value": "power_spring_offset"
+                        },
+                        {
+                            "label": "power_spring_up",
+                            "value": "power_spring_up"
+                        },
+                        {
+                            "label": "svnversion",
+                            "value": "svnversion",
+                            "description": "Control software version"
+                        },
+                        {
+                            "label": "svnversion_factory",
+                            "value": "svnversion_factory",
+                            "description": "Control software factory version"
+                        },
+                        {
+                            "label": "svnversion_last_known",
+                            "value": "svnversion_last_known"
+                        },
+                        {
+                            "label": "update_is_allowed_id",
+                            "value": "update_is_allowed_id"
+                        }
+                    ]
+                },
+                "rct_elements_grid_mon": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "grid_mon (16)",
+                    "options": [
+                        {
+                            "label": "grid_mon[0].f_over.threshold",
+                            "value": "grid_mon[0].f_over.threshold",
+                            "description": "Max. frequency level 1 [Hz]"
+                        },
+                        {
+                            "label": "grid_mon[0].f_over.time",
+                            "value": "grid_mon[0].f_over.time",
+                            "description": "Max. frequency switch-off time level 1 [s]"
+                        },
+                        {
+                            "label": "grid_mon[0].f_under.threshold",
+                            "value": "grid_mon[0].f_under.threshold",
+                            "description": "Min. frequency level 1 [Hz]"
+                        },
+                        {
+                            "label": "grid_mon[0].f_under.time",
+                            "value": "grid_mon[0].f_under.time",
+                            "description": "Min. frequency switch-off time level 1 [s]"
+                        },
+                        {
+                            "label": "grid_mon[0].u_over.threshold",
+                            "value": "grid_mon[0].u_over.threshold",
+                            "description": "Max. voltage level 1 [V]"
+                        },
+                        {
+                            "label": "grid_mon[0].u_over.time",
+                            "value": "grid_mon[0].u_over.time",
+                            "description": "Max. voltage switch-off time level 1 [s]"
+                        },
+                        {
+                            "label": "grid_mon[0].u_under.threshold",
+                            "value": "grid_mon[0].u_under.threshold",
+                            "description": "Min. voltage level 1 [V]"
+                        },
+                        {
+                            "label": "grid_mon[0].u_under.time",
+                            "value": "grid_mon[0].u_under.time",
+                            "description": "Min. voltage switch-off time level 1 [s]"
+                        },
+                        {
+                            "label": "grid_mon[1].f_over.threshold",
+                            "value": "grid_mon[1].f_over.threshold",
+                            "description": "Max. frequency level 2 [Hz]"
+                        },
+                        {
+                            "label": "grid_mon[1].f_over.time",
+                            "value": "grid_mon[1].f_over.time",
+                            "description": "Max. frequency switch-off time level 2 [s]"
+                        },
+                        {
+                            "label": "grid_mon[1].f_under.threshold",
+                            "value": "grid_mon[1].f_under.threshold",
+                            "description": "Min. frequency level 2 [Hz]"
+                        },
+                        {
+                            "label": "grid_mon[1].f_under.time",
+                            "value": "grid_mon[1].f_under.time",
+                            "description": "Min. frequency switch-off time level 2 [s]"
+                        },
+                        {
+                            "label": "grid_mon[1].u_over.threshold",
+                            "value": "grid_mon[1].u_over.threshold",
+                            "description": "Max. voltage level 2 [V]"
+                        },
+                        {
+                            "label": "grid_mon[1].u_over.time",
+                            "value": "grid_mon[1].u_over.time",
+                            "description": "Max. voltage switch-off time level 2 [s]"
+                        },
+                        {
+                            "label": "grid_mon[1].u_under.threshold",
+                            "value": "grid_mon[1].u_under.threshold",
+                            "description": "Min. voltage level 2 [V]"
+                        },
+                        {
+                            "label": "grid_mon[1].u_under.time",
+                            "value": "grid_mon[1].u_under.time",
+                            "description": "Min. voltage switch-off time level 2 [s]"
+                        }
+                    ]
+                },
+                "rct_elements_hw_test": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "hw_test (25)",
+                    "options": [
+                        {
+                            "label": "hw_test.booster_test_index",
+                            "value": "hw_test.booster_test_index"
+                        },
+                        {
+                            "label": "hw_test.bt_cycle",
+                            "value": "hw_test.bt_cycle"
+                        },
+                        {
+                            "label": "hw_test.bt_power[0]",
+                            "value": "hw_test.bt_power[0]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[1]",
+                            "value": "hw_test.bt_power[1]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[2]",
+                            "value": "hw_test.bt_power[2]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[3]",
+                            "value": "hw_test.bt_power[3]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[4]",
+                            "value": "hw_test.bt_power[4]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[5]",
+                            "value": "hw_test.bt_power[5]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[6]",
+                            "value": "hw_test.bt_power[6]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[7]",
+                            "value": "hw_test.bt_power[7]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[8]",
+                            "value": "hw_test.bt_power[8]"
+                        },
+                        {
+                            "label": "hw_test.bt_power[9]",
+                            "value": "hw_test.bt_power[9]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[0]",
+                            "value": "hw_test.bt_time[0]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[1]",
+                            "value": "hw_test.bt_time[1]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[2]",
+                            "value": "hw_test.bt_time[2]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[3]",
+                            "value": "hw_test.bt_time[3]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[4]",
+                            "value": "hw_test.bt_time[4]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[5]",
+                            "value": "hw_test.bt_time[5]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[6]",
+                            "value": "hw_test.bt_time[6]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[7]",
+                            "value": "hw_test.bt_time[7]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[8]",
+                            "value": "hw_test.bt_time[8]"
+                        },
+                        {
+                            "label": "hw_test.bt_time[9]",
+                            "value": "hw_test.bt_time[9]"
+                        },
+                        {
+                            "label": "hw_test.hw_switch_time",
+                            "value": "hw_test.hw_switch_time"
+                        },
+                        {
+                            "label": "hw_test.state",
+                            "value": "hw_test.state"
+                        },
+                        {
+                            "label": "hw_test.timer2",
+                            "value": "hw_test.timer2"
+                        }
+                    ]
+                },
+                "rct_elements_io_board": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "io_board (43)",
+                    "options": [
+                        {
+                            "label": "io_board.alarm_home_relay_mode",
+                            "value": "io_board.alarm_home_relay_mode",
+                            "description": "Multifunctional relay usage"
+                        },
+                        {
+                            "label": "io_board.alarm_home_value",
+                            "value": "io_board.alarm_home_value",
+                            "description": "Evaluated value"
+                        },
+                        {
+                            "label": "io_board.check_rs485_result",
+                            "value": "io_board.check_rs485_result"
+                        },
+                        {
+                            "label": "io_board.check_rse_result",
+                            "value": "io_board.check_rse_result"
+                        },
+                        {
+                            "label": "io_board.check_s0_result",
+                            "value": "io_board.check_s0_result"
+                        },
+                        {
+                            "label": "io_board.check_start",
+                            "value": "io_board.check_start"
+                        },
+                        {
+                            "label": "io_board.check_state",
+                            "value": "io_board.check_state"
+                        },
+                        {
+                            "label": "io_board.home_relay_off_threshold",
+                            "value": "io_board.home_relay_off_threshold",
+                            "description": "Switching off threshold [W]"
+                        },
+                        {
+                            "label": "io_board.home_relay_sw_off_delay",
+                            "value": "io_board.home_relay_sw_off_delay",
+                            "description": "Switching off delay [s]"
+                        },
+                        {
+                            "label": "io_board.home_relay_sw_on_delay",
+                            "value": "io_board.home_relay_sw_on_delay",
+                            "description": "Switching on delay [s]"
+                        },
+                        {
+                            "label": "io_board.home_relay_threshold",
+                            "value": "io_board.home_relay_threshold",
+                            "description": "Switching on threshold [W]"
+                        },
+                        {
+                            "label": "io_board.io1_polarity",
+                            "value": "io_board.io1_polarity",
+                            "description": "Inverted signal on input I/O 1"
+                        },
+                        {
+                            "label": "io_board.io1_s0_imp_per_kwh",
+                            "value": "io_board.io1_s0_imp_per_kwh",
+                            "description": "Number of impulses per kWh for S0 signal on I/O 1"
+                        },
+                        {
+                            "label": "io_board.io1_s0_min_duration",
+                            "value": "io_board.io1_s0_min_duration",
+                            "description": "Minimum S0 signal duration on I/O 1 [s]"
+                        },
+                        {
+                            "label": "io_board.io1_usage",
+                            "value": "io_board.io1_usage",
+                            "description": "Digital I/O 1 usage"
+                        },
+                        {
+                            "label": "io_board.io2_polarity",
+                            "value": "io_board.io2_polarity",
+                            "description": "Inverted signal on input I/O 2"
+                        },
+                        {
+                            "label": "io_board.io2_s0_imp_per_kwh",
+                            "value": "io_board.io2_s0_imp_per_kwh",
+                            "description": "Number of impulses per kWh for S0 signal on I/O 2"
+                        },
+                        {
+                            "label": "io_board.io2_s0_min_duration",
+                            "value": "io_board.io2_s0_min_duration",
+                            "description": "Minimum S0 signal duration on I/O 2 [s]"
+                        },
+                        {
+                            "label": "io_board.io2_usage",
+                            "value": "io_board.io2_usage",
+                            "description": "Digital I/O 2 usage"
+                        },
+                        {
+                            "label": "io_board.load_set",
+                            "value": "io_board.load_set",
+                            "description": "Dummy household load [W]"
+                        },
+                        {
+                            "label": "io_board.p_rse_desc_grad",
+                            "value": "io_board.p_rse_desc_grad",
+                            "description": "Power descent gradient [P/Pn/s]"
+                        },
+                        {
+                            "label": "io_board.p_rse_rise_grad",
+                            "value": "io_board.p_rse_rise_grad",
+                            "description": "Power rise gradient [P/Pn/s]"
+                        },
+                        {
+                            "label": "io_board.rse_data",
+                            "value": "io_board.rse_data",
+                            "description": "Actual K4..K1 data"
+                        },
+                        {
+                            "label": "io_board.rse_data_delay",
+                            "value": "io_board.rse_data_delay",
+                            "description": "Delay for new K4..K1 data [s]"
+                        },
+                        {
+                            "label": "io_board.rse_table[0]",
+                            "value": "io_board.rse_table[0]",
+                            "description": "K4..K1: 0000"
+                        },
+                        {
+                            "label": "io_board.rse_table[1]",
+                            "value": "io_board.rse_table[1]",
+                            "description": "K4..K1: 0001"
+                        },
+                        {
+                            "label": "io_board.rse_table[2]",
+                            "value": "io_board.rse_table[2]",
+                            "description": "K4..K1: 0010"
+                        },
+                        {
+                            "label": "io_board.rse_table[3]",
+                            "value": "io_board.rse_table[3]",
+                            "description": "K4..K1: 0011"
+                        },
+                        {
+                            "label": "io_board.rse_table[4]",
+                            "value": "io_board.rse_table[4]",
+                            "description": "K4..K1: 0100"
+                        },
+                        {
+                            "label": "io_board.rse_table[5]",
+                            "value": "io_board.rse_table[5]",
+                            "description": "K4..K1: 0101"
+                        },
+                        {
+                            "label": "io_board.rse_table[6]",
+                            "value": "io_board.rse_table[6]",
+                            "description": "K4..K1: 0110"
+                        },
+                        {
+                            "label": "io_board.rse_table[7]",
+                            "value": "io_board.rse_table[7]",
+                            "description": "K4..K1: 0111"
+                        },
+                        {
+                            "label": "io_board.rse_table[8]",
+                            "value": "io_board.rse_table[8]",
+                            "description": "K4..K1: 1000"
+                        },
+                        {
+                            "label": "io_board.rse_table[9]",
+                            "value": "io_board.rse_table[9]",
+                            "description": "K4..K1: 1001"
+                        },
+                        {
+                            "label": "io_board.rse_table[10]",
+                            "value": "io_board.rse_table[10]",
+                            "description": "K4..K1: 1010"
+                        },
+                        {
+                            "label": "io_board.rse_table[11]",
+                            "value": "io_board.rse_table[11]",
+                            "description": "K4..K1: 1011"
+                        },
+                        {
+                            "label": "io_board.rse_table[12]",
+                            "value": "io_board.rse_table[12]",
+                            "description": "K4..K1: 1100"
+                        },
+                        {
+                            "label": "io_board.rse_table[13]",
+                            "value": "io_board.rse_table[13]",
+                            "description": "K4..K1: 1101"
+                        },
+                        {
+                            "label": "io_board.rse_table[14]",
+                            "value": "io_board.rse_table[14]",
+                            "description": "K4..K1: 1110"
+                        },
+                        {
+                            "label": "io_board.rse_table[15]",
+                            "value": "io_board.rse_table[15]",
+                            "description": "K4..K1: 1111"
+                        },
+                        {
+                            "label": "io_board.s0_direction",
+                            "value": "io_board.s0_direction",
+                            "description": "S0 inputs single or bidirectional"
+                        },
+                        {
+                            "label": "io_board.s0_external_power",
+                            "value": "io_board.s0_external_power"
+                        },
+                        {
+                            "label": "io_board.s0_sum",
+                            "value": "io_board.s0_sum"
+                        }
+                    ]
+                },
+                "rct_elements_iso_struct": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "iso_struct (4)",
+                    "options": [
+                        {
+                            "label": "iso_struct.r_min",
+                            "value": "iso_struct.r_min",
+                            "description": "Minimum allowed insulation resistance [Ohm]"
+                        },
+                        {
+                            "label": "iso_struct.Riso",
+                            "value": "iso_struct.Riso",
+                            "description": "Total insulation resistance [Ohm]"
+                        },
+                        {
+                            "label": "iso_struct.Rn",
+                            "value": "iso_struct.Rn",
+                            "description": "Insulation resistance on negative DC input [Ohm]"
+                        },
+                        {
+                            "label": "iso_struct.Rp",
+                            "value": "iso_struct.Rp",
+                            "description": "Insulation resistance on positive DC input [Ohm]"
+                        }
+                    ]
+                },
+                "rct_elements_net": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "net (15)",
+                    "options": [
+                        {
+                            "label": "net.command",
+                            "value": "net.command"
+                        },
+                        {
+                            "label": "net.id",
+                            "value": "net.id"
+                        },
+                        {
+                            "label": "net.index",
+                            "value": "net.index"
+                        },
+                        {
+                            "label": "net.load_reduction",
+                            "value": "net.load_reduction"
+                        },
+                        {
+                            "label": "net.master_timeout",
+                            "value": "net.master_timeout"
+                        },
+                        {
+                            "label": "net.n_descendants",
+                            "value": "net.n_descendants",
+                            "description": "Number of descendant slaves"
+                        },
+                        {
+                            "label": "net.n_devices",
+                            "value": "net.n_devices"
+                        },
+                        {
+                            "label": "net.n_slaves",
+                            "value": "net.n_slaves"
+                        },
+                        {
+                            "label": "net.net_tunnel_id",
+                            "value": "net.net_tunnel_id"
+                        },
+                        {
+                            "label": "net.prev_k",
+                            "value": "net.prev_k"
+                        },
+                        {
+                            "label": "net.slave_p_total",
+                            "value": "net.slave_p_total"
+                        },
+                        {
+                            "label": "net.slave_timeout",
+                            "value": "net.slave_timeout"
+                        },
+                        {
+                            "label": "net.soc_av",
+                            "value": "net.soc_av"
+                        },
+                        {
+                            "label": "net.update_slaves",
+                            "value": "net.update_slaves",
+                            "description": "Activate aut. update slaves"
+                        },
+                        {
+                            "label": "net.use_network_filter",
+                            "value": "net.use_network_filter"
+                        }
+                    ]
+                },
+                "rct_elements_nsm": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "nsm (53)",
+                    "options": [
+                        {
+                            "label": "nsm.apm",
+                            "value": "nsm.apm",
+                            "description": "Active power mode"
+                        },
+                        {
+                            "label": "nsm.cos_phi_const",
+                            "value": "nsm.cos_phi_const",
+                            "description": "Cos phi constant value (positive = overexcited)"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[0][0]",
+                            "value": "nsm.cos_phi_p[0][0]",
+                            "description": "Point 1 [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[0][1]",
+                            "value": "nsm.cos_phi_p[0][1]",
+                            "description": "Point 1 (positive = overexcited) [cos(Phi)]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[1][0]",
+                            "value": "nsm.cos_phi_p[1][0]",
+                            "description": "Point 2 [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[1][1]",
+                            "value": "nsm.cos_phi_p[1][1]",
+                            "description": "Point 2 (positive = overexcited) [cos(Phi)]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[2][0]",
+                            "value": "nsm.cos_phi_p[2][0]",
+                            "description": "Point 3 [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[2][1]",
+                            "value": "nsm.cos_phi_p[2][1]",
+                            "description": "Point 3 (positive = overexcited) [cos(Phi)]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[3][0]",
+                            "value": "nsm.cos_phi_p[3][0]",
+                            "description": "Point 4 [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_p[3][1]",
+                            "value": "nsm.cos_phi_p[3][1]",
+                            "description": "Point 4 (positive = overexcited) [cos(rct_db)]"
+                        },
+                        {
+                            "label": "nsm.cos_phi_ts",
+                            "value": "nsm.cos_phi_ts",
+                            "description": "Time const for filter [s]"
+                        },
+                        {
+                            "label": "nsm.f_entry",
+                            "value": "nsm.f_entry",
+                            "description": "Entry frequency for P(f) over-frequency mode [Hz]"
+                        },
+                        {
+                            "label": "nsm.f_exit",
+                            "value": "nsm.f_exit",
+                            "description": "Exit frequency for P(f) over-frequency mode [Hz]"
+                        },
+                        {
+                            "label": "nsm.f_low_entry",
+                            "value": "nsm.f_low_entry",
+                            "description": "Entry frequency for P(f) under-frequency mode [Hz]"
+                        },
+                        {
+                            "label": "nsm.f_low_exit",
+                            "value": "nsm.f_low_exit",
+                            "description": "Exit frequency for P(f) under-frequency mode [Hz]"
+                        },
+                        {
+                            "label": "nsm.f_low_rise_grad",
+                            "value": "nsm.f_low_rise_grad",
+                            "description": "Power rise gradient for P(f) under-frequency mode without battery [1/Pn*Hz]"
+                        },
+                        {
+                            "label": "nsm.f_low_rise_grad_storage",
+                            "value": "nsm.f_low_rise_grad_storage",
+                            "description": "Power rise gradient for P(f) under-frequency mode with battery [1/Pn*Hz]"
+                        },
+                        {
+                            "label": "nsm.min_cos_phi",
+                            "value": "nsm.min_cos_phi",
+                            "description": "Minimum allowed cos(phi) [0..1]"
+                        },
+                        {
+                            "label": "nsm.p_limit",
+                            "value": "nsm.p_limit",
+                            "description": "Max. grid power [W]"
+                        },
+                        {
+                            "label": "nsm.p_u[0][0]",
+                            "value": "nsm.p_u[0][0]",
+                            "description": "Point 1 P/Pn"
+                        },
+                        {
+                            "label": "nsm.p_u[0][1]",
+                            "value": "nsm.p_u[0][1]",
+                            "description": "Point 1 voltage [V]"
+                        },
+                        {
+                            "label": "nsm.p_u[1][0]",
+                            "value": "nsm.p_u[1][0]",
+                            "description": "Point 2 P/Pn"
+                        },
+                        {
+                            "label": "nsm.p_u[1][1]",
+                            "value": "nsm.p_u[1][1]",
+                            "description": "Point 2 voltage [V]"
+                        },
+                        {
+                            "label": "nsm.p_u[2][0]",
+                            "value": "nsm.p_u[2][0]",
+                            "description": "Point 3 [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.p_u[2][1]",
+                            "value": "nsm.p_u[2][1]",
+                            "description": "Point 3 voltage [V]"
+                        },
+                        {
+                            "label": "nsm.p_u[3][0]",
+                            "value": "nsm.p_u[3][0]",
+                            "description": "Point 4 P/Pn [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.p_u[3][1]",
+                            "value": "nsm.p_u[3][1]",
+                            "description": "Point 4 voltage [V]"
+                        },
+                        {
+                            "label": "nsm.pf_delay",
+                            "value": "nsm.pf_delay",
+                            "description": "Delay time after P(f) [s]"
+                        },
+                        {
+                            "label": "nsm.pf_desc_grad",
+                            "value": "nsm.pf_desc_grad",
+                            "description": "Power decrease gradient for P(f) mode [P/(Pn*s)]"
+                        },
+                        {
+                            "label": "nsm.pf_hysteresis",
+                            "value": "nsm.pf_hysteresis",
+                            "description": "Hysteresis mode"
+                        },
+                        {
+                            "label": "nsm.pf_rise_grad",
+                            "value": "nsm.pf_rise_grad",
+                            "description": "Power increase gradient after P(f) restriction [P/(Pn*s)]"
+                        },
+                        {
+                            "label": "nsm.pf_use_p_max",
+                            "value": "nsm.pf_use_p_max",
+                            "description": "By over-frequency in P(f) use Pmax instead of Pmom (instant P)."
+                        },
+                        {
+                            "label": "nsm.pu_mode",
+                            "value": "nsm.pu_mode",
+                            "description": "P(U) mode 0: Pn 1: Pload"
+                        },
+                        {
+                            "label": "nsm.pu_ts",
+                            "value": "nsm.pu_ts",
+                            "description": "Time const for filter [s]"
+                        },
+                        {
+                            "label": "nsm.pu_use",
+                            "value": "nsm.pu_use",
+                            "description": "P(U) active"
+                        },
+                        {
+                            "label": "nsm.Q_const",
+                            "value": "nsm.Q_const",
+                            "description": "Q constant value (positive = overexcited) [var]"
+                        },
+                        {
+                            "label": "nsm.q_u_hysteresis",
+                            "value": "nsm.q_u_hysteresis",
+                            "description": "Curve with hysteresis"
+                        },
+                        {
+                            "label": "nsm.q_u_max_u_high",
+                            "value": "nsm.q_u_max_u_high",
+                            "description": "Qmax at upper voltage level (positive = overexcited) [var]"
+                        },
+                        {
+                            "label": "nsm.q_u_max_u_high_rel",
+                            "value": "nsm.q_u_max_u_high_rel",
+                            "description": "Qmax at upper voltage level relative to Smax (positive = overexcited)"
+                        },
+                        {
+                            "label": "nsm.q_u_max_u_low",
+                            "value": "nsm.q_u_max_u_low",
+                            "description": "Qmax at lower voltage level (positive = overexcited) [var]"
+                        },
+                        {
+                            "label": "nsm.q_u_max_u_low_rel",
+                            "value": "nsm.q_u_max_u_low_rel",
+                            "description": "Qmax at lower voltage level relative to Smax (positive = overexcited)"
+                        },
+                        {
+                            "label": "nsm.q_u_sel",
+                            "value": "nsm.q_u_sel",
+                            "description": "Voltage selection"
+                        },
+                        {
+                            "label": "nsm.rpm",
+                            "value": "nsm.rpm",
+                            "description": "Reactive power mode"
+                        },
+                        {
+                            "label": "nsm.rpm_lock_in_power",
+                            "value": "nsm.rpm_lock_in_power",
+                            "description": "Reactive Power Mode lock-in power [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.rpm_lock_out_power",
+                            "value": "nsm.rpm_lock_out_power",
+                            "description": "Reactive Power Mode lock-out power [P/Pn]"
+                        },
+                        {
+                            "label": "nsm.startup_grad",
+                            "value": "nsm.startup_grad",
+                            "description": "Startup gradient [P/(Pn*s)]"
+                        },
+                        {
+                            "label": "nsm.startup_grad_after_fault",
+                            "value": "nsm.startup_grad_after_fault",
+                            "description": "Startup gradient after fault [P/(Pn*s)]"
+                        },
+                        {
+                            "label": "nsm.u_lock_in",
+                            "value": "nsm.u_lock_in",
+                            "description": "Cos phi(P) lock in voltage [V]"
+                        },
+                        {
+                            "label": "nsm.u_lock_out",
+                            "value": "nsm.u_lock_out",
+                            "description": "Cos phi(P) lock out voltage [V]"
+                        },
+                        {
+                            "label": "nsm.u_q_u[0]",
+                            "value": "nsm.u_q_u[0]",
+                            "description": "Low voltage min. point [V]"
+                        },
+                        {
+                            "label": "nsm.u_q_u[1]",
+                            "value": "nsm.u_q_u[1]",
+                            "description": "Low voltage max. point [V]"
+                        },
+                        {
+                            "label": "nsm.u_q_u[2]",
+                            "value": "nsm.u_q_u[2]",
+                            "description": "High voltage min. point [V]"
+                        },
+                        {
+                            "label": "nsm.u_q_u[3]",
+                            "value": "nsm.u_q_u[3]",
+                            "description": "High voltage max. point [V]"
+                        }
+                    ]
+                },
+                "rct_elements_power_mng": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "power_mng (44)",
+                    "options": [
+                        {
+                            "label": "power_mng.amp_hours",
+                            "value": "power_mng.amp_hours",
+                            "description": "Battery energy [Ah]"
+                        },
+                        {
+                            "label": "power_mng.amp_hours_measured",
+                            "value": "power_mng.amp_hours_measured",
+                            "description": "Measured battery capacity [Ah]"
+                        },
+                        {
+                            "label": "power_mng.bat_calib_days_in_advance",
+                            "value": "power_mng.bat_calib_days_in_advance",
+                            "description": "Battery calibration days in advance"
+                        },
+                        {
+                            "label": "power_mng.bat_calib_reqularity",
+                            "value": "power_mng.bat_calib_reqularity",
+                            "description": "Battery calibration interval [days]"
+                        },
+                        {
+                            "label": "power_mng.bat_empty_full",
+                            "value": "power_mng.bat_empty_full",
+                            "description": "Bit 0 - battery was empty, bit 1 - battery was full"
+                        },
+                        {
+                            "label": "power_mng.bat_next_calib_date",
+                            "value": "power_mng.bat_next_calib_date",
+                            "description": "Next battery calibration"
+                        },
+                        {
+                            "label": "power_mng.battery_power",
+                            "value": "power_mng.battery_power",
+                            "description": "Battery discharge power [W]"
+                        },
+                        {
+                            "label": "power_mng.battery_power_extern",
+                            "value": "power_mng.battery_power_extern",
+                            "description": "Battery target power (positive = discharge) [W]"
+                        },
+                        {
+                            "label": "power_mng.battery_type",
+                            "value": "power_mng.battery_type",
+                            "description": "Battery type"
+                        },
+                        {
+                            "label": "power_mng.calib_charge_power",
+                            "value": "power_mng.calib_charge_power",
+                            "description": "Calibration charge power [W]"
+                        },
+                        {
+                            "label": "power_mng.feed_asymmetrical",
+                            "value": "power_mng.feed_asymmetrical",
+                            "description": "Allow asymmetrical feed"
+                        },
+                        {
+                            "label": "power_mng.force_inv_class",
+                            "value": "power_mng.force_inv_class",
+                            "description": "Change inverter class"
+                        },
+                        {
+                            "label": "power_mng.is_grid",
+                            "value": "power_mng.is_grid"
+                        },
+                        {
+                            "label": "power_mng.is_heiphoss",
+                            "value": "power_mng.is_heiphoss",
+                            "description": "HeiPhoss mode"
+                        },
+                        {
+                            "label": "power_mng.is_island_only",
+                            "value": "power_mng.is_island_only",
+                            "description": "Island without power switch support"
+                        },
+                        {
+                            "label": "power_mng.maximum_charge_voltage",
+                            "value": "power_mng.maximum_charge_voltage",
+                            "description": "Max. battery charge voltage [V]"
+                        },
+                        {
+                            "label": "power_mng.minimum_discharge_voltage",
+                            "value": "power_mng.minimum_discharge_voltage",
+                            "description": "Min. battery discharge voltage [V]"
+                        },
+                        {
+                            "label": "power_mng.model.bat_power_change",
+                            "value": "power_mng.model.bat_power_change"
+                        },
+                        {
+                            "label": "power_mng.n_batteries",
+                            "value": "power_mng.n_batteries"
+                        },
+                        {
+                            "label": "power_mng.power_lim_src_index",
+                            "value": "power_mng.power_lim_src_index",
+                            "description": "Power limit source"
+                        },
+                        {
+                            "label": "power_mng.schedule[0]",
+                            "value": "power_mng.schedule[0]"
+                        },
+                        {
+                            "label": "power_mng.schedule[1]",
+                            "value": "power_mng.schedule[1]"
+                        },
+                        {
+                            "label": "power_mng.schedule[2]",
+                            "value": "power_mng.schedule[2]"
+                        },
+                        {
+                            "label": "power_mng.schedule[3]",
+                            "value": "power_mng.schedule[3]"
+                        },
+                        {
+                            "label": "power_mng.schedule[4]",
+                            "value": "power_mng.schedule[4]"
+                        },
+                        {
+                            "label": "power_mng.schedule[5]",
+                            "value": "power_mng.schedule[5]"
+                        },
+                        {
+                            "label": "power_mng.schedule[6]",
+                            "value": "power_mng.schedule[6]"
+                        },
+                        {
+                            "label": "power_mng.schedule[7]",
+                            "value": "power_mng.schedule[7]"
+                        },
+                        {
+                            "label": "power_mng.schedule[8]",
+                            "value": "power_mng.schedule[8]"
+                        },
+                        {
+                            "label": "power_mng.schedule[9]",
+                            "value": "power_mng.schedule[9]"
+                        },
+                        {
+                            "label": "power_mng.soc_charge",
+                            "value": "power_mng.soc_charge",
+                            "description": "SOC min maintenance charge"
+                        },
+                        {
+                            "label": "power_mng.soc_charge_power",
+                            "value": "power_mng.soc_charge_power",
+                            "description": "Maintenance charge power [W]"
+                        },
+                        {
+                            "label": "power_mng.soc_max",
+                            "value": "power_mng.soc_max",
+                            "description": "Max SOC target"
+                        },
+                        {
+                            "label": "power_mng.soc_min",
+                            "value": "power_mng.soc_min",
+                            "description": "Min SOC target"
+                        },
+                        {
+                            "label": "power_mng.soc_min_island",
+                            "value": "power_mng.soc_min_island",
+                            "description": "Min SOC target (island)"
+                        },
+                        {
+                            "label": "power_mng.soc_strategy",
+                            "value": "power_mng.soc_strategy",
+                            "description": "SOC target selection"
+                        },
+                        {
+                            "label": "power_mng.soc_target_set",
+                            "value": "power_mng.soc_target_set",
+                            "description": "Force SOC target"
+                        },
+                        {
+                            "label": "power_mng.state",
+                            "value": "power_mng.state",
+                            "description": "Battery state machine"
+                        },
+                        {
+                            "label": "power_mng.stop_charge_current",
+                            "value": "power_mng.stop_charge_current",
+                            "description": "Stop charge current [A]"
+                        },
+                        {
+                            "label": "power_mng.stop_discharge_current",
+                            "value": "power_mng.stop_discharge_current",
+                            "description": "Stop discharge current [A]"
+                        },
+                        {
+                            "label": "power_mng.stop_discharge_voltage_buffer",
+                            "value": "power_mng.stop_discharge_voltage_buffer",
+                            "description": "Stop discharge voltage buffer [V]"
+                        },
+                        {
+                            "label": "power_mng.u_acc_lp",
+                            "value": "power_mng.u_acc_lp",
+                            "description": "Battery voltage (inverter) [V]"
+                        },
+                        {
+                            "label": "power_mng.u_acc_mix_lp",
+                            "value": "power_mng.u_acc_mix_lp",
+                            "description": "Battery voltage [V]"
+                        },
+                        {
+                            "label": "power_mng.use_grid_power_enable",
+                            "value": "power_mng.use_grid_power_enable",
+                            "description": "Utilize external Inverter energy"
+                        }
+                    ]
+                },
+                "rct_elements_prim_sm": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "prim_sm (12)",
+                    "options": [
+                        {
+                            "label": "prim_sm.is_thin_layer",
+                            "value": "prim_sm.is_thin_layer",
+                            "description": "Thin-film solar module"
+                        },
+                        {
+                            "label": "prim_sm.island_flag",
+                            "value": "prim_sm.island_flag",
+                            "description": "Grid-separated"
+                        },
+                        {
+                            "label": "prim_sm.island_max_trials",
+                            "value": "prim_sm.island_max_trials",
+                            "description": "Max island trials"
+                        },
+                        {
+                            "label": "prim_sm.island_next_repeat_timeout",
+                            "value": "prim_sm.island_next_repeat_timeout",
+                            "description": "Next island trial timeout [s]"
+                        },
+                        {
+                            "label": "prim_sm.island_reset_retrials_counter_time",
+                            "value": "prim_sm.island_reset_retrials_counter_time",
+                            "description": "Reset island trials counter in (by 0 not used) [min]"
+                        },
+                        {
+                            "label": "prim_sm.island_reset_retrials_operation_time",
+                            "value": "prim_sm.island_reset_retrials_operation_time"
+                        },
+                        {
+                            "label": "prim_sm.island_retrials",
+                            "value": "prim_sm.island_retrials",
+                            "description": "Island trials counter"
+                        },
+                        {
+                            "label": "prim_sm.minigrid_flag",
+                            "value": "prim_sm.minigrid_flag",
+                            "description": "Minigrid support"
+                        },
+                        {
+                            "label": "prim_sm.phase_3_mode",
+                            "value": "prim_sm.phase_3_mode"
+                        },
+                        {
+                            "label": "prim_sm.state",
+                            "value": "prim_sm.state"
+                        },
+                        {
+                            "label": "prim_sm.state_source",
+                            "value": "prim_sm.state_source"
+                        },
+                        {
+                            "label": "prim_sm.Uzk_pump_grad[0]",
+                            "value": "prim_sm.Uzk_pump_grad[0]",
+                            "description": "start power [W]"
+                        }
+                    ]
+                },
+                "rct_elements_rb485": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "rb485 (13)",
+                    "options": [
+                        {
+                            "label": "rb485.available",
+                            "value": "rb485.available",
+                            "description": "Power Switch is available"
+                        },
+                        {
+                            "label": "rb485.f_grid[0]",
+                            "value": "rb485.f_grid[0]",
+                            "description": "Grid phase1 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.f_grid[1]",
+                            "value": "rb485.f_grid[1]",
+                            "description": "Grid phase 2 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.f_grid[2]",
+                            "value": "rb485.f_grid[2]",
+                            "description": "Grid phase 3 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.f_wr[0]",
+                            "value": "rb485.f_wr[0]",
+                            "description": "Power Storage phase 1 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.f_wr[1]",
+                            "value": "rb485.f_wr[1]",
+                            "description": "Power Storage phase 2 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.f_wr[2]",
+                            "value": "rb485.f_wr[2]",
+                            "description": "Power Storage phase 3 frequency [Hz]"
+                        },
+                        {
+                            "label": "rb485.phase_marker",
+                            "value": "rb485.phase_marker",
+                            "description": "Next phase after phase 1 in Power Switch"
+                        },
+                        {
+                            "label": "rb485.u_l_grid[0]",
+                            "value": "rb485.u_l_grid[0]",
+                            "description": "Grid phase 1 voltage [V]"
+                        },
+                        {
+                            "label": "rb485.u_l_grid[1]",
+                            "value": "rb485.u_l_grid[1]",
+                            "description": "Grid phase 2 voltage [V]"
+                        },
+                        {
+                            "label": "rb485.u_l_grid[2]",
+                            "value": "rb485.u_l_grid[2]",
+                            "description": "Grid phase 3 voltage [V]"
+                        },
+                        {
+                            "label": "rb485.version_boot",
+                            "value": "rb485.version_boot",
+                            "description": "Power Switch bootloader version"
+                        },
+                        {
+                            "label": "rb485.version_main",
+                            "value": "rb485.version_main",
+                            "description": "Power Switch software version"
+                        }
+                    ]
+                },
+                "rct_elements_switch_on_cond": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "switch_on_cond (7)",
+                    "options": [
+                        {
+                            "label": "switch_on_cond.f_max",
+                            "value": "switch_on_cond.f_max",
+                            "description": "Max. frequency"
+                        },
+                        {
+                            "label": "switch_on_cond.f_min",
+                            "value": "switch_on_cond.f_min",
+                            "description": "Min. frequency"
+                        },
+                        {
+                            "label": "switch_on_cond.max_rnd_test_time_fault",
+                            "value": "switch_on_cond.max_rnd_test_time_fault",
+                            "description": "Max additional random switching on time after any grid fault [s]"
+                        },
+                        {
+                            "label": "switch_on_cond.test_time",
+                            "value": "switch_on_cond.test_time",
+                            "description": "Test time"
+                        },
+                        {
+                            "label": "switch_on_cond.test_time_fault",
+                            "value": "switch_on_cond.test_time_fault",
+                            "description": "Switching on time after any grid fault [s]"
+                        },
+                        {
+                            "label": "switch_on_cond.u_max",
+                            "value": "switch_on_cond.u_max",
+                            "description": "Max. voltage"
+                        },
+                        {
+                            "label": "switch_on_cond.u_min",
+                            "value": "switch_on_cond.u_min",
+                            "description": "Min. voltage"
+                        }
+                    ]
+                },
+                "rct_elements_wifi": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "wifi (25)",
+                    "options": [
+                        {
+                            "label": "wifi.authentication_method",
+                            "value": "wifi.authentication_method",
+                            "description": "WiFi authentication method"
+                        },
+                        {
+                            "label": "wifi.connect_service_max_duration",
+                            "value": "wifi.connect_service_max_duration",
+                            "description": "Service connection max duration [s]"
+                        },
+                        {
+                            "label": "wifi.connect_service_timestamp",
+                            "value": "wifi.connect_service_timestamp",
+                            "description": "Service auto disconnect time"
+                        },
+                        {
+                            "label": "wifi.connect_to_server",
+                            "value": "wifi.connect_to_server"
+                        },
+                        {
+                            "label": "wifi.connect_to_service",
+                            "value": "wifi.connect_to_service"
+                        },
+                        {
+                            "label": "wifi.connect_to_wifi",
+                            "value": "wifi.connect_to_wifi"
+                        },
+                        {
+                            "label": "wifi.connected_ap_ssid",
+                            "value": "wifi.connected_ap_ssid",
+                            "description": "WiFi associated AP"
+                        },
+                        {
+                            "label": "wifi.dns_address",
+                            "value": "wifi.dns_address",
+                            "description": "DNS address"
+                        },
+                        {
+                            "label": "wifi.encryption_algorithm",
+                            "value": "wifi.encryption_algorithm"
+                        },
+                        {
+                            "label": "wifi.gateway",
+                            "value": "wifi.gateway",
+                            "description": "Gateway"
+                        },
+                        {
+                            "label": "wifi.ip",
+                            "value": "wifi.ip",
+                            "description": "IP Address"
+                        },
+                        {
+                            "label": "wifi.mask",
+                            "value": "wifi.mask",
+                            "description": "Netmask"
+                        },
+                        {
+                            "label": "wifi.mode",
+                            "value": "wifi.mode",
+                            "description": "WiFi mode"
+                        },
+                        {
+                            "label": "wifi.password",
+                            "value": "wifi.password",
+                            "description": "WiFi password"
+                        },
+                        {
+                            "label": "wifi.result",
+                            "value": "wifi.result",
+                            "description": "WiFi result"
+                        },
+                        {
+                            "label": "wifi.server_ip",
+                            "value": "wifi.server_ip",
+                            "description": "Server to connect to to wait for commands, usually used by the vendor service personell"
+                        },
+                        {
+                            "label": "wifi.server_port",
+                            "value": "wifi.server_port"
+                        },
+                        {
+                            "label": "wifi.service_ip",
+                            "value": "wifi.service_ip",
+                            "description": "Server to connect to to wait for commands, usually used by the vendor service personell"
+                        },
+                        {
+                            "label": "wifi.service_port",
+                            "value": "wifi.service_port"
+                        },
+                        {
+                            "label": "wifi.sockb_ip",
+                            "value": "wifi.sockb_ip"
+                        },
+                        {
+                            "label": "wifi.sockb_port",
+                            "value": "wifi.sockb_port",
+                            "description": "Port"
+                        },
+                        {
+                            "label": "wifi.sockb_protocol",
+                            "value": "wifi.sockb_protocol",
+                            "description": "Network mode of the unit: 0 = standalone, 1 = master unit, 2 = slave unit"
+                        },
+                        {
+                            "label": "wifi.state",
+                            "value": "wifi.state"
+                        },
+                        {
+                            "label": "wifi.use_ethernet",
+                            "value": "wifi.use_ethernet"
+                        },
+                        {
+                            "label": "wifi.use_wifi",
+                            "value": "wifi.use_wifi",
+                            "description": "Enable Wi-Fi Access Point"
+                        }
+                    ]
+                },
+                "rct_elements_other": {
+                    "type": "select",
+                    "multiple": true,
+                    "noTranslation": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": {
+                        "de": "Sonstige Bereiche (44)",
+                        "en": "Other areas (44)",
+                        "es": "Otras áreas (44)",
+                        "fr": "Autres domaines (44)",
+                        "it": "Altre aree (44)",
+                        "nl": "Overige gebieden (44)",
+                        "pl": "Pozostałe obszary (44)",
+                        "pt": "Outras áreas (44)",
+                        "ru": "Прочие области (44)",
+                        "uk": "Інші області (44)",
+                        "zh-cn": "其他区域 (44)"
+                    },
+                    "options": [
+                        {
+                            "label": "battery_placeholder",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "battery_placeholder[0].soc",
+                                    "value": "battery_placeholder[0].soc",
+                                    "description": "SOC (State of charge) [%]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "buf_v_control",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "buf_v_control.power_reduction",
+                                    "value": "buf_v_control.power_reduction",
+                                    "description": "External power reduction based on solar plant peak power [0..1]"
+                                },
+                                {
+                                    "label": "buf_v_control.power_reduction_max_solar",
+                                    "value": "buf_v_control.power_reduction_max_solar",
+                                    "description": "Solar plant peak power [Wp]"
+                                },
+                                {
+                                    "label": "buf_v_control.power_reduction_max_solar_grid",
+                                    "value": "buf_v_control.power_reduction_max_solar_grid",
+                                    "description": "Max. allowed grid feed-in power [W]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "cs_map",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "cs_map[0]",
+                                    "value": "cs_map[0]",
+                                    "description": "Associate current sensor 0 with phase L"
+                                },
+                                {
+                                    "label": "cs_map[1]",
+                                    "value": "cs_map[1]",
+                                    "description": "Associate current sensor 1 with phase L"
+                                },
+                                {
+                                    "label": "cs_map[2]",
+                                    "value": "cs_map[2]",
+                                    "description": "Associate current sensor 2 with phase L"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "cs_neg",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "cs_neg[0]",
+                                    "value": "cs_neg[0]",
+                                    "description": "Multiply value of the current sensor 0 by"
+                                },
+                                {
+                                    "label": "cs_neg[1]",
+                                    "value": "cs_neg[1]",
+                                    "description": "Multiply value of the current sensor 1 by"
+                                },
+                                {
+                                    "label": "cs_neg[2]",
+                                    "value": "cs_neg[2]",
+                                    "description": "Multiply value of the current sensor 2 by"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "cs_struct",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "cs_struct.is_tuned",
+                                    "value": "cs_struct.is_tuned",
+                                    "description": "Current sensors are tuned"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "flash_param",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "flash_param.erase_cycles",
+                                    "value": "flash_param.erase_cycles",
+                                    "description": "Erase cycles of flash parameter"
+                                },
+                                {
+                                    "label": "flash_param.write_cycles",
+                                    "value": "flash_param.write_cycles",
+                                    "description": "Write cycles of flash parameters"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "frt",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "frt.enabled",
+                                    "value": "frt.enabled",
+                                    "description": "Enable FRT"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "grid_lt",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "grid_lt.granularity",
+                                    "value": "grid_lt.granularity",
+                                    "description": "Resolution"
+                                },
+                                {
+                                    "label": "grid_lt.threshold",
+                                    "value": "grid_lt.threshold",
+                                    "description": "Max. voltage [V]"
+                                },
+                                {
+                                    "label": "grid_lt.timeframe",
+                                    "value": "grid_lt.timeframe",
+                                    "description": "Timeframe"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "grid_pll",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "grid_pll[0].f",
+                                    "value": "grid_pll[0].f",
+                                    "description": "Grid frequency [Hz]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "inv_struct",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "inv_struct.cosinus_phi",
+                                    "value": "inv_struct.cosinus_phi",
+                                    "description": "[cos(Phi)]"
+                                },
+                                {
+                                    "label": "inv_struct.force_dh",
+                                    "value": "inv_struct.force_dh"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "line_mon",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "line_mon.time_lim",
+                                    "value": "line_mon.time_lim",
+                                    "description": "Switch off time line voltage [s]"
+                                },
+                                {
+                                    "label": "line_mon.u_max",
+                                    "value": "line_mon.u_max",
+                                    "description": "Max line voltage [V]"
+                                },
+                                {
+                                    "label": "line_mon.u_min",
+                                    "value": "line_mon.u_min",
+                                    "description": "Min line voltage [V]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "logger",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "logger.buffer",
+                                    "value": "logger.buffer"
+                                },
+                                {
+                                    "label": "logger.log_rate",
+                                    "value": "logger.log_rate",
+                                    "description": "Data log resolution [s]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "modbus",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "modbus.address",
+                                    "value": "modbus.address",
+                                    "description": "RS485 address"
+                                },
+                                {
+                                    "label": "modbus.mode",
+                                    "value": "modbus.mode",
+                                    "description": "RS485 working mode"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "osci_struct",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "osci_struct.cmd_response_time",
+                                    "value": "osci_struct.cmd_response_time"
+                                },
+                                {
+                                    "label": "osci_struct.error",
+                                    "value": "osci_struct.error",
+                                    "description": "Communication error"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "p_rec_available",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "p_rec_available[0]",
+                                    "value": "p_rec_available[0]",
+                                    "description": "Available compensation power [W]"
+                                },
+                                {
+                                    "label": "p_rec_available[1]",
+                                    "value": "p_rec_available[1]",
+                                    "description": "Available battery to grid power [W]"
+                                },
+                                {
+                                    "label": "p_rec_available[2]",
+                                    "value": "p_rec_available[2]",
+                                    "description": "Available Pac [W]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "p_rec_lim",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "p_rec_lim[0]",
+                                    "value": "p_rec_lim[0]",
+                                    "description": "Max. compensation power [W]"
+                                },
+                                {
+                                    "label": "p_rec_lim[1]",
+                                    "value": "p_rec_lim[1]",
+                                    "description": "Max. battery to grid power [W]"
+                                },
+                                {
+                                    "label": "p_rec_lim[2]",
+                                    "value": "p_rec_lim[2]",
+                                    "description": "Pac max. [W]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "p_rec_req",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "p_rec_req[0]",
+                                    "value": "p_rec_req[0]",
+                                    "description": "Required compensation power [W]"
+                                },
+                                {
+                                    "label": "p_rec_req[1]",
+                                    "value": "p_rec_req[1]",
+                                    "description": "Required battery to grid power [W]"
+                                },
+                                {
+                                    "label": "p_rec_req[2]",
+                                    "value": "p_rec_req[2]",
+                                    "description": "Required Pac [W]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "partition",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "partition[3].last_id",
+                                    "value": "partition[3].last_id"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "pas",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "pas.period",
+                                    "value": "pas.period"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "performance_free",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "performance_free[0]",
+                                    "value": "performance_free[0]"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "relays",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "relays.bits_real",
+                                    "value": "relays.bits_real"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "temperature",
+                            "noTranslation": true,
+                            "items": [
+                                {
+                                    "label": "temperature.bat_temp_power_reduction",
+                                    "value": "temperature.bat_temp_power_reduction",
+                                    "description": "Battery actuator temperature target [°C]"
+                                },
+                                {
+                                    "label": "temperature.sink_temp_power_reduction",
+                                    "value": "temperature.sink_temp_power_reduction",
+                                    "description": "Heat sink temperature target [°C]"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "expert": {
+            "type": "panel",
+            "label": "Expert settings",
+            "items": {
+                "_headerExpert": {
                     "type": "header",
-                    "text": "",
-                    "size": 2
+                    "text": "Trouble-shooting",
+                    "size": 2,
+                    "newLine": true
                 },
                 "debug_logging": {
-                    "newLine": true,
                     "type": "checkbox",
-                    "label": "Enable debug logging for inverter communication (attention: excessive logging, use only for short term trouble-shooting!!)",
-                    "tooltip": "Enable debugging",
+                    "newLine": true,
                     "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 8,
                     "xl": 8,
+                    "label": "Enable debug logging for inverter communication",
+                    "help": "Attention: excessive logging, use only for short term trouble-shooting!",
                     "default": false
                 }
             }

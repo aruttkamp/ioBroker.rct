@@ -59,6 +59,56 @@ rct.getStateInfo = function (rctName, iobInstance) {
     return { channelName, stateName, stateFullName };
 };
 
+// Sections of the parameter selection in the admin, each stored in native.rct_elements_<section>.
+// The list is fixed on purpose: a section key must not change when parameters are added, otherwise
+// the users selection would be lost. Channels not listed here end up in section "other".
+rct.configSections = [
+    'battery',
+    'battery_cells',
+    'battery_modules',
+    'acc_conv',
+    'adc',
+    'bat_mng_struct',
+    'can_bus',
+    'db',
+    'dc_conv',
+    'display_struct',
+    'energy',
+    'fault',
+    'flash_rtc',
+    'g_sync',
+    'general',
+    'grid_mon',
+    'hw_test',
+    'io_board',
+    'iso_struct',
+    'net',
+    'nsm',
+    'power_mng',
+    'prim_sm',
+    'rb485',
+    'switch_on_cond',
+    'wifi',
+    'other',
+];
+
+/**
+ * Returns the admin section (see rct.configSections) a parameter belongs to.
+ *
+ * @param {string} rctName parameter name, e.g. 'battery.soc'
+ * @returns {string} section key
+ */
+rct.getConfigSection = function (rctName) {
+    if (/^battery\.cells(_resist|_stat)?\[/.test(rctName)) {
+        return 'battery_cells';
+    }
+    if (/^battery\.(module_sn|stack_cycles|stack_software_version)\[/.test(rctName)) {
+        return 'battery_modules';
+    }
+    const { channelName } = rct.getStateInfo(rctName, { log: { warn() {} } }) || {};
+    return rct.configSections.includes(channelName) ? channelName : 'other';
+};
+
 rct.reconnect = function (host, iobInstance) {
     if (__client) {
         try {

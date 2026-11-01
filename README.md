@@ -74,9 +74,15 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Andreas Ruttkamp) Admin rebuilt with jsonConfig: parameters are selected per section (battery, dc_conv, g_sync, ...) in selection lists
+- (Andreas Ruttkamp) existing parameter list is migrated automatically to the new selection lists
+- (Andreas Ruttkamp) admin tabs connection / parameters / expert settings, ip address validation, translations for all languages
+- (Andreas Ruttkamp) fix typo in parameter bat_mng_struct.k_reserve
+
 ### 1.2.30 (2026-10-03)
 - (Andreas Ruttkamp) Update dependencies
-- (Andreas Ruttkamp) Nodejs 26 for testiung included
+- (Andreas Ruttkamp) Nodejs 26 for testing included
 - (Andreas Ruttkamp) correct email in licence
 - (Andreas Ruttkamp) add missing data types [#361](https://github.com/aruttkamp/ioBroker.rct/issues/361)
 - (Andreas Ruttkamp) add battery.cells_stat[n] ( shows 12 Datapoints u-min,u_max,t_min,t_max,_index,_time and _value)

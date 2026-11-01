@@ -9,6 +9,19 @@
 const utils = require('@iobroker/adapter-core');
 const rct = require('./rct/rct.js');
 
+// selected elements are stored per admin section in native.rct_elements_<section>
+const ELEMENTS_PREFIX = 'rct_elements_';
+const collectElements = native => [
+    ...new Set(
+        Object.keys(native)
+            .filter(k => k.startsWith(ELEMENTS_PREFIX))
+            .flatMap(k => (Array.isArray(native[k]) ? native[k] : [])),
+    ),
+];
+
+// standard elements if nothing is selected in the admin
+const DEFAULT_ELEMENTS = collectElements(require('./io-package.json').native);
+
 // Load your modules here, e.g.:
 // const fs = require("node:fs");
 
@@ -34,6 +47,8 @@ class Rct extends utils.Adapter {
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
         this.log.info(`config rct_ip: ${this.config.rct_ip}`);
+
+        await this.migrateElementConfig();
         // Reset the connection indicator during startup
         //this.setState('info.connection',false,true);
 
@@ -56,12 +71,8 @@ class Rct extends utils.Adapter {
         rct.initialize(this.config.debug_logging, this);
 
         //Wenn keine Elemente konfiguriert sind - Defaultwerte laden
-        if (!this.config.rct_elements) {
-            this.config.rct_elements =
-                'battery.bat_status,battery.soc,battery.soc_target,battery.soc_target_high,battery.soc_target_low,dc_conv.dc_conv_struct[0].p_dc_lp,dc_conv.dc_conv_struct[1].p_dc_lp,fault[0].flt,fault[1].flt,fault[2].flt,fault[3].flt,g_sync.p_ac_grid_sum_lp,g_sync.p_ac_load_sum_lp,g_sync.p_ac_sum_lp,g_sync.p_acc_lp,g_sync.u_sg_avg[0],g_sync.u_sg_avg[1],io_board.s0_external_power,power_mng.is_heiphoss,power_mng.state,power_mng.u_acc_mix_lp,prim_sm.island_flag';
-        }
-
-        const rctElements = this.config.rct_elements.split(',');
+        const selected = collectElements(this.config);
+        const rctElements = selected.length ? selected : DEFAULT_ELEMENTS;
         try {
             // add states
             //const rctElements = this.config.rct_elements.split(',');
@@ -118,6 +129,31 @@ class Rct extends utils.Adapter {
 
         this.log.debug('Adapter initialization completed: start processing');
         rct.process(this.config.rct_ip, rctElements, this);
+    }
+
+    /**
+     * Until 1.2.x the elements were stored as comma separated string in native.rct_elements.
+     * Distribute them once to the admin sections native.rct_elements_<section>.
+     */
+    async migrateElementConfig() {
+        const legacy = this.config.rct_elements;
+        if (typeof legacy !== 'string' && !Array.isArray(legacy)) {
+            return;
+        }
+        let elements = (Array.isArray(legacy) ? legacy : legacy.split(',')).map(e => String(e).trim()).filter(Boolean);
+        if (!elements.length) {
+            // leerer String bedeutete "Standard" - Standardauswahl sichtbar in die Auswahllisten übernehmen
+            elements = DEFAULT_ELEMENTS;
+        }
+
+        // all sections are written, as an update may already have filled them with the default selection
+        const native = { rct_elements: null };
+        for (const section of rct.configSections) {
+            native[`${ELEMENTS_PREFIX}${section}`] = elements.filter(e => rct.getConfigSection(e) === section);
+        }
+        this.log.info(`Migrating element configuration to selection lists (${elements.length} elements)`);
+        await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, { native });
+        Object.assign(this.config, native);
     }
 
     /**
