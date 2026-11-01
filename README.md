@@ -74,7 +74,7 @@ None
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 1.3.0 (2026-11-01)
+### **WORK IN PROGRESS**
 - (Andreas Ruttkamp) Admin rebuilt with jsonConfig: parameters are selected per section (battery, dc_conv, g_sync, ...) in selection lists
 - (Andreas Ruttkamp) existing parameter list is migrated automatically to the new selection lists
 - (Andreas Ruttkamp) admin tabs connection / parameters / expert settings, ip address validation, translations for all languages
