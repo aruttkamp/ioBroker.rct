@@ -75,17 +75,10 @@ None
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (Andreas Ruttkamp) 
-Admin: jsonConfig with parameter selection per section
-parameters are selected per section (battery, dc_conv, g_sync, ...) in
-multi-select lists, generated from rct_core2 by tasks/build-admin-options.js
-(npm run build:admin, checked in npm run test:package)
-native.rct_elements (comma separated string) is migrated once to
-native.rct_elements_
-admin tabs connection / parameters / expert settings, ip validation,
-translations for all languages
-fix typo in rct.cmd for bat_mng_struct.k_reserve
-Co-Authored-By: Claude Opus 5.5 noreply@anthropic.com
+- (Andreas Ruttkamp) Admin rebuilt with jsonConfig: parameters are selected per section (battery, dc_conv, g_sync, ...) in selection lists
+- (Andreas Ruttkamp) existing parameter list is migrated automatically to the new selection lists
+- (Andreas Ruttkamp) admin tabs connection / parameters / expert settings, ip address validation, translations for all languages
+- (Andreas Ruttkamp) fix typo in parameter bat_mng_struct.k_reserve
 
 ### 1.2.30 (2026-10-03)
 - (Andreas Ruttkamp) Update dependencies
