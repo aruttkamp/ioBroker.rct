@@ -1,0 +1,6 @@
+chore: release v1.3.0
+
+- (Andreas Ruttkamp) Admin rebuilt with jsonConfig: parameters are selected per section (battery, dc_conv, g_sync, ...) in selection lists
+- (Andreas Ruttkamp) existing parameter list is migrated automatically to the new selection lists
+- (Andreas Ruttkamp) admin tabs connection / parameters / expert settings, ip address validation, translations for all languages
+- (Andreas Ruttkamp) fix typo in parameter bat_mng_struct.k_reserve
