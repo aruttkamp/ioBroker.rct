@@ -1,8 +1,11 @@
 # Older changes
+## 1.2.26 (2026-02-22)
+* (Andreas Ruttkamp) correct handling for parameter without "." ( grid_offset / android_description ) [#262](https://github.com/aruttkamp/ioBroker.rct/issues/262)
+
+
 ## 1.2.25 (2025-10-16)
 * (Andreas Ruttkamp) repro checker issues resolved
 * (Andreas Ruttkamp) npm trusted publishing integrated
-
 
 ## 1.2.24 (2025-09-01)
 * (Andreas Ruttkamp) dev dependencies updated
